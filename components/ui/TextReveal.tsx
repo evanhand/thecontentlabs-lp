@@ -20,14 +20,15 @@ export function TextReveal({ children, className = '' }: { children: string; cla
           key={i}
           className="inline-block"
           // Start VISIBLE (opacity: 1) so Lighthouse sees content on first paint.
-          // Animation still runs via y and blur transforms for the reveal effect.
-          initial={{ opacity: 1, y: 12, filter: 'blur(6px)' }}
-          animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+          // Subtle y translate only — no blur, which caused visible artifacts
+          // when combined with opacity: 1 (blur was always showing).
+          initial={{ opacity: 1, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{
             type: 'spring',
-            stiffness: 100,
-            damping: 12,
-            delay: i * 0.04,
+            stiffness: 120,
+            damping: 16,
+            delay: i * 0.03,
           }}
         >
           {word}&nbsp;

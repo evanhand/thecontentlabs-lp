@@ -18,13 +18,13 @@ const heroStagger = {
 };
 
 const heroFadeUp = {
-  hidden: { opacity: 1, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 100, damping: 14, duration: 0.6 } },
+  hidden: { opacity: 1, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 16, duration: 0.5 } },
 };
 
 const heroFadeBlur = {
-  hidden: { opacity: 1, y: 16, filter: 'blur(6px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: 'spring' as const, stiffness: 100, damping: 14, duration: 0.6 } },
+  hidden: { opacity: 1, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 16, duration: 0.5 } },
 };
 
 export function Hero() {
@@ -88,12 +88,12 @@ export function Hero() {
 
       {/* Product Demo Video */}
       {/* Initial state is opacity: 1 so the video poster is visible on first paint
-          (critical for LCP). Only the y/scale/blur transforms animate in. */}
+          (critical for LCP). Subtle y/scale entrance animation only. */}
       <motion.div
         className="-mt-1 max-w-3xl lg:max-w-4xl mx-auto"
-        initial={{ opacity: 1, y: 30, scale: 0.96, filter: 'blur(6px)' }}
-        animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-        transition={{ type: 'spring', stiffness: 60, damping: 14 }}
+        initial={{ opacity: 1, y: 20, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 80, damping: 16 }}
       >
         <video
           autoPlay
