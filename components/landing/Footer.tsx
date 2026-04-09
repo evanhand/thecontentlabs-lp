@@ -18,6 +18,8 @@ export function Footer() {
               alt="The Content Labs"
               loading="lazy"
               decoding="async"
+              width={501}
+              height={151}
               className="h-16 w-auto mb-4"
             />
             <p className="font-mono text-sm tracking-wide text-slate-500 max-w-md">

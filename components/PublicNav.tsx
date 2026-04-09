@@ -40,6 +40,8 @@ export function PublicNav() {
               <img
                 src={LOGO_DARK}
                 alt="The Content Labs"
+                width={501}
+                height={151}
                 className={`transition-all duration-300 ${isScrolled ? 'h-10' : 'h-12'} w-auto`}
               />
             </a>

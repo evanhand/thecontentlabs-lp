@@ -127,7 +127,7 @@ export function Testimonials() {
                           <div className="flex items-center gap-3">
                             <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-600 flex-shrink-0">
                               <div className="absolute inset-0 flex items-center justify-center bg-slate-700 text-white text-sm font-bold">{item.author.charAt(0)}</div>
-                              {item.image && <img src={item.image} alt={item.author} loading="lazy" decoding="async" className="relative w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                              {item.image && <img src={item.image} alt={item.author} loading="lazy" decoding="async" width={40} height={40} className="relative w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
                             </div>
                             <div>
                               <p className="font-semibold text-white text-sm">{item.author}</p>

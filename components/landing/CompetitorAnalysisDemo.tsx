@@ -293,6 +293,8 @@ export function CompetitorAnalysisDemo({ isVisible }: CompetitorAnalysisDemoProp
                           alt={card.overlay}
                           loading="lazy"
                           decoding="async"
+                          width={90}
+                          height={140}
                           className="absolute inset-0 w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

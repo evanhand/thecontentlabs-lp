@@ -33,6 +33,9 @@ export function MarqueeRow({ urls, direction }: { urls: string[]; direction: 'le
               src={url}
               alt=""
               loading="lazy"
+              decoding="async"
+              width={128}
+              height={176}
               className="w-full h-full object-cover"
               onError={(e) => {
                 (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
