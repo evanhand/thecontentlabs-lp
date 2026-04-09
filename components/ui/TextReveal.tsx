@@ -19,7 +19,9 @@ export function TextReveal({ children, className = '' }: { children: string; cla
         <motion.span
           key={i}
           className="inline-block"
-          initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+          // Start VISIBLE (opacity: 1) so Lighthouse sees content on first paint.
+          // Animation still runs via y and blur transforms for the reveal effect.
+          initial={{ opacity: 1, y: 12, filter: 'blur(6px)' }}
           animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{
             type: 'spring',

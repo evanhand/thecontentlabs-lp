@@ -200,16 +200,37 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
       <head>
-        {/* Clash Display from Fontshare — heading font */}
+        {/* Clash Display from Fontshare — heading font, loaded async via print media trick */}
         <link
           rel="preload"
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
           as="style"
         />
         <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
           rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
+          media="print"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var links = document.querySelectorAll('link[media="print"]');
+                for (var i = 0; i < links.length; i++) {
+                  if (links[i].href.indexOf('fontshare') !== -1) {
+                    links[i].addEventListener('load', function() { this.media = 'all'; });
+                  }
+                }
+              })();
+            `,
+          }}
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
+          />
+        </noscript>
 
         {/* JSON-LD Structured Data — rendered in real HTML for crawlers */}
         <script
