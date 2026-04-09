@@ -60,13 +60,11 @@ export function Hero() {
           playsInline
           preload="metadata"
           poster="/hero-demo-poster.jpg"
-          width={1280}
-          height={720}
+          width={1920}
+          height={1080}
           className="w-full rounded-2xl shadow-2xl"
-        >
-          <source src="/hero-demo.webm" type="video/webm" />
-          <source src="/hero-demo.mp4" type="video/mp4" />
-        </video>
+          src="/hero-demo.mp4"
+        />
       </div>
 
       {/* Persona callouts + social proof */}
