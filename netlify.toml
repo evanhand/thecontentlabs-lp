@@ -12,31 +12,49 @@ to = "https://evhand.app.n8n.cloud/webhook/:splat"
 status = 200
 force = true
 
-# App routes — proxy to Vite app (update URL after creating secondary site)
+# App routes — proxy to the Vite app (currently live at thecontentlabs.app)
+# NOTE: Before swapping thecontentlabs.app to point to this Netlify site,
+# the Vite app must be deployed to a separate Netlify URL and these proxies
+# must be updated to point there to avoid circular redirects.
 [[redirects]]
 from = "/register"
-to = "https://spontaneous-sawine-4f97b9.netlify.app/register"
+to = "https://thecontentlabs.app/register"
 status = 200
-force = true
 
 [[redirects]]
 from = "/login"
-to = "https://spontaneous-sawine-4f97b9.netlify.app/login"
+to = "https://thecontentlabs.app/login"
 status = 200
-force = true
 
 [[redirects]]
 from = "/dashboard/*"
-to = "https://spontaneous-sawine-4f97b9.netlify.app/dashboard/:splat"
+to = "https://thecontentlabs.app/dashboard/:splat"
 status = 200
-force = true
 
-# All other routes — proxy to Vite app
 [[redirects]]
-from = "/*"
-to = "https://spontaneous-sawine-4f97b9.netlify.app/:splat"
+from = "/setup-wizard"
+to = "https://thecontentlabs.app/setup-wizard"
 status = 200
-force = true
+
+[[redirects]]
+from = "/onboarding"
+to = "https://thecontentlabs.app/onboarding"
+status = 200
+
+[[redirects]]
+from = "/settings"
+to = "https://thecontentlabs.app/settings"
+status = 200
+
+[[redirects]]
+from = "/checkout-success"
+to = "https://thecontentlabs.app/checkout-success"
+status = 200
+
+[[redirects]]
+from = "/reset-password"
+to = "https://thecontentlabs.app/reset-password"
+status = 200
 
 # Cache hashed assets
 [[headers]]
