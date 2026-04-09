@@ -15,17 +15,18 @@ const SECTIONS = [
   { icon: Film, label: 'Competitor Videos' },
 ];
 
-const THUMB_BASE = 'https://jzhpazqyoceojfvjhpoo.supabase.co/storage/v1/object/public/thumbnails';
-
+// Video metadata stored without hardcoded URLs so Next.js can't statically
+// preload the images in the <head>. URLs are constructed at runtime inside
+// the component via buildThumbUrl().
 const VIDEO_CARDS = [
-  { thumbnailUrl: `${THUMB_BASE}/instagram/3794850253648800310.jpg`, overlay: 'Chiefs Stadium Heist', views: '1.62M', platform: 'Instagram', platformColor: '#e1306c' },
-  { thumbnailUrl: `${THUMB_BASE}/tiktok/7606012853878869278.jpg`, overlay: 'Olympics Average Joe', views: '2.4M', platform: 'TikTok', platformColor: '#ff0050' },
-  { thumbnailUrl: `${THUMB_BASE}/instagram/3796935683559215123.jpg`, overlay: 'NCAA Ruined This Kid', views: '1.56M', platform: 'Instagram', platformColor: '#e1306c' },
-  { thumbnailUrl: `${THUMB_BASE}/tiktok/7497999929667849494.jpg`, overlay: 'FanDuel Got COOKED', views: '3.34M', platform: 'TikTok', platformColor: '#ff0050' },
-  { thumbnailUrl: `${THUMB_BASE}/instagram/3677190931440484746.jpg`, overlay: 'NFL in Spain', views: '1.4M', platform: 'Instagram', platformColor: '#e1306c' },
-  { thumbnailUrl: `${THUMB_BASE}/tiktok/7495467321801051423.jpg`, overlay: 'Lane Kiffin to LSU', views: '1.2M', platform: 'TikTok', platformColor: '#ff0050' },
-  { thumbnailUrl: `${THUMB_BASE}/instagram/3655143419764988026.jpg`, overlay: 'Best Names in Basketball', views: '1.99M', platform: 'Instagram', platformColor: '#e1306c' },
-  { thumbnailUrl: `${THUMB_BASE}/tiktok/7509979016523173163.jpg`, overlay: 'Alabama Ball Rule', views: '1.2M', platform: 'TikTok', platformColor: '#ff0050' },
+  { id: '3794850253648800310', platform: 'instagram' as const, overlay: 'Chiefs Stadium Heist', views: '1.62M', platformLabel: 'Instagram', platformColor: '#e1306c' },
+  { id: '7606012853878869278', platform: 'tiktok' as const, overlay: 'Olympics Average Joe', views: '2.4M', platformLabel: 'TikTok', platformColor: '#ff0050' },
+  { id: '3796935683559215123', platform: 'instagram' as const, overlay: 'NCAA Ruined This Kid', views: '1.56M', platformLabel: 'Instagram', platformColor: '#e1306c' },
+  { id: '7497999929667849494', platform: 'tiktok' as const, overlay: 'FanDuel Got COOKED', views: '3.34M', platformLabel: 'TikTok', platformColor: '#ff0050' },
+  { id: '3677190931440484746', platform: 'instagram' as const, overlay: 'NFL in Spain', views: '1.4M', platformLabel: 'Instagram', platformColor: '#e1306c' },
+  { id: '7495467321801051423', platform: 'tiktok' as const, overlay: 'Lane Kiffin to LSU', views: '1.2M', platformLabel: 'TikTok', platformColor: '#ff0050' },
+  { id: '3655143419764988026', platform: 'instagram' as const, overlay: 'Best Names in Basketball', views: '1.99M', platformLabel: 'Instagram', platformColor: '#e1306c' },
+  { id: '7509979016523173163', platform: 'tiktok' as const, overlay: 'Alabama Ball Rule', views: '1.2M', platformLabel: 'TikTok', platformColor: '#ff0050' },
 ];
 
 export function CompetitorAnalysisDemo({ isVisible }: CompetitorAnalysisDemoProps) {
@@ -276,27 +277,38 @@ export function CompetitorAnalysisDemo({ isVisible }: CompetitorAnalysisDemoProp
 
               {/* Video grid */}
               <div className="grid grid-cols-4 gap-1.5 overflow-hidden">
-                {VIDEO_CARDS.map((card, i) => (
-                  <div key={i} className="cad-stagger bg-white rounded-lg border border-slate-200/80 shadow-sm overflow-hidden" style={{ animationDelay: `${0.15 + i * 0.08}s` }}>
-                    <div className="relative w-full aspect-[9/14] bg-slate-800 overflow-hidden">
-                      <img
-                        src={card.thumbnailUrl}
-                        alt={card.overlay}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                      <div className="absolute top-1 right-1 bg-black/60 text-white text-[7px] font-semibold px-1 py-0.5 rounded">
-                        {card.views}
+                {VIDEO_CARDS.map((card, i) => {
+                  // Build URL at runtime so Next.js doesn't statically preload it
+                  const thumbnailUrl = [
+                    process.env.NEXT_PUBLIC_SUPABASE_URL,
+                    'storage/v1/object/public/thumbnails',
+                    card.platform,
+                    `${card.id}.jpg`,
+                  ].join('/');
+                  return (
+                    <div key={i} className="cad-stagger bg-white rounded-lg border border-slate-200/80 shadow-sm overflow-hidden" style={{ animationDelay: `${0.15 + i * 0.08}s` }}>
+                      <div className="relative w-full aspect-[9/14] bg-slate-800 overflow-hidden">
+                        <img
+                          src={thumbnailUrl}
+                          alt={card.overlay}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                        <div className="absolute top-1 right-1 bg-black/60 text-white text-[7px] font-semibold px-1 py-0.5 rounded">
+                          {card.views}
+                        </div>
+                        <div className="absolute bottom-1 left-1 right-1 text-white text-[7px] font-bold leading-tight text-center drop-shadow-lg">
+                          {card.overlay}
+                        </div>
                       </div>
-                      <div className="absolute bottom-1 left-1 right-1 text-white text-[7px] font-bold leading-tight text-center drop-shadow-lg">
-                        {card.overlay}
+                      <div className="px-1.5 py-1">
+                        <p className="text-[6px] font-semibold" style={{ color: card.platformColor }}>{card.platformLabel}</p>
                       </div>
                     </div>
-                    <div className="px-1.5 py-1">
-                      <p className="text-[6px] font-semibold" style={{ color: card.platformColor }}>{card.platform}</p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -200,12 +200,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
       <head>
-        {/* Clash Display from Fontshare — heading font, loaded async via print media trick */}
-        <link
-          rel="preload"
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
-          as="style"
-        />
+        {/* Clash Display from Fontshare — heading font.
+            Loaded async via media="print" trick. Next.js auto-preloads the
+            stylesheet, so we don't add a manual preload (avoids duplicates). */}
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
