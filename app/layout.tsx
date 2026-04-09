@@ -200,6 +200,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} h-full antialiased`}>
       <head>
+        {/* Preload hero poster as the LCP candidate. High priority
+            ensures it beats the video download on slow mobile networks. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-demo-poster.jpg"
+          // @ts-expect-error - fetchPriority is valid HTML but React types don't include it yet
+          fetchpriority="high"
+        />
+
         {/* Clash Display from Fontshare — heading font.
             Loaded async via media="print" trick. Next.js auto-preloads the
             stylesheet, so we don't add a manual preload (avoids duplicates). */}

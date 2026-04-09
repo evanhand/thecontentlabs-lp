@@ -52,7 +52,8 @@ export function Hero() {
       </div>
 
       {/* Product Demo Video */}
-      <div className="-mt-1 max-w-3xl lg:max-w-4xl mx-auto">
+      {/* GPU layer via translateZ for smoother paint around the video */}
+      <div className="-mt-1 max-w-3xl lg:max-w-4xl mx-auto" style={{ transform: 'translateZ(0)' }}>
         <video
           autoPlay
           loop
@@ -62,6 +63,8 @@ export function Hero() {
           poster="/hero-demo-poster.jpg"
           width={1920}
           height={1080}
+          // @ts-expect-error - fetchpriority is valid HTML but React types don't include it yet
+          fetchpriority="low"
           className="w-full rounded-2xl shadow-2xl"
           src="/hero-demo.mp4"
         />
