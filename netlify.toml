@@ -15,26 +15,26 @@ force = true
 # App routes — proxy to Vite app (update URL after creating secondary site)
 [[redirects]]
 from = "/register"
-to = "https://tcl-app.netlify.app/register"
+to = "https://spontaneous-sawine-4f97b9.netlify.app/register"
 status = 200
 force = true
 
 [[redirects]]
 from = "/login"
-to = "https://tcl-app.netlify.app/login"
+to = "https://spontaneous-sawine-4f97b9.netlify.app/login"
 status = 200
 force = true
 
 [[redirects]]
 from = "/dashboard/*"
-to = "https://tcl-app.netlify.app/dashboard/:splat"
+to = "https://spontaneous-sawine-4f97b9.netlify.app/dashboard/:splat"
 status = 200
 force = true
 
 # All other routes — proxy to Vite app
 [[redirects]]
 from = "/*"
-to = "https://tcl-app.netlify.app/:splat"
+to = "https://spontaneous-sawine-4f97b9.netlify.app/:splat"
 status = 200
 force = true
 
