@@ -18,42 +18,42 @@ force = true
 # must be updated to point there to avoid circular redirects.
 [[redirects]]
 from = "/register"
-to = "https://thecontentlabs.app/register"
+to = "https://stirring-griffin-e64878.netlify.app/register"
 status = 200
 
 [[redirects]]
 from = "/login"
-to = "https://thecontentlabs.app/login"
+to = "https://stirring-griffin-e64878.netlify.app/login"
 status = 200
 
 [[redirects]]
 from = "/dashboard/*"
-to = "https://thecontentlabs.app/dashboard/:splat"
+to = "https://stirring-griffin-e64878.netlify.app/dashboard/:splat"
 status = 200
 
 [[redirects]]
 from = "/setup-wizard"
-to = "https://thecontentlabs.app/setup-wizard"
+to = "https://stirring-griffin-e64878.netlify.app/setup-wizard"
 status = 200
 
 [[redirects]]
 from = "/onboarding"
-to = "https://thecontentlabs.app/onboarding"
+to = "https://stirring-griffin-e64878.netlify.app/onboarding"
 status = 200
 
 [[redirects]]
 from = "/settings"
-to = "https://thecontentlabs.app/settings"
+to = "https://stirring-griffin-e64878.netlify.app/settings"
 status = 200
 
 [[redirects]]
 from = "/checkout-success"
-to = "https://thecontentlabs.app/checkout-success"
+to = "https://stirring-griffin-e64878.netlify.app/checkout-success"
 status = 200
 
 [[redirects]]
 from = "/reset-password"
-to = "https://thecontentlabs.app/reset-password"
+to = "https://stirring-griffin-e64878.netlify.app/reset-password"
 status = 200
 
 # Cache hashed Next.js assets forever (content-hashed filenames)
