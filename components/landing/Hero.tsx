@@ -66,10 +66,8 @@ export function Hero() {
           // @ts-expect-error - fetchpriority is valid HTML but React types don't include it yet
           fetchpriority="low"
           className="w-full rounded-2xl shadow-2xl"
-        >
-          <source src="/hero-demo.webm" type="video/webm" />
-          <source src="/hero-demo.mp4" type="video/mp4" />
-        </video>
+          src="/hero-demo.mp4"
+        />
       </div>
 
       {/* Persona callouts + social proof */}
