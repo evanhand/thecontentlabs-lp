@@ -12,10 +12,13 @@ to = "https://evhand.app.n8n.cloud/webhook/:splat"
 status = 200
 force = true
 
-# App routes — proxy to the Vite app (currently live at thecontentlabs.app)
-# NOTE: Before swapping thecontentlabs.app to point to this Netlify site,
-# the Vite app must be deployed to a separate Netlify URL and these proxies
-# must be updated to point there to avoid circular redirects.
+# Vite app assets — JS/CSS bundles loaded by the proxied app pages
+[[redirects]]
+from = "/assets/*"
+to = "https://stirring-griffin-e64878.netlify.app/assets/:splat"
+status = 200
+
+# App routes — proxy to the Vite app
 [[redirects]]
 from = "/register"
 to = "https://stirring-griffin-e64878.netlify.app/register"
