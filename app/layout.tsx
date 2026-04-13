@@ -206,8 +206,7 @@ export default function RootLayout({
           rel="preload"
           as="image"
           href="/hero-demo-poster.jpg"
-          // @ts-expect-error - fetchPriority is valid HTML but React types don't include it yet
-          fetchpriority="high"
+          fetchPriority="high"
         />
 
         {/* Clash Display from Fontshare — heading font.
@@ -216,28 +215,7 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
-          media="print"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var links = document.querySelectorAll('link[media="print"]');
-                for (var i = 0; i < links.length; i++) {
-                  if (links[i].href.indexOf('fontshare') !== -1) {
-                    links[i].addEventListener('load', function() { this.media = 'all'; });
-                  }
-                }
-              })();
-            `,
-          }}
-        />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
-          />
-        </noscript>
 
         {/* JSON-LD Structured Data — rendered in real HTML for crawlers */}
         <script
