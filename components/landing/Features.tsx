@@ -8,10 +8,10 @@ import { MagneticButton } from '@/components/ui/MagneticButton';
 import { fadeUp, popIn, staggerContainer, VIEWPORT_ONCE } from '@/lib/motionVariants';
 
 const FEATURES = [
-  { title: "See Exactly Why Their Videos Go Viral", description: "Pick any competitor. We'll break down their top-performing content and show you the hooks, formats, and patterns driving their growth so you can use the same formula.", icon: Microscope, benefit: "Know what works before you hit record", tag: "COMPETITOR BREAKDOWN", monitorLabel: "competitor_analysis", wide: true, image: "/features/competitor-analysis.jpg" },
-  { title: "Never Stare at a Blank Screen Again", description: "Get a full month of content planned for you, complete with hooks, scripts, and posting schedule. Every piece is built from what's already proven in your niche.", icon: TestTube2, benefit: "End creative block forever", tag: "CONTENT CALENDAR", monitorLabel: "content_calendar", wide: false, image: "/features/content-calendar.jpg" },
-  { title: "Know What's Growing and What's Not", description: "See which of your videos are actually driving followers and engagement, which formats are working, and where to double down.", icon: LineChart, benefit: "Stop guessing, start seeing what's actually working", tag: "YOUR ANALYTICS", monitorLabel: "content_analytics", wide: false, image: "/features/analytics.jpg" },
-  { title: "Ask Anything. Get Real Answers.", description: "The Chemist knows your niche, your content history, and your competitors. Ask it what to post next, why a video flopped, or how to write a better hook. It's like having a strategist on call 24/7.", icon: Atom, benefit: "Get unstuck in seconds, not hours", tag: "THE CHEMIST", monitorLabel: "the_chemist", wide: true, image: "/features/chemist.jpg" },
+  { title: "See Exactly Why Their Videos Go Viral", description: "Pick any competitor. We'll break down their top-performing content and show you the hooks, formats, and patterns driving their growth so you can use the same formula.", icon: Microscope, benefit: "Know what works before you hit record", tag: "COMPETITOR BREAKDOWN", monitorLabel: "competitor_analysis", image: "/features/competitor-analysis.jpg" },
+  { title: "Never Stare at a Blank Screen Again", description: "Get a full month of content planned for you, complete with hooks, scripts, and posting schedule. Every piece is built from what's already proven in your niche.", icon: TestTube2, benefit: "End creative block forever", tag: "CONTENT CALENDAR", monitorLabel: "content_calendar", image: "/features/content-calendar.jpg" },
+  { title: "Know What's Growing and What's Not", description: "See which of your videos are actually driving followers and engagement, which formats are working, and where to double down.", icon: LineChart, benefit: "Stop guessing, start seeing what's actually working", tag: "YOUR ANALYTICS", monitorLabel: "content_analytics", image: "/features/analytics.jpg" },
+  { title: "Ask Anything. Get Real Answers.", description: "The Chemist knows your niche, your content history, and your competitors. Ask it what to post next, why a video flopped, or how to write a better hook. It's like having a strategist on call 24/7.", icon: Atom, benefit: "Get unstuck in seconds, not hours", tag: "THE CHEMIST", monitorLabel: "the_chemist", image: "/features/chemist.jpg" },
 ];
 
 export function Features() {
@@ -37,13 +37,13 @@ export function Features() {
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {FEATURES.map((feature, index) => (
             <motion.div
               key={index}
               variants={popIn}
-              className={`group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-white/[0.08] overflow-hidden hover:shadow-lg hover:shadow-content-coral/10 hover:border-content-coral/20 transition-all duration-300 ${feature.wide ? 'lg:col-span-2' : 'lg:col-span-1'}`}
+              className="group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-white/[0.08] overflow-hidden hover:shadow-lg hover:shadow-content-coral/10 hover:border-content-coral/20 transition-all duration-300"
             >
               {/* Scan line effect */}
               <div className="lab-readout-scan absolute inset-0 rounded-2xl pointer-events-none z-20" />
