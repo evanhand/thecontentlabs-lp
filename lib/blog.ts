@@ -13,6 +13,7 @@ export interface PostMeta {
   updatedDate?: string;
   tags: string[];
   ogImage?: string;
+  heroImage?: string;
   faqs?: { q: string; a: string }[];
   slug: string;
   readingTime: string;
@@ -40,6 +41,7 @@ export function getPostMeta(slug: string): PostMeta {
     updatedDate: data.updatedDate,
     tags: data.tags || [],
     ogImage: data.ogImage,
+    heroImage: data.heroImage,
     faqs: data.faqs,
     slug,
     readingTime: rt.text,

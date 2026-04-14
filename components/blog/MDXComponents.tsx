@@ -286,21 +286,10 @@ export function NumberBlock({
 }
 
 /* -- Hook Section -- */
-const HOOK_COLORS: Record<string, { bg: string; border: string; badge: string; accent: string }> = {
-  red:    { bg: "bg-red-50",    border: "border-red-200",    badge: "bg-red-100 text-red-700",    accent: "text-red-600" },
-  orange: { bg: "bg-orange-50", border: "border-orange-200", badge: "bg-orange-100 text-orange-700", accent: "text-orange-600" },
-  amber:  { bg: "bg-amber-50",  border: "border-amber-200",  badge: "bg-amber-100 text-amber-700",  accent: "text-amber-600" },
-  blue:   { bg: "bg-blue-50",   border: "border-blue-200",   badge: "bg-blue-100 text-blue-700",   accent: "text-blue-600" },
-  purple: { bg: "bg-purple-50", border: "border-purple-200", badge: "bg-purple-100 text-purple-700", accent: "text-purple-600" },
-  green:  { bg: "bg-green-50",  border: "border-green-200",  badge: "bg-green-100 text-green-700",  accent: "text-green-600" },
-  indigo: { bg: "bg-indigo-50", border: "border-indigo-200", badge: "bg-indigo-100 text-indigo-700", accent: "text-indigo-600" },
-};
-
 export function HookSection({
   rank,
   name,
   tagline,
-  color = "blue",
   engagement,
   videos,
   topViews,
@@ -315,35 +304,34 @@ export function HookSection({
   topViews: string;
   children: React.ReactNode;
 }) {
-  const c = HOOK_COLORS[color] || HOOK_COLORS.blue;
   return (
-    <section className={`not-prose ${c.bg} ${c.border} border rounded-2xl p-6 sm:p-8 my-10`}>
-      <div className="flex flex-wrap items-center gap-3 mb-2">
-        <span className={`${c.badge} text-xs font-bold px-3 py-1 rounded-full`}>
+    <section className="not-prose border-t-2 border-slate-200 pt-10 my-10 first:border-t-0 first:pt-0">
+      <div className="flex flex-wrap items-center gap-3 mb-1">
+        <span className="text-content-coral text-sm font-bold">
           #{rank}
         </span>
-        <h2 className={`text-xl sm:text-2xl font-bold text-slate-900`}>
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
           {name}
         </h2>
       </div>
-      <p className="text-slate-500 text-sm mb-5 italic">{tagline}</p>
+      <p className="text-slate-500 text-base mb-6">{tagline}</p>
 
-      <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="bg-white/70 rounded-xl p-3 text-center">
-          <p className={`text-2xl font-bold ${c.accent}`}>{engagement}</p>
-          <p className="text-xs text-slate-500 mt-0.5">Avg engagement</p>
+      <div className="grid grid-cols-3 gap-3 mb-8">
+        <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
+          <p className="text-2xl font-bold text-slate-900">{engagement}</p>
+          <p className="text-xs text-slate-500 mt-1">Avg engagement</p>
         </div>
-        <div className="bg-white/70 rounded-xl p-3 text-center">
-          <p className={`text-2xl font-bold ${c.accent}`}>{videos}</p>
-          <p className="text-xs text-slate-500 mt-0.5">Videos analyzed</p>
+        <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
+          <p className="text-2xl font-bold text-slate-900">{videos}</p>
+          <p className="text-xs text-slate-500 mt-1">Videos analyzed</p>
         </div>
-        <div className="bg-white/70 rounded-xl p-3 text-center">
-          <p className={`text-2xl font-bold ${c.accent}`}>{topViews}</p>
-          <p className="text-xs text-slate-500 mt-0.5">Top video views</p>
+        <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
+          <p className="text-2xl font-bold text-slate-900">{topViews}</p>
+          <p className="text-xs text-slate-500 mt-1">Top video views</p>
         </div>
       </div>
 
-      <div className="text-slate-700 text-[15px] leading-relaxed space-y-4">
+      <div className="text-slate-700 text-[16px] leading-relaxed space-y-4">
         {children}
       </div>
     </section>
@@ -396,8 +384,8 @@ export function HookExample({
 /* -- "When to use" mini box -- */
 export function WhenToUse({ children }: { children: React.ReactNode }) {
   return (
-    <div className="not-prose bg-white/60 rounded-lg border border-slate-200/60 px-4 py-3 mt-5">
-      <p className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">When to use this</p>
+    <div className="not-prose bg-slate-50 rounded-xl border border-slate-200 px-5 py-4 mt-6">
+      <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">When to use this</p>
       <p className="text-sm text-slate-600 leading-relaxed">{children}</p>
     </div>
   );
