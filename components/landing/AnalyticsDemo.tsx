@@ -1,11 +1,5 @@
-'use client';
-
 import React from 'react';
 import { Eye, TrendingUp, Users, BarChart3, Heart } from 'lucide-react';
-
-interface AnalyticsDemoProps {
-  isVisible: boolean;
-}
 
 const STATS = [
   { icon: Eye, label: 'Total Views', value: '1.2M', change: '+24%' },
@@ -21,9 +15,7 @@ const BARS = [
   { label: 'Trending', value: '12%', width: '24%' },
 ];
 
-export function AnalyticsDemo({ isVisible }: AnalyticsDemoProps) {
-  if (!isVisible) return <div className="aly-app" />;
-
+export function AnalyticsDemo() {
   return (
     <div className="aly-app flex flex-col">
       {/* Top bar */}
@@ -43,14 +35,10 @@ export function AnalyticsDemo({ isVisible }: AnalyticsDemoProps) {
       <div className="flex-1 p-3 flex flex-col gap-3 overflow-hidden">
         {/* Stat cards row */}
         <div className="grid grid-cols-4 gap-2">
-          {STATS.map((stat, i) => {
+          {STATS.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div
-                key={stat.label}
-                className="aly-stagger bg-white rounded-xl border border-slate-200/80 shadow-sm p-3"
-                style={{ animationDelay: `${0.1 + i * 0.1}s` }}
-              >
+              <div key={stat.label} className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-3">
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-lg bg-content-coral/10 flex items-center justify-center">
                     <Icon size={12} className="text-content-coral" />
@@ -69,7 +57,7 @@ export function AnalyticsDemo({ isVisible }: AnalyticsDemoProps) {
         {/* Charts row */}
         <div className="grid grid-cols-[2fr_1fr] gap-2 flex-1 min-h-0">
           {/* Line chart */}
-          <div className="aly-stagger bg-white rounded-xl border border-slate-200/80 shadow-sm p-3 flex flex-col" style={{ animationDelay: '0.5s' }}>
+          <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-3 flex flex-col">
             <div className="flex items-center justify-between mb-2">
               <div className="text-[10px] font-bold text-slate-800">Growth Trend</div>
               <div className="flex gap-2">
@@ -84,54 +72,30 @@ export function AnalyticsDemo({ isVisible }: AnalyticsDemoProps) {
               </div>
             </div>
             <svg className="flex-1 w-full" viewBox="0 0 400 140" preserveAspectRatio="none">
-              {/* Grid lines */}
               {[0, 35, 70, 105, 140].map(y => (
                 <line key={y} x1="0" y1={y} x2="400" y2={y} stroke="#f1f5f9" strokeWidth="1" />
               ))}
-              {/* Area fill */}
               <defs>
                 <linearGradient id="alyGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#f4632a" stopOpacity="0.15" />
                   <stop offset="100%" stopColor="#f4632a" stopOpacity="0" />
                 </linearGradient>
               </defs>
-              <path
-                className="aly-area-fade"
-                d="M0,120 L40,105 L80,95 L120,100 L160,80 L200,70 L240,55 L280,45 L320,35 L360,20 L400,10 L400,140 L0,140 Z"
-                fill="url(#alyGrad)"
-              />
-              {/* Views line */}
-              <path
-                className="aly-line-draw"
-                d="M0,120 L40,105 L80,95 L120,100 L160,80 L200,70 L240,55 L280,45 L320,35 L360,20 L400,10"
-                fill="none" stroke="#f4632a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-              />
-              {/* Followers line */}
-              <path
-                className="aly-line-draw"
-                d="M0,130 L40,125 L80,118 L120,115 L160,108 L200,100 L240,90 L280,82 L320,70 L360,60 L400,50"
-                fill="none" stroke="#fac0aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="4 3"
-                style={{ animationDelay: '0.9s' }}
-              />
+              <path d="M0,120 L40,105 L80,95 L120,100 L160,80 L200,70 L240,55 L280,45 L320,35 L360,20 L400,10 L400,140 L0,140 Z" fill="url(#alyGrad)" />
+              <path d="M0,120 L40,105 L80,95 L120,100 L160,80 L200,70 L240,55 L280,45 L320,35 L360,20 L400,10" fill="none" stroke="#f4632a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M0,130 L40,125 L80,118 L120,115 L160,108 L200,100 L240,90 L280,82 L320,70 L360,60 L400,50" fill="none" stroke="#fac0aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="4 3" />
             </svg>
           </div>
 
           {/* Bar breakdown */}
-          <div className="aly-stagger bg-white rounded-xl border border-slate-200/80 shadow-sm p-3 flex flex-col" style={{ animationDelay: '0.6s' }}>
+          <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-3 flex flex-col">
             <div className="text-[10px] font-bold text-slate-800 mb-2">Top Formats</div>
             <div className="flex flex-col gap-2.5 flex-1 justify-center">
-              {BARS.map((bar, i) => (
+              {BARS.map((bar) => (
                 <div key={bar.label} className="flex items-center gap-2">
                   <span className="text-[8px] text-slate-500 w-16 text-right flex-shrink-0">{bar.label}</span>
                   <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden flex-1">
-                    <div
-                      className="h-full rounded-full aly-score-fill"
-                      style={{
-                        '--bar-w': bar.width,
-                        background: 'linear-gradient(90deg, #f4632a, #f67a4e)',
-                        animationDelay: `${0.8 + i * 0.15}s`,
-                      } as React.CSSProperties}
-                    />
+                    <div className="h-full rounded-full" style={{ width: bar.width, background: 'linear-gradient(90deg, #f4632a, #f67a4e)' }} />
                   </div>
                   <span className="text-[8px] font-bold text-slate-700 w-7 flex-shrink-0">{bar.value}</span>
                 </div>
