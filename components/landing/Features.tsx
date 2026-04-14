@@ -61,13 +61,13 @@ export function Features() {
                     <span className="lab-monitor-dot bg-green-500/60" />
                     <span className="font-mono text-[10px] text-slate-500 ml-2 tracking-wider">{feature.monitorLabel}</span>
                   </div>
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden h-[200px] sm:h-[260px] lg:h-[300px]">
                     <img
                       src={feature.image}
                       alt={feature.title}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-auto object-cover object-top max-h-[340px]"
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                 </div>
