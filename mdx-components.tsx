@@ -11,6 +11,11 @@ import {
   VideoGrid,
   Highlight,
   NumberBlock,
+  HookSection,
+  HookExample,
+  WhenToUse,
+  DataBarChart,
+  DataPieChart,
 } from "@/components/blog/MDXComponents";
 
 export function useMDXComponents(): MDXComponents {
@@ -26,6 +31,11 @@ export function useMDXComponents(): MDXComponents {
     VideoGrid,
     Highlight,
     NumberBlock,
+    HookSection,
+    HookExample,
+    WhenToUse,
+    DataBarChart,
+    DataPieChart,
     a: ({
       href,
       children,

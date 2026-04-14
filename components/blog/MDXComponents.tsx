@@ -1,4 +1,19 @@
+"use client";
+
 import { ArrowRight, Check, X } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  PieChart,
+  Pie,
+  Legend,
+} from "recharts";
 
 /* -- CTA Block -- */
 export function CTA({
@@ -267,5 +282,286 @@ export function NumberBlock({
         </div>
       ))}
     </div>
+  );
+}
+
+/* -- Hook Section -- */
+const HOOK_COLORS: Record<string, { bg: string; border: string; badge: string; accent: string }> = {
+  red:    { bg: "bg-red-50",    border: "border-red-200",    badge: "bg-red-100 text-red-700",    accent: "text-red-600" },
+  orange: { bg: "bg-orange-50", border: "border-orange-200", badge: "bg-orange-100 text-orange-700", accent: "text-orange-600" },
+  amber:  { bg: "bg-amber-50",  border: "border-amber-200",  badge: "bg-amber-100 text-amber-700",  accent: "text-amber-600" },
+  blue:   { bg: "bg-blue-50",   border: "border-blue-200",   badge: "bg-blue-100 text-blue-700",   accent: "text-blue-600" },
+  purple: { bg: "bg-purple-50", border: "border-purple-200", badge: "bg-purple-100 text-purple-700", accent: "text-purple-600" },
+  green:  { bg: "bg-green-50",  border: "border-green-200",  badge: "bg-green-100 text-green-700",  accent: "text-green-600" },
+  indigo: { bg: "bg-indigo-50", border: "border-indigo-200", badge: "bg-indigo-100 text-indigo-700", accent: "text-indigo-600" },
+};
+
+export function HookSection({
+  rank,
+  name,
+  tagline,
+  color = "blue",
+  engagement,
+  videos,
+  topViews,
+  children,
+}: {
+  rank: number;
+  name: string;
+  tagline: string;
+  color?: string;
+  engagement: string;
+  videos: string;
+  topViews: string;
+  children: React.ReactNode;
+}) {
+  const c = HOOK_COLORS[color] || HOOK_COLORS.blue;
+  return (
+    <section className={`not-prose ${c.bg} ${c.border} border rounded-2xl p-6 sm:p-8 my-10`}>
+      <div className="flex flex-wrap items-center gap-3 mb-2">
+        <span className={`${c.badge} text-xs font-bold px-3 py-1 rounded-full`}>
+          #{rank}
+        </span>
+        <h2 className={`text-xl sm:text-2xl font-bold text-slate-900`}>
+          {name}
+        </h2>
+      </div>
+      <p className="text-slate-500 text-sm mb-5 italic">{tagline}</p>
+
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="bg-white/70 rounded-xl p-3 text-center">
+          <p className={`text-2xl font-bold ${c.accent}`}>{engagement}</p>
+          <p className="text-xs text-slate-500 mt-0.5">Avg engagement</p>
+        </div>
+        <div className="bg-white/70 rounded-xl p-3 text-center">
+          <p className={`text-2xl font-bold ${c.accent}`}>{videos}</p>
+          <p className="text-xs text-slate-500 mt-0.5">Videos analyzed</p>
+        </div>
+        <div className="bg-white/70 rounded-xl p-3 text-center">
+          <p className={`text-2xl font-bold ${c.accent}`}>{topViews}</p>
+          <p className="text-xs text-slate-500 mt-0.5">Top video views</p>
+        </div>
+      </div>
+
+      <div className="text-slate-700 text-[15px] leading-relaxed space-y-4">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/* -- Hook Example Quote -- */
+export function HookExample({
+  quote,
+  creator,
+  views,
+  url,
+}: {
+  quote: string;
+  creator?: string;
+  views?: string;
+  url?: string;
+}) {
+  const inner = (
+    <div className="not-prose bg-white rounded-xl border border-slate-200 px-5 py-4 my-3 flex items-start gap-3 group hover:border-content-coral/30 hover:shadow-sm transition-all">
+      <span className="text-content-coral text-xl leading-none mt-0.5">&ldquo;</span>
+      <div className="flex-1 min-w-0">
+        <p className="text-slate-800 font-medium text-[15px] leading-snug">{quote}</p>
+        {(creator || views) && (
+          <p className="text-xs text-slate-400 mt-1.5">
+            {creator && <span>@{creator}</span>}
+            {creator && views && <span> &middot; </span>}
+            {views && <span>{views} views</span>}
+          </p>
+        )}
+      </div>
+      {url && (
+        <span className="text-xs text-slate-300 group-hover:text-content-coral transition-colors flex-shrink-0 mt-1">
+          &#9654;
+        </span>
+      )}
+    </div>
+  );
+
+  if (url) {
+    return (
+      <a href={url} target="_blank" rel="noopener noreferrer" className="no-underline block">
+        {inner}
+      </a>
+    );
+  }
+  return inner;
+}
+
+/* -- "When to use" mini box -- */
+export function WhenToUse({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="not-prose bg-white/60 rounded-lg border border-slate-200/60 px-4 py-3 mt-5">
+      <p className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">When to use this</p>
+      <p className="text-sm text-slate-600 leading-relaxed">{children}</p>
+    </div>
+  );
+}
+
+/* -- Bar Chart -- */
+const CHART_COLORS = [
+  "#ef4444", "#f97316", "#f59e0b", "#3b82f6", "#a855f7", "#22c55e", "#6366f1",
+  "#ec4899", "#14b8a6", "#8b5cf6",
+];
+
+export function DataBarChart({
+  data,
+  xKey,
+  yKey,
+  title,
+  yLabel,
+  height = 350,
+  suffix = "",
+  horizontal = false,
+}: {
+  data: Record<string, string | number>[];
+  xKey: string;
+  yKey: string;
+  title?: string;
+  yLabel?: string;
+  height?: number;
+  suffix?: string;
+  horizontal?: boolean;
+}) {
+  return (
+    <figure className="not-prose my-8">
+      {title && (
+        <p className="text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div
+        className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6"
+        style={{ height }}
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          {horizontal ? (
+            <BarChart data={data} layout="vertical" margin={{ left: 10, right: 30, top: 5, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+              <XAxis
+                type="number"
+                tick={{ fontSize: 12, fill: "#64748b" }}
+                tickFormatter={(v) => `${v}${suffix}`}
+              />
+              <YAxis
+                dataKey={xKey}
+                type="category"
+                tick={{ fontSize: 12, fill: "#334155" }}
+                width={120}
+              />
+              <Tooltip
+                formatter={(value: number) => [`${value}${suffix}`, yLabel || yKey]}
+                contentStyle={{
+                  borderRadius: 12,
+                  border: "1px solid #e2e8f0",
+                  fontSize: 13,
+                }}
+              />
+              <Bar dataKey={yKey} radius={[0, 6, 6, 0]} barSize={28}>
+                {data.map((_, i) => (
+                  <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                ))}
+              </Bar>
+            </BarChart>
+          ) : (
+            <BarChart data={data} margin={{ left: -10, right: 10, top: 5, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+              <XAxis
+                dataKey={xKey}
+                tick={{ fontSize: 11, fill: "#64748b" }}
+                interval={0}
+                angle={-20}
+                textAnchor="end"
+                height={60}
+              />
+              <YAxis
+                tick={{ fontSize: 12, fill: "#64748b" }}
+                tickFormatter={(v) => `${v}${suffix}`}
+              />
+              <Tooltip
+                formatter={(value: number) => [`${value}${suffix}`, yLabel || yKey]}
+                contentStyle={{
+                  borderRadius: 12,
+                  border: "1px solid #e2e8f0",
+                  fontSize: 13,
+                }}
+              />
+              <Bar dataKey={yKey} radius={[6, 6, 0, 0]} barSize={40}>
+                {data.map((_, i) => (
+                  <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                ))}
+              </Bar>
+            </BarChart>
+          )}
+        </ResponsiveContainer>
+      </div>
+    </figure>
+  );
+}
+
+/* -- Pie / Donut Chart -- */
+export function DataPieChart({
+  data,
+  nameKey,
+  valueKey,
+  title,
+  height = 350,
+  donut = false,
+}: {
+  data: Record<string, string | number>[];
+  nameKey: string;
+  valueKey: string;
+  title?: string;
+  height?: number;
+  donut?: boolean;
+}) {
+  return (
+    <figure className="not-prose my-8">
+      {title && (
+        <p className="text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div
+        className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6"
+        style={{ height }}
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey={valueKey}
+              nameKey={nameKey}
+              cx="50%"
+              cy="50%"
+              innerRadius={donut ? "45%" : 0}
+              outerRadius="75%"
+              paddingAngle={2}
+              label={({ name, percent }) =>
+                `${name} ${(percent * 100).toFixed(0)}%`
+              }
+              labelLine={{ stroke: "#94a3b8" }}
+              fontSize={11}
+            >
+              {data.map((_, i) => (
+                <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                borderRadius: 12,
+                border: "1px solid #e2e8f0",
+                fontSize: 13,
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </figure>
   );
 }
