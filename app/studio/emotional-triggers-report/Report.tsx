@@ -206,7 +206,7 @@ export function EmotionalTriggersReport() {
   return (
     <div className="lab-grid-bg text-slate-900 min-h-screen [font-feature-settings:'ss01','cv11']">
       <div
-        className={`fixed top-6 right-8 z-50 text-[11px] font-mono uppercase tracking-[0.25em] transition-opacity duration-300 ${
+        className={`hidden md:block fixed top-6 right-8 z-50 text-[11px] font-mono uppercase tracking-[0.25em] transition-opacity duration-300 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       >
