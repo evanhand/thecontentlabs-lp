@@ -19,6 +19,9 @@ function getStaticRoutes(): string[] {
       if (entry.name.startsWith("[") || entry.name.startsWith("_")) continue;
 
       if (entry.isDirectory()) {
+        // Skip hidden/private sections
+        if (entry.name === "studio" || entry.name === "api") continue;
+
         // Check if this directory has a page file
         const hasPage = fs.readdirSync(path.join(dir, entry.name)).some(
           (f) => f.startsWith("page.")

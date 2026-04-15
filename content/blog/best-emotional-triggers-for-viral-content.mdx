@@ -1,0 +1,187 @@
+---
+title: "Outrage Beats Inspiration 9x: The Emotions That Actually Go Viral"
+description: "We tagged 1,833 videos by primary emotion and normalized for follower count. The emotions that get the most reach aren't the ones creators are told to use."
+category: "blog"
+date: "2026-04-15"
+tags: ["viral content", "emotional triggers", "content strategy", "data", "tiktok", "instagram"]
+faqs:
+  - q: "What emotion gets the most views on TikTok and Instagram?"
+    a: "Based on our analysis of 1,833 videos normalized for follower count, Outrage is the top-performing emotion with a 0.186 median view-per-follower ratio. On TikTok specifically, outrage hits 0.307, which is 15× higher than Inspiration (0.021)."
+  - q: "Does 'fear sells' actually work in short-form video?"
+    a: "No. Fear-based content ranks 11th out of 12 emotions in our dataset. The 'you're doing it wrong and here's why you should be scared' angle doesn't actually drive engagement. Outrage and Humor outperform Fear by 5× and 4×."
+  - q: "Why doesn't inspirational content perform well?"
+    a: "Inspiration finishes last in our rankings at 0.021 median views per follower. Viewers say they want positive motivational content, but they don't actually click on it. They watch videos that make them laugh or angry. That's the gap between stated preferences and real behavior."
+---
+
+Every content guru gives the same advice. "Inspire people." "Tell a heartwarming story." "Make them believe in themselves."
+
+Turns out that's basically the worst thing you can do.
+
+We tagged **1,833 videos** by their primary emotional trigger, then measured performance using views per follower (so small creators compete fairly with huge ones). The results are not what any marketing course will tell you.
+
+## The full ranking
+
+<StatGrid>
+  <StatCard stat="1,833" label="Videos analyzed" />
+  <StatCard stat="12" label="Emotions measured" />
+  <StatCard stat="0.186" label="Outrage ratio" />
+  <StatCard stat="0.021" label="Inspiration ratio" />
+  <StatCard stat="9×" label="Outrage vs Inspiration" />
+  <StatCard stat="15×" label="Gap on TikTok" />
+</StatGrid>
+
+Here's the full list, sorted by median views per follower:
+
+<DataBarChart
+  data={[
+    { emotion: "Outrage", ratio: 0.186 },
+    { emotion: "Humor", ratio: 0.172 },
+    { emotion: "Curiosity", ratio: 0.091 },
+    { emotion: "Relief", ratio: 0.060 },
+    { emotion: "Belonging", ratio: 0.057 },
+    { emotion: "Trust", ratio: 0.053 },
+    { emotion: "Identity", ratio: 0.051 },
+    { emotion: "Anger", ratio: 0.049 },
+    { emotion: "Aspiration", ratio: 0.048 },
+    { emotion: "Desire", ratio: 0.043 },
+    { emotion: "Fear", ratio: 0.037 },
+    { emotion: "Inspiration", ratio: 0.021 },
+  ]}
+  xKey="emotion"
+  yKey="ratio"
+  title="Median views per follower by primary emotion"
+  yLabel="Views per follower"
+  horizontal
+  height={420}
+/>
+
+Outrage wins. Humor is a close second. Everything else is mid-tier or worse.
+
+Then you get to the bottom three: **Desire, Fear, and Inspiration** — the three emotions most frequently recommended by marketing advice. They're the worst performers.
+
+---
+
+## What "normalized for followers" means
+
+Before you dismiss this as "of course big creators win," let's be clear. This isn't raw views. This is **median views per follower**.
+
+Think of it this way:
+
+- **Creator A**: 1 million followers, 500K views on a video. Ratio: 0.5
+- **Creator B**: 10,000 followers, 50K views on a video. Ratio: 5.0
+
+Creator A got more total views. But Creator B's video reached **10× their follower base** while Creator A's video barely reached half of theirs. Creator B crushed it. Creator A didn't.
+
+We use this ratio because it measures the thing that actually matters: **did your video break out of your follower base and reach new people?** That's what going viral is.
+
+When we rank emotions this way, the results don't favor big creators or small creators. They favor whichever emotional trigger gets videos sent beyond their original audience.
+
+---
+
+## Why outrage wins
+
+Outrage is engineered for shares. When you see a video that makes you genuinely angry about something, you don't just watch it and move on. You:
+
+1. Send it to friends to confirm you're not crazy
+2. Comment to vent
+3. Save it so you can show someone later
+4. Re-share with your own take
+
+Every one of those behaviors is algorithmic gold. Shares + comments + saves all feed the "this video needs to be pushed further" signal.
+
+Look at the videos we found that crushed it:
+
+**"The internet is OUTRAGED after this Phillies Karen stole a ball from a kid during the Phillies vs Marlins game last night."** — 7.9M views
+
+**"Chappell Roan allegedly made one of her 11-year-old fans cry this morning because she looked at her while she was eating breakfast."** — 2.4M views
+
+**"It's no secret that many of you are demanding that I speak out about what happened in Minneapolis."** — 2.5M views
+
+Different niches, same pattern. Story of something wrong or unfair, real person at the center, takes a stance. The algorithm and the audience both reward it.
+
+---
+
+## Why inspiration fails
+
+Inspiration ranks dead last with a 0.021 median ratio. That means inspirational videos, on average, reach only 2% of the follower base. For every 10,000 followers, the typical inspirational video gets seen by 200 people.
+
+The reason: inspiration is passive. You watch an inspirational video, feel mildly uplifted, and scroll on. You don't comment. You don't save it. You don't send it to a friend. There's nothing to do with the emotion.
+
+Compare that to outrage, where the natural next step is to share. Or humor, where the natural next step is to tag someone who'd find it funny. These emotions have built-in distribution behaviors. Inspiration doesn't.
+
+---
+
+## The TikTok outlier
+
+On TikTok specifically, the gap is even bigger:
+
+| Emotion | TikTok median ratio |
+|---------|---------------------|
+| Outrage | **0.307** |
+| Humor | 0.172 |
+| Curiosity | 0.090 |
+| Fear | 0.037 |
+| Inspiration | **0.021** |
+
+TikTok's algorithm rewards outrage more aggressively than Instagram's. A 15× gap between best and worst emotion. That's not a rounding error. That's the algorithm actively pushing outrage content to new viewers while burying inspirational content.
+
+If you post on TikTok and you're making "motivational" or "feel-good" content, this is why your reach is terrible.
+
+---
+
+## The arbitrage nobody is using
+
+Here's the part that should make you think. Look at how often each emotion shows up in our dataset:
+
+- **Curiosity**: 562 videos (most common)
+- **Desire**: 353 videos
+- **Trust**: 150 videos
+- **Identity**: 131 videos
+- **Outrage**: 44 videos (**rarest**)
+
+The best-performing emotion is the second-least-used emotion. Creators pile into curiosity and desire. Almost nobody leans into outrage.
+
+That's a real arbitrage. Outrage gets **2× the results for 1/13th the usage**. If you're looking for an edge, that's where it is.
+
+## What you should actually do
+
+**Primary emotions to use:**
+
+- **Outrage**: Something happened that's unfair, wrong, or ridiculous. Tell the story. Take a side.
+- **Humor**: Make people laugh. This is the other reliable winner.
+- **Curiosity**: Safe middle ground. Won't blow up, won't die.
+
+**Stop using:**
+
+- **Inspiration**: People say they want it. They don't watch it.
+- **Fear**: "You're doing it wrong" content underperforms hard.
+- **Generic desire/aspiration**: The "show the result" content is saturated.
+
+<Callout type="tip">
+This doesn't mean every video should be rage-bait. It means your hook should trigger outrage, humor, or curiosity in the first 1-3 seconds. You can deliver whatever payoff you want after that. But the emotion you lead with determines whether anyone watches long enough to see it.
+</Callout>
+
+---
+
+## See the full visual report
+
+We turned this entire analysis into a visual walkthrough you can read in 5 minutes. It covers everything in this post with larger charts, real video examples, and the methodology behind the data.
+
+<a
+  href="/reports/emotional-triggers"
+  className="not-prose inline-flex items-center justify-center px-6 py-4 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-xl font-bold hover:shadow-lg transition-all no-underline my-6"
+>
+  View the full data report →
+</a>
+
+---
+
+## The takeaway
+
+Audiences lie to themselves about what they want. They say inspiration. They click on outrage. They say motivation. They watch comedy.
+
+Don't listen to what people tell you they want. Look at what they actually watch.
+
+**Make them laugh. Make them mad. Make them curious.** That's the formula.
+
+<CTA text="Get Your Content Strategy" />

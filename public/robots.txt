@@ -4,6 +4,7 @@ Disallow: /dashboard/
 Disallow: /setup-wizard
 Disallow: /checkout-success
 Disallow: /reset-password
+Disallow: /studio/
 
 # AI Search Bots — explicitly allowed for citation/discovery
 User-agent: GPTBot
