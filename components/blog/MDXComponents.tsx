@@ -443,7 +443,7 @@ export function DataBarChart({
                 width={120}
               />
               <Tooltip
-                formatter={(value: number) => [`${value}${suffix}`, yLabel || yKey]}
+                formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
                 contentStyle={{
                   borderRadius: 12,
                   border: "1px solid #e2e8f0",
@@ -472,7 +472,7 @@ export function DataBarChart({
                 tickFormatter={(v) => `${v}${suffix}`}
               />
               <Tooltip
-                formatter={(value: number) => [`${value}${suffix}`, yLabel || yKey]}
+                formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
                 contentStyle={{
                   borderRadius: 12,
                   border: "1px solid #e2e8f0",
@@ -531,7 +531,7 @@ export function DataPieChart({
               outerRadius="75%"
               paddingAngle={2}
               label={({ name, percent }) =>
-                `${name} ${(percent * 100).toFixed(0)}%`
+                `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
               }
               labelLine={{ stroke: "#94a3b8" }}
               fontSize={11}
