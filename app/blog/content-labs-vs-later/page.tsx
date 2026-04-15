@@ -174,7 +174,7 @@ export default function ContentLabsVsLater() {
             <h2 className="text-2xl font-bold text-slate-900 mb-3">Know What to Post Before You Schedule It</h2>
             <p className="text-slate-600 mb-6 max-w-xl mx-auto">47,598+ creators use The Content Labs to build data-driven strategies. Plans from $39/mo.</p>
             <a href="/pricing" className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95">
-              Get My 30-Day Content Plan <ArrowRight className="ml-3 h-5 w-5" />
+              Get Your Free Audit <ArrowRight className="ml-3 h-5 w-5" />
             </a>
           </section>
 

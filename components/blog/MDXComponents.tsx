@@ -17,8 +17,8 @@ import {
 
 /* -- CTA Block -- */
 export function CTA({
-  text = "Get My 30-Day Content Plan",
-  href = "/pricing",
+  text = "Get Your Free Audit",
+  href = "/register",
 }: {
   text?: string;
   href?: string;

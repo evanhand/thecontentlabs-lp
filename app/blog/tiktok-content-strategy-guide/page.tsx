@@ -236,7 +236,7 @@ export default function TikTokContentStrategyGuide() {
               href="/pricing"
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              Get My 30-Day Content Plan
+              Get Your Free Audit
               <ArrowRight className="ml-3 h-5 w-5" />
             </a>
             <p className="text-sm text-slate-500 mt-3">Plans from $39/mo &middot; Free content audit in minutes</p>

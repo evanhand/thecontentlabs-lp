@@ -49,7 +49,7 @@ export function FinalCTA() {
             >
               <span className="flex items-center">
                 <Rocket className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
-                Get My 30-Day Content Plan
+                Get Your Free Audit
                 <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
               </span>
             </a>
