@@ -20,13 +20,22 @@ export const metadata: Metadata = {
 
 const REPORTS = [
   {
+    slug: "small-vs-big",
+    title: "Small Accounts Get 14× More Reach",
+    description:
+      "We measured views per follower across 2,537 videos. The algorithm feeds small accounts. Big accounts aren't suppressed — they just lost the discovery boost.",
+    stat: "2,537",
+    statLabel: "Videos analyzed",
+    badge: "New",
+  },
+  {
     slug: "emotional-triggers",
     title: "Which Emotions Actually Go Viral?",
     description:
       "We tagged 1,833 videos by primary emotion and normalized for follower count. Outrage beats inspiration by 9×.",
     stat: "1,833",
     statLabel: "Videos analyzed",
-    badge: "New",
+    badge: null,
   },
   {
     slug: "posting-times",

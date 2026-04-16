@@ -199,6 +199,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://thecontentlabs.app/reports/small-vs-big</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://thecontentlabs.app/terms</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -241,8 +247,26 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://thecontentlabs.app/blog/saves-vs-shares-vs-reach</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thecontentlabs.app/blog/small-accounts-more-reach</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://thecontentlabs.app/blog/tiktok-hooks-that-work</loc>
     <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thecontentlabs.app/blog/tiktok-vs-instagram-reels-2026</loc>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
