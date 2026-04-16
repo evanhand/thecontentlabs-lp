@@ -316,7 +316,7 @@ export function HookSection({
       </div>
       <p className="text-slate-500 text-base mb-6">{tagline}</p>
 
-      <div className="grid grid-cols-3 gap-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
         <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
           <p className="text-2xl font-bold text-slate-900">{engagement}</p>
           <p className="text-xs text-slate-500 mt-1">Avg engagement</p>
@@ -393,8 +393,16 @@ export function WhenToUse({ children }: { children: React.ReactNode }) {
 
 /* -- Bar Chart -- */
 const CHART_COLORS = [
-  "#ef4444", "#f97316", "#f59e0b", "#3b82f6", "#a855f7", "#22c55e", "#6366f1",
-  "#ec4899", "#14b8a6", "#8b5cf6",
+  "#f4632a", // content-coral
+  "#1e293b", // slate-800
+  "#f4632a99", // coral 60%
+  "#475569", // slate-600
+  "#f4632a66", // coral 40%
+  "#94a3b8", // slate-400
+  "#f4632a40", // coral 25%
+  "#cbd5e1", // slate-300
+  "#f4632acc", // coral 80%
+  "#334155", // slate-700
 ];
 
 export function DataBarChart({
@@ -419,74 +427,79 @@ export function DataBarChart({
   return (
     <figure className="not-prose my-8">
       {title && (
-        <p className="text-sm font-bold text-slate-700 mb-4 text-center">
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
           {title}
         </p>
       )}
       <div
-        className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6"
-        style={{ height }}
+        className="bg-white rounded-xl border border-slate-200 p-3 sm:p-6 overflow-x-auto"
+        style={{ minHeight: height }}
       >
-        <ResponsiveContainer width="100%" height="100%">
-          {horizontal ? (
-            <BarChart data={data} layout="vertical" margin={{ left: 10, right: 30, top: 5, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
-              <XAxis
-                type="number"
-                tick={{ fontSize: 12, fill: "#64748b" }}
-                tickFormatter={(v) => `${v}${suffix}`}
-              />
-              <YAxis
-                dataKey={xKey}
-                type="category"
-                tick={{ fontSize: 12, fill: "#334155" }}
-                width={120}
-              />
-              <Tooltip
-                formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
-                contentStyle={{
-                  borderRadius: 12,
-                  border: "1px solid #e2e8f0",
-                  fontSize: 13,
-                }}
-              />
-              <Bar dataKey={yKey} radius={[0, 6, 6, 0]} barSize={28}>
-                {data.map((_, i) => (
-                  <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          ) : (
-            <BarChart data={data} margin={{ left: -10, right: 10, top: 5, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-              <XAxis
-                dataKey={xKey}
-                tick={{ fontSize: 11, fill: "#64748b" }}
-                interval={0}
-                angle={-20}
-                textAnchor="end"
-                height={60}
-              />
-              <YAxis
-                tick={{ fontSize: 12, fill: "#64748b" }}
-                tickFormatter={(v) => `${v}${suffix}`}
-              />
-              <Tooltip
-                formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
-                contentStyle={{
-                  borderRadius: 12,
-                  border: "1px solid #e2e8f0",
-                  fontSize: 13,
-                }}
-              />
-              <Bar dataKey={yKey} radius={[6, 6, 0, 0]} barSize={40}>
-                {data.map((_, i) => (
-                  <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          )}
-        </ResponsiveContainer>
+        <div style={{ width: "100%", height }}>
+          <ResponsiveContainer width="100%" height="100%">
+            {horizontal ? (
+              <BarChart data={data} layout="vertical" margin={{ left: 0, right: 20, top: 5, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+                <XAxis
+                  type="number"
+                  tick={{ fontSize: 10, fill: "#64748b" }}
+                  tickFormatter={(v) => `${v}${suffix}`}
+                />
+                <YAxis
+                  dataKey={xKey}
+                  type="category"
+                  tick={{ fontSize: 10, fill: "#334155" }}
+                  width={90}
+                />
+                <Tooltip
+                  formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
+                  contentStyle={{
+                    borderRadius: 12,
+                    border: "1px solid #e2e8f0",
+                    fontSize: 12,
+                    padding: "8px 12px",
+                  }}
+                />
+                <Bar dataKey={yKey} radius={[0, 6, 6, 0]} barSize={24}>
+                  {data.map((_, i) => (
+                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            ) : (
+              <BarChart data={data} margin={{ left: -15, right: 5, top: 5, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                <XAxis
+                  dataKey={xKey}
+                  tick={{ fontSize: 9, fill: "#64748b" }}
+                  interval={0}
+                  angle={-25}
+                  textAnchor="end"
+                  height={55}
+                />
+                <YAxis
+                  tick={{ fontSize: 10, fill: "#64748b" }}
+                  tickFormatter={(v) => `${v}${suffix}`}
+                  width={40}
+                />
+                <Tooltip
+                  formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
+                  contentStyle={{
+                    borderRadius: 12,
+                    border: "1px solid #e2e8f0",
+                    fontSize: 12,
+                    padding: "8px 12px",
+                  }}
+                />
+                <Bar dataKey={yKey} radius={[6, 6, 0, 0]} barSize={32}>
+                  {data.map((_, i) => (
+                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            )}
+          </ResponsiveContainer>
+        </div>
       </div>
     </figure>
   );
@@ -511,12 +524,12 @@ export function DataPieChart({
   return (
     <figure className="not-prose my-8">
       {title && (
-        <p className="text-sm font-bold text-slate-700 mb-4 text-center">
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
           {title}
         </p>
       )}
       <div
-        className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6"
+        className="bg-white rounded-xl border border-slate-200 p-3 sm:p-6"
         style={{ height }}
       >
         <ResponsiveContainer width="100%" height="100%">
@@ -527,14 +540,14 @@ export function DataPieChart({
               nameKey={nameKey}
               cx="50%"
               cy="50%"
-              innerRadius={donut ? "45%" : 0}
-              outerRadius="75%"
+              innerRadius={donut ? "40%" : 0}
+              outerRadius="65%"
               paddingAngle={2}
               label={({ name, percent }) =>
                 `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
               }
               labelLine={{ stroke: "#94a3b8" }}
-              fontSize={11}
+              fontSize={9}
             >
               {data.map((_, i) => (
                 <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />

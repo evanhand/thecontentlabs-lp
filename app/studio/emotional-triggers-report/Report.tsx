@@ -453,7 +453,7 @@ export function EmotionalTriggersReport() {
             <span className="text-content-coral">mostly wrong.</span>
           </h2>
 
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
             {[
               { rank: 1, emotion: "Outrage", ratio: 0.186, tier: "top" },
               { rank: 11, emotion: "Fear", ratio: 0.037, tier: "low" },
