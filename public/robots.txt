@@ -4,6 +4,10 @@ Disallow: /dashboard/
 Disallow: /setup-wizard
 Disallow: /checkout-success
 Disallow: /reset-password
+Disallow: /forgot-password
+Disallow: /demo
+Disallow: /login
+Disallow: /register
 Disallow: /studio/
 
 # AI Search Bots — explicitly allowed for citation/discovery
