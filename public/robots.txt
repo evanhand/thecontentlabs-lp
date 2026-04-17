@@ -34,3 +34,4 @@ User-agent: CCBot
 Disallow: /
 
 Sitemap: https://thecontentlabs.app/sitemap.xml
+Sitemap: https://thecontentlabs.app/rss.xml

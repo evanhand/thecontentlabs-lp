@@ -9,6 +9,7 @@ import { SocialProof } from '@/components/landing/SocialProof';
 import { Testimonials } from '@/components/landing/Testimonials';
 import { FAQ } from '@/components/landing/FAQ';
 import { PricingPreview } from '@/components/landing/PricingPreview';
+import { LatestContent } from '@/components/landing/LatestContent';
 import { FinalCTA } from '@/components/landing/FinalCTA';
 import { Footer } from '@/components/landing/Footer';
 
@@ -94,6 +95,7 @@ export default function Home() {
         <Testimonials />
         <FAQ />
         <PricingPreview />
+        <LatestContent />
         <FinalCTA />
       </main>
       <Footer />

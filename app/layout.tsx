@@ -154,6 +154,14 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap"
         />
 
+        {/* RSS feed auto-discovery */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="The Content Labs — Data Reports & Strategy Guides"
+          href="https://thecontentlabs.app/rss.xml"
+        />
+
         {/* JSON-LD Structured Data — rendered in real HTML for crawlers */}
         <script
           type="application/ld+json"
