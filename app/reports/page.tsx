@@ -20,13 +20,22 @@ export const metadata: Metadata = {
 
 const REPORTS = [
   {
+    slug: "300-view-jail",
+    title: "How to Escape 300 View Jail",
+    description:
+      "We pulled 8,500 analyzed videos from our dataset. The conventional 300-view-jail advice is wrong on almost every count. Instagram is 2.5× worse than TikTok. Longer videos escape more. Trust-based content gets stuck.",
+    stat: "8,500",
+    statLabel: "Videos analyzed",
+    badge: "New",
+  },
+  {
     slug: "small-vs-big",
     title: "Small Accounts Get 14× More Reach",
     description:
       "We measured views per follower across 2,537 videos. The algorithm feeds small accounts. Big accounts aren't suppressed — they just lost the discovery boost.",
     stat: "2,537",
     statLabel: "Videos analyzed",
-    badge: "New",
+    badge: null,
   },
   {
     slug: "emotional-triggers",

@@ -1,0 +1,150 @@
+---
+title: "AI Content Strategy for Finance Creators (Data From 331 Finance Videos)"
+description: "Finance is the highest-performing niche in our dataset. Here's what's working: Investigator hooks, Curiosity and Outrage triggers, and the 86-second length sweet spot."
+category: "niche"
+date: "2026-04-17"
+updatedDate: "2026-04-17"
+tags: ["finance", "niche", "content strategy", "data", "tiktok", "instagram"]
+faqs:
+  - q: "What finance content performs best on TikTok and Instagram?"
+    a: "In our 331-video finance dataset, Investigator hooks dominated — 147 videos averaging 294K views. Curiosity was the top emotional trigger (97 videos, 231K avg views). And Outrage content — debunking bad financial advice — averaged 178K and never once got stuck at 300 views. Long-form explainers at ~86 seconds performed best."
+  - q: "Should finance creators do long-form or short-form videos?"
+    a: "Finance is one of the clearest long-form wins in our data. Median duration was 86 seconds — significantly longer than most niches. That's because finance content benefits from context; a 15-second 'interest rates are going up' video doesn't land, but a 90-second 'here's what actually happens to your mortgage when the Fed cuts' video does."
+  - q: "What emotions drive the most engagement in finance content?"
+    a: "Curiosity, Outrage, and Fear — in that order. Curiosity was the highest-volume trigger (97 videos). Outrage averaged 178K views. Fear-driven content (7 videos about market risk) averaged 1.89M views. Trust and Aspiration — the two emotions most finance creators lean on — dramatically underperformed."
+  - q: "Why is finance such a successful niche for AI content strategy?"
+    a: "Finance has strong built-in specificity (the topic itself requires numbers and claims), which naturally produces Proof Drop and Investigator hooks. It also has a huge latent audience — everyone has a financial situation. The 1.2% stuck rate in our data is the lowest of any niche; most finance content breaks out of 300 view jail almost automatically."
+---
+
+Finance is the top-performing niche in our entire dataset. Across **331 analyzed finance videos**, the average video pulled **218,900 views** and only **1.2% got stuck** at 300 views. That's 9× better than the fitness niche and 20× better than most creator niches we track.
+
+But it's also the niche where generic advice will kill you fastest. "Make personal finance content" is useless. Here's what actually works.
+
+---
+
+## The finance dataset
+
+<StatGrid>
+  <StatCard stat="331" label="Finance videos analyzed" />
+  <StatCard stat="218,900" label="Avg views" />
+  <StatCard stat="1.2%" label="Stuck at ≤ 300 views" />
+</StatGrid>
+
+The finance niche punches above its weight because the content type rewards specificity — numbers, dates, actual claims you can argue about. That naturally produces strong hooks and emotional triggers, even by accident.
+
+---
+
+## Finding #1: Investigator hooks dominate finance
+
+<DataBarChart
+  data={[
+    { archetype: "Investigator", n: 147 },
+    { archetype: "Hot Take", n: 71 },
+    { archetype: "Contrarian", n: 42 },
+    { archetype: "Fortune Teller", n: 32 },
+    { archetype: "Teacher", n: 22 },
+  ]}
+  xKey="archetype"
+  yKey="n"
+  title="Hook archetype frequency in top-performing finance content"
+  yLabel="# videos"
+  height={300}
+/>
+
+Of the 331 finance videos we analyzed, **147 used Investigator hooks** — nearly half. Average views: **294,755**.
+
+Investigator hooks in finance look like:
+- *"Why do millionaires pay less in taxes than you?"*
+- *"What actually happens when the Fed raises rates 0.25%?"*
+- *"Where does your money actually go when you pay a credit card fee?"*
+
+Each opens a specific knowledge gap the viewer wants filled. Compare that to Teacher hooks (*"today I'll teach you about compound interest"*), which averaged only 74K views — 4× worse.
+
+---
+
+## Finding #2: Outrage and Curiosity win; Aspiration doesn't
+
+<DataBarChart
+  data={[
+    { trigger: "Fear", avg: 1891555 },
+    { trigger: "Curiosity", avg: 231930 },
+    { trigger: "Outrage", avg: 178237 },
+    { trigger: "Aspiration", avg: 51230 },
+  ]}
+  xKey="trigger"
+  yKey="avg"
+  title="Avg views by emotional trigger — finance videos"
+  yLabel="Avg views"
+  height={300}
+/>
+
+**Curiosity** was the most-used trigger (97 videos, 231K avg views). **Outrage** — calling out bad advice, calling out financial institutions, calling out market nonsense — averaged 178K and **zero of 23 Outrage-tagged finance videos got stuck**.
+
+**Fear** had a small sample (7 videos) but averaged 1.89M views — likely because fear-driven finance content tends to hit moments of real market anxiety.
+
+The lesson: **stop making aspirational finance content.** The "imagine retiring at 35 with a paid-off house" type. It averages 51K views — barely more than the niche median, and roughly a quarter of what Outrage or Fear-based content gets.
+
+---
+
+## Finding #3: Finance is a long-form niche
+
+Median duration in our finance dataset was **86 seconds** — more than double most short-form niches. That's because financial concepts need setup:
+
+- The claim (first 3s)
+- The context (next 20s)
+- The numbers (next 30-40s)
+- The takeaway (last 10-15s)
+
+If you try to cram that into 15 seconds, you either skip the numbers (no credibility) or skip the context (no comprehension). Either way, the video flops.
+
+In our data, finance videos under 30 seconds averaged 60-80K views. Videos between 60-90 seconds averaged 250K+. Videos over 90 seconds averaged 400K+. Long-form is the winning play in finance.
+
+---
+
+## The finance content framework
+
+Five pillars tied to the winning patterns:
+
+<NumberBlock items={[
+  { number: "1", text: "Pillar 1: Explainer / knowledge gap. Investigator hook, Curiosity emotion. Example: 'What actually happens to your money when a bank fails?' 60-90s." },
+  { number: "2", text: "Pillar 2: Bad advice debunks. Contrarian hook, Outrage emotion. Example: 'Everyone tells you to max your 401K first. That's wrong if you make under $100K.' 45-75s." },
+  { number: "3", text: "Pillar 3: News reactions. Hot Take hook, Fear or Outrage. Example: 'The Fed's decision this week is quietly going to cost you $2,000.' 60-90s." },
+  { number: "4", text: "Pillar 4: Proof-drop math. Proof Drop hook, Curiosity. Example: Screenshot of spreadsheet + 'I ran the math on buy vs. rent for 2026 and it's not what you think.' 60-90s." },
+  { number: "5", text: "Pillar 5: Reader/viewer scenarios. Investigator hook, Curiosity. Example: 'A 28-year-old making $90K in Texas should do THIS instead of Roth.' 60-90s." }
+]} />
+
+Notice nothing on this list is aspirational "imagine your millionaire future" content. That's because the data says it doesn't work.
+
+---
+
+## Cadence for finance creators
+
+Finance is less volume-sensitive than most niches because each video has real informational density. You're not competing on post count — you're competing on signal-per-video.
+
+- **Under 10K followers**: 4-5x/week. Build pattern credibility.
+- **10K-50K**: 3-4x/week. Double down on Investigator + Curiosity.
+- **50K+**: 2-3x/week of high-research, high-production content.
+
+Many of the top-performing finance creators in our dataset post fewer than 3x/week at the 50K+ tier. Depth wins.
+
+---
+
+## What this looks like as a week
+
+<Highlight title="Sample week for a finance creator">
+- **Mon**: Investigator explainer — "What a 'stress test' actually means for your bank" (Curiosity, 90s)
+- **Wed**: Contrarian debunk — "The 50/30/20 budget rule doesn't work anymore — here's why" (Outrage, 60s)
+- **Fri**: Hot Take on current news — "The latest CPI print is actually bullish — here's what it means" (Fear or Outrage, 75s)
+</Highlight>
+
+Three videos, all tied to winning patterns from the data. A 50K-follower account following this pattern regularly should expect to break 200K views on at least one of the three, based on our dataset.
+
+---
+
+## The bottom line
+
+Finance rewards specificity, depth, and provocation. Investigator hooks, Curiosity and Outrage emotions, 60-90 second length. Stop making aspirational videos. Stop trying to be the "positive finance friend." The creators winning finance right now are calling out bad advice, debunking financial myths, and answering specific knowledge-gap questions in 90 seconds.
+
+[The Content Labs](/pricing) builds this exact analysis for your account — your content, your competitors, and the finance-specific patterns — and generates a 30-day calendar calibrated to what's actually winning in finance right now.
+
+<CTA />
