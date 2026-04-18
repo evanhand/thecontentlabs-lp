@@ -15,13 +15,13 @@ export const metadata: Metadata = {
       "Most 'best time to post' articles are biased. Here's what the data really says when you normalize for follower count.",
     url: "https://thecontentlabs.app/reports/posting-times",
     type: "article",
-    images: ["https://thecontentlabs.app/og-image.png"],
+    images: ["https://thecontentlabs.app/og/report-posting-times.png"],
   },
   twitter: {
     title: "Does Posting Time Actually Matter? (7,261 Videos)",
     description:
       "Content beats timing 100×. Full data report inside.",
-    images: ["https://thecontentlabs.app/og-image.png"],
+    images: ["https://thecontentlabs.app/og/report-posting-times.png"],
   },
 };
 

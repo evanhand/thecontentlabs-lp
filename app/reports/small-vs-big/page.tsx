@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "The algorithm feeds small accounts. We proved it with data.",
     url: "https://thecontentlabs.app/reports/small-vs-big",
     type: "article",
-    images: ["https://thecontentlabs.app/og-image.png"],
+    images: ["https://thecontentlabs.app/og/report-small-vs-big.png"],
   },
 };
 

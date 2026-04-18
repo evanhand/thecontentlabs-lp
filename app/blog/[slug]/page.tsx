@@ -25,6 +25,8 @@ export async function generateMetadata({
   const { slug } = await params;
   const meta = getPostMeta(slug);
   const url = `https://thecontentlabs.app/blog/${slug}`;
+  const ogImage =
+    meta.ogImage || `https://thecontentlabs.app/og/blog-${slug}.png`;
 
   return {
     title: meta.title,
@@ -35,14 +37,14 @@ export async function generateMetadata({
       description: meta.description,
       url,
       type: "article",
-      images: [meta.ogImage || "https://thecontentlabs.app/og-image.png"],
+      images: [ogImage],
       publishedTime: meta.date,
       modifiedTime: meta.updatedDate || meta.date,
     },
     twitter: {
       title: meta.title,
       description: meta.description,
-      images: [meta.ogImage || "https://thecontentlabs.app/og-image.png"],
+      images: [ogImage],
     },
   };
 }

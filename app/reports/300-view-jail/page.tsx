@@ -12,7 +12,7 @@ export const metadata: Metadata = {
       "Instagram is 2.6× worse than TikTok. Longer videos escape more. Trust-based content gets trapped. The full data.",
     url: "https://thecontentlabs.app/reports/300-view-jail",
     type: "article",
-    images: ["https://thecontentlabs.app/og-image.png"],
+    images: ["https://thecontentlabs.app/og/report-300-view-jail.png"],
   },
 };
 

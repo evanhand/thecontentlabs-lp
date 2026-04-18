@@ -15,13 +15,13 @@ export const metadata: Metadata = {
       "Outrage beats Inspiration by 9×. The full data report on emotional triggers that drive reach.",
     url: "https://thecontentlabs.app/reports/emotional-triggers",
     type: "article",
-    images: ["https://thecontentlabs.app/og-image.png"],
+    images: ["https://thecontentlabs.app/og/report-emotional-triggers.png"],
   },
   twitter: {
     title: "Which Emotions Actually Go Viral? (1,833 Videos)",
     description:
       "Outrage beats Inspiration by 9×. Full data report inside.",
-    images: ["https://thecontentlabs.app/og-image.png"],
+    images: ["https://thecontentlabs.app/og/report-emotional-triggers.png"],
   },
 };
 
