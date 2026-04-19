@@ -43,10 +43,31 @@ const LOGO_LIGHT =
   "https://jzhpazqyoceojfvjhpoo.supabase.co/storage/v1/object/sign/Site%20Assets/Logo%20Dark%20Text%20(The,%20Labs).png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9mMGJhNjZhNy01MzVmLTQyNGQtOGEyMC1lNTViNjVkNzA3ZmUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJTaXRlIEFzc2V0cy9Mb2dvIERhcmsgVGV4dCAoVGhlLCBMYWJzKS5wbmciLCJpYXQiOjE3NzM1NzkyNTEsImV4cCI6MjA4ODkzOTI1MX0.MiY_5spRpSXmi5WUodI2Myv7zXtQmKNmJbCkBPWfkug";
 
 // JSON-LD schemas — rendered server-side in real HTML
+//
+// NOTE on sameAs: Google uses this array to disambiguate "The Content Labs"
+// from other "Content Lab/Labs" entities in search. Add URLs ONLY after each
+// profile is live and matches the brand name exactly. Broken URLs hurt more
+// than they help. Recommended order to claim:
+//   1. LinkedIn company page (highest leverage)
+//   2. Crunchbase profile
+//   3. Product Hunt
+//   4. G2 listing
+//   5. Wikidata entry
+//   6. X / Twitter
+const organizationSameAs: string[] = [
+  // "https://www.linkedin.com/company/the-content-labs",
+  // "https://www.crunchbase.com/organization/the-content-labs",
+  // "https://www.producthunt.com/products/the-content-labs",
+  // "https://www.g2.com/products/the-content-labs",
+  // "https://www.wikidata.org/wiki/QXXXXXXX",
+  // "https://x.com/thecontentlabs",
+];
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "The Content Labs",
+  alternateName: ["TheContentLabs", "Content Labs"],
   url: "https://thecontentlabs.app",
   logo: LOGO_LIGHT,
   description:
@@ -60,6 +81,7 @@ const organizationSchema = {
     postalCode: "48084",
     addressCountry: "US",
   },
+  ...(organizationSameAs.length > 0 ? { sameAs: organizationSameAs } : {}),
 };
 
 const websiteSchema = {
