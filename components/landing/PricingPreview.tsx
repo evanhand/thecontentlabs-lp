@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Sparkles } from 'lucide-react';
 import { fadeUp, popIn, staggerContainer, VIEWPORT_ONCE } from '@/lib/motionVariants';
 
 const plans = [
@@ -12,14 +12,14 @@ const plans = [
 
 export function PricingPreview() {
   return (
-    <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={fadeUp} transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4 tracking-tight">
             Simple, Transparent Pricing
           </h2>
           <p className="text-lg text-slate-600">
@@ -30,54 +30,80 @@ export function PricingPreview() {
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 items-stretch"
         >
-          {plans.map((plan) => (
-            <motion.div
-              key={plan.name}
-              variants={popIn}
-              whileHover={{ y: -6, scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className={`relative bg-white rounded-2xl border p-6 cursor-pointer transition-shadow duration-300 ${plan.popular ? 'border-content-coral shadow-lg shadow-content-coral/10 hover:shadow-xl hover:shadow-content-coral/20' : 'border-slate-200 hover:shadow-lg hover:border-slate-300'}`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-content-coral text-white text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</span>
-                </div>
-              )}
-              <div className="text-center mb-4">
-                <h3 className="font-bold text-slate-900 text-lg">{plan.name}</h3>
-                <p className="text-slate-500 text-xs mt-1">{plan.desc}</p>
-                <div className="mt-3">
-                  <span className="text-3xl font-bold text-slate-900">${plan.price}</span>
-                  <span className="text-slate-500 text-sm">/mo</span>
-                </div>
-              </div>
-              <ul className="space-y-2 mb-5">
-                {plan.highlights.map((h) => (
-                  <li key={h} className="flex items-center gap-2 text-sm text-slate-600">
-                    <Check className="h-3.5 w-3.5 text-content-coral flex-shrink-0" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="/pricing"
-                className={`block text-center py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${plan.popular
-                  ? 'bg-gradient-to-r from-content-cta-dark to-content-cta text-white shadow-sm hover:shadow-md hover:brightness-110'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+          {plans.map((plan) => {
+            const isPopular = !!plan.popular;
+            return (
+              <motion.div
+                key={plan.name}
+                variants={popIn}
+                whileHover={{ y: -6 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className={`relative rounded-2xl p-6 sm:p-7 cursor-pointer transition-all duration-300 flex flex-col ${
+                  isPopular
+                    ? 'bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border-2 border-content-coral/60 shadow-2xl shadow-content-coral/20 md:-my-4 md:py-10 z-10 md:scale-[1.04]'
+                    : 'bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:border-slate-300 md:mt-2 md:mb-2 opacity-95 hover:opacity-100'
                 }`}
               >
-                {plan.cta}
-              </a>
-            </motion.div>
-          ))}
+                {isPopular && (
+                  <>
+                    <div
+                      aria-hidden
+                      className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-content-coral/25 blur-[80px] pointer-events-none"
+                    />
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                      <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-content-cta-dark to-content-cta text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full shadow-lg shadow-content-coral/30">
+                        <Sparkles className="h-3 w-3" />
+                        MOST POPULAR
+                      </span>
+                    </div>
+                  </>
+                )}
+
+                <div className={`text-center mb-5 relative ${isPopular ? 'pt-2' : ''}`}>
+                  <h3 className={`font-heading font-bold text-xl tracking-tight ${isPopular ? 'text-white' : 'text-slate-900'}`}>
+                    {plan.name}
+                  </h3>
+                  <p className={`text-xs mt-1 ${isPopular ? 'text-slate-400' : 'text-slate-500'}`}>{plan.desc}</p>
+                  <div className="mt-4 flex items-baseline justify-center gap-1">
+                    <span className={`text-4xl sm:text-5xl font-heading font-bold tabular-nums ${isPopular ? 'text-white' : 'text-slate-900'}`}>
+                      ${plan.price}
+                    </span>
+                    <span className={`text-sm ${isPopular ? 'text-slate-400' : 'text-slate-500'}`}>/mo</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-2.5 mb-6 flex-1 relative">
+                  {plan.highlights.map((h) => (
+                    <li key={h} className={`flex items-start gap-2.5 text-sm ${isPopular ? 'text-slate-200' : 'text-slate-600'}`}>
+                      <span className={`flex-shrink-0 flex items-center justify-center w-4 h-4 rounded-full mt-0.5 ${isPopular ? 'bg-content-coral/25' : 'bg-content-coral/10'}`}>
+                        <Check className={`h-2.5 w-2.5 ${isPopular ? 'text-content-coral-400' : 'text-content-coral'}`} />
+                      </span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="/pricing"
+                  className={`block text-center py-3 rounded-xl font-semibold text-sm transition-all duration-200 relative ${
+                    isPopular
+                      ? 'bg-gradient-to-r from-content-cta-dark to-content-cta text-white shadow-lg shadow-content-coral/30 hover:shadow-xl hover:shadow-content-coral/50 hover:scale-[1.02]'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  {plan.cta}
+                </a>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         <motion.p
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={fadeUp} transition={{ duration: 0.5 }}
-          className="text-center text-sm text-slate-500 mt-6"
+          className="text-center text-sm text-slate-500 mt-8"
         >
           Save 17% with annual billing &middot; No credit card required to start &middot; Cancel anytime
         </motion.p>

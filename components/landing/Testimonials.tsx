@@ -88,7 +88,7 @@ export function Testimonials() {
           variants={fadeUp} transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-tight">
             They Stopped Guessing. Look What Happened.
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
@@ -110,44 +110,42 @@ export function Testimonials() {
                   variants={fanIn(index % 3)}
                 >
                   <TiltCard className="group relative h-full">
-                    <div className="relative bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-sm hover:shadow-lg hover:border-content-coral/30 transition-all duration-300 h-full flex flex-col overflow-visible">
+                    <div className="relative bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-700/70 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-content-coral/10 hover:border-content-coral/40 transition-all duration-300 h-full flex flex-col overflow-visible">
                       {/* Tab */}
                       <div className="absolute -top-3 left-6 bg-slate-800 border border-slate-700 border-b-slate-800 rounded-t-lg px-3 py-1 z-10">
                         <span className="font-mono text-[10px] text-slate-400 tracking-wider">{item.author.split(' ')[0].toUpperCase()}</span>
                       </div>
 
                       {/* VERIFIED stamp */}
-                      <div className="absolute -top-1 -right-1 sm:top-2 sm:right-3 opacity-20 pointer-events-none z-10" style={{ transform: 'rotate(-12deg)' }}>
-                        <span className="font-mono text-xs font-bold tracking-widest text-content-coral-400 border-2 border-content-coral-500/50 rounded px-2 py-0.5">VERIFIED</span>
+                      <div className="absolute top-3 right-3 opacity-25 pointer-events-none z-10" style={{ transform: 'rotate(-10deg)' }}>
+                        <span className="font-mono text-[10px] font-bold tracking-widest text-content-coral-400 border-2 border-content-coral-500/50 rounded px-2 py-0.5">VERIFIED</span>
                       </div>
 
-                      <div className="p-5 sm:p-6 pt-6 flex flex-col h-full">
-                        <div className="mb-4">
-                          <p className="text-slate-500 font-mono text-[10px] tracking-wider uppercase mb-2">CREATOR</p>
-                          <div className="flex items-center gap-3">
-                            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-600 flex-shrink-0">
-                              <div className="absolute inset-0 flex items-center justify-center bg-slate-700 text-white text-sm font-bold">{item.author.charAt(0)}</div>
-                              {item.image && <img src={item.image} alt={item.author} loading="lazy" decoding="async" width={40} height={40} className="relative w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-                            </div>
-                            <div>
-                              <p className="font-semibold text-white text-sm">{item.author}</p>
-                              <p className="text-slate-400 text-xs">{item.role}</p>
-                            </div>
-                          </div>
+                      <div className="p-6 pt-7 flex flex-col h-full">
+                        <div className="flex gap-0.5 mb-5">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star key={i} className={`h-4 w-4 ${i < item.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'}`} />
+                          ))}
                         </div>
 
-                        <div className="mb-4">
-                          <p className="text-slate-500 font-mono text-[10px] tracking-wider uppercase mb-2">RATING</p>
-                          <div className="flex gap-0.5">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <Star key={i} className={`h-4 w-4 ${i < item.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'}`} />
-                            ))}
-                          </div>
-                        </div>
+                        <blockquote className="flex-1 text-slate-200 text-[15px] leading-relaxed mb-6">
+                          &ldquo;{item.quote}&rdquo;
+                        </blockquote>
 
-                        <div className="flex-1">
-                          <p className="text-slate-500 font-mono text-[10px] tracking-wider uppercase mb-2">IN THEIR WORDS</p>
-                          <p className="text-slate-300 text-sm leading-relaxed">&ldquo;{item.quote}&rdquo;</p>
+                        <div className="flex items-center gap-3 pt-5 border-t border-slate-700/50">
+                          <img
+                            src={item.image || '/testimonials/placeholder.jpg'}
+                            alt={item.author}
+                            loading="lazy"
+                            decoding="async"
+                            width={44}
+                            height={44}
+                            className="w-11 h-11 rounded-full object-cover border border-slate-600 ring-2 ring-content-coral/20 flex-shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <p className="font-semibold text-white text-sm truncate">{item.author}</p>
+                            <p className="text-slate-400 text-xs truncate">{item.role}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
