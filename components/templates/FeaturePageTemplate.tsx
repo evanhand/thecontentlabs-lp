@@ -1,4 +1,4 @@
-import { ChevronRight, ArrowRight, Check } from 'lucide-react';
+import { ChevronRight, ArrowRight, Check, Sparkles, Star, Quote } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { PublicNav } from '@/components/PublicNav';
 
@@ -19,104 +19,291 @@ export interface FeaturePageConfig {
   faq: { q: string; a: string }[];
 }
 
+const TRUST_STATS = [
+  { stat: '10,000+', label: 'videos analyzed' },
+  { stat: '47,598+', label: 'creators on the platform' },
+  { stat: '50+', label: 'niches covered' },
+  { stat: '4.9/5', label: 'average review' },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Helped me scale my coaching business so fast, I literally had to start saying no to people.",
+    name: 'Matt Gehlbach',
+    role: 'Full Time Firefighter & Business Owner',
+  },
+  {
+    quote:
+      "It's a detailed, strategic approach. Not just 'post consistently and hope for growth.'",
+    name: 'Manny Watkins',
+    role: 'Former D1 Basketball Star & Coach',
+  },
+  {
+    quote:
+      'This Content Strategy Was a Game Changer!',
+    name: 'Jen Thompson',
+    role: '11-Time World Champion Powerlifter',
+  },
+];
+
 export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
-  const { slug, title, heroTagline, heroHeadline, heroDescription, icon: Icon, iconColor, iconBg, benefits, howItWorks, cta, faq } = config;
+  const {
+    slug,
+    title,
+    heroTagline,
+    heroHeadline,
+    heroDescription,
+    icon: Icon,
+    iconColor,
+    iconBg,
+    benefits,
+    howItWorks,
+    cta,
+    faq,
+  } = config;
 
   const faqSchema = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faq.map(f => ({
-      "@type": "Question",
-      "name": f.q,
-      "acceptedAnswer": { "@type": "Answer", "text": f.a },
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
   });
 
   const breadcrumbSchema = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thecontentlabs.app/" },
-      { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://thecontentlabs.app/features" },
-      { "@type": "ListItem", "position": 3, "name": title },
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://thecontentlabs.app/' },
+      { '@type': 'ListItem', position: 2, name: 'Features', item: 'https://thecontentlabs.app/features' },
+      { '@type': 'ListItem', position: 3, name: title },
     ],
   });
 
+  const [featured, ...rest] = benefits;
+
   return (
-    <div className="min-h-screen lab-grid-bg">
+    <div className="min-h-screen bg-[#fffbf9] text-slate-900 overflow-x-hidden">
       <PublicNav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
 
-      {/* Breadcrumbs */}
-      <nav aria-label="Breadcrumb" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-36">
-        <ol className="flex items-center gap-1 text-sm text-slate-400">
-          <li><a href="/" className="hover:text-slate-700 transition-colors">Home</a></li>
-          <li><ChevronRight className="h-3 w-3" /></li>
-          <li><a href="/#features" className="hover:text-slate-700 transition-colors">Features</a></li>
-          <li><ChevronRight className="h-3 w-3" /></li>
-          <li><span className="text-slate-600">{title}</span></li>
-        </ol>
-      </nav>
+      {/* ============================================================ */}
+      {/* Hero                                                         */}
+      {/* ============================================================ */}
+      <section className="relative pt-36 pb-20 overflow-hidden">
+        {/* Background accents */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 lab-grid-bg opacity-90"
+        />
+        <div
+          aria-hidden
+          className="absolute -top-20 -right-40 -z-10 h-[480px] w-[480px] rounded-full bg-content-coral/20 blur-[120px]"
+        />
+        <div
+          aria-hidden
+          className="absolute -bottom-40 -left-40 -z-10 h-[420px] w-[420px] rounded-full bg-amber-200/30 blur-[120px]"
+        />
 
-      {/* Hero */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 text-center">
-        <div className={`inline-flex items-center justify-center w-16 h-16 ${iconBg} rounded-2xl mb-6`}>
-          <Icon className={`h-8 w-8 ${iconColor}`} />
-        </div>
-        <p className="text-sm font-semibold text-content-coral uppercase tracking-wider mb-3">{heroTagline}</p>
-        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6 max-w-3xl mx-auto leading-tight">{heroHeadline}</h1>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">{heroDescription}</p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href="/register"
-            className="inline-flex items-center justify-center px-8 py-3.5 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
-          >
-            Get My Free Audit
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
-          <a
-            href="/pricing"
-            className="inline-flex items-center justify-center px-8 py-3.5 bg-slate-100 text-slate-700 rounded-xl font-semibold hover:bg-slate-200 transition-colors"
-          >
-            See Pricing
-          </a>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="bg-content-coral/[0.02] py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 text-center mb-12">What You Get</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((b, i) => (
-              <div key={i} className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md hover:border-content-coral/20 transition-all duration-200">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                    <Check className="h-4 w-4 text-green-600" />
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex items-center gap-1.5 text-sm text-slate-500">
+              <li>
+                <a href="/" className="hover:text-content-coral transition-colors">
+                  Home
+                </a>
+              </li>
+              <li><ChevronRight className="h-3.5 w-3.5 text-slate-400" /></li>
+              <li>
+                <a href="/#features" className="hover:text-content-coral transition-colors">
+                  Features
+                </a>
+              </li>
+              <li><ChevronRight className="h-3.5 w-3.5 text-slate-400" /></li>
+              <li className="text-slate-900 font-medium">{title}</li>
+            </ol>
+          </nav>
+
+          <div className="text-center max-w-3xl mx-auto">
+            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full ${iconBg} border border-content-coral/15 mb-6`}>
+              <Icon className={`h-4 w-4 ${iconColor}`} />
+              <span className={`text-xs font-semibold uppercase tracking-wider ${iconColor}`}>
+                {heroTagline}
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-slate-900 mb-6 leading-[1.1] tracking-tight">
+              {heroHeadline}
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+              {heroDescription}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <a
+                href="/register"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-[1.03] active:scale-[0.98]"
+              >
+                Get My Free Audit
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="/pricing"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white/70 backdrop-blur border border-slate-200 text-slate-700 rounded-xl font-semibold hover:bg-white hover:border-slate-300 transition-all"
+              >
+                See Pricing
+              </a>
+            </div>
+
+            <div className="flex items-center justify-center gap-2 mt-8 text-sm text-slate-500">
+              <div className="flex -space-x-1.5">
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="h-6 w-6 rounded-full bg-gradient-to-br from-content-coral to-amber-400 border-2 border-[#fffbf9]"
+                  />
+                ))}
+              </div>
+              <span>
+                Trusted by <strong className="text-slate-700">47,598+</strong> creators
+              </span>
+              <span className="text-slate-300">·</span>
+              <div className="flex items-center gap-0.5">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Trust Strip                                                  */}
+      {/* ============================================================ */}
+      <section className="border-y border-slate-200 bg-white/60 backdrop-blur">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+            {TRUST_STATS.map((t, i) => (
+              <div
+                key={i}
+                className="text-center md:border-r md:last:border-r-0 border-slate-200"
+              >
+                <div className="text-2xl sm:text-3xl font-heading font-bold text-slate-900">
+                  {t.stat}
+                </div>
+                <div className="text-xs sm:text-sm text-slate-500 mt-1 uppercase tracking-wider">
+                  {t.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* Benefits (bento)                                             */}
+      {/* ============================================================ */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14 max-w-2xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-content-coral mb-3">
+              What You Get
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 leading-tight">
+              Everything built around one goal: you getting to your next viral video faster.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-5">
+            {/* Featured benefit spans 3 columns on desktop */}
+            <div className="md:col-span-3 md:row-span-2 group relative bg-gradient-to-br from-content-coral/5 via-white to-amber-50/40 rounded-2xl border border-content-coral/15 p-8 hover:border-content-coral/40 hover:shadow-xl hover:shadow-content-coral/5 transition-all duration-300 overflow-hidden">
+              <div
+                aria-hidden
+                className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-content-coral/10 blur-3xl group-hover:bg-content-coral/20 transition-colors"
+              />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-content-coral/10 border border-content-coral/20 mb-5">
+                  <Sparkles className="h-3.5 w-3.5 text-content-coral" />
+                  <span className="text-xs font-semibold text-content-coral uppercase tracking-wider">
+                    Headline feature
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 mb-4 leading-tight">
+                  {featured.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed text-[15px]">
+                  {featured.description}
+                </p>
+              </div>
+            </div>
+
+            {rest.map((b, i) => (
+              <div
+                key={i}
+                className="md:col-span-3 group bg-white rounded-2xl border border-slate-200 p-6 hover:border-content-coral/30 hover:shadow-lg hover:shadow-content-coral/5 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <Check className="h-5 w-5 text-green-600" />
                   </div>
-                  <h3 className="font-bold text-slate-900">{b.title}</h3>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-slate-900 mb-1.5 group-hover:text-content-coral transition-colors">
+                      {b.title}
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {b.description}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed">{b.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 text-center mb-12">How It Works</h2>
-          <div className="space-y-8">
+      {/* ============================================================ */}
+      {/* How It Works                                                 */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-gradient-to-b from-white to-content-coral/[0.03]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-content-coral mb-3">
+              How It Works
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 leading-tight">
+              Three steps from sign-up to actionable data.
+            </h2>
+          </div>
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+            {/* Desktop connector line */}
+            <div
+              aria-hidden
+              className="hidden lg:block absolute top-10 left-[16.66%] right-[16.66%] h-px bg-gradient-to-r from-transparent via-content-coral/30 to-transparent"
+            />
+
             {howItWorks.map((step, i) => (
-              <div key={i} className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-content-coral/10 border border-content-coral/20 flex items-center justify-center">
-                  <span className="text-sm font-bold font-mono text-content-coral">{step.step}</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 mb-1">{step.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{step.description}</p>
+              <div key={i} className="relative">
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+                  <div className="relative mb-5 z-10">
+                    <div className="absolute inset-0 bg-content-coral/30 blur-lg rounded-full" />
+                    <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-content-coral to-amber-500 shadow-lg shadow-content-coral/25 flex items-center justify-center">
+                      <span className="text-3xl font-heading font-bold text-white">
+                        {step.step}
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-heading font-bold text-slate-900 mb-2.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed text-[15px]">
+                    {step.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -124,36 +311,117 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-content-coral/[0.02] py-16">
+      {/* ============================================================ */}
+      {/* Testimonials                                                 */}
+      {/* ============================================================ */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14 max-w-2xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-content-coral mb-3">
+              What creators say
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 leading-tight">
+              Creators are using this to grow right now.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {TESTIMONIALS.map((t, i) => (
+              <figure
+                key={i}
+                className="relative bg-white rounded-2xl border border-slate-200 p-7 hover:border-content-coral/30 hover:shadow-lg hover:shadow-content-coral/5 transition-all duration-300"
+              >
+                <Quote className="h-7 w-7 text-content-coral/30 mb-4" />
+                <blockquote className="text-slate-800 text-[15px] leading-relaxed mb-6">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className="flex items-center gap-3 pt-5 border-t border-slate-100">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-content-coral to-amber-400 flex-shrink-0" />
+                  <div className="min-w-0">
+                    <div className="font-bold text-slate-900 text-sm truncate">
+                      {t.name}
+                    </div>
+                    <div className="text-xs text-slate-500 truncate">{t.role}</div>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* FAQ                                                          */}
+      {/* ============================================================ */}
+      <section className="py-24 bg-gradient-to-b from-content-coral/[0.03] to-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-heading font-bold text-slate-900 text-center mb-8">FAQ</h2>
-          <div className="space-y-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-content-coral mb-3">
+              FAQ
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-slate-900">
+              Common questions
+            </h2>
+          </div>
+
+          <div className="space-y-3">
             {faq.map((f, i) => (
-              <details key={i} className="group bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md hover:border-content-coral/20 transition-all duration-200">
-                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-semibold text-slate-900 hover:bg-slate-50 transition-colors">
-                  {f.q}
-                  <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-open:rotate-90 flex-shrink-0 ml-4" />
+              <details
+                key={i}
+                className="group bg-white rounded-xl border border-slate-200 open:border-content-coral/30 open:shadow-md open:shadow-content-coral/5 overflow-hidden transition-all duration-200"
+              >
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-semibold text-slate-900 hover:text-content-coral transition-colors">
+                  <span className="pr-4">{f.q}</span>
+                  <ChevronRight className="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-90 group-open:text-content-coral flex-shrink-0" />
                 </summary>
-                <div className="px-5 pb-5 text-sm text-slate-600 leading-relaxed">{f.a}</div>
+                <div className="px-5 pb-5 text-[15px] text-slate-600 leading-relaxed">
+                  {f.a}
+                </div>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 mb-4">{cta}</h2>
-          <p className="text-slate-600 mb-8">Join 47,598+ creators building data-driven content strategies.</p>
-          <a
-            href="/register"
-            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
-          >
-            Start My Free Audit - Plans from $39/mo
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
+      {/* ============================================================ */}
+      {/* Final CTA                                                    */}
+      {/* ============================================================ */}
+      <section className="py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 px-8 py-16 sm:px-16 sm:py-20 overflow-hidden border border-slate-800">
+            <div
+              aria-hidden
+              className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-content-coral/30 blur-[100px]"
+            />
+            <div
+              aria-hidden
+              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-amber-400/20 blur-[100px]"
+            />
+
+            <div className="relative text-center max-w-2xl mx-auto">
+              <h2 className="text-3xl sm:text-5xl font-heading font-bold text-white mb-5 leading-[1.1]">
+                {cta}
+              </h2>
+              <p className="text-slate-300 mb-10 text-lg">
+                Join 47,598+ creators building data-driven content strategies.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <a
+                  href="/register"
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/50 transition-all hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  Start My Free Audit
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                </a>
+                <a
+                  href="/pricing"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur border border-white/10 text-white rounded-xl font-semibold hover:bg-white/15 transition-all"
+                >
+                  Plans from $39/mo
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

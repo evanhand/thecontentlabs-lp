@@ -60,7 +60,7 @@ export default function ComparePage() {
       {/* Breadcrumbs */}
       <nav
         aria-label="Breadcrumb"
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4"
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32"
       >
         <ol className="flex items-center gap-1 text-sm text-slate-400">
           <li>

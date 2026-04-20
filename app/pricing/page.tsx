@@ -203,7 +203,13 @@ export default function PricingPage() {
         {/* Navigation */}
         <PublicNav />
 
-        <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3">
+        <main>
+        {/* Hero + breadcrumb share a single gradient background so there's no
+            harsh transition between the fixed nav area and the hero. */}
+        <section
+          style={{ background: 'radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,124,14,0.08) 0%, transparent 55%)' }}
+        >
+        <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
           <ol className="flex items-center gap-1 text-sm text-slate-400">
             <li><a href="/" className="hover:text-slate-700 transition-colors">Home</a></li>
             <li><ChevronDown className="h-3 w-3 -rotate-90" /></li>
@@ -211,11 +217,9 @@ export default function PricingPage() {
           </ol>
         </nav>
 
-        <main>
         {/* Hero */}
         <div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8 text-center"
-          style={{ background: 'radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,124,14,0.08) 0%, transparent 55%)' }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 text-center"
         >
           <motion.div
             initial="hidden"
@@ -295,6 +299,7 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
+        </section>
 
         {/* Pricing Cards */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
