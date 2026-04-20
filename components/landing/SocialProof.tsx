@@ -60,7 +60,7 @@ export function SocialProof() {
   }, [thumbnailPaths]);
 
   return (
-    <section className="pt-16 pb-16 relative overflow-hidden z-10 bg-content-coral/[0.015]">
+    <section className="pt-16 pb-16 relative overflow-hidden z-10 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <motion.p
           initial={{ opacity: 0, y: 20 }}

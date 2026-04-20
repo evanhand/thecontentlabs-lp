@@ -8,9 +8,9 @@ import { fadeUp, slideFromLeft, staggerContainerSlow, VIEWPORT_ONCE } from '@/li
 
 export function PainSection() {
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10 bg-content-coral/[0.02]">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10 bg-gradient-to-b from-content-coral/[0.06] via-content-coral/[0.04] to-white">
       {/* Cracked flask decoration */}
-      <div className="absolute right-4 lg:right-16 top-1/2 -translate-y-1/2 opacity-[0.08] pointer-events-none" aria-hidden="true">
+      <div className="absolute right-4 lg:right-16 top-1/2 -translate-y-1/2 opacity-[0.18] pointer-events-none" aria-hidden="true">
         <svg width="120" height="180" viewBox="0 0 120 180" fill="none">
           <path d="M45 10 L45 60 L20 140 Q15 160 35 170 L85 170 Q105 160 100 140 L75 60 L75 10" stroke="#f4632a" strokeWidth="2" fill="none" />
           <line x1="40" y1="10" x2="80" y2="10" stroke="#f4632a" strokeWidth="2" />
@@ -37,13 +37,27 @@ export function PainSection() {
           className="space-y-10 mb-16"
         >
           {[
-            { title: "You're posting every day. Nothing's moving.", body: "It's time to film and you're staring at your notes app with nothing. You've been posting 3, 4, 5 times a week and the numbers barely move. Stuck in 200-view jail while creators half your size are blowing up. The advice says \"just keep posting.\" But posting without a plan isn't a strategy. It's a guess." },
-            { title: "You've done the research. Still don't know what to post.", body: "You spend hours watching competitors, saving videos, studying hooks, trying to figure out what's working and why. But scrolling through their feed isn't going to tell you why it worked. You have screenshots. You don't have a strategy." },
-            { title: "You don't know what you're doing wrong.", body: "You don't know why your last 10 videos flopped. You don't know if it's the format, the pacing, or the first three seconds. Nobody's told you. You just keep filming and hoping the next one hits." },
+            { title: "You're posting every day. Nothing's moving.", body: "It's time to film and you're staring at your notes app with nothing. You've been posting 3, 4, 5 times a week and the numbers barely move. Stuck in 200-view jail while creators half your size are blowing up. The advice says \"just keep posting.\" But posting without a plan isn't a strategy. It's a guess.", featured: false },
+            { title: "You've done the research. Still don't know what to post.", body: "You spend hours watching competitors, saving videos, studying hooks, trying to figure out what's working and why. But scrolling through their feed isn't going to tell you why it worked. You have screenshots. You don't have a strategy.", featured: true },
+            { title: "You don't know what you're doing wrong.", body: "You don't know why your last 10 videos flopped. You don't know if it's the format, the pacing, or the first three seconds. Nobody's told you. You just keep filming and hoping the next one hits.", featured: false },
           ].map((item, i) => (
-            <motion.div key={i} variants={slideFromLeft} className="hazard-stripe pl-4 sm:pl-6">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 sm:mb-3">{item.title}</h3>
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed">{item.body}</p>
+            <motion.div
+              key={i}
+              variants={slideFromLeft}
+              className={
+                item.featured
+                  ? "relative hazard-stripe pl-5 sm:pl-8 py-2 sm:py-3 bg-gradient-to-r from-content-coral/[0.08] to-transparent rounded-r-xl"
+                  : "hazard-stripe pl-4 sm:pl-6"
+              }
+            >
+              <h3 className={item.featured
+                ? "text-2xl sm:text-3xl font-heading font-bold text-slate-900 mb-2 sm:mb-3 leading-tight"
+                : "text-xl sm:text-2xl font-bold text-slate-900 mb-2 sm:mb-3"
+              }>{item.title}</h3>
+              <p className={item.featured
+                ? "text-lg sm:text-xl text-slate-700 leading-relaxed"
+                : "text-base sm:text-lg text-slate-600 leading-relaxed"
+              }>{item.body}</p>
             </motion.div>
           ))}
         </motion.div>
