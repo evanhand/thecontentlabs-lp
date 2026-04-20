@@ -14,18 +14,24 @@ const FEATURES = [
   { title: "Ask Anything. Get Real Answers.", description: "The Chemist knows your niche, your content history, and your competitors. Ask it what to post next, why a video flopped, or how to write a better hook. It's like having a strategist on call 24/7.", icon: Atom, benefit: "Get unstuck in seconds, not hours", tag: "THE CHEMIST", monitorLabel: "the_chemist", image: "/features/chemist.jpg" },
 ];
 
+const [featured, ...rest] = FEATURES;
+
 export function Features() {
   return (
     <section id="features" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10 bg-slate-950">
       <HexMolecule size={200} className="absolute -right-16 top-32 opacity-[0.05] pointer-events-none" />
+      <div
+        aria-hidden
+        className="absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-content-coral/10 blur-[140px] pointer-events-none"
+      />
 
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={fadeUp} transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-tight">
             What You Get
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
@@ -33,73 +39,133 @@ export function Features() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
+        {/* Bento: featured card + 3 tiles */}
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 lg:grid-cols-12 auto-rows-auto gap-5"
         >
-          {FEATURES.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={popIn}
-              className="group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-white/[0.08] overflow-hidden hover:shadow-lg hover:shadow-content-coral/10 hover:border-content-coral/20 transition-all duration-300"
-            >
-              {/* Scan line effect */}
-              <div className="lab-readout-scan absolute inset-0 rounded-2xl pointer-events-none z-20" />
-              <div className="p-6 relative">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-content-coral animate-pulse" />
-                  <span className="font-mono text-xs tracking-wider text-content-coral-400 uppercase">{feature.tag}</span>
-                </div>
-
-                {/* Product screenshot */}
-                <div className="lab-monitor-frame-dark shadow-sm mb-5 group-hover:shadow-md group-hover:shadow-content-coral/5 transition-shadow duration-300">
-                  <div className="lab-monitor-bar-dark">
-                    <span className="lab-monitor-dot bg-red-500/60" />
-                    <span className="lab-monitor-dot bg-amber-500/60" />
-                    <span className="lab-monitor-dot bg-green-500/60" />
-                    <span className="font-mono text-[10px] text-slate-500 ml-2 tracking-wider">{feature.monitorLabel}</span>
-                  </div>
-                  <div className="overflow-hidden h-[200px] sm:h-[260px] lg:h-[300px]">
-                    <img
-                      src={feature.image}
-                      alt={feature.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-slate-400 text-sm mb-4 leading-relaxed">{feature.description}</p>
-                <p className="text-content-coral-400 text-sm font-medium flex items-center gap-2">
-                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-content-coral-500/15">
-                    <Check className="h-3 w-3 text-content-coral-400" />
+          {/* Featured (Competitor Breakdown) — spans 7 cols × 2 rows on desktop */}
+          <motion.div
+            variants={popIn}
+            className="lg:col-span-7 lg:row-span-2 group relative bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 rounded-2xl border border-white/[0.08] overflow-hidden hover:shadow-xl hover:shadow-content-coral/10 hover:border-content-coral/30 transition-all duration-300"
+          >
+            <div
+              aria-hidden
+              className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-content-coral/20 blur-[100px] group-hover:bg-content-coral/30 transition-colors"
+            />
+            <div className="lab-readout-scan absolute inset-0 rounded-2xl pointer-events-none z-20" />
+            <div className="relative p-6 sm:p-8 flex flex-col h-full">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-content-coral/15 border border-content-coral/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-content-coral animate-pulse" />
+                  <span className="font-mono text-[10px] tracking-wider text-content-coral-400 uppercase font-bold">
+                    Featured
                   </span>
-                  {feature.benefit}
-                </p>
+                </span>
+                <span className="font-mono text-xs tracking-wider text-content-coral-400 uppercase">
+                  {featured.tag}
+                </span>
               </div>
-            </motion.div>
-          ))}
+
+              <div className="lab-monitor-frame-dark shadow-sm mb-5 group-hover:shadow-lg group-hover:shadow-content-coral/10 transition-shadow duration-300">
+                <div className="lab-monitor-bar-dark">
+                  <span className="lab-monitor-dot bg-red-500/60" />
+                  <span className="lab-monitor-dot bg-amber-500/60" />
+                  <span className="lab-monitor-dot bg-green-500/60" />
+                  <span className="font-mono text-[10px] text-slate-500 ml-2 tracking-wider">{featured.monitorLabel}</span>
+                </div>
+                <div className="overflow-hidden h-[240px] sm:h-[340px] lg:h-[400px]">
+                  <img
+                    src={featured.image}
+                    alt={featured.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-3 tracking-tight leading-tight">
+                {featured.title}
+              </h3>
+              <p className="text-slate-400 text-[15px] mb-5 leading-relaxed">
+                {featured.description}
+              </p>
+              <p className="text-content-coral-400 text-sm font-medium flex items-center gap-2 mt-auto">
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-content-coral-500/15">
+                  <Check className="h-3 w-3 text-content-coral-400" />
+                </span>
+                {featured.benefit}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Tiles: 2 stacked (right side) + 1 full-width (bottom) */}
+          {rest.map((feature, index) => {
+            const isFullWidth = index === rest.length - 1;
+            return (
+              <motion.div
+                key={feature.tag}
+                variants={popIn}
+                className={`${isFullWidth ? 'lg:col-span-12' : 'lg:col-span-5'} group relative bg-slate-900 rounded-2xl border border-white/[0.08] overflow-hidden hover:shadow-lg hover:shadow-content-coral/5 hover:border-content-coral/25 transition-all duration-300`}
+              >
+                <div className={`relative ${isFullWidth ? 'flex flex-col lg:flex-row' : ''}`}>
+                  <div className={`${isFullWidth ? 'lg:w-1/2 lg:order-2 flex-shrink-0' : ''}`}>
+                    <div className="lab-monitor-frame-dark shadow-sm">
+                      <div className="lab-monitor-bar-dark">
+                        <span className="lab-monitor-dot bg-red-500/60" />
+                        <span className="lab-monitor-dot bg-amber-500/60" />
+                        <span className="lab-monitor-dot bg-green-500/60" />
+                        <span className="font-mono text-[10px] text-slate-500 ml-2 tracking-wider">{feature.monitorLabel}</span>
+                      </div>
+                      <div className={`overflow-hidden ${isFullWidth ? 'h-[220px] lg:h-[260px]' : 'h-[180px] sm:h-[200px]'}`}>
+                        <img
+                          src={feature.image}
+                          alt={feature.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`p-5 sm:p-6 ${isFullWidth ? 'lg:w-1/2 lg:order-1 lg:flex lg:flex-col lg:justify-center' : ''}`}>
+                    <span className="inline-block font-mono text-[10px] tracking-wider text-content-coral-400 uppercase mb-2">
+                      {feature.tag}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-heading font-bold text-white mb-2 tracking-tight leading-tight">
+                      {feature.title}
+                    </h3>
+                    <p className="text-slate-400 text-sm mb-3 leading-relaxed">
+                      {feature.description}
+                    </p>
+                    <p className="text-content-coral-400 text-xs font-medium flex items-center gap-2">
+                      <span className="flex items-center justify-center w-4 h-4 rounded-full bg-content-coral-500/15">
+                        <Check className="h-2.5 w-2.5 text-content-coral-400" />
+                      </span>
+                      {feature.benefit}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
-        {/* CTA */}
+        {/* Secondary inline CTA — less loud than primary button to avoid button fatigue */}
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={fadeUp} transition={{ duration: 0.6 }}
-          className="mt-16 flex justify-center"
+          className="mt-14 flex justify-center"
         >
-          <MagneticButton className="inline-block">
-            <a
-              href="/register"
-              className="lab-bubbles group inline-flex items-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-semibold text-base text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
-            >
-              Try It Free - See Your Audit
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </MagneticButton>
+          <a
+            href="/register"
+            className="group inline-flex items-center gap-2 text-slate-300 hover:text-white text-sm font-medium border border-white/10 hover:border-content-coral/40 rounded-full px-5 py-2.5 transition-all backdrop-blur"
+          >
+            Try It Free - See Your Audit
+            <ArrowRight className="h-4 w-4 text-content-coral group-hover:translate-x-0.5 transition-transform" />
+          </a>
         </motion.div>
       </div>
     </section>

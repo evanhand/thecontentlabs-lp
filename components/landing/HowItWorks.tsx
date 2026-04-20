@@ -19,9 +19,9 @@ export function HowItWorks() {
         <motion.div
           initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           variants={fadeUp} transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-tight">
             <TextReveal>We Do the Research. You Hit Record.</TextReveal>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
@@ -46,14 +46,17 @@ export function HowItWorks() {
                 key={index}
                 initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
                 variants={isEven ? slideFromLeft : slideFromRight}
-                className="relative flex items-start mb-16 last:mb-0"
+                className="relative flex items-start mb-12 last:mb-0"
               >
                 {/* Node on pipeline */}
-                <div className={`absolute left-6 md:left-1/2 -translate-x-1/2 w-5 h-5 rounded-full ${step.dotColor} animate-progress-glow z-10 border-4 border-slate-950 shadow-[0_0_10px_rgba(244,99,42,0.5)]`} />
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
+                  <span className={`absolute inset-0 rounded-full ${step.dotColor} opacity-40 blur-md animate-pulse`} />
+                  <div className={`relative w-6 h-6 rounded-full ${step.dotColor} border-4 border-slate-950 shadow-[0_0_14px_rgba(244,99,42,0.7)]`} />
+                </div>
 
                 {/* Card */}
                 <div className={`ml-16 md:ml-0 md:w-[45%] ${isEven ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
-                  <div className="group relative bg-slate-900/60 backdrop-blur-sm rounded-2xl p-6 border border-white/[0.08] shadow-sm hover:shadow-lg hover:shadow-content-coral/5 hover:border-content-coral/20 transition-all duration-300 hover:-translate-y-1">
+                  <div className="group relative bg-slate-900 rounded-2xl p-6 border border-white/10 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-content-coral/10 hover:border-content-coral/30 transition-all duration-300 hover:-translate-y-1">
                     <div className="absolute inset-0 rounded-2xl opacity-[0.02] dot-grid-texture pointer-events-none" />
                     <HoverBubbles />
                     <div className="flex items-start gap-4 relative">
