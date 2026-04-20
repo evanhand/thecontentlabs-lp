@@ -154,7 +154,16 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     >
       <div className="flex items-center justify-between">
         <h3 className="text-base font-semibold text-slate-900 pr-4">{question}</h3>
-        <ChevronDown className={`h-5 w-5 text-slate-400 flex-shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
+        <span
+          className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+            open
+              ? 'bg-content-coral/15 text-content-coral rotate-180 scale-110'
+              : 'bg-slate-100 text-slate-500'
+          }`}
+          aria-hidden="true"
+        >
+          <ChevronDown className="h-4 w-4" />
+        </span>
       </div>
       {open && (
         <p className="mt-3 text-sm text-slate-600 leading-relaxed">{answer}</p>
@@ -531,7 +540,11 @@ export default function PricingPage() {
             >
               <Atom className="h-5 w-5 text-content-coral" />
               Compare plans side by side
-              <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${showComparison ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`h-5 w-5 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                  showComparison ? 'rotate-180 text-content-coral' : ''
+                }`}
+              />
             </button>
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out ${

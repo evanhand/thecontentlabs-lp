@@ -21,8 +21,8 @@ export interface FeaturePageConfig {
 
 const TRUST_STATS = [
   { stat: '10,000+', label: 'videos analyzed' },
-  { stat: '47,598+', label: 'creators on the platform' },
-  { stat: '50+', label: 'niches covered' },
+  { stat: '100+', label: 'niches covered' },
+  { stat: 'Daily', label: 'auto-updates' },
   { stat: '4.9/5', label: 'average review' },
 ];
 
@@ -32,18 +32,21 @@ const TESTIMONIALS = [
       "Helped me scale my coaching business so fast, I literally had to start saying no to people.",
     name: 'Matt Gehlbach',
     role: 'Full Time Firefighter & Business Owner',
+    image: '/testimonials/matt-gehlbach.jpg',
   },
   {
     quote:
       "It's a detailed, strategic approach. Not just 'post consistently and hope for growth.'",
     name: 'Manny Watkins',
     role: 'Former D1 Basketball Star & Coach',
+    image: '/testimonials/manny-watkins.jpg',
   },
   {
     quote:
       'This Content Strategy Was a Game Changer!',
     name: 'Jen Thompson',
     role: '11-Time World Champion Powerlifter',
+    image: '/testimonials/jen-thompson.jpg',
   },
 ];
 
@@ -159,17 +162,19 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
               </a>
             </div>
 
-            <div className="flex items-center justify-center gap-2 mt-8 text-sm text-slate-500">
-              <div className="flex -space-x-1.5">
-                {[0, 1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="h-6 w-6 rounded-full bg-gradient-to-br from-content-coral to-amber-400 border-2 border-[#fffbf9]"
+            <div className="flex items-center justify-center gap-2 mt-8 text-sm text-slate-500 flex-wrap">
+              <div className="flex -space-x-2">
+                {TESTIMONIALS.map((t) => (
+                  <img
+                    key={t.name}
+                    src={t.image}
+                    alt={t.name}
+                    className="h-7 w-7 rounded-full object-cover border-2 border-[#fffbf9] shadow-sm"
                   />
                 ))}
               </div>
               <span>
-                Trusted by <strong className="text-slate-700">47,598+</strong> creators
+                Trusted by creators across <strong className="text-slate-700">100+</strong> niches
               </span>
               <span className="text-slate-300">·</span>
               <div className="flex items-center gap-0.5">
@@ -336,7 +341,11 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <figcaption className="flex items-center gap-3 pt-5 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-content-coral to-amber-400 flex-shrink-0" />
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0 ring-2 ring-content-coral/10"
+                  />
                   <div className="min-w-0">
                     <div className="font-bold text-slate-900 text-sm truncate">
                       {t.name}
@@ -370,9 +379,14 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
                 key={i}
                 className="group bg-white rounded-xl border border-slate-200 open:border-content-coral/30 open:shadow-md open:shadow-content-coral/5 overflow-hidden transition-all duration-200"
               >
-                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-semibold text-slate-900 hover:text-content-coral transition-colors">
+                <summary className="flex items-center justify-between cursor-pointer p-5 text-left font-semibold text-slate-900 hover:text-content-coral transition-colors list-none [&::-webkit-details-marker]:hidden">
                   <span className="pr-4">{f.q}</span>
-                  <ChevronRight className="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-90 group-open:text-content-coral flex-shrink-0" />
+                  <span
+                    className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-500 group-open:bg-content-coral/15 group-open:text-content-coral group-open:rotate-90 group-open:scale-110 group-hover:bg-content-coral/10 group-hover:text-content-coral transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                    aria-hidden="true"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </span>
                 </summary>
                 <div className="px-5 pb-5 text-[15px] text-slate-600 leading-relaxed">
                   {f.a}
@@ -403,7 +417,7 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
                 {cta}
               </h2>
               <p className="text-slate-300 mb-10 text-lg">
-                Join 47,598+ creators building data-driven content strategies.
+                Built for creators who take their content seriously.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                 <a
