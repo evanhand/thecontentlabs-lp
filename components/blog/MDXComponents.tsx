@@ -186,9 +186,7 @@ export function InstagramEmbed({
         src={embedUrl}
         width="400"
         height="580"
-        frameBorder="0"
         scrolling="no"
-        allowTransparency
         allow="encrypted-media"
         className="rounded-xl border border-slate-200 max-w-full"
       />
@@ -217,7 +215,6 @@ export function TikTokEmbed({
         src={`https://www.tiktok.com/embed/v2/${videoId}`}
         width="325"
         height="580"
-        frameBorder="0"
         scrolling="no"
         allow="encrypted-media"
         className="rounded-xl border border-slate-200"
