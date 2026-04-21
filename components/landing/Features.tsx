@@ -14,9 +14,8 @@ const FEATURES = [
   { title: "Ask Anything. Get Real Answers.", description: "The Chemist knows your niche, your content history, and your competitors. Ask it what to post next, why a video flopped, or how to write a better hook. It's like having a strategist on call 24/7.", icon: Atom, benefit: "Get unstuck in seconds, not hours", tag: "THE CHEMIST", monitorLabel: "the_chemist", image: "/features/chemist.jpg" },
 ];
 
-const [featured, ...rest] = FEATURES;
-
 export function Features() {
+  const [featured, ...rest] = FEATURES;
   return (
     <section id="features" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10 bg-slate-950">
       <HexMolecule size={200} className="absolute -right-16 top-32 opacity-[0.05] pointer-events-none" />
