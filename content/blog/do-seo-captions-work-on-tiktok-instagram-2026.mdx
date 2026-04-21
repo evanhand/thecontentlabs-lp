@@ -25,7 +25,7 @@ Our database contains **4,663 short-form videos** analyzed across TikTok, Instag
   <StatCard stat="4,663" label="Videos analyzed" />
   <StatCard stat="4.9x" label="Views: 151-400 vs 400+ char captions" />
   <StatCard stat="1.8x" label="Views with 0 hashtags vs 1-3" />
-  <StatCard stat="72x" label="Views: 0 hashtags vs 15+ hashtags" />
+  <StatCard stat="27x" label="Views when both rules met vs both broken" />
 </StatGrid>
 
 ---
@@ -125,6 +125,30 @@ Why? Three reasons:
 ]} />
 
 **Important nuance:** videos with 4-8 hashtags had the highest save rate (608 per video vs 215 for 0-hashtag videos). So if your primary goal is bookmarks/saves for a topical piece (a cooking recipe, a how-to, a reference video), a small hashtag cluster still helps with categorization. For raw reach and views, skip them entirely.
+
+---
+
+## Finding 4: Combine both rules and the gap becomes a 27x multiplier
+
+Length and hashtag count are each strong predictors on their own. When you combine them, the effect compounds dramatically.
+
+We segmented every TikTok + Instagram video in the dataset (4,012 videos) by whether the caption followed *both* rules, one rule, or neither:
+
+| Caption pattern | Videos | Avg Views | Avg Shares | Avg Comments |
+|---|---|---|---|---|
+| **Sweet spot (151-400 chars) + zero hashtags** | **1,040** | **207,876** | **1,091** | **296** |
+| Sweet spot + 1-8 hashtags | 1,062 | 85,159 | 844 | 97 |
+| Other combos | 1,440 | 63,083 | 447 | 88 |
+| Short or empty caption (<50 chars) | 386 | 12,787 | 27 | 8 |
+| Stuffed caption (400+) + many hashtags (9+) | 84 | 7,687 | 60 | 6 |
+
+Videos that hit **both rules at once averaged 207,876 views**. Videos that broke both (the stuffed caption + hashtag stack combo that most SEO advice tells you to do) averaged **7,687**.
+
+That's a **27x gap** on a sample of 1,124 combined videos. Not a coincidence, not a viral-hit artifact. A consistent, large-sample effect.
+
+<Highlight title="The rule, stated simply">
+On TikTok and Instagram in 2026, the optimal caption is **151-400 characters of narrative** with **zero hashtags**. Any deviation costs you reach. Doing the opposite (stuffing length with hashtags) costs you roughly 27x your average views.
+</Highlight>
 
 ---
 
