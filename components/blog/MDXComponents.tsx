@@ -290,6 +290,9 @@ export function HookSection({
   engagement,
   videos,
   topViews,
+  engagementLabel,
+  videosLabel,
+  topViewsLabel,
   children,
 }: {
   rank: number;
@@ -299,6 +302,9 @@ export function HookSection({
   engagement: string;
   videos: string;
   topViews: string;
+  engagementLabel?: string;
+  videosLabel?: string;
+  topViewsLabel?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -316,15 +322,15 @@ export function HookSection({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
         <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
           <p className="text-2xl font-bold text-slate-900">{engagement}</p>
-          <p className="text-xs text-slate-500 mt-1">Avg engagement</p>
+          <p className="text-xs text-slate-500 mt-1">{engagementLabel || "Avg engagement"}</p>
         </div>
         <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
           <p className="text-2xl font-bold text-slate-900">{videos}</p>
-          <p className="text-xs text-slate-500 mt-1">Videos analyzed</p>
+          <p className="text-xs text-slate-500 mt-1">{videosLabel || "Videos analyzed"}</p>
         </div>
         <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
           <p className="text-2xl font-bold text-slate-900">{topViews}</p>
-          <p className="text-xs text-slate-500 mt-1">Top video views</p>
+          <p className="text-xs text-slate-500 mt-1">{topViewsLabel || "Top video views"}</p>
         </div>
       </div>
 
