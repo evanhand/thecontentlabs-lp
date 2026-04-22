@@ -33,7 +33,13 @@ export const metadata: Metadata = {
     canonical: "https://thecontentlabs.app/",
   },
   icons: {
-    icon: "/favicon.png",
+    // Browsers pick the smallest matching size for tabs (16/32) — they grab the white-bg one.
+    // Google's favicon crawler prefers >= 48x48 — it grabs the navy-bg one so the orange beaker
+    // stays visible against Google's white search backdrop.
+    icon: [
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-dark.png", sizes: "192x192", type: "image/png" },
+    ],
     apple: "/favicon.png",
   },
   metadataBase: new URL("https://thecontentlabs.app"),
