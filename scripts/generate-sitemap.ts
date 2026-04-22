@@ -6,6 +6,7 @@ const SITE_URL = "https://thecontentlabs.app";
 const PUBLIC_DIR = path.join(process.cwd(), "public");
 const APP_DIR = path.join(process.cwd(), "app");
 const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
+const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
 function getStaticRoutes(): string[] {
   const routes: string[] = [];
@@ -79,10 +80,30 @@ function getBlogRoutes(): { url: string; lastmod: string }[] {
   return routes;
 }
 
+function getGuideRoutes(): { url: string; lastmod: string }[] {
+  const routes: { url: string; lastmod: string }[] = [];
+
+  if (fs.existsSync(GUIDES_DIR)) {
+    const files = fs.readdirSync(GUIDES_DIR).filter((f) => f.endsWith(".mdx"));
+    for (const file of files) {
+      const raw = fs.readFileSync(path.join(GUIDES_DIR, file), "utf-8");
+      const { data } = matter(raw);
+      const slug = file.replace(/\.mdx$/, "");
+      routes.push({
+        url: `/guides/${slug}`,
+        lastmod: data.updatedDate || data.date || new Date().toISOString().split("T")[0],
+      });
+    }
+  }
+
+  return routes;
+}
+
 function generateSitemap() {
   const today = new Date().toISOString().split("T")[0];
   const staticRoutes = getStaticRoutes();
   const blogRoutes = getBlogRoutes();
+  const guideRoutes = getGuideRoutes();
 
   // Deduplicate (blog index appears in both static and blog)
   const allUrls = new Map<string, string>();
@@ -95,12 +116,16 @@ function generateSitemap() {
     allUrls.set(url, lastmod);
   }
 
+  for (const { url, lastmod } of guideRoutes) {
+    allUrls.set(url, lastmod);
+  }
+
   const entries = Array.from(allUrls.entries())
     .map(
       ([url, lastmod]) => `  <url>
     <loc>${SITE_URL}${url}</loc>
     <lastmod>${lastmod}</lastmod>
-    <changefreq>${url.startsWith("/blog/") ? "weekly" : "monthly"}</changefreq>
+    <changefreq>${url.startsWith("/blog/") || url.startsWith("/guides/") ? "weekly" : "monthly"}</changefreq>
     <priority>${url === "" ? "1.0" : url === "/blog" ? "0.8" : "0.7"}</priority>
   </url>`
     )
