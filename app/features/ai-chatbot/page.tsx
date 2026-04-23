@@ -28,6 +28,9 @@ const config: FeaturePageConfig = {
     { step: '3', title: 'Get data-informed answers', description: 'Every response draws on your content data, competitor analysis, and niche trends. Not generic advice - answers tailored to you.' },
   ],
   cta: 'Your personal AI strategist is waiting.',
+  heroImage: '/features/chemist.jpg',
+  heroImageAlt: 'The Chemist chat interface with context-aware AI strategy answers',
+  monitorLabel: 'the_chemist',
   faq: [
     { q: 'How is The Chemist different from ChatGPT?', a: 'ChatGPT knows nothing about your content, your competitors, or your niche performance data. The Chemist has full context from your content audits, competitor analysis, and strategy - so every answer is personalized to your situation.' },
     { q: 'Does it cost extra to use?', a: 'The Chemist is included in every plan. Usage is measured in Lab Credits - Starter gets 1,000/month, Pro gets 2,500, and Studio gets 5,000. You can also purchase credit packs if you need more.' },

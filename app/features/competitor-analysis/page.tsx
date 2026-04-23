@@ -28,6 +28,9 @@ const config: FeaturePageConfig = {
     { step: '3', title: 'Get actionable intel', description: 'See what\'s working, what topics to cover, and which hooks to adapt for your own content. Updated with every analysis cycle.' },
   ],
   cta: 'Know what your competitors know - and more.',
+  heroImage: '/features/competitor-analysis.jpg',
+  heroImageAlt: 'Competitor analysis dashboard showing top-performing videos and hook patterns',
+  monitorLabel: 'competitor_analysis',
   faq: [
     { q: 'How many competitors can I track?', a: 'Starter and Pro plans include 6 competitors (3 per platform). Studio includes 8 competitors (4 per platform). Each competitor is analyzed with multiple videos.' },
     { q: 'Can I change my competitors later?', a: 'Yes. You can update your competitor list when you re-run your analysis. Swap out competitors anytime as your strategy evolves.' },

@@ -17,6 +17,9 @@ export interface FeaturePageConfig {
   howItWorks: { step: string; title: string; description: string }[];
   cta: string;
   faq: { q: string; a: string }[];
+  heroImage?: string;
+  heroImageAlt?: string;
+  monitorLabel?: string;
 }
 
 const TRUST_STATS = [
@@ -64,6 +67,9 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
     howItWorks,
     cta,
     faq,
+    heroImage,
+    heroImageAlt,
+    monitorLabel,
   } = config;
 
   const faqSchema = JSON.stringify({
@@ -186,6 +192,39 @@ export function FeaturePageTemplate({ config }: { config: FeaturePageConfig }) {
           </div>
         </div>
       </section>
+
+      {/* ============================================================ */}
+      {/* Hero product shot                                            */}
+      {/* ============================================================ */}
+      {heroImage && (
+        <section className="relative -mt-6 pb-12 sm:pb-20">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="lab-monitor-frame-dark relative shadow-2xl shadow-content-coral/10 ring-1 ring-content-coral/10">
+              <div
+                aria-hidden
+                className="absolute -top-12 -right-12 h-56 w-56 rounded-full bg-content-coral/20 blur-[80px] pointer-events-none -z-10"
+              />
+              <div className="lab-monitor-bar-dark">
+                <span className="lab-monitor-dot bg-red-500/60" />
+                <span className="lab-monitor-dot bg-amber-500/60" />
+                <span className="lab-monitor-dot bg-green-500/60" />
+                {monitorLabel && (
+                  <span className="font-mono text-[10px] text-slate-500 ml-2 tracking-wider">
+                    {monitorLabel}
+                  </span>
+                )}
+              </div>
+              <img
+                src={heroImage}
+                alt={heroImageAlt || `${title} preview`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto block object-cover object-top"
+              />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* Trust Strip                                                  */}

@@ -16,6 +16,9 @@ import {
   WhenToUse,
   DataBarChart,
   DataPieChart,
+  HookFramework,
+  HookComboGrid,
+  HookComboCard,
 } from "@/components/blog/MDXComponents";
 
 export function useMDXComponents(): MDXComponents {
@@ -36,6 +39,9 @@ export function useMDXComponents(): MDXComponents {
     WhenToUse,
     DataBarChart,
     DataPieChart,
+    HookFramework,
+    HookComboGrid,
+    HookComboCard,
     a: ({
       href,
       children,

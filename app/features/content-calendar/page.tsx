@@ -28,6 +28,9 @@ const config: FeaturePageConfig = {
     { step: '3', title: 'Film, post, repeat', description: 'Use the scripts as-is or customize them with your voice. Mark items complete as you post, and regenerate when you need fresh ideas.' },
   ],
   cta: 'Never stare at a blank page again.',
+  heroImage: '/features/content-calendar.jpg',
+  heroImageAlt: '30-day content calendar with full scripts and hooks',
+  monitorLabel: 'content_calendar',
   faq: [
     { q: 'How many content ideas do I get?', a: 'Starter includes 21 calendar items per generation. Pro includes 30, and Studio includes 60. Each comes with a full script, hooks, and CTAs.' },
     { q: 'Can I customize the scripts?', a: 'Absolutely. The scripts are a starting point built from data. Bring your voice and personality - that\'s what makes content stand out.' },

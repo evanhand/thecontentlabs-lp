@@ -28,6 +28,9 @@ const config: FeaturePageConfig = {
     { step: '3', title: 'Get your audit report', description: 'Review detailed scores and specific recommendations for every video. See exactly what to change and what to keep.' },
   ],
   cta: 'Stop guessing. Start knowing what works.',
+  heroImage: '/features/analytics.jpg',
+  heroImageAlt: 'Video audit report with hook, retention, and CTA scoring',
+  monitorLabel: 'video_audit',
   faq: [
     { q: 'How many videos can I audit per month?', a: 'Starter plans include 40 video audits per month. Pro gets 80, and Studio gets 160. Each audit gives you a full breakdown of hooks, retention, CTAs, and structure.' },
     { q: 'What platforms do you support?', a: 'We analyze content from TikTok, YouTube (including Shorts), and Instagram Reels. Connect one or all three during setup.' },

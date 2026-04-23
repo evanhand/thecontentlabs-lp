@@ -28,6 +28,9 @@ const config: FeaturePageConfig = {
     { step: '3', title: 'Execute with confidence', description: 'Use your strategy to guide your content calendar. Pro and Studio plans get automatic strategy refreshes every time new content is detected.' },
   ],
   cta: 'Stop posting randomly. Start posting strategically.',
+  heroImage: '/features/analytics.jpg',
+  heroImageAlt: 'Content strategy dashboard with pillars, hook frameworks, and growth levers',
+  monitorLabel: 'content_strategy',
   faq: [
     { q: 'How is this different from asking ChatGPT for a strategy?', a: 'ChatGPT has no access to your content data, your competitors, or real performance metrics from your niche. Our strategies are built from actual video analysis data: what hooks are working, what topics are trending, what your competitors are doing. It\'s the difference between generic advice and a real strategy.' },
     { q: 'How often should I regenerate my strategy?', a: 'Pro and Studio plans automatically refresh your strategy whenever new content is detected \u2014 typically daily. Starter plans can regenerate once per week. Your strategy stays current as trends shift and your content evolves.' },
