@@ -32,6 +32,7 @@ export function getGuideMeta(slug: string): PostMeta {
     faqs: data.faqs,
     slug,
     readingTime: rt.text,
+    isGuide: true,
   };
 }
 

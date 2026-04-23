@@ -4,6 +4,7 @@ import { PublicNav } from "@/components/PublicNav";
 import { Footer } from "@/components/landing/Footer";
 import { CategoryTabs } from "@/components/blog/CategoryTabs";
 import { getAllPosts } from "@/lib/blog";
+import { getAllGuides } from "@/lib/guides";
 
 export const metadata: Metadata = {
   title: "Resources — The Content Labs | Guides, Comparisons & Strategy Tips",
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
 };
 
 export default function BlogIndex() {
-  const posts = getAllPosts();
+  const posts = [...getAllPosts(), ...getAllGuides()].sort((a, b) =>
+    a.date > b.date ? -1 : 1,
+  );
 
   return (
     <div className="min-h-screen bg-slate-50">

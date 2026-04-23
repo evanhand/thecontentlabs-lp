@@ -17,6 +17,7 @@ export interface PostMeta {
   faqs?: { q: string; a: string }[];
   slug: string;
   readingTime: string;
+  isGuide?: boolean;
 }
 
 export function getAllSlugs(): string[] {

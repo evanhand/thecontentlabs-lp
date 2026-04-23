@@ -18,7 +18,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 export function BlogCard({ post }: { post: PostMeta }) {
   return (
     <a
-      href={`/blog/${post.slug}`}
+      href={`${post.isGuide ? "/guides" : "/blog"}/${post.slug}`}
       className="group block bg-white rounded-xl border border-slate-200 p-6 hover:border-content-coral/30 hover:shadow-md transition-all duration-200"
     >
       <span
