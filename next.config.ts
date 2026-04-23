@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  ...(process.env.NODE_ENV === "production" && { output: "export" as const }),
   images: {
     unoptimized: true,
   },
