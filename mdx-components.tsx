@@ -19,6 +19,9 @@ import {
   HookFramework,
   HookComboGrid,
   HookComboCard,
+  CaptionCardGrid,
+  CaptionCard,
+  HashtagCountBar,
 } from "@/components/blog/MDXComponents";
 
 export function useMDXComponents(): MDXComponents {
@@ -42,6 +45,9 @@ export function useMDXComponents(): MDXComponents {
     HookFramework,
     HookComboGrid,
     HookComboCard,
+    CaptionCardGrid,
+    CaptionCard,
+    HashtagCountBar,
     a: ({
       href,
       children,

@@ -693,6 +693,132 @@ export function HookComboCard({
   );
 }
 
+/* -- Caption mockup card (used by hashtags blog) -- */
+export function CaptionCardGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-5 my-10">{children}</div>
+  );
+}
+
+export function CaptionCard({
+  status,
+  bucket,
+  caption,
+  handle = "@creator",
+  hashtags = [],
+  medianViews,
+  sampleSize,
+  platform = "Instagram",
+  note,
+}: {
+  status: ComboStatus;
+  bucket: string;
+  caption: string;
+  handle?: string;
+  hashtags?: string[];
+  medianViews: string;
+  sampleSize: string;
+  platform?: string;
+  note?: string;
+}) {
+  const s = STATUS_STYLE[status];
+  return (
+    <div
+      className={`relative rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 ${s.ring}`}
+    >
+      <span
+        className={`absolute -top-2.5 left-5 inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${s.chipBg} ${s.chipText}`}
+      >
+        {s.label}
+      </span>
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+          {bucket}
+        </span>
+        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+          {platform}
+        </span>
+      </div>
+
+      {/* Caption mockup styled like an IG caption */}
+      <div className="rounded-xl bg-slate-50/70 border border-slate-200/80 p-4 mb-5">
+        <p className="text-[13px] font-bold text-slate-900 mb-1.5 leading-tight">{handle}</p>
+        <p className="text-[13px] text-slate-700 leading-relaxed whitespace-pre-line">{caption}</p>
+        {hashtags.length > 0 ? (
+          <p className="text-[13px] leading-relaxed mt-2">
+            {hashtags.map((h, i) => (
+              <span key={i}>
+                <span className="text-blue-600 font-medium">#{h}</span>
+                {i < hashtags.length - 1 ? <span className="text-blue-600"> </span> : null}
+              </span>
+            ))}
+          </p>
+        ) : (
+          <p className="text-[11px] text-slate-400 italic mt-2">no hashtags</p>
+        )}
+      </div>
+
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="text-3xl font-bold text-slate-900 leading-none tabular-nums">
+            {medianViews}
+          </p>
+          <p className="text-[11px] text-slate-500 mt-1 uppercase tracking-wider font-semibold">
+            Median views
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-[11px] text-slate-400 leading-snug">
+            <span className="text-slate-500 font-semibold">{hashtags.length}</span>{" "}
+            hashtag{hashtags.length === 1 ? "" : "s"}
+          </p>
+          <p className="text-[11px] text-slate-400 leading-snug mt-0.5">{sampleSize}</p>
+        </div>
+      </div>
+
+      {note && (
+        <p className="text-[12px] text-slate-600 mt-4 leading-snug border-t border-slate-100 pt-3">
+          {note}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* -- Hashtag count visualizer (small inline pictogram) -- */
+export function HashtagCountBar({
+  count,
+  max = 30,
+  label,
+}: {
+  count: number;
+  max?: number;
+  label?: string;
+}) {
+  const filled = Math.min(count, max);
+  return (
+    <span className="not-prose inline-flex items-center gap-2 align-middle">
+      <span className="inline-flex items-center gap-[2px]">
+        {Array.from({ length: max }).map((_, i) => (
+          <span
+            key={i}
+            className={`block h-2 w-1 rounded-full ${
+              i < filled
+                ? count >= 16
+                  ? "bg-red-400"
+                  : count >= 7
+                    ? "bg-amber-400"
+                    : "bg-emerald-400"
+                : "bg-slate-200"
+            }`}
+          />
+        ))}
+      </span>
+      {label && <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">{label}</span>}
+    </span>
+  );
+}
+
 /* -- Hook Section -- */
 export function HookSection({
   rank,
