@@ -758,19 +758,31 @@ export default function PricingPage() {
             variants={staggerContainer}
             className="relative max-w-4xl mx-auto text-center"
           >
-            <motion.h2 variants={fadeUp} className="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Your Content Formula Is Ready
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-content-coral/10 border border-content-coral/25">
+              <span className="h-1.5 w-1.5 rounded-full bg-content-coral animate-pulse" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
+                47,598 creators · No card · 60 seconds
+              </span>
+            </motion.div>
+            <motion.h2 variants={fadeUp} className="font-heading text-3xl sm:text-5xl md:text-[56px] font-semibold tracking-tight text-slate-900 mb-5 leading-[1.05]">
+              Stop guessing what to post<span className="text-content-coral">.</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
-              Every week without a strategy is another week of posting and hoping. Join creators who stopped guessing and started growing.
+            <motion.p variants={fadeUp} className="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Every week without a strategy is another week of posting and hoping. Connect TikTok and Instagram, get a 30-day calendar in under 10 minutes.
             </motion.p>
-            <motion.div variants={scaleIn}>
+            <motion.div variants={scaleIn} className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
               <a
                 href="https://thecontentlabs.app/register"
-                className="lab-bubbles w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-lg text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
+                className="lab-bubbles group inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-lg text-white shadow-lg shadow-content-cta/30 hover:shadow-xl hover:shadow-content-cta/50 transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                Get Started Now
-                <ArrowRight className="ml-3 h-5 w-5" />
+                Get my free audit
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+              <a
+                href="/trends"
+                className="inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-white border border-slate-200 rounded-xl font-semibold text-slate-700 hover:border-content-coral/40 hover:text-content-coral transition-all"
+              >
+                See what&rsquo;s trending
               </a>
             </motion.div>
             <motion.p variants={fadeUp} className="mt-6 text-sm text-slate-500">Cancel anytime. No contracts.</motion.p>

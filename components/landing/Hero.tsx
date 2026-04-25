@@ -27,6 +27,21 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto pb-8">
         <div className="text-center max-w-4xl mx-auto">
+          {/* Live trends ticker */}
+          <a
+            href="/trends"
+            className="group inline-flex items-center gap-2 mb-4 pl-2 pr-4 py-1 rounded-full bg-white/80 border border-slate-200 hover:border-content-coral/40 hover:bg-white transition-all"
+          >
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[9px] font-mono uppercase tracking-[0.2em] font-bold">
+              <span className="h-1 w-1 rounded-full bg-white animate-pulse" />
+              Live
+            </span>
+            <span className="text-[12px] sm:text-[13px] font-medium text-slate-700">
+              <span className="font-bold text-slate-900">Hot Take</span> is the top hook this month
+            </span>
+            <ArrowRight className="h-3 w-3 text-slate-400 group-hover:text-content-coral group-hover:translate-x-0.5 transition-all" />
+          </a>
+
           <div
             className="inline-flex items-center px-4 py-1.5 font-mono text-xs border border-content-coral-500/20 bg-content-coral-500/5 rounded-full text-content-coral-600 mb-6 tracking-wider"
           >
