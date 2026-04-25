@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "tsx scripts/generate-sitemap.ts && tsx scripts/generate-og-images.tsx && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "thumbnails": "node scripts/generate-thumbnails.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
