@@ -253,7 +253,7 @@ export function BlogCard({
       className="group flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden hover:border-content-coral/40 hover:shadow-lg hover:shadow-content-coral/5 transition-all duration-300"
     >
       <div className="p-3 pb-0">
-        <CardThumbnail slug={post.slug} category={post.category} />
+        <CardThumbnail slug={post.slug} category={post.category} imageUrl={thumbnailUrl} alt={post.title} />
       </div>
       <div className="flex flex-col flex-1 p-5">
         <CardEyebrow post={post} />

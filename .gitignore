@@ -43,3 +43,9 @@ next-env.d.ts
 # Local Netlify folder
 .netlify
 .fonts-cache/
+
+# brainstorming companion
+.superpowers/
+
+# local Claude Code settings
+.claude/
