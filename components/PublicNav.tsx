@@ -13,6 +13,12 @@ const FEATURE_LINKS = [
   { to: '/features/ai-chatbot', label: 'The Chemist' },
 ];
 
+const RESOURCE_LINKS = [
+  { to: '/blog', label: 'Studies & guides', sub: '6 data studies + 24 guides' },
+  { to: '/trends', label: 'Live trends', sub: 'Updated monthly · April 2026' },
+  { to: '/playbooks', label: 'Niche playbooks', sub: '6 niches, ranked by data' },
+];
+
 export function PublicNav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -85,12 +91,29 @@ export function PublicNav() {
               >
                 Compare
               </a>
-              <a
-                href="/blog"
-                className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white"
-              >
-                Resources
-              </a>
+              {/* Resources dropdown */}
+              <div className="relative group">
+                <button className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 text-slate-300 hover:text-white">
+                  Resources
+                  <svg className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180 duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="rounded-xl bg-[#0f172a] shadow-xl shadow-black/20 border border-white/[0.06] py-1.5 w-64">
+                    {RESOURCE_LINKS.map((item) => (
+                      <a
+                        key={item.to}
+                        href={item.to}
+                        className="block px-3.5 py-2.5 transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                      >
+                        <span className="block text-sm font-semibold">{item.label}</span>
+                        <span className="block text-[11px] text-slate-500 mt-0.5">{item.sub}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </nav>
 
             {/* Right side: auth + CTA */}
@@ -157,13 +180,19 @@ export function PublicNav() {
                 >
                   Compare
                 </a>
-                <a
-                  href="/blog"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                >
+                <p className="px-3 py-1.5 mt-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                   Resources
-                </a>
+                </p>
+                {RESOURCE_LINKS.map((item) => (
+                  <a
+                    key={item.to}
+                    href={item.to}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-sm transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  >
+                    {item.label}
+                  </a>
+                ))}
                 <div className="pt-3 mt-2 border-t border-white/[0.06] flex flex-col gap-2">
                   <a
                     href="/login"

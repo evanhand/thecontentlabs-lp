@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { Metadata } from "next";
+import { ArrowRight, Activity } from "lucide-react";
 import { PublicNav } from "@/components/PublicNav";
 import { Footer } from "@/components/landing/Footer";
 import { FeaturedStudyCard } from "@/components/blog/FeaturedStudyCard";
@@ -96,12 +97,54 @@ export default function BlogIndex() {
 
       {/* ========== Featured (Lead Study) ========== */}
       {featured && (
-        <section className="px-4 sm:px-6 lg:px-8 mb-14">
+        <section className="px-4 sm:px-6 lg:px-8 mb-8">
           <div className="max-w-6xl mx-auto">
             <FeaturedStudyCard post={featured} imageUrl={featured.imageUrl} />
           </div>
         </section>
       )}
+
+      {/* ========== Live monthly trends strip ========== */}
+      <section className="px-4 sm:px-6 lg:px-8 mb-14">
+        <div className="max-w-6xl mx-auto">
+          <a
+            href="/trends"
+            className="group block relative overflow-hidden rounded-2xl border border-content-coral/30 bg-gradient-to-r from-slate-50 via-white to-content-coral/5 hover:border-content-coral/50 hover:shadow-lg hover:shadow-content-coral/10 transition-all"
+          >
+            <div
+              aria-hidden
+              className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-content-coral/15 blur-3xl pointer-events-none"
+            />
+            <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 px-5 py-5 sm:px-7 sm:py-6">
+              <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-content-coral/10 border border-content-coral/30">
+                <Activity className="h-5 w-5 text-content-coral" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="inline-flex items-center gap-2 mb-1.5">
+                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[9px] font-mono uppercase tracking-[0.2em] font-bold">
+                    <span className="h-1 w-1 rounded-full bg-white animate-pulse" />
+                    Live
+                  </span>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold">
+                    Updated monthly
+                  </span>
+                </div>
+                <h2 className="font-heading text-lg sm:text-xl font-semibold text-slate-900 leading-tight">
+                  See what&rsquo;s actually winning right now
+                  <span className="ml-2 text-slate-500 text-sm font-mono uppercase tracking-wider">
+                    April 2026
+                  </span>
+                </h2>
+                <p className="text-sm text-slate-600 mt-1">
+                  Hook leaderboard, format winners, and viral examples from
+                  1,439 videos posted this month.
+                </p>
+              </div>
+              <ArrowRight className="hidden sm:block h-5 w-5 text-content-coral group-hover:translate-x-1 transition-transform flex-shrink-0" />
+            </div>
+          </a>
+        </div>
+      </section>
 
       {/* ========== Browse ========== */}
       <section className="px-4 sm:px-6 lg:px-8 pb-16">

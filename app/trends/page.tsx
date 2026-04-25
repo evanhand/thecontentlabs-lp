@@ -376,10 +376,7 @@ export default function TrendsPage() {
             working creator should expect. Median is the honest summary.
           </p>
           <p className="text-sm text-slate-600 leading-relaxed">
-            Data lives in our <code className="text-[12px] font-mono bg-slate-100 px-1.5 py-0.5 rounded">scrapes</code>
-            {" "}and{" "}
-            <code className="text-[12px] font-mono bg-slate-100 px-1.5 py-0.5 rounded">content_audits</code>
-            {" "}tables. Pulled on {EDITION.asOf}.
+            Pulled from our analyzed video dataset on {EDITION.asOf}.
           </p>
         </div>
       </section>
