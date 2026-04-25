@@ -243,7 +243,7 @@ For everyone else, the cheapest single edit you can make to your caption strateg
 
 ## Methodology
 
-**Dataset:** 10,001 distinct TikTok and Instagram videos with both caption and view data populated. Pulled from `scrapes` and `content_audits` tables on 2026-04-24.
+**Dataset:** 10,001 distinct TikTok and Instagram videos with both caption and view data populated. Pulled from our analyzed video dataset on 2026-04-24.
 
 **Hashtag counting:** Counted via Postgres `regexp_matches(caption, '#[A-Za-z][A-Za-z0-9_]*', 'g')` to match every `#` followed by a letter (avoids false positives like "#1" rankings). Captions were treated as the source of truth because the dedicated `hashtags` column had inconsistent storage formats (JSON arrays, JSON objects, comma-strings, and a few malformed entries) across the dataset.
 
