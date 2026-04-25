@@ -47,5 +47,8 @@ next-env.d.ts
 # brainstorming companion
 .superpowers/
 
+# thumbnail generator background cache (regen with `npm run thumbnails -- --force`)
+.thumbnail-bg-cache/
+
 # local Claude Code settings
 .claude/
