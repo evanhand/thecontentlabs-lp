@@ -1,67 +1,134 @@
+import fs from "fs";
+import path from "path";
 import { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
 import { PublicNav } from "@/components/PublicNav";
 import { Footer } from "@/components/landing/Footer";
-import { CategoryTabs } from "@/components/blog/CategoryTabs";
-import { getAllPosts } from "@/lib/blog";
+import { FeaturedStudyCard } from "@/components/blog/FeaturedStudyCard";
+import { ResourcesBrowser } from "@/components/blog/ResourcesBrowser";
+import { CTA } from "@/components/blog/MDXComponents";
+import { getAllPosts, type PostMeta } from "@/lib/blog";
 import { getAllGuides } from "@/lib/guides";
 
 export const metadata: Metadata = {
-  title: "Resources — The Content Labs | Guides, Comparisons & Strategy Tips",
+  title: "Resources — The Content Labs | Data Studies, Guides, Strategy",
   description:
-    "Free guides, comparisons, and strategy tips for content creators. Learn about AI content strategy, TikTok growth, content calendars, and how The Content Labs compares to other tools.",
+    "Free data studies, guides, and comparisons for content creators. Built from 10,000+ analyzed TikTok and Instagram videos. AI content strategy, hooks, hashtags, posting times, and more.",
   alternates: { canonical: "https://thecontentlabs.app/blog" },
   openGraph: {
     title: "Resources — The Content Labs",
     description:
-      "Free guides and comparisons for content creators. AI content strategy, TikTok growth, and more.",
+      "Free data studies and guides for content creators. Built from 10,000+ analyzed videos.",
     url: "https://thecontentlabs.app/blog",
     images: ["https://thecontentlabs.app/og-image.png"],
   },
 };
 
+function resolveImageUrl(post: PostMeta): string | null {
+  if (post.ogImage) return post.ogImage;
+  const filename = post.isGuide
+    ? `guide-${post.slug}.png`
+    : `blog-${post.slug}.png`;
+  const localPath = path.join(process.cwd(), "public", "og", filename);
+  if (fs.existsSync(localPath)) return `/og/${filename}`;
+  return null;
+}
+
+function resolveThumbnailUrl(slug: string): string | null {
+  const localPath = path.join(process.cwd(), "public", "thumbnails", `${slug}.png`);
+  if (fs.existsSync(localPath)) return `/thumbnails/${slug}.png`;
+  return null;
+}
+
 export default function BlogIndex() {
-  const posts = [...getAllPosts(), ...getAllGuides()].sort((a, b) =>
-    a.date > b.date ? -1 : 1,
+  const allPosts: PostMeta[] = [...getAllPosts(), ...getAllGuides()].sort(
+    (a, b) => (a.date > b.date ? -1 : 1),
   );
 
+  const enriched = allPosts.map((p) => ({
+    ...p,
+    imageUrl: resolveImageUrl(p),
+    thumbnailUrl: resolveThumbnailUrl(p.slug),
+  }));
+  const [featured, ...rest] = enriched;
+
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#fffbf9]">
       <PublicNav />
 
-      <div className="bg-white border-b border-slate-200 pt-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Resources for Creators
-          </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Guides, comparisons, and strategy tips to help you grow — whether
-            you use The Content Labs or not.
-          </p>
+      {/* ========== Header ========== */}
+      <section className="relative pt-32 sm:pt-36 pb-10 sm:pb-14 overflow-hidden">
+        {/* Subtle graph-paper backdrop */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 opacity-[0.045]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(15,23,42,1) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,1) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute -top-20 right-0 -z-10 h-[420px] w-[420px] rounded-full bg-content-coral/15 blur-[120px]"
+        />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 mb-6">
+            <span
+              aria-hidden
+              className="h-2 w-2 rounded-full bg-content-coral animate-pulse"
+            />
+            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
+              The Content Labs · Resources
+            </span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 items-end">
+            <h1 className="font-heading font-semibold text-slate-900 tracking-tight leading-[1.02] text-[40px] sm:text-5xl lg:text-[58px]">
+              Data studies, guides, and strategy<span className="text-content-coral">.</span>
+            </h1>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed lg:max-w-md lg:justify-self-end lg:text-right">
+              Built from 10,000+ analyzed TikTok and Instagram videos. Useful
+              whether you use The Content Labs or not.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <CategoryTabs posts={posts} />
-
-        <section className="mt-16 bg-gradient-to-br from-content-coral/5 to-content-coral/10 rounded-xl p-8 sm:p-10 text-center border border-content-coral/20">
-          <h2 className="text-2xl font-bold text-slate-900 mb-3">
-            Ready to Put Strategy Into Action?
-          </h2>
-          <p className="text-slate-600 mb-6 max-w-xl mx-auto">
-            47,598+ creators use The Content Labs to turn data into content
-            plans. Competitor analysis, 30-day calendars, and full scripts —
-            starting at $39/mo.
-          </p>
-          <a
-            href="/pricing"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
-          >
-            Get Your Free Audit
-            <ArrowRight className="ml-3 h-5 w-5" />
-          </a>
+      {/* ========== Featured (Lead Study) ========== */}
+      {featured && (
+        <section className="px-4 sm:px-6 lg:px-8 mb-14">
+          <div className="max-w-6xl mx-auto">
+            <FeaturedStudyCard post={featured} imageUrl={featured.imageUrl} />
+          </div>
         </section>
-      </div>
+      )}
+
+      {/* ========== Browse ========== */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-end justify-between mb-7 border-b border-slate-200 pb-5">
+            <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+              All resources
+            </h2>
+            <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 tabular-nums">
+              {enriched.length.toString().padStart(2, "0")} entries
+            </span>
+          </div>
+          <ResourcesBrowser posts={rest} />
+        </div>
+      </section>
+
+      {/* ========== CTA ========== */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="max-w-6xl mx-auto">
+          <CTA
+            headline="Stop reading studies. Start running them on your own account."
+            sub="Connect TikTok and Instagram. The Content Labs runs the same audits you've been reading about across every video on your account, then writes a 30-day calendar with hooks and scripts built from what's actually winning in your niche."
+            primary="Get my free audit"
+            secondary="See pricing"
+          />
+        </div>
+      </section>
 
       <Footer />
     </div>
