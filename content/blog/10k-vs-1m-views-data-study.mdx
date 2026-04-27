@@ -1,0 +1,345 @@
+---
+title: "What Separates a 10K Video From a 1M Video? (10,042-Video Data Study)"
+description: "We sliced 10,042 short-form videos into three view tiers and compared what changes as videos scale from the long tail into the viral tier. Investigator hooks scale steadily. Trust/utility content collapses. Talking Head loses share at the top. Full data study."
+category: "blog"
+date: "2026-04-26"
+updatedDate: "2026-04-26"
+tags: ["viral", "data-study", "tiktok", "instagram", "youtube shorts", "hooks", "emotional triggers", "content strategy"]
+faqs:
+  - q: "What's the biggest difference between videos that get 10K views and ones that get 1M?"
+    a: "Hook archetype mix and emotional register, not duration or format polish. Across our 10,042-video dataset, Investigator hooks grow from 22.5% of the long tail to 31.5% of the 1M+ tier (the only archetype with consistent share growth across all three tiers). Trust/utility emotional content collapses from 6.6% of the long tail to 2.9% of mega-virals. The structural inputs are different at the top."
+  - q: "Why do 'helpful' or 'value-driven' videos rarely go viral?"
+    a: "Trust and utility as the primary emotional trigger collapses from 6.6% of videos under 100K to 2.9% of videos over 1M in our sample. Short-form algorithms reward Curiosity, Humor, and to a lesser extent Outrage and Fear. Aspirational content holds at 9-12% across tiers, but pure 'be helpful' content does not break out of the long tail. The viral tier wants utility wrapped in curiosity, not utility on its own."
+  - q: "Does video format matter for going viral?"
+    a: "Yes, in a counterintuitive way. Talking Head share actually drops as you scale up: 48.7% of long-tail videos, 40.1% of 100K-1M, and 33.2% of mega-virals. Skit content triples its share (2.6% → 9.3%). Voiceover + B-Roll is bimodal: 13.1% of the long tail, dips to 10.1% in the middle, jumps to 20.4% at the top. Talking Head is the safe default. Skits and Voiceover + B-Roll specialty content are over-indexed in the viral tier."
+  - q: "Which hook archetype is most likely to break 100K views?"
+    a: "Investigator. It's 22.5% of our long-tail sample but 33.7% of the 100K-1M tier and 31.5% of the 1M+ tier. The only hook archetype with strong scaling across all three tiers. Hot Take is over-indexed in the 100K-1M tier but flattens at the top. Magician is under-indexed in the long tail (5.7%) but doubles its share in the 1M+ tier (10.3%)."
+  - q: "How big is the gap between an average video and a viral one?"
+    a: "Median views climb from 5,657 in the under-100K tier to 233,933 in the 100K to 1M tier (41x), to 1,958,271 in the 1M-plus tier (an additional 8x). The gap between a typical video and a typical viral one is two and a half orders of magnitude. Going from 'medium' to 'big' is a smaller jump than going from 'small' to 'medium.'"
+thumbnailHook: "From 10K to 1M. What changes."
+thumbnailEmphasis: "1M"
+---
+
+<StatGrid>
+  <StatCard stat="10,042" label="Videos analyzed" />
+  <StatCard stat="327" label="Hit 1M+ views" />
+  <StatCard stat="33.2%" label="Of 1M+ winners are Talking Head (down from 48.7% in long tail)" />
+  <StatCard stat="103" label="Distinct creators" />
+</StatGrid>
+
+Most "what makes a video go viral" posts answer the wrong question. They look at viral videos and pattern-match what they have in common. The flaw: every video that goes viral has things in common with every video that doesn't.
+
+The real question is: **what changes as videos scale up the view tiers?** What do 1M-view videos do that 100K videos don't? What do 100K videos do that 10K videos don't?
+
+We pulled 10,042 short-form videos from our analyzed corpus across TikTok, Instagram, and YouTube Shorts, and split them into three tiers: under 100K views (the long tail), 100K to 1M (solid hits), and 1M+ (mega-virals).
+
+## The view jump itself
+
+Here's how dramatic the gap actually is.
+
+<TierScaleVisual
+  tiers={[
+    { label: "Tier 1 — long tail", median: "5,657", medianRaw: 5657, sample: "7,884 videos", color: "slate" },
+    { label: "Tier 2 — solid hits", median: "233,933", medianRaw: 233933, sample: "1,831 videos", color: "coral" },
+    { label: "Tier 3 — mega-virals", median: "1,958,271", medianRaw: 1958271, sample: "327 videos", color: "emerald" }
+  ]}
+/>
+
+The typical video in our dataset gets 5,657 views. The typical 100K-tier video gets **41x more**. The typical 1M-tier video gets another **8x on top of that**.
+
+What's interesting: **the gap from "small" to "medium" is way bigger than from "medium" to "huge."** Going from 5,657 to 233,933 is a 41x leap. Going from 233,933 to 1.96M is an 8x leap. The hard part is breaking out of the long tail. Once a video enters the 100K club, the structural barriers to a 1M+ outcome get smaller.
+
+---
+
+## First, what's a "hook archetype"?
+
+Before the data, the vocabulary. Every short-form video opens with one of nine hook archetypes — different shapes the first sentence can take. Here's the plain-English version of each, with a real example from the dataset:
+
+<HookArchetypeGrid>
+  <HookArchetypeCard
+    name="Investigator"
+    meaning="Plants a mystery the viewer has to stick around to solve. Curiosity-loop hook."
+    example="Did you know that snowplows are banned in the NFL?"
+    trend="scales"
+    tierShare="22.5% → 33.7% → 31.5%"
+  />
+  <HookArchetypeCard
+    name="Hot Take"
+    meaning="A bold opinion stated as fact. Pattern-interrupt that polarizes."
+    example="What's happening on TikTok right now should absolutely terrify you."
+    trend="peaks-mid"
+    tierShare="13.3% → 18.7% → 11.9%"
+  />
+  <HookArchetypeCard
+    name="Teacher"
+    meaning="The 'let me show you how to' frame. Teaches a tactical skill."
+    example="How to answer: 'What are your salary expectations?'"
+    trend="bimodal"
+    tierShare="18.2% → 9.8% → 13.2%"
+  />
+  <HookArchetypeCard
+    name="Contrarian"
+    meaning="'Everyone says X, but actually Y.' Authority-challenging frame."
+    example="Stop drinking 8 glasses of water a day. Here's why."
+    trend="collapses"
+    tierShare="16.0% → 13.4% → 10.9%"
+  />
+  <HookArchetypeCard
+    name="Magician"
+    meaning="Promises a reveal: 'watch this' or 'wait for it.' Demands a payoff."
+    example="Watch this 4lb steak get cooked in 30 seconds."
+    trend="bimodal"
+    tierShare="5.7% → 5.3% → 10.3%"
+  />
+  <HookArchetypeCard
+    name="Fortune Teller"
+    meaning="A prediction or warning about the future. Stakes-driven hook."
+    example="This is going to make thousands of millionaires next year."
+    trend="flat"
+    tierShare="9.2% → 8.5% → 9.3%"
+  />
+  <HookArchetypeCard
+    name="Proof Drop"
+    meaning="Authority + listicle. 'Top 5 things X does to Y.' Numbered authority."
+    example="Top 5 foods that lower blood pressure naturally."
+    trend="flat"
+    tierShare="5.4% → 4.0% → 4.8%"
+  />
+  <HookArchetypeCard
+    name="FaceTime Energy"
+    meaning="Talking to camera like a friend. Casual, parasocial intimacy."
+    example="Hey, what's up bro? You're gonna want to see this."
+    trend="flat"
+    tierShare="5.1% → 3.0% → 4.8%"
+  />
+  <HookArchetypeCard
+    name="Experimenter"
+    meaning="'I tried X for Y days.' Self-experiment, results-driven."
+    example="I drank only water for 30 days. Here's what happened."
+    trend="collapses"
+    tierShare="3.3% → 1.9% → 1.3%"
+  />
+</HookArchetypeGrid>
+
+Now the data.
+
+---
+
+## Finding 1: Investigator is the one hook that keeps scaling
+
+The mix of which hook archetypes show up shifts in very specific ways as you climb the view tiers.
+
+<TierComparisonChart
+  data={[
+    { archetype: "Investigator", t1: 22.5, t2: 33.7, t3: 31.5 },
+    { archetype: "Teacher", t1: 18.2, t2: 9.8, t3: 13.2 },
+    { archetype: "Contrarian", t1: 16.0, t2: 13.4, t3: 10.9 },
+    { archetype: "Hot Take", t1: 13.3, t2: 18.7, t3: 11.9 },
+    { archetype: "Fortune Teller", t1: 9.2, t2: 8.5, t3: 9.3 },
+    { archetype: "Magician", t1: 5.7, t2: 5.3, t3: 10.3 },
+    { archetype: "Proof Drop", t1: 5.4, t2: 4.0, t3: 4.8 },
+    { archetype: "FaceTime Energy", t1: 5.1, t2: 3.0, t3: 4.8 },
+    { archetype: "Experimenter", t1: 3.3, t2: 1.9, t3: 1.3 }
+  ]}
+  xKey="archetype"
+  series={[
+    { key: "t1", label: "Tier 1 (under 100K)", color: "#cbd5e1" },
+    { key: "t2", label: "Tier 2 (100K-1M)", color: "#fb7185" },
+    { key: "t3", label: "Tier 3 (1M+)", color: "#10b981" }
+  ]}
+  title="Hook archetype mix by view tier (% of tier)"
+  height={360}
+/>
+
+| Hook | Tier 1 | Tier 2 | Tier 3 | Direction |
+|---|---|---|---|---|
+| **Investigator** | 22.5% | 33.7% | 31.5% | ⬆⬆ scales steadily |
+| Teacher | 18.2% | 9.8% | 13.2% | ⬇ collapses at T2, partial recovery |
+| Contrarian | 16.0% | 13.4% | 10.9% | ⬇ slow decline |
+| **Hot Take** | 13.3% | 18.7% | 11.9% | ⬆ peaks at T2, drops |
+| Fortune Teller | 9.2% | 8.5% | 9.3% | flat |
+| **Magician** | 5.7% | 5.3% | 10.3% | ⬆ doubles at T3 |
+| FaceTime Energy | 5.1% | 3.0% | 4.8% | flat-low |
+| Experimenter | 3.3% | 1.9% | 1.3% | ⬇ stops working |
+
+**Investigator is the only hook archetype with consistent positive scaling across all three tiers.** 22.5% of the long tail, 33.7% of solid hits, 31.5% of mega-virals. It's the #1 hook at every tier above T1. The "wait, what?" curiosity loop is the highest-leverage hook structure short-form has.
+
+**Hot Take is a Tier 2 specialty, not a Tier 3 hook.** Hot Take peaks at 18.7% in the 100K-1M tier and *drops* to 11.9% in the mega-viral tier. Hot takes get you into the solid-hit zone reliably, but they often have a ceiling. Strong opinions polarize, which limits the size of the breakout.
+
+**Teacher hooks have a Tier 2 problem, not a viral problem.** They drop hard from 18.2% in the long tail to 9.8% in T2, then partially recover to 13.2% at T3. The pattern suggests there's a specific kind of Teacher hook (deep, niche, expertise-driven) that breaks all the way to mega-viral, but generic "let me teach you something" content hits a wall in the middle.
+
+**Magician hooks double at the top tier (5.7% → 10.3%).** The "watch this" / "wait for it" / "no way that's possible" archetype is over-indexed in the mega-viral tier specifically. When magic content goes off, it goes off big.
+
+<Highlight title="The hook rule">
+The cleanest archetype to default to is **Investigator**, the only hook with consistent scaling. Hot Take is the second-best 100K-1M play but loses dominance at the top. Teacher and Magician are bimodal. The seven other archetypes are mostly stable across tiers.
+</Highlight>
+
+---
+
+## Finding 2: Trust/utility content collapses, humor steadily scales
+
+We bucketed each video's primary emotional trigger into nine clean categories. The shifts between tiers tell you what register the algorithm rewards.
+
+<TierComparisonChart
+  data={[
+    { trigger: "Curiosity", t1: 39.5, t2: 45.4, t3: 30.8 },
+    { trigger: "Aspiration", t1: 12.0, t2: 6.0, t3: 9.9 },
+    { trigger: "Humor", t1: 7.4, t2: 10.3, t3: 16.0 },
+    { trigger: "Trust/Utility", t1: 6.6, t2: 2.8, t3: 2.9 },
+    { trigger: "Outrage", t1: 4.6, t2: 8.6, t3: 6.4 },
+    { trigger: "Fear", t1: 2.9, t2: 3.3, t3: 6.7 },
+    { trigger: "Empathy", t1: 3.4, t2: 1.6, t3: 1.6 },
+    { trigger: "Surprise", t1: 1.9, t2: 3.1, t3: 3.5 }
+  ]}
+  xKey="trigger"
+  series={[
+    { key: "t1", label: "Tier 1 (under 100K)", color: "#cbd5e1" },
+    { key: "t2", label: "Tier 2 (100K-1M)", color: "#fb7185" },
+    { key: "t3", label: "Tier 3 (1M+)", color: "#10b981" }
+  ]}
+  title="Primary emotional trigger by view tier (% of tier)"
+  height={360}
+/>
+
+| Trigger | Tier 1 | Tier 2 | Tier 3 | Direction |
+|---|---|---|---|---|
+| Curiosity | 39.5% | 45.4% | 30.8% | ⬆ peaks at T2, drops |
+| **Humor** | 7.4% | 10.3% | 16.0% | ⬆⬆ steady scaler |
+| **Trust/Utility** | 6.6% | 2.8% | 2.9% | ⬇⬇ **collapses** |
+| Outrage | 4.6% | 8.6% | 6.4% | ⬆ peaks at T2 |
+| Fear | 2.9% | 3.3% | 6.7% | ⬆ doubles at T3 |
+| Aspiration | 12.0% | 6.0% | 9.9% | bimodal |
+| Empathy | 3.4% | 1.6% | 1.6% | ⬇ flat-low at top |
+| Surprise | 1.9% | 3.1% | 3.5% | ⬆ slow scale |
+
+**Trust/utility is the cleanest collapse in the dataset.** 6.6% of long-tail videos lead with "valuable info" / "trustworthy expertise" emotional registers, but only 2.8% of solid hits and 2.9% of mega-virals do. The "give value" advice that dominates personal-brand coaching is structurally a long-tail strategy, not a viral one.
+
+**Humor is the steadiest scaler.** 7.4% of T1, 10.3% of T2, 16.0% of T3, more than doubling its share as videos scale. If you can make something land as funny, the algorithm consistently rewards it across all tiers. Comedy doesn't peak and drop the way hot takes do.
+
+**Curiosity is the volume leader, but it peaks at T2.** Curiosity-driven content makes up 39.5% of all long-tail videos and 45.4% of all 100K-1M hits, but its share drops to 30.8% in the 1M+ tier. The interpretation: curiosity reliably moves you up to 100K-1M, but the very biggest videos (1M+) often run on humor, fear, or other emotional registers that hit harder once you're getting reach.
+
+**Fear doubles at the top tier (2.9% → 6.7%).** Fear content (warnings, threats, "this is bad") rarely lives in the long tail but is over-indexed at mega-viral. Pattern: when fear content lands, it spreads quickly because viewers feel obligated to share warnings.
+
+**Outrage peaks at T2 (8.6%) and drops at T3 (6.4%).** Outrage is a Tier 2 specialty: civic and cultural critique gets you to 100K-1M reliably, but the audience-polarizing nature limits the very biggest breakouts.
+
+<Highlight title="The emotional rule">
+**Stop leading with trust/utility ("here's how to..."). It collapses past 100K.** Lead with curiosity to break out of the long tail. Lean humor for the steadiest scale. Fear and surprise content is over-indexed at the very top if you can pull it off.
+</Highlight>
+
+---
+
+## Finding 3: Talking Head loses its monopoly as videos scale
+
+Format shifts are the most counterintuitive finding in the study.
+
+| Format | Tier 1 | Tier 2 | Tier 3 | Direction |
+|---|---|---|---|---|
+| **Talking Head** | 48.7% | 40.1% | 33.2% | ⬇ steady decline |
+| Mixed | 16.0% | 14.6% | 16.3% | flat |
+| **Voiceover + B-Roll** | 13.1% | 10.1% | 20.4% | ⬆ bimodal, doubles at T3 |
+| Greenscreen | 8.5% | 18.5% | 6.4% | ⬆⬇ T2 specialty |
+| **Skit** | 2.6% | 5.3% | 9.3% | ⬆⬆ scales hard |
+| Other | 9.0% | 9.6% | 11.8% | slow scale |
+| Montage | 1.1% | 0.6% | 0.3% | ⬇ stops working |
+| Interview | 0.8% | 1.2% | 2.2% | ⬆ slow scale |
+
+**Talking Head loses 15+ points of share as videos scale (48.7% → 33.2%).** It's still the largest single format at every tier, but it gets crowded out at the top by Voiceover + B-Roll (faceless) and Skit content. Talking Head is the safest *default* format. The biggest breakouts often live in other formats.
+
+**Skit content triples its share between Tier 1 and Tier 3 (2.6% → 9.3%).** Skits are expensive to produce (writing, performing, editing), which is why they're rare in the long tail. But when they hit, they hit big. High-production-value comedy and dialogue-driven content has structural permission to go viral that a talking head doesn't.
+
+**Voiceover + B-Roll is bimodal: 13.1% of T1, 10.1% of T2, jumps to 20.4% at T3.** When faceless content works, it works at the very top: sports news, history facts, viral-moment commentary. The faceless format struggles in the middle (10.1% of T2) but is over-indexed at the top.
+
+**Greenscreen is the Tier 2 power format.** 18.5% of all 100K-1M videos are greenscreen, more than double its share at any other tier. Greenscreen is structurally a fit for commentary on news/screenshots/reactions. It breaks the 100K barrier reliably, but caps out: only 6.4% of 1M+ videos are greenscreen because reactive content has a ceiling.
+
+<Highlight title="The format rule">
+**Talking Head wins the volume game, but loses share at the top.** If you're aiming for breakout videos specifically, you have to make room in your mix for **Skit, Voiceover + B-Roll, and Mixed-format** content. Pure Talking Head is the safe default and the volume-content workhorse, not the viral-tier playbook.
+</Highlight>
+
+---
+
+<CTA
+  headline="See which tier your content lives in (and what's keeping it there)."
+  sub="TCL audits every video on your TikTok and Instagram, classifies your hook archetypes and emotional triggers against the viral tier, and writes a 30-day calendar built around the hook-emotion combinations that are actually breaking 100K in your niche."
+  primary="Audit my account free"
+  secondary="See how it works"
+  secondaryHref="/features/content-strategy"
+/>
+
+---
+
+## What the 1M-plus tier actually looks like
+
+A handful of the 327 videos in our 1M+ tier, with their hook archetype tags:
+
+<HookExample quote="Nobody fumbled the bag harder than the French gymnastics team." creator="Evan Hand Sports" views="17.7M" />
+
+*Magician hook + Voiceover + B-Roll. Faceless format hitting at the very top of the distribution.*
+
+<HookExample quote="What's happening on TikTok right now should absolutely terrify you." creator="evanhandd" views="5.6M" />
+
+*Investigator hook + Fear trigger. Two channels firing the algorithm rewards.*
+
+<HookExample quote="Top 5 Foods Lower Blood Pressure Naturally" creator="leonidkimmd" views="6.8M" />
+
+*Proof Drop hook + Trust trigger. The exception that proves the rule. Listicle health content with a credible creator hits trust + curiosity simultaneously.*
+
+<HookExample quote="When you get asked in a job interview why do you want to leave your current job, I want you to tell them you're not." creator="RealisticRecruiting" views="3.1M" />
+
+*Contrarian hook + Curiosity trigger. The contrarian that broke into the top tier rides on a curiosity carry: "tell them you're not" is the pattern interrupt.*
+
+<HookExample quote="Did you know that snowplows are banned in the NFL?" creator="Ev Hand" views="2.84M" url="https://www.youtube.com/shorts/pS8Lj7Hmpd8" />
+
+*Teacher hook (delivered as Voiceover + B-Roll) + Curiosity trigger. The faceless format works here because the fact itself is the hook.*
+
+The common thread across nearly every 1M+ video: **the first sentence either makes you curious, makes you laugh, or makes you afraid**, and the format choice serves that emotional payload rather than competing with it.
+
+---
+
+## How to use this
+
+<NumberBlock items={[
+  { number: "01", text: "Default your next 10 hooks to Investigator. It's the only archetype with consistent scaling across all three tiers and the #1 hook at every tier above the long tail. The 'wait, what?' curiosity loop is the most reliable shape." },
+  { number: "02", text: "Stop leading with 'here's how to' or 'this is helpful.' Trust/utility content collapses from 6.6% of the long tail to 2.9% of mega-virals. Wrap your useful insight inside a curiosity loop, an opinion, or a piece of humor, not a teaching frame." },
+  { number: "03", text: "Lean humor for steady scaling. Humor share more than doubles between Tier 1 and Tier 3 (7.4% → 16.0%). The other emotions are bimodal or peak in the middle. Funny is the only consistent compounder." },
+  { number: "04", text: "Use greenscreen for commentary on news/screenshots/reactions. Greenscreen is wildly over-indexed in the 100K-1M tier (18.5%, more than double any other tier). It's the fastest path from long tail to solid hit if you cover topical subjects, but don't expect mega-viral from it." },
+  { number: "05", text: "Make room for Skit and Voiceover + B-Roll in your mix. Skits triple their share between T1 and T3. Voiceover + B-Roll doubles. Pure Talking Head loses 15 share points as you scale. If your goal is breakouts, not just consistency, the format mix has to widen." },
+  { number: "06", text: "Look at your last 30 videos. If you don't have at least 8 Investigator hooks and your dominant emotional trigger isn't Curiosity or Humor, the structural inputs are misaligned with the viral tier. Tactical fix: rewrite four hooks per week as Investigator over the next month." }
+]} />
+
+---
+
+## The bottom line
+
+The path from 10K to 1M is not "post more, work harder, get lucky." It's a measurable structural shift in *what kind of content you're making*.
+
+The long tail is dominated by Teacher and Contrarian hooks, trust/utility and aspiration emotional registers, and Talking Head as the workhorse format. The viral tier is dominated by Investigator hooks, Curiosity/Humor/Fear emotions, and a wider format spread that includes Skit, Voiceover + B-Roll, and Mixed formats.
+
+Most creators stuck in the long tail are not bad at execution. They're picking content combinations that mathematically don't scale past 100K views, then trying to outwork the structural ceiling. The leverage move is changing the inputs.
+
+<CTA
+  headline="Get a hook and emotion mix tuned to your specific niche."
+  sub="TCL analyzes your account plus your top competitors, breaks down which hook archetypes and emotional triggers are actually crossing 100K in your space, and writes a 30-day script calendar in those combinations."
+  primary="Get my free audit"
+  secondary="See pricing"
+/>
+
+---
+
+## Methodology
+
+**Dataset:** 10,042 short-form videos with view counts greater than zero, drawn from our analyzed video corpus (combining first-party analyzed content and competitor-scrape analyzed content) on 2026-04-26. Platforms: TikTok, Instagram, YouTube. 103 distinct creators across the dataset.
+
+**Tier definitions:** Tier 1 = views less than 100,000 (7,884 videos). Tier 2 = views from 100,000 to 999,999 (1,831 videos). Tier 3 = views of 1,000,000 or more (327 videos).
+
+**Hook archetype tagging:** Each video's first 1-3 seconds were analyzed and labeled with one of nine archetype categories using our analysis pipeline. Cells with fewer than 3 videos in a tier are not reported in the breakdown tables.
+
+**Emotional trigger bucketing:** The raw `primary_emotional_trigger` field has high variance (some entries are single words, some are full descriptive paragraphs). We bucketed entries into nine clean categories using prefix matching: entries starting with "curiosity" → Curiosity, "outrage" → Outrage, "humor"/"amusement" → Humor, "fear" → Fear, "surprise"/"awe" → Surprise, "empathy"/"relatability"/"connection" → Empathy, "aspiration"/"hope"/"inspiration" → Aspiration, "trust"/"utility" → Trust/Utility, "righteous"/"vindication"/"injustice"/"frustration" → Righteousness. Entries that didn't match any prefix were tagged Other (which is a sizable cell, 17-22% of each tier, so percentages within each cleaned category should be read in context).
+
+**Format bucketing:** Free-text format_type strings were bucketed into Talking Head, Greenscreen, Voiceover + B-Roll, Mixed, Skit, Interview, Screen Recording, Montage, or Other based on substring matching. The Mixed bucket captures multi-format videos.
+
+**Why three tiers, not five:** We tested 5-tier (under 10K / 10K-100K / 100K-1M / 1M-10M / 10M+) and the directional patterns were the same. Three tiers gives us cleanly significant n in every cell while preserving the headline shifts.
+
+**Known limits:**
+- Cross-posted videos (the same content posted to multiple platforms) appear once per platform.
+- Tier 3 (327 videos) is a meaningful sample but cell-level percentages should still be treated as directional. The headline patterns (Investigator dominance, Humor scaling, Trust/Utility collapse) hold in both Tier 2 and Tier 3 independently.
+- The hook archetype tagger is rule-based on the analyzer output. Edge cases (videos that fit two archetypes) are tagged with the dominant one.

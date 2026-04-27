@@ -1106,3 +1106,595 @@ export function DataPieChart({
     </figure>
   );
 }
+
+/* -- Niche Bubble Map (size = volume, color = hit rate) -- */
+export function NicheBubbleMap({
+  rows,
+  metric = "% hit 100K+",
+  suffix = "%",
+  title,
+  legendNote,
+}: {
+  rows: {
+    niche: string;
+    value: number;
+    volume: number;
+    extra?: string;
+  }[];
+  metric?: string;
+  suffix?: string;
+  title?: string;
+  legendNote?: string;
+}) {
+  const maxVolume = Math.max(...rows.map((r) => r.volume));
+  const sortedByVolume = [...rows].sort((a, b) => b.volume - a.volume);
+
+  // sqrt scale so volume doesn't dominate too much
+  function sizeFor(volume: number) {
+    const t = Math.sqrt(volume) / Math.sqrt(maxVolume); // 0..1
+    return Math.round(96 + 144 * t); // 96px..240px
+  }
+
+  function colorFor(v: number) {
+    if (v >= 32)
+      return {
+        bg: "bg-content-coral",
+        text: "text-white",
+        ring: "ring-content-coral/40",
+        accent: "text-white/85",
+        glow: "shadow-[0_8px_28px_-6px_rgba(255,107,107,0.55)]",
+      };
+    if (v >= 25)
+      return {
+        bg: "bg-content-coral/85",
+        text: "text-white",
+        ring: "ring-content-coral/30",
+        accent: "text-white/85",
+        glow: "shadow-[0_8px_28px_-6px_rgba(255,107,107,0.4)]",
+      };
+    if (v >= 19)
+      return {
+        bg: "bg-orange-400",
+        text: "text-white",
+        ring: "ring-orange-300/40",
+        accent: "text-white/85",
+        glow: "shadow-[0_6px_20px_-6px_rgba(251,146,60,0.5)]",
+      };
+    if (v >= 14)
+      return {
+        bg: "bg-amber-300",
+        text: "text-amber-900",
+        ring: "ring-amber-200/60",
+        accent: "text-amber-900/75",
+        glow: "shadow-[0_6px_18px_-6px_rgba(252,211,77,0.5)]",
+      };
+    if (v >= 9)
+      return {
+        bg: "bg-slate-300",
+        text: "text-slate-700",
+        ring: "ring-slate-200/60",
+        accent: "text-slate-600",
+        glow: "shadow-[0_4px_14px_-4px_rgba(148,163,184,0.4)]",
+      };
+    return {
+      bg: "bg-slate-200",
+      text: "text-slate-500",
+      ring: "ring-slate-200/60",
+      accent: "text-slate-400",
+      glow: "shadow-[0_4px_14px_-4px_rgba(148,163,184,0.3)]",
+    };
+  }
+
+  return (
+    <figure className="not-prose my-10">
+      {title && (
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div className="relative rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-50 p-5 sm:p-8 overflow-hidden">
+        {/* Subtle grid */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(15,23,42,1) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,1) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+        <div className="relative flex flex-wrap gap-3 sm:gap-4 justify-center items-center">
+          {sortedByVolume.map((row) => {
+            const c = colorFor(row.value);
+            const size = sizeFor(row.volume);
+            const fontScale = Math.max(0.7, Math.min(1.15, size / 180));
+            return (
+              <div
+                key={row.niche}
+                className={`group relative ${c.bg} ${c.text} rounded-full ring-1 ${c.ring} ${c.glow} flex flex-col items-center justify-center text-center p-3 transition-transform hover:scale-[1.04] cursor-default`}
+                style={{
+                  width: size,
+                  height: size,
+                  flexShrink: 0,
+                }}
+                title={`${row.niche}: ${row.value}${suffix} hit rate · ${row.volume.toLocaleString()} videos`}
+              >
+                <p
+                  className="font-bold leading-tight tracking-tight px-2"
+                  style={{ fontSize: Math.round(13 * fontScale) }}
+                >
+                  {row.niche}
+                </p>
+                <p
+                  className="font-bold tabular-nums leading-none mt-1"
+                  style={{ fontSize: Math.round(28 * fontScale) }}
+                >
+                  {row.value.toFixed(1)}
+                  {suffix}
+                </p>
+                {row.extra && (
+                  <p
+                    className={`${c.accent} font-mono uppercase tracking-wider mt-1`}
+                    style={{ fontSize: Math.round(9 * fontScale) }}
+                  >
+                    {row.extra}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* Legend */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-4 px-1">
+        <div className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-3 w-3 rounded-full bg-slate-300 ring-1 ring-slate-200" />
+            <span className="h-4 w-4 rounded-full bg-slate-300 ring-1 ring-slate-200" />
+            <span className="h-5 w-5 rounded-full bg-slate-300 ring-1 ring-slate-200" />
+            Size = sample
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-3 w-3 rounded-sm bg-slate-200" />
+            <span className="h-3 w-3 rounded-sm bg-amber-300" />
+            <span className="h-3 w-3 rounded-sm bg-orange-400" />
+            <span className="h-3 w-3 rounded-sm bg-content-coral" />
+            Color = {metric}
+          </span>
+        </div>
+        {legendNote && (
+          <p className="text-[10px] font-mono uppercase tracking-[0.16em] text-slate-400">
+            {legendNote}
+          </p>
+        )}
+      </div>
+    </figure>
+  );
+}
+
+/* -- Niche Heat Map (ranked horizontal heat bars) -- */
+export function NicheHeatMap({
+  rows,
+  metric = "hit rate",
+  suffix = "%",
+  title,
+}: {
+  rows: {
+    niche: string;
+    value: number;
+    sample: string;
+    extra?: string;
+  }[];
+  metric?: string;
+  suffix?: string;
+  title?: string;
+}) {
+  const max = Math.max(...rows.map((r) => r.value));
+  const min = Math.min(...rows.map((r) => r.value));
+  const range = Math.max(1, max - min);
+
+  // Coral → orange → amber → slate as values descend
+  function colorFor(v: number) {
+    const t = (v - min) / range; // 0..1, higher = hotter
+    if (t > 0.85) return { bg: "bg-content-coral", text: "text-white", chip: "bg-content-coral text-white" };
+    if (t > 0.65) return { bg: "bg-content-coral/80", text: "text-white", chip: "bg-content-coral/85 text-white" };
+    if (t > 0.45) return { bg: "bg-orange-400", text: "text-white", chip: "bg-orange-400 text-white" };
+    if (t > 0.25) return { bg: "bg-amber-300", text: "text-amber-900", chip: "bg-amber-300 text-amber-900" };
+    if (t > 0.1) return { bg: "bg-slate-300", text: "text-slate-700", chip: "bg-slate-300 text-slate-700" };
+    return { bg: "bg-slate-200", text: "text-slate-500", chip: "bg-slate-200 text-slate-500" };
+  }
+
+  return (
+    <figure className="not-prose my-10">
+      {title && (
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+        {/* Header */}
+        <div className="grid grid-cols-[1fr_auto] sm:grid-cols-[180px_1fr_70px] gap-2 sm:gap-4 px-4 sm:px-5 py-3 bg-slate-50 border-b border-slate-200 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold">
+          <span>Niche</span>
+          <span className="hidden sm:block">{metric}</span>
+          <span className="text-right">Value</span>
+        </div>
+        {/* Rows */}
+        <ol className="divide-y divide-slate-100">
+          {rows.map((row, i) => {
+            const c = colorFor(row.value);
+            const widthPct = ((row.value - 0) / Math.max(1, max)) * 100;
+            return (
+              <li
+                key={row.niche}
+                className="grid grid-cols-[1fr_auto] sm:grid-cols-[180px_1fr_70px] gap-2 sm:gap-4 items-center px-4 sm:px-5 py-3 hover:bg-slate-50/60 transition-colors"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="text-[11px] font-mono tabular-nums text-slate-400 w-5 flex-shrink-0">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-slate-900 leading-tight truncate">
+                      {row.niche}
+                    </p>
+                    <p className="text-[10px] font-mono text-slate-400 truncate">
+                      {row.sample}
+                      {row.extra ? ` · ${row.extra}` : ""}
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden sm:block relative h-8 bg-slate-100 rounded-md overflow-hidden">
+                  <div
+                    className={`absolute inset-y-0 left-0 ${c.bg} rounded-md transition-all`}
+                    style={{ width: `${widthPct}%` }}
+                  />
+                </div>
+                <div className="text-right">
+                  <span
+                    className={`inline-block px-2 py-1 rounded-md text-[12px] font-mono font-bold tabular-nums ${c.chip}`}
+                  >
+                    {row.value.toFixed(1)}
+                    {suffix}
+                  </span>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+      {/* Legend */}
+      <div className="flex items-center justify-end gap-2 mt-3 text-[10px] font-mono uppercase tracking-wider text-slate-500">
+        <span>Low</span>
+        <span className="inline-flex items-center gap-0.5">
+          <span className="h-3 w-3 rounded-sm bg-slate-200" />
+          <span className="h-3 w-3 rounded-sm bg-slate-300" />
+          <span className="h-3 w-3 rounded-sm bg-amber-300" />
+          <span className="h-3 w-3 rounded-sm bg-orange-400" />
+          <span className="h-3 w-3 rounded-sm bg-content-coral/80" />
+          <span className="h-3 w-3 rounded-sm bg-content-coral" />
+        </span>
+        <span>High</span>
+      </div>
+    </figure>
+  );
+}
+
+/* -- Tier Heat Matrix (niches × tiers) -- */
+export function TierHeatMatrix({
+  rows,
+  title,
+}: {
+  rows: {
+    niche: string;
+    t1: number;
+    t2: number;
+    t3: number;
+    sample?: string;
+  }[];
+  title?: string;
+}) {
+  const allValues = rows.flatMap((r) => [r.t1, r.t2, r.t3]);
+  const max = Math.max(...allValues);
+
+  function cellStyle(v: number) {
+    const t = v / Math.max(1, max);
+    if (t > 0.85) return "bg-content-coral text-white";
+    if (t > 0.6) return "bg-content-coral/75 text-white";
+    if (t > 0.4) return "bg-orange-400 text-white";
+    if (t > 0.22) return "bg-amber-300 text-amber-900";
+    if (t > 0.1) return "bg-slate-200 text-slate-700";
+    return "bg-slate-100 text-slate-500";
+  }
+
+  return (
+    <figure className="not-prose my-10">
+      {title && (
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div className="rounded-2xl border border-slate-200 bg-white overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500">
+              <th className="text-left px-4 py-3 font-bold">Niche</th>
+              <th className="text-center px-3 py-3 font-bold">Under 100K</th>
+              <th className="text-center px-3 py-3 font-bold">100K-1M</th>
+              <th className="text-center px-3 py-3 font-bold">1M+</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.niche} className="border-b border-slate-100 last:border-b-0">
+                <td className="px-4 py-3 align-middle">
+                  <div>
+                    <p className="text-sm font-bold text-slate-900 leading-tight">
+                      {row.niche}
+                    </p>
+                    {row.sample && (
+                      <p className="text-[10px] font-mono text-slate-400">
+                        {row.sample}
+                      </p>
+                    )}
+                  </div>
+                </td>
+                {([row.t1, row.t2, row.t3] as const).map((v, i) => (
+                  <td key={i} className="px-2 py-2 align-middle">
+                    <div
+                      className={`mx-auto w-full h-12 sm:h-14 rounded-md flex items-center justify-center font-mono font-bold tabular-nums text-xs sm:text-sm ${cellStyle(v)}`}
+                    >
+                      {v.toFixed(1)}%
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </figure>
+  );
+}
+
+/* -- Multi-Series Bar Chart (tier comparison) -- */
+export function TierComparisonChart({
+  data,
+  xKey,
+  series,
+  title,
+  height = 360,
+  suffix = "%",
+}: {
+  data: Record<string, string | number>[];
+  xKey: string;
+  series: { key: string; label: string; color: string }[];
+  title?: string;
+  height?: number;
+  suffix?: string;
+}) {
+  return (
+    <figure className="not-prose my-8">
+      {title && (
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div
+        className="bg-white rounded-xl border border-slate-200 p-3 sm:p-6 overflow-x-auto"
+        style={{ minHeight: height }}
+      >
+        <div style={{ width: "100%", height }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data} margin={{ left: -10, right: 5, top: 5, bottom: 30 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+              <XAxis
+                dataKey={xKey}
+                tick={{ fontSize: 10, fill: "#334155" }}
+                interval={0}
+                angle={-20}
+                textAnchor="end"
+                height={60}
+              />
+              <YAxis
+                tick={{ fontSize: 10, fill: "#64748b" }}
+                tickFormatter={(v) => `${v}${suffix}`}
+                width={42}
+              />
+              <Tooltip
+                formatter={(value, name) => [`${value}${suffix}`, name]}
+                contentStyle={{
+                  borderRadius: 12,
+                  border: "1px solid #e2e8f0",
+                  fontSize: 12,
+                  padding: "8px 12px",
+                }}
+              />
+              <Legend
+                wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
+                iconType="circle"
+              />
+              {series.map((s) => (
+                <Bar
+                  key={s.key}
+                  dataKey={s.key}
+                  name={s.label}
+                  fill={s.color}
+                  radius={[4, 4, 0, 0]}
+                  barSize={18}
+                />
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+/* -- Hook Archetype Glossary -- */
+type ArchetypeTrend = "scales" | "peaks-mid" | "collapses" | "bimodal" | "flat";
+
+const TREND_STYLE: Record<ArchetypeTrend, { label: string; chip: string; ring: string; arrow: string }> = {
+  scales: {
+    label: "Scales with views",
+    chip: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    ring: "ring-1 ring-emerald-200",
+    arrow: "↗",
+  },
+  "peaks-mid": {
+    label: "Peaks at 100K-1M",
+    chip: "bg-amber-50 text-amber-700 border-amber-200",
+    ring: "ring-1 ring-amber-200",
+    arrow: "△",
+  },
+  collapses: {
+    label: "Collapses past 100K",
+    chip: "bg-rose-50 text-rose-700 border-rose-200",
+    ring: "ring-1 ring-rose-200",
+    arrow: "↘",
+  },
+  bimodal: {
+    label: "Bimodal (T1 + T3)",
+    chip: "bg-violet-50 text-violet-700 border-violet-200",
+    ring: "ring-1 ring-violet-200",
+    arrow: "⇡⇣",
+  },
+  flat: {
+    label: "Flat across tiers",
+    chip: "bg-slate-100 text-slate-700 border-slate-200",
+    ring: "ring-1 ring-slate-200",
+    arrow: "→",
+  },
+};
+
+export function HookArchetypeGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+      {children}
+    </div>
+  );
+}
+
+export function HookArchetypeCard({
+  name,
+  meaning,
+  example,
+  trend = "flat",
+  tierShare,
+}: {
+  name: string;
+  meaning: string;
+  example: string;
+  trend?: ArchetypeTrend;
+  tierShare?: string;
+}) {
+  const t = TREND_STYLE[trend];
+  return (
+    <div
+      className={`relative rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 ${t.ring} transition-shadow hover:shadow-md`}
+    >
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex items-center gap-2">
+          <span
+            className="text-2xl font-bold text-slate-300 tabular-nums leading-none"
+            aria-hidden
+          >
+            {t.arrow}
+          </span>
+          <h4 className="text-slate-900 font-bold text-lg leading-tight">
+            {name}
+          </h4>
+        </div>
+        <span
+          className={`inline-flex items-center px-2 py-0.5 rounded-md border text-[10px] font-mono uppercase tracking-wider font-semibold whitespace-nowrap ${t.chip}`}
+        >
+          {t.label}
+        </span>
+      </div>
+      <p className="text-[14px] text-slate-700 leading-relaxed mb-3">
+        {meaning}
+      </p>
+      <blockquote className="text-[13px] text-slate-500 italic leading-snug border-l-2 border-slate-200 pl-3 py-1 mb-3">
+        &ldquo;{example}&rdquo;
+      </blockquote>
+      {tierShare && (
+        <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400 border-t border-slate-100 pt-3">
+          {tierShare}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* -- Tier Scale Visual: hero-scale view-jump visualization -- */
+export function TierScaleVisual({
+  tiers,
+}: {
+  tiers: {
+    label: string;
+    median: string;
+    medianRaw: number;
+    sample: string;
+    color?: "slate" | "coral" | "emerald";
+  }[];
+}) {
+  const palette = {
+    slate: { dot: "bg-slate-400", text: "text-slate-700", glow: "bg-slate-200" },
+    coral: { dot: "bg-content-coral", text: "text-content-coral", glow: "bg-content-coral/20" },
+    emerald: { dot: "bg-emerald-500", text: "text-emerald-700", glow: "bg-emerald-200" },
+  } as const;
+
+  return (
+    <figure className="not-prose my-10">
+      <div className="relative rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-50 border border-slate-200 p-6 sm:p-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-3 items-end relative">
+          {tiers.map((tier, i) => {
+            const c = palette[tier.color || "slate"];
+            const sizeScale = 0.55 + 0.45 * (i / Math.max(1, tiers.length - 1));
+            const dotSize = Math.round(60 + 60 * sizeScale);
+            const fontSize = i === tiers.length - 1 ? "text-3xl sm:text-5xl" : i === 0 ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl";
+            const nextTier = tiers[i + 1];
+            const multiplier = nextTier
+              ? Math.round(nextTier.medianRaw / Math.max(1, tier.medianRaw))
+              : null;
+            return (
+              <div key={tier.label} className="relative flex flex-col items-center text-center">
+                <div className="relative mb-4">
+                  <div
+                    className={`absolute inset-0 rounded-full blur-2xl ${c.glow}`}
+                    aria-hidden
+                  />
+                  <div
+                    className={`relative rounded-full ${c.dot} flex items-center justify-center shadow-md`}
+                    style={{ width: dotSize, height: dotSize }}
+                    aria-hidden
+                  >
+                    <span className="text-white font-bold text-lg">{i + 1}</span>
+                  </div>
+                </div>
+                <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold mb-2">
+                  {tier.label}
+                </p>
+                <p className={`${fontSize} font-bold tabular-nums leading-none ${c.text} mb-1`}>
+                  {tier.median}
+                </p>
+                <p className="text-xs text-slate-500 font-mono">
+                  median views
+                </p>
+                <p className="text-[11px] text-slate-400 mt-2">{tier.sample}</p>
+                {multiplier && (
+                  <span
+                    className="hidden sm:inline-flex absolute top-1/3 -right-3 translate-x-1/2 items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-[11px] font-mono font-bold text-slate-700 z-10"
+                    aria-hidden
+                  >
+                    <ArrowRight className="h-3 w-3 text-content-coral" />
+                    {multiplier}x
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </figure>
+  );
+}

@@ -130,27 +130,16 @@ export function ResourcesBrowser({ posts }: { posts: EnrichedPost[] }) {
         </p>
       )}
 
-      {/* Bento grid: first card spans 2 cols on desktop */}
       {visible.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {visible.map((post, i) => {
-            const isWide = i === 0 && active === "all" && !query;
-            if (isWide) {
-              return (
-                <div key={post.slug} className="sm:col-span-2 lg:col-span-3">
-                  <BlogCard post={post} variant="wide" thumbnailUrl={post.thumbnailUrl} />
-                </div>
-              );
-            }
-            return (
-              <BlogCard
-                key={post.slug}
-                post={post}
-                variant="default"
-                thumbnailUrl={post.thumbnailUrl}
-              />
-            );
-          })}
+          {visible.map((post) => (
+            <BlogCard
+              key={post.slug}
+              post={post}
+              variant="default"
+              thumbnailUrl={post.thumbnailUrl}
+            />
+          ))}
         </div>
       ) : (
         <div className="text-center py-16 px-4 rounded-2xl border border-dashed border-slate-300 bg-white">

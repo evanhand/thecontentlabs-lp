@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { PostMeta } from "@/lib/blog";
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -22,9 +22,35 @@ export function FeaturedStudyCard({
     day: "numeric",
     year: "numeric",
   });
+  const daysAgo = Math.floor(
+    (Date.now() - new Date(post.date).getTime()) / (1000 * 60 * 60 * 24),
+  );
+  const isFresh = daysAgo <= 14;
 
   return (
-    <article className="relative overflow-hidden rounded-3xl border border-content-coral/30 shadow-2xl shadow-content-coral/10 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 group">
+    <article className="relative overflow-visible rounded-3xl border-2 border-content-coral/50 shadow-[0_0_60px_-15px_rgba(255,107,107,0.45)] shadow-content-coral/30 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 group">
+      {/* Floating "NEW" sticker */}
+      {isFresh && (
+        <div
+          aria-hidden
+          className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-20"
+        >
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-content-coral blur-md animate-pulse" />
+            <div className="relative inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-content-coral text-white shadow-lg ring-2 ring-white/40">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span className="text-[11px] font-mono uppercase tracking-[0.18em] font-extrabold">
+                Just dropped
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Top accent bar */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-gradient-to-r from-content-coral via-content-cta to-content-coral"
+      />
       {/* Decorative coral glow */}
       <div
         aria-hidden

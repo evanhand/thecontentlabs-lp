@@ -58,19 +58,29 @@ Hard rules: no text, no letters, no numbers, no faces in close-up, no logos, no 
 Length: one sentence, ~25 words max.`;
 
 const HOOK_SYSTEM = `You write punchy thesis statements for blog post thumbnails in the style of an editorial Instagram brand.
+
 Output JSON only: {"hook": "string", "emphasis": "string"}.
+
 Rules:
-- hook: 3-5 words, ends with a period
-- emphasis: one word from hook (verbatim, including casing/punctuation), the most loaded/contrarian word, will be italicized
-- voice: assertive, contrarian, simple, slightly provocative
-- never use marketing fluff ("amazing", "powerful", "ultimate")
-- never restate the title literally — find the underlying claim
-Examples:
-- Title: "How small accounts get more reach than huge ones" → {"hook": "Small accounts win.", "emphasis": "win"}
-- Title: "Best emotional triggers for viral content" → {"hook": "Emotion is the strategy.", "emphasis": "strategy"}
-- Title: "Do TikTok videos need on-screen text?" → {"hook": "Text wins. 14×.", "emphasis": "14×"}
-- Title: "AI Content Strategy for Coaches" → {"hook": "Coaching is broken.", "emphasis": "broken"}
-- Title: "TikTok hooks that actually go viral" → {"hook": "Most hooks are noise.", "emphasis": "noise"}`;
+- hook: 3-5 words, ends with a period (or other terminal punctuation)
+- emphasis: one word from hook (verbatim, including casing/punctuation), the most loaded/contrarian/surprising word — will be italicized
+- voice: assertive, contrarian, simple, slightly provocative, sometimes wry
+- never use marketing fluff ("amazing", "powerful", "ultimate", "unlock", "boost", "level up")
+- never restate the title literally — find the underlying counter-intuitive claim
+
+VARY THE STRUCTURE. Do not default to "X is broken" or "X is the Y". The phrase "is broken" is overused — avoid it unless no other framing works. Mix sentence types across the corpus.
+
+Use a varied mix of these structures:
+- Stat-led: "Text wins. 14×." / "9×. Not 1.5×."
+- Imperative: "Stop chasing trends." / "Post less. Win more."
+- Counter-intuitive pair: "Less reach. More money." / "Small wins big."
+- Accusation: "Your hooks aren't working." / "Your captions are dead weight."
+- Diagnosis: "Most hooks are noise." / "Timing barely matters."
+- Thesis: "Emotion is the strategy." / "Volume beats virality."
+- Rhetorical: "Why bother with hashtags?" / "Who needs SEO captions?"
+- Two-part: "Pick a niche. Pick wrong." / "Trust loses. Curiosity wins."
+
+The italicized word should land — choose the word that carries the contradiction or the punchline, not a filler word.`;
 
 function getKey(): string {
   const k = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
@@ -141,7 +151,11 @@ async function deriveSubject(title: string, description: string): Promise<string
         ],
       },
     ],
-    generationConfig: { temperature: 0.9, maxOutputTokens: 120 },
+    generationConfig: {
+      temperature: 0.9,
+      maxOutputTokens: 200,
+      thinkingConfig: { thinkingBudget: 0 },
+    },
   });
   const parts: GeminiPart[] = data?.candidates?.[0]?.content?.parts || [];
   const text = parts.map((p) => p.text || "").join("").trim();
@@ -171,8 +185,9 @@ async function deriveHook(title: string, description: string, body: string): Pro
       ],
       generationConfig: {
         temperature: 0.85,
-        maxOutputTokens: 100,
+        maxOutputTokens: 200,
         responseMimeType: "application/json",
+        thinkingConfig: { thinkingBudget: 0 },
       },
     });
 
@@ -422,6 +437,37 @@ async function listMdx(dir: string): Promise<PostFile[]> {
   }
 }
 
+/**
+ * Surgically upsert top-level scalar fields in YAML frontmatter without
+ * reformatting the rest of the block. Avoids js-yaml's aggressive
+ * dump-style changes (single quotes, block folding, list re-indent).
+ *
+ * Only handles top-level string fields written at column 0. That's all
+ * we need for thumbnailHook / thumbnailEmphasis.
+ */
+function upsertFrontmatterFields(raw: string, fields: Record<string, string>): string {
+  const fmMatch = raw.match(/^---(\r?\n)([\s\S]*?)\r?\n---(\r?\n|$)/);
+  if (!fmMatch) throw new Error("No frontmatter block found at top of file");
+  const lineEnd = fmMatch[1];
+  const fmBody = fmMatch[2];
+  const fullFmBlock = fmMatch[0];
+
+  let newFmBody = fmBody;
+  for (const [key, value] of Object.entries(fields)) {
+    const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+    const newLine = `${key}: "${escaped}"`;
+    const existing = new RegExp(`^${key}:[^\\n]*$`, "m");
+    if (existing.test(newFmBody)) {
+      newFmBody = newFmBody.replace(existing, newLine);
+    } else {
+      // Append at end of frontmatter body (before the closing ---)
+      newFmBody = newFmBody.replace(/\s*$/, "") + lineEnd + newLine;
+    }
+  }
+
+  return `---${lineEnd}${newFmBody}${lineEnd}---${fmMatch[3]}` + raw.slice(fullFmBlock.length);
+}
+
 async function ensureHook(
   filepath: string,
   data: Record<string, any>,
@@ -443,9 +489,11 @@ async function ensureHook(
   );
   process.stdout.write(` ✓ "${hook}" (italic: "${emphasis}")\n`);
 
-  // Write back to MDX, preserving body and other frontmatter
-  const newData = { ...data, thumbnailHook: hook, thumbnailEmphasis: emphasis };
-  const updated = matter.stringify(body, newData);
+  const raw = await fsp.readFile(filepath, "utf-8");
+  const updated = upsertFrontmatterFields(raw, {
+    thumbnailHook: hook,
+    thumbnailEmphasis: emphasis,
+  });
   await fsp.writeFile(filepath, updated, "utf-8");
 
   return { hook, emphasis };

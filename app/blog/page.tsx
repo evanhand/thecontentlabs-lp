@@ -50,7 +50,7 @@ export default function BlogIndex() {
     imageUrl: resolveImageUrl(p),
     thumbnailUrl: resolveThumbnailUrl(p.slug),
   }));
-  const [featured, ...rest] = enriched;
+  const [featured] = enriched;
 
   return (
     <div className="min-h-screen bg-[#fffbf9]">
@@ -99,6 +99,20 @@ export default function BlogIndex() {
       {featured && (
         <section className="px-4 sm:px-6 lg:px-8 mb-8">
           <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-between mb-4 px-1">
+              <div className="inline-flex items-center gap-2">
+                <span
+                  aria-hidden
+                  className="h-2 w-2 rounded-full bg-content-coral animate-pulse"
+                />
+                <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
+                  Newest study
+                </span>
+              </div>
+              <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-slate-400">
+                Read it first
+              </span>
+            </div>
             <FeaturedStudyCard post={featured} imageUrl={featured.imageUrl} />
           </div>
         </section>
@@ -157,7 +171,7 @@ export default function BlogIndex() {
               {enriched.length.toString().padStart(2, "0")} entries
             </span>
           </div>
-          <ResourcesBrowser posts={rest} />
+          <ResourcesBrowser posts={enriched} />
         </div>
       </section>
 

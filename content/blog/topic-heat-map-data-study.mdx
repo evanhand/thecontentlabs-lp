@@ -1,0 +1,287 @@
+---
+title: "We Ranked 16 Content Niches by Viral Hit Rate (10,226-Video Heat Map)"
+description: "We bucketed 10,226 short-form videos into 16 topic niches and ranked them by % of videos crossing 100K views. Food, Health, and Sports dominate. Real Estate, Productivity, and Tech are the hardest niches to break out in. Full topic leaderboard with example videos."
+category: "blog"
+date: "2026-04-27"
+updatedDate: "2026-04-27"
+tags: ["niche", "data-study", "tiktok", "instagram", "youtube shorts", "viral", "content strategy", "topics"]
+faqs:
+  - q: "Which content niche has the highest chance of going viral?"
+    a: "Food. In our 10,226-video sample, 35.9% of Food videos crossed 100,000 views (the highest hit rate of any of the 16 niches we tracked). Health was a close second at 34.5%, with the highest median views of any niche (33,970). Sports was third at 28.6% and has the largest sample in the dataset (3,484 videos)."
+  - q: "Which niche is hardest to go viral in?"
+    a: "Real Estate & Home content. Only 5.3% of videos in this niche crossed 100K views in our sample, with a median of 6,323 views. Productivity (13.1%), Tech & AI (13.4%), and Fashion (14.2%) round out the bottom of the leaderboard. The niches that creators flood are mathematically the worst niches to compete in."
+  - q: "Does Politics or News content go viral?"
+    a: "It's bimodal. Politics has a 21.0% hit rate at 100K+ (middle of the pack) but its 1M+ rate (5.39%) is fifth-highest among all niches. The catch: median Politics views are only 4,931, the lowest of any niche we tracked. Translation: most political content gets buried, but when it does break out, it goes nuclear. Politics is winner-take-all."
+  - q: "Is Sports the easiest niche to go viral in?"
+    a: "Sports has the largest sample size in our dataset (3,484 videos) and a 28.6% hit rate at 100K+, third-highest. The median Sports video pulled 26,893 views, third-highest median of any niche. The reason: sports has near-universal cultural permission, recurring news cycles, and built-in tribal audiences. It's not the highest-converting niche but it's the most consistent one at scale."
+  - q: "Why does Tech & AI content underperform in our data?"
+    a: "Despite the boom in AI products, only 13.4% of Tech & AI videos in our sample crossed 100K views and the median sat at 8,519. The likely cause: tech audiences are smaller and more decision-fatigued than mainstream audiences. Health, food, and sports have a much wider top-of-funnel."
+thumbnailHook: "We ranked 16 niches. Food won."
+thumbnailEmphasis: "Food"
+---
+
+<StatGrid>
+  <StatCard stat="10,226" label="Videos analyzed across 16 niches" />
+  <StatCard stat="35.9%" label="Hit rate for Food (the winner)" />
+  <StatCard stat="5.3%" label="Hit rate for Real Estate (the loser)" />
+  <StatCard stat="6.8x" label="Gap between best and worst niche" />
+</StatGrid>
+
+Most "best niches for short-form" articles are vibes. Someone runs a course on a niche they like, picks the niche that's hot in their feed this month, and publishes a top-10 list. No actual data on what breaks out.
+
+We bucketed 10,226 analyzed videos across TikTok, Instagram, and YouTube Shorts into 16 topical niches based on what each video is actually about (using the `core_content_idea` field tagged by our analysis pipeline). Then we computed the rate at which each niche produces 100K+ hits and 1M+ mega-virals.
+
+The leaderboard is one of the most actionable tables we've published.
+
+<Highlight title="The 6.8x niche gap">
+**Food content has a 35.9% chance of crossing 100K views in our sample. Real Estate content has a 5.3% chance.** Same period. Same platforms. Same analysis pipeline. The niche you pick is doing 6.8x more work than your hook, your editing, or your posting frequency. Most creators stuck in the long tail are stuck in the wrong niche, not the wrong video.
+</Highlight>
+
+Here's the heat map.
+
+---
+
+## The niche bubble map
+
+Each niche is a bubble. **Bubble size = how many videos we analyzed in that niche.** **Bubble color = % of those videos that crossed 100K views.** The hottest, biggest bubbles are the niches with both volume and reliability. The cold, small bubbles are the ones to avoid.
+
+<NicheBubbleMap
+  rows={[
+    { niche: "Sports", value: 28.6, volume: 3484, extra: "28.6% hit 100K+" },
+    { niche: "Productivity", value: 13.1, volume: 480, extra: "13.1% hit 100K+" },
+    { niche: "Tech & AI", value: 13.4, volume: 455, extra: "13.4% hit 100K+" },
+    { niche: "Money", value: 21.2, volume: 401, extra: "21.2% hit 100K+" },
+    { niche: "Dating", value: 25.8, volume: 387, extra: "25.8% hit 100K+" },
+    { niche: "Food", value: 35.9, volume: 354, extra: "35.9% hit 100K+" },
+    { niche: "Career", value: 17.7, volume: 344, extra: "17.7% hit 100K+" },
+    { niche: "Fitness", value: 22.7, volume: 331, extra: "22.7% hit 100K+" },
+    { niche: "Fashion", value: 14.2, volume: 309, extra: "14.2% hit 100K+" },
+    { niche: "Comedy", value: 22.6, volume: 283, extra: "22.6% hit 100K+" },
+    { niche: "Health", value: 34.5, volume: 275, extra: "34.5% hit 100K+" },
+    { niche: "Politics", value: 21.0, volume: 167, extra: "21.0% hit 100K+" },
+    { niche: "Family", value: 16.3, volume: 160, extra: "16.3% hit 100K+" },
+    { niche: "Real Estate", value: 5.3, volume: 131, extra: "5.3% hit 100K+" },
+    { niche: "Cars", value: 19.3, volume: 83, extra: "19.3% hit 100K+" },
+    { niche: "Travel", value: 15.8, volume: 57, extra: "15.8% hit 100K+" }
+  ]}
+  metric="hit rate"
+  title="Content niche bubble map (size = video volume, color = hit rate)"
+  legendNote="Bigger + hotter = better niche"
+/>
+
+What pops out at a glance:
+
+- **Sports is the giant warm bubble.** 3,484 videos and a 28.6% hit rate. Most data, solid hit rate. Big and reliable.
+- **Food and Health are the brightest bubbles.** Small-ish but the deepest coral. High hit rate per video posted (35.9% and 34.5%). High EV per post.
+- **Real Estate is the small cold bubble.** Visibly the iciest on the chart. 5.3% hit rate. The clearest "avoid" signal.
+- **Productivity and Tech & AI are big-ish but cold.** 480 and 455 videos respectively, but their colors are slate-blue. High supply, low payoff.
+
+Below is the same data ranked top to bottom for the precise numbers.
+
+<NicheHeatMap
+  rows={[
+    { niche: "Food", value: 35.9, sample: "354 videos", extra: "27,200 median" },
+    { niche: "Health", value: 34.5, sample: "275 videos", extra: "33,970 median (highest)" },
+    { niche: "Sports", value: 28.6, sample: "3,484 videos", extra: "26,893 median" },
+    { niche: "Dating & Relationships", value: 25.8, sample: "387 videos", extra: "13,900 median" },
+    { niche: "Fitness", value: 22.7, sample: "331 videos", extra: "6,999 median" },
+    { niche: "Comedy & Skits", value: 22.6, sample: "283 videos", extra: "13,683 median" },
+    { niche: "Money & Investing", value: 21.2, sample: "401 videos", extra: "11,856 median" },
+    { niche: "Politics & News", value: 21.0, sample: "167 videos", extra: "4,931 median" },
+    { niche: "Cars & Automotive", value: 19.3, sample: "83 videos", extra: "20,276 median" },
+    { niche: "Career & Jobs", value: 17.7, sample: "344 videos", extra: "12,069 median" },
+    { niche: "Family & Parenting", value: 16.3, sample: "160 videos", extra: "7,704 median" },
+    { niche: "Travel", value: 15.8, sample: "57 videos", extra: "1,468 median" },
+    { niche: "Fashion & Beauty", value: 14.2, sample: "309 videos", extra: "6,916 median" },
+    { niche: "Tech & AI", value: 13.4, sample: "455 videos", extra: "8,519 median" },
+    { niche: "Productivity", value: 13.1, sample: "480 videos", extra: "6,823 median" },
+    { niche: "Real Estate & Home", value: 5.3, sample: "131 videos", extra: "6,323 median" }
+  ]}
+  metric="% of videos hitting 100K+ views"
+  title="Same data, ranked: % of videos crossing 100K views"
+/>
+
+The top 4 (Food, Health, Sports, Dating) all have hit rates above 25%, meaning more than 1 in 4 videos in those niches cross 100K views. The bottom 4 (Fashion, Tech & AI, Productivity, Real Estate) all sit below 15%, closer to 1 in 7. That's not noise. The niche choice is the single biggest variable in viral outcomes.
+
+---
+
+## Where the videos actually live (niche × view tier)
+
+Reading the heat map above tells you the hit rate. The matrix below tells you the **shape of the distribution** for each niche. Real Estate is 94.7% long-tail. Comedy is 6.01% mega-viral. Each niche has a distinct shape.
+
+<TierHeatMatrix
+  rows={[
+    { niche: "Food", t1: 64.1, t2: 31.1, t3: 4.80, sample: "354 videos" },
+    { niche: "Health", t1: 65.5, t2: 29.5, t3: 5.09, sample: "275 videos" },
+    { niche: "Sports", t1: 71.4, t2: 25.3, t3: 3.27, sample: "3,484 videos" },
+    { niche: "Dating", t1: 74.2, t2: 22.2, t3: 3.62, sample: "387 videos" },
+    { niche: "Fitness", t1: 77.3, t2: 16.9, t3: 5.74, sample: "331 videos" },
+    { niche: "Comedy", t1: 77.4, t2: 16.6, t3: 6.01, sample: "283 videos" },
+    { niche: "Money", t1: 78.8, t2: 17.2, t3: 3.99, sample: "401 videos" },
+    { niche: "Politics", t1: 79.0, t2: 15.6, t3: 5.39, sample: "167 videos" },
+    { niche: "Career", t1: 82.3, t2: 14.5, t3: 3.20, sample: "344 videos" },
+    { niche: "Fashion", t1: 85.8, t2: 12.0, t3: 2.27, sample: "309 videos" },
+    { niche: "Tech & AI", t1: 86.6, t2: 10.8, t3: 2.64, sample: "455 videos" },
+    { niche: "Productivity", t1: 86.9, t2: 10.6, t3: 2.50, sample: "480 videos" },
+    { niche: "Real Estate", t1: 94.7, t2: 4.6, t3: 0.76, sample: "131 videos" }
+  ]}
+  title="% of each niche's videos by view tier"
+/>
+
+Two patterns jump out:
+
+**Comedy and Politics are mega-viral specialists.** Comedy has the highest 1M+ rate of any niche at 6.01%, and Politics is fifth at 5.39%. Both have lower 100K+ rates than the top niches but a higher chance of going truly nuclear when they hit. These are bimodal niches: most posts get buried, the ones that escape go to the moon.
+
+**Real Estate is a long-tail monoculture.** 94.7% of Real Estate videos sit under 100K views. Almost no Real Estate content crosses into the 100K-1M tier. The conventional Real Estate genre (house tours, market commentary, mortgage explanations) is structurally a long-tail niche. The few exceptions in our data (Australian floor-plan projection company, the 22-secret-room house) all break the genre frame.
+
+---
+
+## Finding 1: Food, Health, and Dating are mainstream-curiosity goldmines
+
+The top niches share a structural advantage: they tap into universal-human-curiosity content that doesn't require background knowledge to find compelling.
+
+**Food (35.9% hit rate, 27,200 median views).** Restaurant POVs, recipe walkthroughs, food challenges. The "you'll never believe what's in this sandwich" curiosity loop maps perfectly to short-form.
+
+<HookExample quote="POV YOU GET KICKED OUT OF THE BEST ITALIAN DELI IN THE BRONX!??" creator="(Food creator)" views="17.0M" />
+
+<HookExample quote="POV YOU GET KICKED OUT OF THE BEST ALL YOU CAN EAT WAGYU STEAK SPOT IN NYC!??" creator="(Food creator)" views="7.4M" />
+
+**Health (34.5% hit rate, 33,970 median views).** Highest median of any niche. The pattern: visible body issues (skin, joint pain, posture, gut health, autoimmune disease) explained by a credentialed-feeling expert with anatomical visuals. The audience is everyone with a body who's curious why something hurts.
+
+<HookExample quote="80% Of All Autoimmune Diseases Happen To Women. Why?" creator="(Health expert)" views="28.1M" />
+
+<HookExample quote="THIS IS WHAT can happen to your liver if you have fatty liver." creator="(Health expert)" views="10.8M" />
+
+**Dating & Relationships (25.8% hit rate, 13,900 median views).** Relatability content with high comment-section engagement.
+
+<HookExample quote="Happy Valentine's Day!" creator="evantheguardian" views="24.3M" />
+
+The common thread: **anyone scrolling can engage instantly.** No prior interest required. No specialized vocabulary. The hook works on a stranger.
+
+---
+
+## Finding 2: Sports is the consistency king
+
+Sports content has the largest sample in our dataset (3,484 videos) and the third-highest median views (26,893). It's not the easiest niche to break into, but it's the most reliable niche to scale in once you do.
+
+What sports has that the other niches don't:
+
+<NumberBlock items={[
+  { number: "01", text: "Recurring news cycles. Every week of the NFL/NBA/MLB/NHL season produces fresh material with a built-in audience hungry for commentary." },
+  { number: "02", text: "Tribal audiences. Fans of a team will watch any video about that team. Niche sub-audiences (college football, NHL, soccer) compound." },
+  { number: "03", text: "Cultural permission for hot takes. Sports is the one mainstream niche where hot-take content is socially acceptable and amplified rather than punished." },
+  { number: "04", text: "A bottomless library of historical clips and storylines that can be remixed indefinitely. The Damien Harris/Alabama clip has 4.8M views years after the play happened." }
+]} />
+
+If you can find a sports angle (history facts, niche sport commentary, fan-culture observations), the structural tailwinds are stronger than any other niche on the list.
+
+---
+
+## Finding 3: Comedy and Politics are winner-take-all
+
+Comedy and Politics have something in common that the data captures clearly. Both have **higher 1M+ rates than 100K-1M rates relative to other niches**, meaning when they break the long tail at all, they tend to break it BIG.
+
+| Niche | 100K-1M tier | 1M+ tier | Ratio (1M+ / 100K-1M) |
+|---|---|---|---|
+| Comedy | 16.6% | 6.01% | 0.36 |
+| Politics | 15.6% | 5.39% | 0.35 |
+| Fitness | 16.9% | 5.74% | 0.34 |
+| Health | 29.5% | 5.09% | 0.17 |
+| Food | 31.1% | 4.80% | 0.15 |
+| Sports | 25.3% | 3.27% | 0.13 |
+
+A higher ratio means the niche is more concentrated at the very top once it breaks out. Comedy, Politics, and Fitness are the three "all-or-nothing" niches. Health, Food, and Sports are the three "consistent compounder" niches.
+
+If you can tolerate variance and have a strong specific angle, the upside in Comedy/Politics/Fitness is unmatched. If you want the most reliable shot at consistent reach, Food/Health/Sports are the safer bets.
+
+---
+
+<CTA
+  headline="See if you're posting in the right niche."
+  sub="Connect TikTok or Instagram. We classify every video on your account by topic, hook archetype, and emotional trigger, then write a 30-day calendar built on the niche-hook combinations that are actually breaking 100K in your space."
+  primary="Audit my account free"
+  secondary="See how it works"
+  secondaryHref="/features/content-strategy"
+/>
+
+---
+
+## Finding 4: The "over-supplied" niches are the worst niches
+
+Here's the counterintuitive part of the leaderboard. The four niches at the bottom are all niches creators are *drawn to*:
+
+- **Productivity (13.1% hit rate).** Every aspiring creator's default niche. "Here's how to be more disciplined." 480 videos in our sample, only 1 in 8 cross 100K.
+- **Tech & AI (13.4% hit rate).** The hot subject of 2025-2026. 455 videos in our sample, only 1 in 7 cross 100K.
+- **Fashion & Beauty (14.2% hit rate).** Saturated competitive niche with high content production volume. 1 in 7 break out.
+- **Real Estate (5.3% hit rate).** The worst niche in our entire dataset. 1 in 19 cross 100K.
+
+What these niches have in common: **they're decision-fatiguing.** Productivity content asks the viewer to do something hard. Tech & AI content requires comprehension. Fashion content asks the viewer to want something. Real Estate content has microscopic relevance to most viewers (you're not buying a house this scroll session).
+
+Compare that to the top three: Food, Health, Dating. Pure curiosity. No homework. No ask.
+
+<Highlight title="The over-supply rule">
+**Niches that ask the viewer to do something or buy something underperform niches that simply make the viewer curious.** Productivity, Tech, Fashion, and Real Estate all ask. Food, Health, Dating, and Sports just provide. The asking niches are also where every aspiring creator wants to live, which compounds the disadvantage with supply-side competition.
+</Highlight>
+
+---
+
+## Finding 5: Career & Jobs is the dark-horse niche
+
+Career & Jobs sits at #10 (17.7% hit rate, 12,069 median) but produced two of the highest-viewed videos in our entire dataset:
+
+<HookExample quote="How to answer one of the trickiest job interview questions: 'What are your salary expectations?'" creator="(Career creator)" views="50.7M" />
+
+<HookExample quote="How to answer: Why are you leaving your current job? in an interview" creator="(Career creator)" views="29.1M" />
+
+Both are talking-head Educational/Advice videos with concrete, actionable answers to interview questions. The pattern: **career content works when it's tactically specific, not when it's general "how to win at work" advice.** Pure productivity content gets crushed (13.1% hit rate). Job-search tactics get rewarded.
+
+Career & Jobs is one of the few niches where Educational content reliably breaks out, likely because the audience has a specific high-stakes problem (a real upcoming interview) and is scrolling with intent that other Educational viewers don't have.
+
+---
+
+## How to actually use this
+
+<NumberBlock items={[
+  { number: "01", text: "If you're starting a niche from scratch, pick from Food, Health, Sports, Dating, Fitness, or Comedy. The hit rates (22-36%) are 2-3x higher than the bottom-tier niches. The viral math gives you a structural advantage that no amount of execution overcomes." },
+  { number: "02", text: "If you're locked into Real Estate, Productivity, Fashion, or Tech & AI, look for a curiosity-driven angle inside your niche. Real Estate doesn't have to be 'here's how to buy a house.' It can be 'here's a house in Pennsylvania that has 22 secret rooms.' The niche penalty is on tutorial content, not curiosity content." },
+  { number: "03", text: "Career & Jobs is the smartest non-obvious pick. The two top videos in this niche have 50M and 29M views. Tactically-specific career advice (interview question answers, salary negotiation tactics) consistently breaks out where general productivity content fails." },
+  { number: "04", text: "Comedy and Politics are high-variance niches. The 1M+ rates (6.01% Comedy, 5.39% Politics) are top of the dataset but the median views are mid-tier or low. If you can tolerate misses, the upside is unmatched. If not, pick a more consistent niche." },
+  { number: "05", text: "Sports is consistency. The hit rate is solid (28.6%) and the volume is enormous (3,484 videos in our sample). If you have a sports angle that's not 'random opinion on tonight's game,' the structural tailwinds are stronger than any other niche." },
+  { number: "06", text: "If you're posting Tech & AI content right now, your hit rate is 13.4%. Compare to a Food creator at 35.9%. The math is brutal. The fix isn't 'work harder on tech content.' It's 'wrap your tech insights inside a curiosity hook a non-techie would click on.'" }
+]} />
+
+---
+
+## The bottom line
+
+The niche you pick is the single biggest lever in your viral outcomes. A 35.9% niche has 6.8x better hit-rate math than a 5.3% niche. No hook, no edit, no posting cadence makes up that gap.
+
+Most creators stuck in the long tail are not bad at execution. They're posting in niches with structural ceilings (Productivity, Real Estate, Fashion, Tech) that no amount of effort breaks through. The leverage move is changing the niche, not grinding harder in the wrong one.
+
+If you can't change niche, the next best move is to find a curiosity-driven angle inside your existing niche. Real Estate as 'how to buy a house' is dead. Real Estate as 'this Australian company projects life-size floor plans in a warehouse before construction' (a 14.5M-view video in our sample) is alive.
+
+The math doesn't care about effort. It cares about niche.
+
+<CTA
+  headline="Find the niche-hook combinations actually winning in your space."
+  sub="TCL audits your account plus your top competitors, classifies every video by topic and hook archetype, then writes a 30-day script calendar built on the combinations that are crossing 100K in your specific niche."
+  primary="Get my free audit"
+  secondary="See pricing"
+/>
+
+---
+
+## Methodology
+
+**Dataset:** 10,226 short-form videos with view counts and a tagged `core_content_idea` field, drawn from our analyzed video corpus on 2026-04-27 (combining first-party analyzed content and competitor-scrape analyzed content). Platforms: TikTok, Instagram, YouTube. 104 distinct creators across the dataset.
+
+**Topic bucketing:** The free-text `core_content_idea` field on each video was matched against keyword patterns to assign one of 16 topic buckets (Food, Health, Sports, Dating, Fitness, Comedy, Money, Politics, Career, Cars, Family, Travel, Fashion, Tech & AI, Productivity, Real Estate). Buckets were defined by domain-specific keywords (e.g., Health: disease, symptom, hormone, autoimmune, gut health, vitamin, etc.). Videos that didn't cleanly match any of the 16 specific topic patterns (about 25% of the dataset) were excluded from the leaderboard. The 16 niches we DO show represent 7,701 videos out of the 10,226 total.
+
+**Why hit rate, not just average views:** Average views are heavily skewed by mega-viral outliers. Hit rate (% of videos crossing a specific threshold) is a better summary of "what's the realistic outcome of posting in this niche." We report median views as a complementary stable summary.
+
+**Sample sizes vary:** Some niches have huge samples (Sports 3,484) and some have small ones (Travel 57, Cars 83). We required a minimum of 30 videos to include a niche in the leaderboard. Small-cell niches (Travel, Cars, Politics, Real Estate) should be treated as directional rather than precise.
+
+**Known limits:**
+- Topic bucketing is keyword-based, not semantic. A few edge cases inevitably get misbucketed (e.g., a video about a "dating coach's morning routine" could land in either Dating or Productivity).
+- The dataset includes a mix of creator content and analyzed competitors, so the niche distribution reflects what's been analyzed, not necessarily a uniform sample of all short-form content.
+- Cross-posted videos (same content on multiple platforms) appear once per platform.
