@@ -19,6 +19,19 @@ import {
   ArrowRight,
   TrendingUp,
 } from 'lucide-react';
+import { capture } from '@/lib/analytics';
+
+type PlanId = 'starter' | 'pro' | 'enterprise';
+
+function trackPricingCta(plan: PlanId, billingPeriod: 'monthly' | 'yearly', position: string) {
+  capture('pricing_cta_clicked', {
+    plan,
+    billing_period: billingPeriod,
+    location: 'marketing',
+    position,
+    is_logged_in: false,
+  });
+}
 
 /* ------------------------------------------------------------------ */
 /*  Inline plan limits & pricing (mirrors app's subscriptionLimits +  */
@@ -356,6 +369,7 @@ export default function PricingPage() {
 
                 <a
                   href="https://thecontentlabs.app/register"
+                  onClick={() => trackPricingCta('starter', billingInterval, 'plan_card')}
                   className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
                 >
                   Get Started
@@ -424,6 +438,7 @@ export default function PricingPage() {
 
                 <a
                   href="https://thecontentlabs.app/register"
+                  onClick={() => trackPricingCta('pro', billingInterval, 'plan_card')}
                   className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
                 >
                   Get Started
@@ -488,6 +503,7 @@ export default function PricingPage() {
 
                 <a
                   href="https://thecontentlabs.app/register"
+                  onClick={() => trackPricingCta('enterprise', billingInterval, 'plan_card')}
                   className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-bold shadow-lg shadow-purple-600/25 hover:shadow-xl hover:shadow-purple-600/40 transition-all hover:scale-105 active:scale-95"
                 >
                   Get Started
@@ -773,6 +789,7 @@ export default function PricingPage() {
             <motion.div variants={scaleIn} className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
               <a
                 href="https://thecontentlabs.app/register"
+                onClick={() => capture('pricing_cta_clicked', { plan: 'unspecified', billing_period: billingInterval, location: 'marketing', position: 'final_cta', is_logged_in: false })}
                 className="lab-bubbles group inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-lg text-white shadow-lg shadow-content-cta/30 hover:shadow-xl hover:shadow-content-cta/50 transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 Get my free audit

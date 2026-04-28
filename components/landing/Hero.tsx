@@ -1,9 +1,11 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { AuroraBackground } from '@/components/ui/AuroraBackground';
 import { CursorGlow } from '@/components/ui/CursorGlow';
+import { capture } from '@/lib/analytics';
 
 const PERSONAS = [
   { label: 'UGC creators', href: '/for/ugc-creators' },
@@ -20,6 +22,38 @@ const HERO_CHIPS = [
 ];
 
 export function Hero() {
+  // Read query string after mount so the page can stay static. There's a brief
+  // flash of the default headline for prealgo visitors, but the alternative is
+  // useSearchParams + a Suspense boundary that breaks SSG.
+  const [fromPrealgo, setFromPrealgo] = useState(false);
+  const [registerHref, setRegisterHref] = useState('https://thecontentlabs.app/register');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    setFromPrealgo(params.get('utm_source') === 'prealgo');
+    if (search.length > 1) {
+      // Pass utm + ph_distinct_id through so attribution + cross-app identity
+      // stitching survive the jump to /register on the dashboard.
+      setRegisterHref(`https://thecontentlabs.app/register${search}`);
+    }
+  }, []);
+
+  const handleHeroCtaClick = () => {
+    capture('landing_cta_clicked', {
+      position: 'hero_primary',
+      from_prealgo: fromPrealgo,
+    });
+  };
+
+  const handleSecondaryCtaClick = () => {
+    capture('landing_cta_clicked', {
+      position: 'hero_secondary',
+      from_prealgo: fromPrealgo,
+    });
+  };
+
   return (
     <section id="hero-section" className="relative pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
       <CursorGlow />
@@ -27,20 +61,29 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto pb-8">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Live trends ticker */}
-          <a
-            href="/trends"
-            className="group inline-flex items-center gap-2 mb-4 pl-2 pr-4 py-1 rounded-full bg-white/80 border border-slate-200 hover:border-content-coral/40 hover:bg-white transition-all"
-          >
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[9px] font-mono uppercase tracking-[0.2em] font-bold">
-              <span className="h-1 w-1 rounded-full bg-white animate-pulse" />
-              Live
-            </span>
-            <span className="text-[12px] sm:text-[13px] font-medium text-slate-700">
-              <span className="font-bold text-slate-900">Hot Take</span> is the top hook this month
-            </span>
-            <ArrowRight className="h-3 w-3 text-slate-400 group-hover:text-content-coral group-hover:translate-x-0.5 transition-all" />
-          </a>
+          {fromPrealgo ? (
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-content-coral text-white text-xs font-bold uppercase tracking-[0.18em]">
+              <Sparkles className="h-3.5 w-3.5" />
+              Welcome from PreAlgo
+              <span className="hidden sm:inline font-normal opacity-90 normal-case tracking-normal">
+                · your free TCL audit is ready
+              </span>
+            </div>
+          ) : (
+            <a
+              href="/trends"
+              className="group inline-flex items-center gap-2 mb-4 pl-2 pr-4 py-1 rounded-full bg-white/80 border border-slate-200 hover:border-content-coral/40 hover:bg-white transition-all"
+            >
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[9px] font-mono uppercase tracking-[0.2em] font-bold">
+                <span className="h-1 w-1 rounded-full bg-white animate-pulse" />
+                Live
+              </span>
+              <span className="text-[12px] sm:text-[13px] font-medium text-slate-700">
+                <span className="font-bold text-slate-900">Hot Take</span> is the top hook this month
+              </span>
+              <ArrowRight className="h-3 w-3 text-slate-400 group-hover:text-content-coral group-hover:translate-x-0.5 transition-all" />
+            </a>
+          )}
 
           <div
             className="inline-flex items-center px-4 py-1.5 font-mono text-xs border border-content-coral-500/20 bg-content-coral-500/5 rounded-full text-content-coral-600 mb-6 tracking-wider"
@@ -49,26 +92,46 @@ export function Hero() {
           </div>
 
           <h1 className="font-heading font-bold tracking-tight mb-5 text-[2rem] sm:text-5xl md:text-6xl leading-[1.05]">
-            <span className="block text-slate-900">Stop Guessing What to Post.</span>
-            <span className="block text-content-coral">Post What Actually Works.</span>
+            {fromPrealgo ? (
+              <>
+                <span className="block text-slate-900">You picked the right hooks.</span>
+                <span className="block text-content-coral">Now get the full strategy.</span>
+              </>
+            ) : (
+              <>
+                <span className="block text-slate-900">Stop Guessing What to Post.</span>
+                <span className="block text-content-coral">Post What Actually Works.</span>
+              </>
+            )}
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed mb-8">
-            Get your first content strategy in under 10 minutes. A 30-day plan with full scripts, built from what's going viral in your niche. You just hit record.
+            {fromPrealgo
+              ? 'PreAlgo gave you the trending sounds and hooks. The Content Labs gives you the 30-day plan that uses them. Free audit in under 60 seconds.'
+              : "Get your first content strategy in under 10 minutes. A 30-day plan with full scripts, built from what's going viral in your niche. You just hit record."}
           </p>
 
-          <div className="mb-2">
+          <div className="mb-2 flex flex-col sm:flex-row gap-3 items-center justify-center">
             <MagneticButton className="inline-block">
               <a
-                href="/register"
+                href={registerHref}
+                onClick={handleHeroCtaClick}
                 className="lab-bubbles group inline-flex items-center px-6 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-base sm:text-lg text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                Get Your Free Audit
+                {fromPrealgo ? 'Claim my free audit' : 'Get Your Free Audit'}
                 <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </MagneticButton>
-            <p className="text-sm text-slate-400 mt-3">Free content audit in under 60 seconds &middot; No credit card required</p>
+            <a
+              href="/pricing"
+              onClick={handleSecondaryCtaClick}
+              className="inline-flex items-center px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold text-slate-700 hover:text-content-coral transition-colors"
+            >
+              See pricing
+              <ArrowRight className="ml-1.5 h-4 w-4" />
+            </a>
           </div>
+          <p className="text-sm text-slate-400 mt-3">Free content audit in under 60 seconds &middot; No credit card required</p>
         </div>
       </div>
 

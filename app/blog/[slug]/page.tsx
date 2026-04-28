@@ -3,6 +3,7 @@ import { getAllSlugs, getPostMeta } from "@/lib/blog";
 import { PublicNav } from "@/components/PublicNav";
 import { Footer } from "@/components/landing/Footer";
 import { Breadcrumbs } from "@/components/blog/BlogComponents";
+import { BlogCTACard } from "@/components/blog/BlogCTACard";
 
 const CATEGORY_LABELS: Record<string, string> = {
   guide: "Guide",
@@ -239,6 +240,7 @@ export default async function BlogPost({
           ].join(" ")}
         >
           <Post />
+          <BlogCTACard slug={slug} />
         </article>
       </div>
 
