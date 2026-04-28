@@ -232,6 +232,10 @@ export default async function BlogPost({
             "prose-blockquote:my-0 prose-blockquote:border-content-coral/30 prose-blockquote:bg-slate-50 prose-blockquote:rounded-r-xl prose-blockquote:py-1 prose-blockquote:not-italic",
             // Images
             "prose-img:rounded-xl prose-img:my-0",
+            // Inline code: allow wrapping so long regex/strings don't overflow
+            "[&_code]:break-all [&_code]:whitespace-normal",
+            // Pre/code blocks: scroll horizontally on overflow
+            "[&_pre]:overflow-x-auto [&_pre]:max-w-full",
           ].join(" ")}
         >
           <Post />

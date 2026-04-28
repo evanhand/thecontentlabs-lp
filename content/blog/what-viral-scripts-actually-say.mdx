@@ -298,7 +298,7 @@ This isn't a coincidence. The audience at 100K+ views is everyone, not just your
 **Linguistic measurement:**
 - **Words/sentence**: total word count divided by sentence count (split on `.`, `!`, `?`).
 - **Questions**: count of `?` characters per transcript.
-- **Profanity**: regex match for `\m(fuck|shit|damn|crap|bitch|asshole|bullshit)\M` (case-insensitive). A transcript is "with profanity" if at least one match occurs.
+- **Profanity**: whole-word case-insensitive match against fuck, shit, damn, crap, bitch, asshole, and bullshit. A transcript is "with profanity" if at least one whole-word match occurs.
 - **Pronoun counts**: regex word-boundary matches for `(you|your|yours|youre|y'all)` and `(i|im|me|my|mine)` (case-insensitive).
 - **First word**: leading non-empty word of the transcript (or hook field, when transcript is missing), stripped of punctuation, lowercased.
 
