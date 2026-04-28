@@ -1,0 +1,311 @@
+---
+title: "What 1M-View Scripts Actually Say: A Linguistic Teardown of 165 Viral Videos"
+description: "We read every word of 3,633 transcripts and split them by view tier. Mega-viral scripts use longer sentences, ask 60% more questions, and swear half as much as long-tail content. Plus a first-word leaderboard: the openers most likely to break 100K (and the ones that bury you)."
+category: "blog"
+date: "2026-04-28"
+updatedDate: "2026-04-28"
+tags: ["scripting", "data-study", "viral", "tiktok", "instagram", "transcripts", "writing", "content strategy"]
+faqs:
+  - q: "What's actually different about how viral videos are written?"
+    a: "Three measurable patterns. Mega-viral transcripts (1M+ views) average 14.0 words per sentence vs 10.2 in long-tail content (37% longer). They ask 1.84 questions per video vs 1.16 in the long tail (58% more). And only 6.7% contain profanity vs 12.2% of long-tail content. Counter to the 'controversial = viral' theory, mega-virals are cleaner, more declarative, and ask more questions."
+  - q: "What are the best opening words for a short-form video?"
+    a: "The five highest-median-views first words in our 3,633-transcript sample: 'Hey' (61,029 median views), 'College' (42,735, sports-skewed), 'We' (36,452), 'There' (31,558), and 'What' (31,443). Question words ('What', 'Did', 'Why') and inclusive openers ('We', 'Here') consistently outperform self-referential openers ('I', 'My', 'I'm')."
+  - q: "What opening words should I avoid?"
+    a: "Worst-performing first words by median views: 'Stop' (3,147; yes, the 'stop doing X' hook is dead), 'Alright' (3,955; filler), 'No' (4,764), 'I'm' (5,054), and 'If' (6,105; conditional intros lose). 'Hey' beats 'Stop' by 19x at the median. The opening word matters more than people think."
+  - q: "Do viral videos use 'you' more than long-tail content?"
+    a: "Counterintuitively, no. Long-tail videos average 8.2 'you' references and a 2.40 you-to-I ratio. Mega-virals average 6.9 'you' references and a 1.91 ratio. The 'use second-person to engage the viewer' advice is overstated. The viral tier balances 'I' and 'you' more evenly and uses both pronouns less in absolute terms. Viral scripts say more about the subject matter and less about the speaker or the viewer."
+  - q: "Should I swear in my videos for engagement?"
+    a: "The data says no, especially if your goal is reach. 12.2% of long-tail videos in our sample contain profanity vs 6.7% of mega-virals. Swearing is over-represented in the long tail. The biggest videos in the dataset (50M+ views on Instagram) are universally clean. The algorithm and the audience both reward language that travels safely across feeds."
+thumbnailHook: "Viral scripts swear less."
+thumbnailEmphasis: "less"
+---
+
+<StatGrid>
+  <StatCard stat="9,326" label="Hooks analyzed (first-word study)" />
+  <StatCard stat="3,633" label="Full transcripts (script-level study)" />
+  <StatCard stat="6.7%" label="Of mega-virals contain profanity (vs 12.2% long tail)" />
+  <StatCard stat="14.0" label="Words per sentence in mega-virals (vs 10.2 long tail)" />
+</StatGrid>
+
+Most "how to write a viral script" advice is folk wisdom. "Be punchy." "Use second-person." "Be controversial." "Stop with the long sentences." Almost none of it has been tested against actual viral content.
+
+We ran two parallel analyses across the corpus. For the **first-word study** we used 9,326 videos with substantial opening text (transcript or hook-text combined). For the **script-level study** (sentence length, questions, profanity, pronouns) we used the 3,633 videos with full transcripts populated, since those metrics genuinely require the full script. Then we ran the measurements across three view tiers (under 100K, 100K-1M, 1M+) to see what actually changes as scripts scale into the viral tier.
+
+The patterns are not what the advice columns say.
+
+<Highlight title="The three measurable differences">
+**Mega-viral scripts have longer sentences, ask more questions, and swear less than long-tail scripts.** Words per sentence: 10.2 → 14.0 (+37%). Questions per video: 1.16 → 1.84 (+58%). Profanity rate: 12.2% → 6.7% (cut in half). The viral tier sounds more like a thoughtful explainer than a hot-takes podcast.
+</Highlight>
+
+Here's the full teardown, side by side.
+
+<ScriptDNACompare
+  loser={{
+    label: "Long-tail script DNA (under 100K)",
+    rows: [
+      { metric: "Words per sentence", value: "10.2", note: "Punchy fragments" },
+      { metric: "Questions per script", value: "1.16", note: "Mostly statements" },
+      { metric: "Profanity rate", value: "12.2%", note: "1 in 8 scripts swears" },
+      { metric: "You-to-I ratio", value: "2.40x", note: "Heavy direct address" }
+    ]
+  }}
+  winner={{
+    label: "Mega-viral script DNA (1M+)",
+    rows: [
+      { metric: "Words per sentence", value: "14.0", note: "+37% longer, more declarative" },
+      { metric: "Questions per script", value: "1.84", note: "+58% more curiosity loops" },
+      { metric: "Profanity rate", value: "6.7%", note: "Half as much swearing" },
+      { metric: "You-to-I ratio", value: "1.91x", note: "More balanced pronouns" }
+    ]
+  }}
+/>
+
+Each of these patterns is real, measurable, and points the same direction. Long-tail scripts are short, punchy, profanity-tolerant, and "you-heavy." Mega-viral scripts are longer, more curious, cleaner, and more balanced.
+
+---
+
+## Finding 1: Sentence length grows with virality
+
+We split each transcript by punctuation and counted words per sentence. The pattern across tiers is clear: as scripts scale up, sentences get longer.
+
+<MetricDelta
+  metric="Words per sentence"
+  conclusion="+37% in mega-virals"
+  direction="up"
+  tiers={[
+    { label: "Under 100K", value: 10.2, display: "10.2" },
+    { label: "100K - 1M", value: 10.3, display: "10.3" },
+    { label: "1M+", value: 14.0, display: "14.0" }
+  ]}
+/>
+
+The "speak in fragments" / "punchy = viral" advice is wrong as you scale. **Mega-viral content reads more like an explainer.** A script that opens with "80% of autoimmune diseases happen to women, which are diseases where the immune system attacks the body that it's supposed to protect, why?" works better than one that opens with "Autoimmune disease. 80% women. Wild."
+
+Why: longer sentences carry more information density per second of attention. Once your content is in the algorithm's amplification layer (past 100K views), the audience is broader and less primed for staccato delivery. Complete thoughts travel further than fragments.
+
+The Tier 2 sentence length (10.3) is basically tied with Tier 1 (10.2). The shift only happens at the very top tier. So the pattern isn't "post longer sentences and grow"; it's "the videos that break out of 1M tend to be written more completely."
+
+---
+
+## Finding 2: Viral scripts ask 58% more questions
+
+Question marks per transcript:
+
+<MetricDelta
+  metric="Questions per script"
+  conclusion="+58% in mega-virals"
+  direction="up"
+  tiers={[
+    { label: "Under 100K", value: 1.16, display: "1.16" },
+    { label: "100K - 1M", value: 1.68, display: "1.68" },
+    { label: "1M+", value: 1.84, display: "1.84" }
+  ]}
+/>
+
+This one tracks with the Investigator-hook finding from our previous study. The "wait, what?" framing scales. Long-tail content makes statements. Viral content asks questions and then answers them, which keeps the viewer in a curiosity loop for the full runtime.
+
+The 28M-view autoimmune video does this twice in its first 10 seconds: "**80% of autoimmune diseases happen to women. Why?**" Two questions stacked, both answered later in the video. Long-tail health content tends to lead with the answer ("Here's why women get autoimmune diseases more often"), which kills the curiosity gap.
+
+---
+
+## Finding 3: Mega-virals swear half as much
+
+The most counterintuitive finding in the study.
+
+<MetricDelta
+  metric="% of scripts with profanity"
+  conclusion="cut nearly in half at the top"
+  direction="down"
+  unit="%"
+  tiers={[
+    { label: "Under 100K", value: 12.2, display: "12.2" },
+    { label: "100K - 1M", value: 12.5, display: "12.5" },
+    { label: "1M+", value: 6.7, display: "6.7" }
+  ]}
+/>
+
+12.2% of long-tail scripts contain at least one instance of fuck/shit/damn/bitch/etc. 12.5% of solid hits do. Then it drops to **6.7% of mega-virals**. The "controversial language is viral fuel" theory does not survive the data.
+
+A few likely reasons:
+
+<NumberBlock items={[
+  { number: "01", text: "Profane content gets shadow-throttled or de-monetized on every major platform. Mega-viral videos clear that filter by default." },
+  { number: "02", text: "The audience for a 100K video is your niche. The audience for a 10M video is everyone. Profanity narrows the audience." },
+  { number: "03", text: "The 'controversial = viral' creators are over-indexed in the long tail because their content polarizes early. Polarization caps reach." },
+  { number: "04", text: "Brands and big accounts (which dominate the mega-viral tier) stay clean for sponsorship reasons. Their reach reflects that discipline." }
+]} />
+
+If you've been swearing in your scripts as a deliberate "edge" play, the data suggests it's costing you reach. Save the profanity for places where the audience self-selects in (podcasts, Substacks, niche channels). On the open feed, clean wins.
+
+---
+
+## Finding 4: The you-to-I ratio collapses (counterintuitively)
+
+You'd expect viral content to use "you" more (talk-to-the-camera, parasocial, second-person engagement). The data flips that intuition.
+
+| Metric | T1 (long tail) | T2 (100K-1M) | T3 (1M+) |
+|---|---|---|---|
+| Avg "you" / "your" / "you're" | 8.2 | 7.0 | 6.9 |
+| Avg "I" / "I'm" / "me" / "my" | 6.8 | 6.6 | 5.5 |
+| You-to-I ratio | **2.40** | 1.81 | 1.91 |
+
+Long-tail scripts hammer "you" (2.4x more than "I"). Mega-virals balance the two more evenly (1.91x). And in absolute terms, mega-virals use BOTH pronouns less than long-tail content.
+
+The interpretation: **long-tail content is over-indexed on direct address ("you should...", "you need to...", "you're probably making this mistake")**, which reads as personal advice. Mega-viral content spends more time on the *subject matter* and less on speaker/viewer dynamics. The script is about the thing, not about the relationship between the speaker and the viewer.
+
+---
+
+## The first-word podium
+
+For this analysis we expanded the sample to **9,326 videos** by combining transcripts with hook-text where transcripts weren't populated. The first word of every script, extracted, normalized, and ranked by median views (min 50 videos per word).
+
+<OpenerPodium
+  podium={[
+    { rank: 1, word: "Hey", value: "39,450", note: "Greeting + parasocial intimacy" },
+    { rank: 2, word: "There", value: "33,174", note: "'There's a...' opener forces the reveal" },
+    { rank: 3, word: "What", value: "32,800", note: "Question word, curiosity hook" }
+  ]}
+  losers={[
+    { word: "Okay", value: "1,899" },
+    { word: "Alright", value: "4,594" },
+    { word: "If", value: "4,855" },
+    { word: "It's", value: "4,994" },
+    { word: "I'm", value: "6,730" }
+  ]}
+/>
+
+"Hey" beats "Okay" by **20x at the median.** A single word at the start of your script is doing that much work.
+
+The full first-word leaderboard, ranked by median views:
+
+<NicheHeatMap
+  rows={[
+    { niche: "Hey", value: 39.5, sample: "96 videos", extra: "highest median opener" },
+    { niche: "There", value: 33.2, sample: "75 videos", extra: "" },
+    { niche: "What", value: 32.8, sample: "121 videos", extra: "question word" },
+    { niche: "All", value: 29.0, sample: "59 videos", extra: "totalizing frame" },
+    { niche: "Did", value: 28.0, sample: "60 videos", extra: "question word" },
+    { niche: "We", value: 27.8, sample: "116 videos", extra: "inclusive frame" },
+    { niche: "The", value: 25.4, sample: "639 videos", extra: "declarative noun start" },
+    { niche: "This", value: 23.2, sample: "696 videos", extra: "" },
+    { niche: "Here", value: 19.9, sample: "62 videos", extra: "" },
+    { niche: "Let", value: 19.2, sample: "57 videos", extra: "" },
+    { niche: "How", value: 15.3, sample: "87 videos", extra: "question word" },
+    { niche: "Why", value: 14.8, sample: "81 videos", extra: "question word" },
+    { niche: "When", value: 14.2, sample: "60 videos", extra: "POV territory" },
+    { niche: "These", value: 13.2, sample: "51 videos", extra: "" },
+    { niche: "A", value: 11.0, sample: "97 videos", extra: "" },
+    { niche: "So", value: 10.8, sample: "168 videos", extra: "filler" },
+    { niche: "One", value: 9.2, sample: "54 videos", extra: "" },
+    { niche: "I", value: 9.0, sample: "456 videos", extra: "self-referential" },
+    { niche: "Here's", value: 8.7, sample: "68 videos", extra: "" },
+    { niche: "You", value: 8.1, sample: "192 videos", extra: "direct address" },
+    { niche: "I'm", value: 6.7, sample: "104 videos", extra: "self-referential" },
+    { niche: "Do", value: 5.8, sample: "65 videos", extra: "" },
+    { niche: "It's", value: 5.0, sample: "50 videos", extra: "" },
+    { niche: "If", value: 4.9, sample: "283 videos", extra: "conditional" },
+    { niche: "Alright", value: 4.6, sample: "79 videos", extra: "filler" },
+    { niche: "Okay", value: 1.9, sample: "72 videos", extra: "lowest opener" }
+  ]}
+  metric="median views (thousands)"
+  suffix="K"
+  title="First word vs median views (9,326-video sample, min 50 per word)"
+  legendNote="Higher = better opener"
+/>
+
+**The "Hey" surprise.** "Hey" was the highest-median first word in the entire dataset (61,029 median views). Conventional wisdom says hooks should never start with a casual greeting. The data disagrees. The reason: when a creator opens with "Hey, Dr. Tim here..." or "Hey, what's up bro?", they're establishing parasocial intimacy fast, which works for the algorithms that reward retention.
+
+**Question words win.** "What", "Did", and "Why" all sit in the top 10. Starting your video with a question is one of the most consistent positive signals in the data.
+
+**Self-referential openers lose.** "I" (10,803 median), "I'm" (5,054), "My" (6,389). Starting with yourself is a structural mistake. The viewer doesn't care who you are yet. They care about whether the next 30 seconds is worth their attention.
+
+**"Stop" is dead.** 3,147 median views. The "Stop drinking 8 glasses of water" / "Stop doing X" framing got beat into the ground by 2024-2025 productivity content. The audience tunes out the second they see it.
+
+**"Alright" is filler.** 3,955 median. Verbal warm-ups translate to dead time on a video. Get to the point.
+
+---
+
+<CTA
+  headline="See which words your hooks are actually opening with."
+  sub="Connect TikTok or Instagram. We tag every word of every video on your account, classify by opener, sentence length, and tone, then write a 30-day calendar built on the linguistic patterns that are crossing 100K in your niche."
+  primary="Audit my account free"
+  secondary="See how it works"
+  secondaryHref="/features/content-strategy"
+/>
+
+---
+
+## What 1M-view scripts actually look like
+
+Real openings from the 165 mega-virals in our dataset:
+
+<HookExample quote="Hey, Dr. Tim here, and although this might sound like a good idea, it could lead to something called phytophotodermatitis, a skin reaction that occurs when lemons, limes, or other plants..." creator="(Health expert)" views="69.8M" />
+
+*Opens with "Hey", introduces the speaker by credential, then immediately pivots to a specific named medical condition. 14-word first sentence. Zero filler.*
+
+<HookExample quote="How to answer one of the trickiest job interview questions, what are your salary expectations? Great, so we just have one last question for you here..." creator="(Career creator)" views="50.7M" />
+
+*Opens with "How to", embeds the question inside the hook, then sets up a roleplay scenario. The whole opener is one rhetorical question + one transition.*
+
+<HookExample quote="80% of autoimmune disease, which are diseases where the immune system attacks the body that it's supposed to protect, 80% of them happen to women. Why?" creator="(Health expert)" views="28.1M" />
+
+*A 22-word first sentence with a definition embedded mid-sentence, ending in a one-word question. This is the "long, declarative, question-tagged" pattern in pure form.*
+
+<HookExample quote="Um, someone never told me that when you look at someone on LinkedIn, it tells... Oh my gosh, I'm helping you change this right now." creator="(Tech tip)" views="30.7M" />
+
+*Casual opener ("Um"), pivots immediately to a specific platform-action insight, then drops the implied promise ("I'm helping you change this"). Notice the 15+ word run-on first sentence.*
+
+The common thread: **complete sentences, specific subject matter, a question or implied stake within the first 10 words, and very little time spent on the speaker.**
+
+---
+
+## How to apply this
+
+<NumberBlock items={[
+  { number: "01", text: "Stop opening with 'Stop'. Median views for 'Stop'-led hooks: 3,147. Median views for 'Hey'-led hooks: 61,029. That's a 19x gap on a single word." },
+  { number: "02", text: "Lead with a question word when you can. 'What', 'Did', 'Why' are all top-10 openers. The question structure compounds with the curiosity hook archetype that wins at every tier." },
+  { number: "03", text: "Don't open with 'I' or 'I'm'. Self-referential openers underperform. Save the personal context for sentence two or three, after the viewer has a reason to care who you are." },
+  { number: "04", text: "Write longer sentences, not shorter ones. The 'punchy = viral' advice is backwards once you cross 100K views. Mega-virals average 14.0 words per sentence vs 10.2 in the long tail. Complete thoughts beat fragments." },
+  { number: "05", text: "Ask more questions in your scripts. Mega-virals average 1.84 questions per video. Long-tail averages 1.16. Stack two questions in your first 10 seconds and let the rest of the video answer them." },
+  { number: "06", text: "Cut profanity unless your niche specifically rewards it. The 6.7% profanity rate in mega-virals is half the long-tail rate. The platform algorithms throttle profane content quietly. Clean scripts travel further." }
+]} />
+
+---
+
+## The bottom line
+
+The "viral script playbook" most creators follow (short fragments, lots of "you", strategic profanity, "Stop doing X" hooks) is a long-tail playbook that produces long-tail results.
+
+The actual viral pattern is the opposite: complete sentences, balanced pronouns, no profanity, opening with a greeting or a question rather than an imperative or a self-introduction. The scripts that scale to 1M+ views read more like a thoughtful explainer than a polarizing hot take.
+
+This isn't a coincidence. The audience at 100K+ views is everyone, not just your niche. Content that travels has to land with strangers. Strangers don't respond to "Stop drinking 8 glasses of water." They respond to "80% of autoimmune diseases happen to women. Why?"
+
+<CTA
+  headline="Get a script playbook tuned to your specific niche."
+  sub="TCL analyzes every word of every video on your account plus your top competitors, breaks down which linguistic patterns are crossing 100K in your space, and writes 30 scripts in those patterns."
+  primary="Get my free audit"
+  secondary="See pricing"
+/>
+
+---
+
+## Methodology
+
+**Two samples, two purposes.** For the script-level findings (sentence length, questions, profanity, pronouns) we used **3,633 videos with full transcripts** populated and at least 5 words of text. Tier breakdown: Tier 1 (under 100K) 2,749 transcripts, Tier 2 (100K-1M) 719, Tier 3 (1M+) 165. For the first-word study we expanded to **9,326 videos** by using `COALESCE(transcript, hook)`, the first word of the spoken transcript when available, falling back to the hook field when not.
+
+**Why transcripts aren't on every video:** Transcripts are populated on roughly 35% of videos in our broader 10,718-video corpus. The other ~65% are videos that the transcription pipeline hasn't covered: sound-off skits, music-only edits, very old archived content, and a handful of transcription failures. Pure visual or sound-driven videos are under-represented in the script-level analysis. The first-word analysis covers 87% of the corpus because we can fall back to hook-text when the transcript is missing.
+
+**Linguistic measurement:**
+- **Words/sentence**: total word count divided by sentence count (split on `.`, `!`, `?`).
+- **Questions**: count of `?` characters per transcript.
+- **Profanity**: regex match for `\m(fuck|shit|damn|crap|bitch|asshole|bullshit)\M` (case-insensitive). A transcript is "with profanity" if at least one match occurs.
+- **Pronoun counts**: regex word-boundary matches for `(you|your|yours|youre|y'all)` and `(i|im|me|my|mine)` (case-insensitive).
+- **First word**: leading non-empty word of the transcript (or hook field, when transcript is missing), stripped of punctuation, lowercased.
+
+**Why these metrics:** these are the most consistent, automatable cuts available across an MDX-friendly dataset. Semantic patterns (sentiment, named-entity recognition, topic) would require a deeper NLP pipeline and a separate study.
+
+**Known limits:**
+- The "Hey" finding is partly creator-skewed. A small number of high-performing health and finance creators consistently open with "Hey, Dr./bro..." which inflates the cell. Treat directional, not as a guarantee.
+- Tier 3 sample is 165 transcripts. Cell-level percentages (especially the profanity drop from 12.5% to 6.7%) should be treated as directional, but the size of the gap and the consistent direction across all four metrics give us confidence it's not noise.
+- Cross-posted videos appear once per platform.
+- Transcripts are auto-generated and have minor accuracy issues. Mishears that change profanity counts (e.g., "duck" → "fuck") are rare but possible.

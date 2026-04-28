@@ -1,0 +1,292 @@
+---
+title: "Watchable vs Talkable: A 10,761-Video Comment Rate Study"
+description: "We analyzed comment-to-view ratios across 10,761 short-form videos. Comment rate goes DOWN as views go up. Politics videos provoke 3x the discussion of Health videos despite Health getting more reach. The hooks and niches that get talked about are not the ones that get watched."
+category: "blog"
+date: "2026-04-28"
+updatedDate: "2026-04-28"
+tags: ["engagement", "comments", "data-study", "tiktok", "instagram", "youtube shorts", "viral", "content strategy"]
+faqs:
+  - q: "Do videos with more views get more comments?"
+    a: "Yes in absolute terms, but the comment RATE drops sharply as views climb. Long-tail videos (under 100K) get a 0.131% median comment rate. 100K-1M videos drop to 0.082%. Mega-virals (1M+) drop to 0.042%. A 50K-view video with 65 comments has a higher engagement rate than a 5M-view video with 2,000 comments. The mega-viral 'reach' tier is structurally less talkable per viewer."
+  - q: "Which hook archetype provokes the most discussion?"
+    a: "Hot Take hooks have the highest median comment rate (0.135%) and FaceTime Energy hooks are tied at 0.133%. Contrarian (0.116%) and Fortune Teller (0.102%) round out the top four. Investigator hooks (the highest-reach archetype in our dataset) only score 0.084%, meaning they get watched but provoke less conversation. The hook that maximizes reach is different from the hook that maximizes discussion."
+  - q: "Which content niche gets the most comments?"
+    a: "Politics & News at 0.202% median comment rate, followed by Real Estate (0.153%), Tech & AI (0.152%), Money (0.142%), and Productivity (0.122%). The 'low-reach but talkable' niches (Real Estate, Productivity, Tech) over-index on commentary. Meanwhile Health, the highest-reach niche, has the lowest comment rate (0.068%): Health content is watched silently."
+  - q: "Why do mega-viral videos have lower comment rates?"
+    a: "Two reasons. First, mega-viral content reaches an audience that's broader and less invested. Most viewers scroll on without engaging. Second, the type of content that scales to mega-viral (specific facts, curiosity loops, broadly relatable scenes) tends to be content people watch and then forget, rather than argue about. Polarizing content has a higher comment rate but a lower 100K hit rate. There's a measurable trade-off between reach and discussion."
+  - q: "Should I optimize for views or comments?"
+    a: "Different goals require different strategies. If you want raw reach (vanity views, brand awareness), Investigator hooks and Health/Food/Sports niches are the math. If you want to build a community that talks (engagement signal that algorithms reward, audience that comes back), Hot Take/Contrarian hooks and Politics/Tech/Money niches drive comment rate even at lower view counts. The biggest creator brands stack both: high-reach content for top-of-funnel, high-comment-rate content for activation."
+thumbnailHook: "Talkable ≠ viewable."
+thumbnailEmphasis: "Talkable"
+---
+
+<StatGrid>
+  <StatCard stat="10,761" label="Videos with comment data" />
+  <StatCard stat="0.131%" label="Median comment rate in long tail" />
+  <StatCard stat="0.042%" label="Median comment rate in 1M+ tier (3x lower)" />
+  <StatCard stat="3x" label="Politics comment rate vs Health" />
+</StatGrid>
+
+The "engagement" metric most creators chase is comments. Algorithms reward them. Audiences-of-strangers turn into communities through them. They're the difference between a video that got watched and a video that got talked about.
+
+Most growth advice treats "watchable" and "talkable" as the same thing. The data does not.
+
+We pulled comment counts and view counts on **10,761 short-form videos** across TikTok, Instagram, and YouTube Shorts, then computed comment-to-view ratios across tiers, hook archetypes, and niches. The results split sharply.
+
+<Highlight title="The comment rate inverse">
+**Comment rate goes DOWN as views go UP.** Long-tail (under 100K) videos average a 0.131% median comment rate. 100K-1M videos drop to 0.082%. Mega-virals (1M+) drop to 0.042%. A 50K-view video with 65 comments has a higher engagement rate than a 5M-view video with 2,000 comments. The reach tier is structurally less talkable per viewer.
+</Highlight>
+
+Here's the full study.
+
+---
+
+## Finding 1: Comment rate is inversely related to views
+
+Counter to the standard "engagement = reach" framing, the comment-rate-to-view-count relationship is monotonic and inverse. As views climb, the percentage of viewers who bother to comment drops.
+
+<TierComparisonChart
+  data={[
+    { metric: "Median comment rate", t1: 0.131, t2: 0.082, t3: 0.042 }
+  ]}
+  xKey="metric"
+  series={[
+    { key: "t1", label: "Under 100K", color: "#cbd5e1" },
+    { key: "t2", label: "100K-1M", color: "#fb7185" },
+    { key: "t3", label: "1M+", color: "#10b981" }
+  ]}
+  title="Median comment rate (% of viewers who comment) by tier"
+  height={260}
+/>
+
+| Tier | Videos | Median comments | Median comment rate | p90 comment rate |
+|---|---|---|---|---|
+| Tier 1 (under 100K) | 8,419 | 8 | **0.131%** | 0.790% |
+| Tier 2 (100K-1M) | 1,993 | 186 | 0.082% | 0.254% |
+| Tier 3 (1M+) | 349 | 964 | **0.042%** | 0.162% |
+
+The **absolute** comment count grows with views (8 → 186 → 964). The **rate** falls. There are two structural reasons:
+
+<NumberBlock items={[
+  { number: "01", text: "The mega-viral audience is broader and less invested. A 5M-view video reaches everyone, including casual scrollers who watch and move on. Long-tail videos reach niche audiences that are more likely to engage." },
+  { number: "02", text: "The CONTENT that scales tends to be 'watch and forget' content. Specific facts, curiosity loops, broadly relatable scenes. The kind of content that provokes comments (polarizing opinions, ambiguous moral takes, identity-touching arguments) has a lower 100K hit rate." }
+]} />
+
+The implication is uncomfortable for creators who chase comments as a growth signal: **the videos that maximize comment rate are not the videos that maximize reach.** Optimizing for one comes at the expense of the other.
+
+---
+
+## Finding 2: Hot Take and FaceTime Energy hooks dominate comment rate
+
+We computed median comment rate by hook archetype across all videos with at least 5,000 views (filtering out the noisy bottom of the distribution).
+
+<DataBarChart
+  data={[
+    { archetype: "Hot Take", median_cmt_pct: 0.135 },
+    { archetype: "FaceTime Energy", median_cmt_pct: 0.133 },
+    { archetype: "Contrarian", median_cmt_pct: 0.116 },
+    { archetype: "Fortune Teller", median_cmt_pct: 0.102 },
+    { archetype: "Teacher", median_cmt_pct: 0.096 },
+    { archetype: "Investigator", median_cmt_pct: 0.084 },
+    { archetype: "Proof Drop", median_cmt_pct: 0.084 },
+    { archetype: "Magician", median_cmt_pct: 0.082 },
+    { archetype: "Story", median_cmt_pct: 0.082 },
+    { archetype: "Experimenter", median_cmt_pct: 0.058 }
+  ]}
+  xKey="archetype"
+  yKey="median_cmt_pct"
+  title="Median comment rate by hook archetype"
+  yLabel="Comment rate"
+  suffix="%"
+  height={340}
+  horizontal={true}
+/>
+
+**Hot Take is #1 (0.135%).** The "I have an opinion you might disagree with" framing structurally invites people to disagree in the comments. Hot takes don't get the highest views (Investigator does), but they get the highest comment rate.
+
+**FaceTime Energy is #2 (0.133%).** The casual, parasocial, "talking to you like a friend" hook earns disproportionate comments. People reply to friends. They scroll past strangers.
+
+**Contrarian is #3 (0.116%).** "Everyone says X, actually Y" forces a position. Either you agree (and say so) or you disagree (and say so). Both produce comments.
+
+**Investigator is mid-pack (0.084%).** This is the counterintuitive one. Investigator hooks dominate the view-tier leaderboard (the only hook that scales across all three tiers in our previous study), but they trigger less discussion. People watch "Did you know snowplows are banned in the NFL?" and just move on. They don't have a position to express.
+
+**Experimenter is dead last (0.058%).** "I tried X for 30 days" content gets watched but rarely sparks debate. The format is voyeuristic, not argumentative.
+
+<Highlight title="The hook trade-off">
+**The hook archetype that maximizes views is different from the hook archetype that maximizes comments.** Investigator wins reach. Hot Take wins discussion. Both have legitimate uses; the question is which signal you're optimizing for.
+</Highlight>
+
+---
+
+## Finding 3: The reach-vs-talk quadrant
+
+We plotted every niche on a 2D map: hit rate (% of videos crossing 100K) on the X-axis, comment rate (% of viewers commenting) on the Y-axis. The result splits cleanly into four zones.
+
+<ReachTalkQuadrant
+  rows={[
+    { niche: "Health", reach: 35.3, talk: 0.068 },
+    { niche: "Food", reach: 31.6, talk: 0.102 },
+    { niche: "Sports", reach: 28.6, talk: 0.094 },
+    { niche: "Dating", reach: 25.8, talk: 0.097 },
+    { niche: "Fitness", reach: 22.7, talk: 0.070 },
+    { niche: "Comedy", reach: 22.6, talk: 0.101 },
+    { niche: "Money", reach: 21.2, talk: 0.142 },
+    { niche: "Politics", reach: 21.0, talk: 0.202 },
+    { niche: "Career", reach: 17.7, talk: 0.095 },
+    { niche: "Tech & AI", reach: 13.4, talk: 0.152 },
+    { niche: "Productivity", reach: 13.1, talk: 0.122 },
+    { niche: "Real Estate", reach: 5.3, talk: 0.153 }
+  ]}
+  xMax={40}
+  yMax={0.22}
+  xMid={20}
+  yMid={0.10}
+  title="Where each niche sits on the reach × talk grid"
+/>
+
+Four clear zones:
+
+- **Sweet spot (top-right): Politics and Money.** High reach AND high comment rate. Both niches structurally provoke conversation while still scaling. Politics is the standout: highest comment rate of any niche AND a 21.0% hit rate.
+- **Watchable, low talk (bottom-right): Health, Food, Sports, Dating, Fitness, Career.** These niches dominate reach but their audiences mostly watch and move on. Health is the extreme: highest hit rate of any niche, lowest comment rate.
+- **Talkable, low reach (top-left): Real Estate, Tech & AI, Productivity.** These niches struggle to break out (5-13% hit rates) but the audiences that DO watch are extremely vocal.
+- **Dead zone (bottom-left): nothing significant.** No niche in our data is both unwatchable AND silent. Every niche has at least one engagement axis going for it.
+
+By niche, the comment-rate leaderboard looks almost backwards from the view-rate leaderboard.
+
+<NicheHeatMap
+  rows={[
+    { niche: "Politics & News", value: 0.202, sample: "154 videos", extra: "highest cmt rate" },
+    { niche: "Real Estate", value: 0.153, sample: "106 videos", extra: "low reach, high talk" },
+    { niche: "Tech & AI", value: 0.152, sample: "479 videos", extra: "" },
+    { niche: "Money", value: 0.142, sample: "307 videos", extra: "" },
+    { niche: "Productivity", value: 0.122, sample: "445 videos", extra: "" },
+    { niche: "Food", value: 0.102, sample: "326 videos", extra: "" },
+    { niche: "Comedy", value: 0.101, sample: "343 videos", extra: "" },
+    { niche: "Dating", value: 0.097, sample: "272 videos", extra: "" },
+    { niche: "Career", value: 0.095, sample: "246 videos", extra: "" },
+    { niche: "Sports", value: 0.094, sample: "3,485 videos", extra: "" },
+    { niche: "Fitness", value: 0.070, sample: "245 videos", extra: "" },
+    { niche: "Health", value: 0.068, sample: "183 videos", extra: "lowest cmt rate" }
+  ]}
+  metric="comment rate"
+  suffix="%"
+  title="Median comment rate by niche (sorted by talkability)"
+/>
+
+**Politics is the most talkable niche by far (0.202%).** Three times the comment rate of Health. People argue about politics in a way they don't argue about most other content categories.
+
+**Real Estate jumps from worst-for-reach to second-best-for-comments.** It has the lowest 100K-hit rate in our entire dataset (5.3%), but a 0.153% median comment rate (#2 by talkability). The audience that watches Real Estate content is small, but they're invested. Mortgage rates, housing market predictions, and "secret room" discoveries all provoke active discussion.
+
+**Tech & AI is high-comment, low-reach.** 0.152% comment rate (#3) but only 13.4% hit rate at 100K+. The Tech & AI audience is small but extremely opinionated.
+
+**Health is the LOWEST-comment niche (0.068%).** Despite being the highest-reach niche (35.3% hit rate), Health content is watched silently. People consume health information and move on. They don't argue about whether 80% of autoimmune diseases happen to women.
+
+The clearest pattern in this leaderboard:
+
+<Highlight title="The reach-talk inversion">
+**The niches that scale (Health, Food, Sports) have lower comment rates. The niches that struggle for reach (Real Estate, Productivity, Tech & AI) have HIGHER comment rates.** Discovery and discussion pull in opposite directions. Politics is the rare niche that does both: high reach (5.39% mega-viral rate, fifth-highest) AND highest comment rate.
+</Highlight>
+
+---
+
+## What high-comment-rate videos actually look like
+
+A few of the highest comment-rate videos in our 100K-5M tier (excluding the obvious giveaway-bait outliers):
+
+<HookExample quote="Here's how I booked 20 high ticket calls this week..." creator="Just Getting Data" views="111,876" />
+
+*5.03% comment rate. Specific number ("20"), bold claim ("high ticket"), implied "how" question. Comment section becomes "drop a 'how' for the system" engagement-bait that the creator probably gates a DM on.*
+
+<HookExample quote="If you've been watching the AI boom but still find yourself wondering how do I actually make money with this, you are not alone." creator="(AI creator)" views="135,384" />
+
+*4.87% comment rate. Direct address ("you"), shared problem framing ("you are not alone"), implicit position to react to. The "comment 'AI' to get the system" pattern.*
+
+<HookExample quote="Stop wasting your VO3 credits on useless prompts." creator="(AI creator)" views="146,077" />
+
+*4.20% comment rate. Imperative + identifying with a small tribe (people using VO3, a niche AI tool). Tribal in-group content compounds comments.*
+
+<HookExample quote="Here is the one thing you need to know if you actually want to blow up on Instagram." creator="(Growth creator)" views="1,116,828" />
+
+*3.00% comment rate at 1.1M views (exceptional for the mega-viral tier where the median is 0.042%). 30,000+ comments. The "one thing you need to know" structure forces curiosity to a payoff that lives in the comments.*
+
+The common thread across high-comment-rate hooks:
+
+<NumberBlock items={[
+  { number: "01", text: "A specific small number ('20', 'one', '$2,000') that anchors curiosity around a precise claim." },
+  { number: "02", text: "An imperative or position the viewer can react to ('Stop', 'Here's', 'You don't have to...'). Statements > questions for comment provocation." },
+  { number: "03", text: "A tribal in-group reference (specific tool, specific industry, specific shared experience). Comments compound when viewers feel they belong to a small group." },
+  { number: "04", text: "An implied gate ('comment X for the system'). Many high-comment-rate videos route the audience through the comment section to get a DM. The cap of this strategy is 'engagement-bait fatigue,' but it's measurably effective." }
+]} />
+
+---
+
+<CTA
+  headline="See if you're optimizing for the right signal."
+  sub="Connect TikTok or Instagram. We classify every video on your account by hook archetype, niche, and engagement type, then write a 30-day calendar tuned to your actual goal: reach, comments, or both."
+  primary="Audit my account free"
+  secondary="See how it works"
+  secondaryHref="/features/content-strategy"
+/>
+
+---
+
+## How to read this if you're a creator
+
+Two opposite playbooks fall out of the data depending on what you're solving for.
+
+**If your goal is reach (vanity views, top-of-funnel, brand awareness):**
+
+<NumberBlock items={[
+  { number: "01", text: "Default to Investigator hooks. They're the only archetype that scales across all three view tiers." },
+  { number: "02", text: "Pick from Health, Food, Sports, or Dating: the highest-hit-rate niches." },
+  { number: "03", text: "Don't worry about provocative takes. Specific curiosity facts beat hot takes for raw reach." }
+]} />
+
+**If your goal is community (comment signal, audience activation, repeat viewers):**
+
+<NumberBlock items={[
+  { number: "01", text: "Default to Hot Take, FaceTime Energy, or Contrarian hooks. Comment rate roughly 1.6x higher than the bottom-tier hooks." },
+  { number: "02", text: "Lean into Politics, Real Estate, Tech & AI, Money, or Productivity. These niches over-index on talkability." },
+  { number: "03", text: "Take a position. The 'I'm not telling you what to think, just sharing data' frame loses to 'this is wrong and here's why.' Polarization is the comment-rate fuel." }
+]} />
+
+**The biggest creators stack both.** They have a reach playbook (Investigator hooks on broad topics) and a discussion playbook (Hot Takes on niche topics). The reach content brings new viewers in. The discussion content turns viewers into commenters into followers.
+
+---
+
+## The bottom line
+
+"Engagement" is not a single metric. Reach and discussion are two separate signals that pull in opposite directions for most creators.
+
+The tactical move is to be honest about which one you're optimizing for, then use the right inputs. If you've been posting Health-niche Investigator-hook content and complaining that "no one comments," the data isn't broken. You picked the inputs that maximize watch counts and minimize discussion.
+
+The biggest opportunity in the data: **Politics is the rare niche that wins both.** High mega-viral rate AND highest comment rate. If you have a defensible angle in politics, civic commentary, or news commentary, the math is unusually favorable.
+
+For everyone else: pick a signal, pick the matching inputs, and stop expecting one type of content to deliver both.
+
+<CTA
+  headline="Get a content mix tuned to your specific goal."
+  sub="TCL audits your account plus your top competitors, classifies every video by reach signal vs comment signal, and writes a 30-day script calendar tuned to whichever metric matters most for you."
+  primary="Get my free audit"
+  secondary="See pricing"
+/>
+
+---
+
+## Methodology
+
+**Dataset:** 10,761 short-form videos with both view counts and comment counts populated, drawn from our analyzed video corpus on 2026-04-28 (combining first-party analyzed content and competitor-scrape analyzed content). Platforms: TikTok, Instagram, YouTube. Tier breakdown: Tier 1 (under 100K) 8,419 videos, Tier 2 (100K-1M) 1,993, Tier 3 (1M+) 349.
+
+**Comment rate definition:** `comments / views * 100`, expressed as a percentage. We report the median, not the mean, because a small number of giveaway-bait videos (with 20%+ comment rates) skew the average upward in ways that aren't representative.
+
+**Why median comment rate, not absolute count:** Absolute comments grow with views by definition (more viewers = more potential commenters). The rate is a more honest measure of "how talkable is this content."
+
+**Hook archetype filter:** For the hook breakdown we filtered to videos with at least 5,000 views to avoid the noisy bottom of the distribution where comment counts are tiny and ratios are unreliable.
+
+**Niche bucketing:** Same keyword-based bucketing as our prior topic heat map study. Videos that didn't cleanly match a niche pattern were excluded from the niche breakdown (about 25% of the dataset).
+
+**Known limits:**
+- Instagram comment counts are sometimes under-reported in scrape data due to API limits. The IG numbers should be read as directional minimums.
+- The "engagement-bait" caveat: a small number of videos (giveaway, "comment X for the system" routing) inflate the very top of the comment-rate distribution. We excluded the giveaway outlier from our top-examples list and used median throughout to avoid these distorting the headline numbers.
+- Cross-posted videos appear once per platform.
+- Tier 3 is 349 videos, a meaningful sample but cell-level percentages should still be treated as directional. The headline pattern (comment rate inversely correlated with views) holds across both Tier 2 and Tier 3 independently.

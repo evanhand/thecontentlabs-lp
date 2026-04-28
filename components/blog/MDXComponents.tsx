@@ -1107,6 +1107,378 @@ export function DataPieChart({
   );
 }
 
+/* -- Metric Delta: dramatic single-metric tier comparison with punchline -- */
+export function MetricDelta({
+  metric,
+  conclusion,
+  direction = "up",
+  tiers,
+  unit = "",
+}: {
+  metric: string;
+  conclusion: string;
+  direction?: "up" | "down";
+  tiers: { label: string; value: number; display: string; tone?: "slate" | "amber" | "coral" | "emerald" }[];
+  unit?: string;
+}) {
+  const max = Math.max(...tiers.map((t) => t.value));
+  const palette = {
+    slate: { bar: "bg-slate-300", text: "text-slate-600", glow: "" },
+    amber: { bar: "bg-amber-400", text: "text-amber-700", glow: "" },
+    coral: {
+      bar: "bg-gradient-to-r from-content-coral to-content-cta",
+      text: "text-content-coral",
+      glow: "shadow-[0_8px_24px_-6px_rgba(255,107,107,0.55)]",
+    },
+    emerald: {
+      bar: "bg-gradient-to-r from-emerald-400 to-emerald-500",
+      text: "text-emerald-600",
+      glow: "shadow-[0_8px_24px_-6px_rgba(16,185,129,0.5)]",
+    },
+  } as const;
+  const winnerIdx = direction === "up"
+    ? tiers.indexOf(tiers.reduce((a, b) => (a.value >= b.value ? a : b)))
+    : tiers.indexOf(tiers.reduce((a, b) => (a.value <= b.value ? a : b)));
+  const arrowChar = direction === "up" ? "↑" : "↓";
+
+  return (
+    <figure className="not-prose my-10 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
+      {/* Header strip */}
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 sm:px-7 py-4 border-b border-slate-200 bg-white">
+        <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.18em] text-slate-700 font-bold">
+          {metric}
+        </p>
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-content-coral/10 border border-content-coral/30">
+          <span className="text-content-coral font-bold tabular-nums">
+            {arrowChar}
+          </span>
+          <span className="text-[12px] font-bold text-content-coral uppercase tracking-wide">
+            {conclusion}
+          </span>
+        </div>
+      </div>
+      {/* Bars */}
+      <div className="px-5 sm:px-7 py-6 space-y-4">
+        {tiers.map((tier, i) => {
+          const tone = tier.tone || (i === winnerIdx ? "coral" : i === 0 ? "slate" : "amber");
+          const c = palette[tone];
+          const widthPct = (tier.value / max) * 100;
+          const isWinner = i === winnerIdx;
+          return (
+            <div key={tier.label} className="flex items-center gap-4">
+              <div className="w-24 sm:w-32 flex-shrink-0">
+                <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold leading-none">
+                  {tier.label}
+                </p>
+              </div>
+              <div className="relative flex-1 h-12 sm:h-14 rounded-lg bg-slate-100 overflow-hidden">
+                <div
+                  className={`absolute inset-y-0 left-0 ${c.bar} ${isWinner ? c.glow : ""} transition-all`}
+                  style={{ width: `${widthPct}%` }}
+                />
+                {isWinner && (
+                  <div className="absolute inset-y-0 right-2 flex items-center">
+                    <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-white/90 px-2 py-0.5 rounded-full bg-black/15 backdrop-blur-sm">
+                      {direction === "up" ? "highest" : "lowest"}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="w-20 sm:w-28 flex-shrink-0 text-right">
+                <p className={`text-2xl sm:text-3xl font-bold tabular-nums leading-none ${isWinner ? c.text : "text-slate-700"}`}>
+                  {tier.display}
+                  {unit && <span className="text-base ml-0.5">{unit}</span>}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </figure>
+  );
+}
+
+/* -- Reach × Talk Quadrant Matrix -- */
+export function ReachTalkQuadrant({
+  rows,
+  xLabel = "Hit rate (% videos crossing 100K)",
+  yLabel = "Comment rate (% of viewers)",
+  xMax = 40,
+  yMax = 0.25,
+  xMid = 20,
+  yMid = 0.1,
+  title,
+}: {
+  rows: { niche: string; reach: number; talk: number }[];
+  xLabel?: string;
+  yLabel?: string;
+  xMax?: number;
+  yMax?: number;
+  xMid?: number;
+  yMid?: number;
+  title?: string;
+}) {
+  function quadrant(reach: number, talk: number) {
+    if (reach >= xMid && talk >= yMid) return { label: "TR", style: "bg-emerald-500 text-white", ring: "ring-emerald-400/40" };
+    if (reach >= xMid && talk < yMid) return { label: "BR", style: "bg-content-coral text-white", ring: "ring-content-coral/40" };
+    if (reach < xMid && talk >= yMid) return { label: "TL", style: "bg-sky-500 text-white", ring: "ring-sky-400/40" };
+    return { label: "BL", style: "bg-slate-400 text-white", ring: "ring-slate-300/40" };
+  }
+
+  return (
+    <figure className="not-prose my-10">
+      {title && (
+        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+          {title}
+        </p>
+      )}
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
+        <div className="relative" style={{ aspectRatio: "16 / 10", minHeight: 360 }}>
+          {/* Quadrant background tints */}
+          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+            <div className="bg-sky-50/60 border-r border-b border-slate-200" />
+            <div className="bg-emerald-50/60 border-b border-slate-200" />
+            <div className="bg-slate-50/60 border-r border-slate-200" />
+            <div className="bg-content-coral/5" />
+          </div>
+          {/* Quadrant labels */}
+          <span className="absolute top-2 left-2 text-[9px] font-mono uppercase tracking-[0.18em] text-sky-600 font-bold opacity-80">
+            Talkable, low reach
+          </span>
+          <span className="absolute top-2 right-2 text-[9px] font-mono uppercase tracking-[0.18em] text-emerald-700 font-bold opacity-90">
+            Sweet spot ★
+          </span>
+          <span className="absolute bottom-7 left-2 text-[9px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold opacity-80">
+            Dead zone
+          </span>
+          <span className="absolute bottom-7 right-2 text-[9px] font-mono uppercase tracking-[0.18em] text-content-coral font-bold opacity-80">
+            Watchable, low talk
+          </span>
+          {/* Mid-line crosshair */}
+          <div
+            aria-hidden
+            className="absolute left-0 right-0 h-px bg-slate-300"
+            style={{ bottom: `${(yMid / yMax) * 100}%` }}
+          />
+          <div
+            aria-hidden
+            className="absolute top-0 bottom-6 w-px bg-slate-300"
+            style={{ left: `${(xMid / xMax) * 100}%` }}
+          />
+          {/* Y-axis label */}
+          <span className="absolute -left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 origin-center whitespace-nowrap" style={{ transform: 'translateX(-100%) translateY(-50%) rotate(-90deg)' }}>
+            {yLabel}
+          </span>
+          {/* Plot area */}
+          <div className="absolute inset-0 pl-6 pr-2 pt-2 pb-6">
+            <div className="relative w-full h-full">
+              {rows.map((r) => {
+                const x = Math.min(100, (r.reach / xMax) * 100);
+                const y = Math.min(100, (r.talk / yMax) * 100);
+                const q = quadrant(r.reach, r.talk);
+                return (
+                  <div
+                    key={r.niche}
+                    className="absolute group"
+                    style={{ left: `${x}%`, bottom: `${y}%`, transform: "translate(-50%, 50%)" }}
+                  >
+                    <div
+                      className={`w-3.5 h-3.5 rounded-full ring-2 ${q.ring} ${q.style.split(' ')[0]} shadow-md transition-transform group-hover:scale-150`}
+                      title={`${r.niche}: ${r.reach}% reach · ${r.talk}% comment rate`}
+                    />
+                    <span
+                      className="absolute left-3 top-1/2 -translate-y-1/2 whitespace-nowrap text-[11px] font-semibold text-slate-700 pointer-events-none px-1.5 py-0.5 rounded bg-white/80 ring-1 ring-slate-200/60 shadow-sm"
+                    >
+                      {r.niche}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          {/* X-axis label */}
+          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500">
+            {xLabel} →
+          </span>
+        </div>
+      </div>
+      {/* Legend */}
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-[10px] font-mono uppercase tracking-[0.16em] text-slate-500">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-3 w-3 rounded-full bg-emerald-500" /> Sweet spot (high reach + high talk)
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-3 w-3 rounded-full bg-content-coral" /> Watchable only
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-3 w-3 rounded-full bg-sky-500" /> Talkable only
+        </span>
+      </div>
+    </figure>
+  );
+}
+
+/* -- Script DNA Compare (long-tail vs viral linguistic profile) -- */
+export function ScriptDNACompare({
+  loser,
+  winner,
+}: {
+  loser: { label: string; rows: { metric: string; value: string; note?: string }[] };
+  winner: { label: string; rows: { metric: string; value: string; note?: string }[] };
+}) {
+  return (
+    <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-10">
+      {/* Loser card */}
+      <div className="relative rounded-2xl bg-slate-50 border border-slate-200 p-6">
+        <div className="flex items-center gap-2 mb-5">
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-200 text-slate-600 text-sm font-bold">
+            ↓
+          </span>
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 font-bold">
+            {loser.label}
+          </span>
+        </div>
+        <ul className="space-y-4">
+          {loser.rows.map((r) => (
+            <li key={r.metric}>
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-sm text-slate-600">{r.metric}</span>
+                <span className="text-2xl font-bold tabular-nums text-slate-700">
+                  {r.value}
+                </span>
+              </div>
+              {r.note && (
+                <p className="text-[11px] text-slate-400 mt-0.5">{r.note}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* Winner card */}
+      <div className="relative rounded-2xl bg-gradient-to-br from-content-coral/5 via-white to-content-coral/10 border-2 border-content-coral/40 p-6 shadow-[0_8px_28px_-12px_rgba(255,107,107,0.4)]">
+        <div className="flex items-center gap-2 mb-5">
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-content-coral text-white text-sm font-bold">
+            ↑
+          </span>
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-content-coral font-bold">
+            {winner.label}
+          </span>
+        </div>
+        <ul className="space-y-4">
+          {winner.rows.map((r) => (
+            <li key={r.metric}>
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-sm text-slate-700">{r.metric}</span>
+                <span className="text-2xl font-bold tabular-nums text-content-coral">
+                  {r.value}
+                </span>
+              </div>
+              {r.note && (
+                <p className="text-[11px] text-slate-500 mt-0.5">{r.note}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/* -- Opener Podium (top first words on a 1-2-3 podium) -- */
+export function OpenerPodium({
+  podium,
+  losers,
+}: {
+  podium: { rank: 1 | 2 | 3; word: string; value: string; note?: string }[];
+  losers?: { word: string; value: string }[];
+}) {
+  const order = [2, 1, 3]; // visual order: 2nd, 1st, 3rd (podium layout)
+  const heights: Record<number, string> = { 1: "h-44", 2: "h-32", 3: "h-24" };
+  const colors: Record<number, { bg: string; text: string; ring: string; medal: string }> = {
+    1: {
+      bg: "bg-gradient-to-br from-content-coral to-content-cta",
+      text: "text-white",
+      ring: "ring-content-coral/40",
+      medal: "bg-amber-300 text-amber-900",
+    },
+    2: {
+      bg: "bg-gradient-to-br from-slate-500 to-slate-600",
+      text: "text-white",
+      ring: "ring-slate-400/40",
+      medal: "bg-slate-200 text-slate-700",
+    },
+    3: {
+      bg: "bg-gradient-to-br from-orange-400 to-orange-500",
+      text: "text-white",
+      ring: "ring-orange-300/40",
+      medal: "bg-orange-200 text-orange-800",
+    },
+  };
+
+  return (
+    <div className="not-prose my-10">
+      <div className="rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 sm:p-8">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 items-end">
+          {order.map((rank) => {
+            const entry = podium.find((p) => p.rank === rank);
+            if (!entry) return <div key={rank} />;
+            const c = colors[rank];
+            return (
+              <div key={rank} className="flex flex-col items-center text-center">
+                <span
+                  className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${c.medal} font-bold text-sm mb-2 ring-1 ring-black/5`}
+                >
+                  {rank}
+                </span>
+                <p className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-0.5">
+                  &ldquo;{entry.word}&rdquo;
+                </p>
+                <p className="text-2xl sm:text-3xl font-bold tabular-nums text-slate-900 leading-none mb-2">
+                  {entry.value}
+                </p>
+                {entry.note && (
+                  <p className="text-[10px] text-slate-400 mb-2 px-1 leading-tight">
+                    {entry.note}
+                  </p>
+                )}
+                <div
+                  className={`relative w-full ${heights[rank]} rounded-t-xl ${c.bg} ${c.text} ring-2 ${c.ring} shadow-md flex items-end justify-center pb-3`}
+                >
+                  <span className="text-3xl sm:text-5xl font-bold opacity-30 tabular-nums">
+                    {rank}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {losers && losers.length > 0 && (
+          <div className="mt-6 pt-6 border-t border-slate-200">
+            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold mb-3 text-center">
+              The bottom shelf — openers to avoid
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {losers.map((l) => (
+                <div
+                  key={l.word}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-xs"
+                >
+                  <span className="text-slate-700 font-semibold">
+                    &ldquo;{l.word}&rdquo;
+                  </span>
+                  <span className="text-slate-400 tabular-nums font-mono">
+                    {l.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /* -- Niche Bubble Map (size = volume, color = hit rate) -- */
 export function NicheBubbleMap({
   rows,
