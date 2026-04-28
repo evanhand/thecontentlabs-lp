@@ -12,6 +12,7 @@ import { PricingPreview } from '@/components/landing/PricingPreview';
 import { LatestContent } from '@/components/landing/LatestContent';
 import { FinalCTA } from '@/components/landing/FinalCTA';
 import { Footer } from '@/components/landing/Footer';
+import { StickyMobileCTA } from '@/components/StickyMobileCTA';
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -99,6 +100,7 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      <StickyMobileCTA watchId="hero-section" />
     </div>
   );
 }

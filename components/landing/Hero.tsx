@@ -86,7 +86,7 @@ export function Hero() {
           )}
 
           <div
-            className="inline-flex items-center px-4 py-1.5 font-mono text-xs border border-content-coral-500/20 bg-content-coral-500/5 rounded-full text-content-coral-600 mb-6 tracking-wider"
+            className="inline-flex items-center px-4 py-2 sm:py-1.5 font-mono text-[13px] sm:text-xs border border-content-coral-500/30 sm:border-content-coral-500/20 bg-content-coral-500/10 sm:bg-content-coral-500/5 rounded-full text-content-coral-700 sm:text-content-coral-600 mb-6 tracking-wider font-semibold sm:font-normal"
           >
             TRUSTED BY 47,598 CREATORS
           </div>
@@ -132,6 +132,29 @@ export function Hero() {
             </a>
           </div>
           <p className="text-sm text-slate-400 mt-3">Free content audit in under 60 seconds &middot; No credit card required</p>
+
+          {/* Mobile-only social proof — sits between CTA and video so phone
+              users see real creator results in the first viewport instead of
+              having to scroll past the autoplay product demo. */}
+          <div className="sm:hidden mt-7 flex flex-wrap justify-center gap-2">
+            {HERO_CHIPS.map((t) => (
+              <div key={`mobile-${t.name}`} className="flex items-center gap-2 px-2.5 py-1.5 border border-slate-200 rounded-lg bg-white/70">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  loading="lazy"
+                  decoding="async"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 rounded-full object-cover border border-slate-200 flex-shrink-0"
+                />
+                <div className="text-left">
+                  <p className="font-mono text-[10px] font-semibold text-slate-900 leading-none">{t.name}</p>
+                  <p className="font-mono text-[9px] text-content-coral-600 leading-tight mt-0.5">{t.stat}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -169,7 +192,7 @@ export function Hero() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="hidden sm:flex flex-wrap justify-center gap-3">
           {HERO_CHIPS.map((t) => (
             <div key={t.name} className="flex items-center gap-2.5 px-3 py-2 border border-slate-200 rounded-lg bg-white/70">
               <img
