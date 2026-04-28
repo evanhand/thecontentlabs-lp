@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { PrealgoIdentityBridge } from "@/components/PrealgoIdentityBridge";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -212,7 +213,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <PostHogProvider>{children}</PostHogProvider>
+        <PostHogProvider>
+          <PrealgoIdentityBridge />
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );
