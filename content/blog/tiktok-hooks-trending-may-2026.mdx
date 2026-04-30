@@ -18,15 +18,22 @@ thumbnailHook: "Hot Takes are over."
 thumbnailEmphasis: "over"
 ---
 
-Last month's playbook is already wrong.
+**Last month's playbook is already wrong.** We tagged every TikTok and Reel posted in the last 30 days. The leaderboard flipped.
 
-We've been tagging every TikTok and Reel that gets posted by our users and their competitors. **808 videos in the last 30 days alone.** When we re-ran the hook analysis against the prior 90 days, the leaderboard had completely flipped.
+<StatGrid>
+  <StatCard stat="808" label="Videos posted (last 30 days)" />
+  <StatCard stat="+0.44pt" label="Predict the Future engagement" />
+  <StatCard stat="-1.90pt" label="Hot Take engagement" />
+</StatGrid>
 
-The hook type that was pulling the highest engagement at the end of Q1 is now down 29%. A different archetype, one that didn't even crack the top 5 a month ago, just took the lead.
-
-Here's the May 2026 picture, with real videos and real numbers from the last 30 days.
-
----
+<Highlight title="The 60-second version">
+  <ul>
+    <li><strong>Predict the Future is the only hook type climbing.</strong> Up from 5.49% to 5.93% engagement.</li>
+    <li><strong>Hot Takes are saturated.</strong> Down 29%. Still drive the most views, but per-view engagement is collapsing.</li>
+    <li><strong>Personal-story openers are dead.</strong> Down 40%. The "this is me when" pattern got memed.</li>
+    <li><strong>Flip the Script and Drop a Useful Fact held flat.</strong> Reliable. Not exciting.</li>
+  </ul>
+</Highlight>
 
 <CTA
   headline="Stop guessing what's hot. See what's working in your niche this week."
@@ -36,18 +43,20 @@ Here's the May 2026 picture, with real videos and real numbers from the last 30 
   secondaryHref="/features/content-strategy"
 />
 
-## The May 2026 hook leaderboard
+---
 
-749 videos across 6 hook archetypes, posted in the last 30 days. Engagement column is the average rate across all videos in that bucket. The Δ column shows how it shifted vs the prior 90 days.
+## The May 2026 leaderboard
 
-| Hook Type | What It Is | Videos | Engagement | Δ vs Prior 90d | Status |
-|-----------|-----------|--------|-----------|----------------|--------|
-| **Predict the Future** | Tell viewers what's about to happen | 68 | **5.93%** | +0.44 | Climbing |
-| **Flip the Script** | Contradict what everyone assumes | 153 | **5.48%** | -0.19 | Flat |
-| Pull Them In | Open a question or mystery | 164 | 4.71% | -1.28 | Cooling |
-| Hot Take | Lead with a strong opinion | 220 | 4.70% | **-1.90** | Cooling fast |
-| Drop a Useful Fact | Teach something specific in 1 line | 119 | 4.56% | -0.07 | Flat |
-| Tell a Story | Open with a personal narrative | 25 | 4.14% | **-2.79** | Collapsing |
+749 videos. 6 hook types. Δ shows shift vs the prior 90 days.
+
+| Hook Type | What It Is | Videos | Engagement | Δ | Status |
+|-----------|-----------|--------|-----------|----|--------|
+| **Predict the Future** | Tell viewers what's about to happen | 68 | **5.93%** | **+0.44** ↑ | Climbing |
+| **Flip the Script** | Contradict what everyone assumes | 153 | **5.48%** | -0.19 → | Flat |
+| Pull Them In | Open a question or mystery | 164 | 4.71% | -1.28 ↓ | Cooling |
+| Hot Take | Lead with a strong opinion | 220 | 4.70% | **-1.90** ↓ | Cooling fast |
+| Drop a Useful Fact | Teach something specific in 1 line | 119 | 4.56% | -0.07 → | Flat |
+| Tell a Story | Open with a personal narrative | 25 | 4.14% | **-2.79** ↓ | Collapsing |
 
 <DataBarChart
   data={[
@@ -60,145 +69,133 @@ Here's the May 2026 picture, with real videos and real numbers from the last 30 
   ]}
   xKey="hook"
   yKey="engagement"
-  title="Average Engagement Rate by Hook Type (Last 30 Days)"
+  title="Engagement Rate by Hook Type (Last 30 Days)"
   yLabel="Engagement"
   suffix="%"
   horizontal
   height={340}
 />
 
-The story isn't who's #1. The story is **what's shifting**. Three of the six hook types lost more than a full point of engagement vs the prior quarter. Only one is up.
+<DataPieChart
+  data={[
+    { hook: "Hot Take", count: 220 },
+    { hook: "Pull Them In", count: 164 },
+    { hook: "Flip the Script", count: 153 },
+    { hook: "Drop a Useful Fact", count: 119 },
+    { hook: "Predict the Future", count: 68 },
+    { hook: "Tell a Story", count: 25 },
+  ]}
+  nameKey="hook"
+  valueKey="count"
+  title="What Creators Are Posting (749 Videos, Last 30 Days)"
+  donut
+  height={360}
+/>
+
+Notice the gap: **Hot Take is the most posted (220 videos) but only the 4th-best performing.** Everyone is making the same thing. Predict the Future has the *fewest* videos and the *highest* engagement. Supply and demand.
 
 ---
 
-## What's actually happening
+## What's actually shifting
 
-### Predictions are the new currency
+<Callout type="tip">
+  <strong>↑ Predictions are the new currency.</strong> Up 8% vs prior 90 days. AI volatility, sports drama, contract chaos, breaking news. People are anxious about what's coming next, and "I can see around the corner" wins their attention. Specificity (numbers, deadlines, named events) is what flips a generic prediction into a credible one.
+</Callout>
 
-Predict-the-Future hooks (the "here's what's about to happen" or "watch what they're going to do" format) are the only hook type climbing. Engagement is up 8% vs the prior 90 days, even as overall feed engagement has flattened.
+<Callout type="warning">
+  <strong>↓ Hot Takes are saturated.</strong> Engagement crashed from 6.60% to 4.70% in 90 days. The algorithm still pushes them (highest avg views by far), but viewers are scrolling past more often. Everyone running the "you NEED to hear this" playbook is fighting for the same shrinking pie.
+</Callout>
 
-Why now? AI volatility, sports drama, breaking news cycles, and contract chaos. People are anxious about what's coming next, and the hook that says "I can see around the corner" wins their attention.
-
-The format has built-in shareability. Viewers either bookmark you to verify later or share it to start a conversation. Both extend the video's reach past the initial view.
-
-### Hot Takes are saturated
-
-The biggest story in the data is the collapse of Hot Take engagement. From 6.60% down to 4.70% in 90 days. They still drive the most views per video by a wide margin (avg 129,912), but the per-view engagement is fatiguing.
-
-Translation: the algorithm is still pushing them, but viewers are scrolling past more often. Everyone running the "you NEED to hear this" playbook is fighting for the same shrinking pie.
-
-You can still win with Hot Takes in May 2026. You just have to be sharper, more specific, and have an actual take, not just a tone.
-
-### Personal-story hooks are collapsing
-
-Tell-a-Story hooks dropped 2.79 points. That's a 40% engagement crash in 90 days. The "let me tell you about the time I..." opener that worked through Q1 is now being skipped.
-
-This isn't because storytelling died. It's because the *opening pattern* got memed. When viewers can predict the next 10 seconds from the first 2, they swipe.
+<Callout type="warning">
+  <strong>↓ Personal-story openers are collapsing.</strong> Down 40% in 90 days. Storytelling isn't dead, the *opening pattern* is. When viewers can predict the next 10 seconds from the first 2, they swipe. Lead with the surprise or the consequence, not "this is me when..."
+</Callout>
 
 ---
 
 ## Real videos pulling engagement right now
 
-Pulled directly from the last 30 days. Hook quotes are verbatim from the videos.
+Verbatim hooks from the last 30 days.
 
 <HookSection rank={1} name="Predict the Future" tagline="Tell people what's about to happen. Position yourself as the person who saw it first." engagement="5.93%" videos="68" topViews="328K">
 
-Climbing. Up 0.44 points vs prior 90 days. The only hook type rising in May 2026.
+**Status:** Climbing. **+0.44pt** vs prior 90 days. The only hook type rising in May 2026.
 
-The pattern: open with a prediction, a number, or a "watch what happens next" frame. The viewer's brain treats it like a movie trailer. They have to know if you're right.
-
-**Real examples from the last 30 days:**
+**Pattern:** Open with a prediction, a number, or a "watch what happens next" frame. Anchor it to a specific date, dollar amount, or breaking event. The viewer's brain treats it like a movie trailer.
 
 <HookExample quote="The Masters will be making $277 every single second starting this Sunday until the Masters is over." creator="wunderpar" views="328K" />
 <HookExample quote="The US government is about to completely blow up the NFL's TV contracts. And if they win, you may never have to pay for another streaming service just to watch a game ever again." creator="evhandagain" views="250.9K" />
 <HookExample quote="We have some insane breaking news in the golf world right now. If the news out of New York is true, this is going to change absolutely everything for the game of golf." creator="wunderpar" views="257.8K" />
 
-Notice the pattern: each one anchors the prediction to a specific number, deadline, or breaking event. That's the part that flips a generic prediction into a credible one.
-
-<WhenToUse>When you have an angle on what's coming next in your niche. Industry shifts, breaking news, scheduled events, contract deadlines, AI releases, or any "watch this space" moment. Specificity makes it credible.</WhenToUse>
+<WhenToUse>When you have an angle on what's coming next in your niche. Industry shifts, breaking news, scheduled events, contract deadlines, AI releases. Specificity makes it credible.</WhenToUse>
 
 </HookSection>
 
 <HookSection rank={2} name="Flip the Script" tagline="Say the opposite of what everyone assumes. Make people argue in the comments." engagement="5.48%" videos="153" topViews="2.1M">
 
-Held the line. Down 0.19 points, basically flat. The most reliable hook type across all our data.
+**Status:** Flat. **-0.19pt** vs prior 90 days. The most reliable hook type across our entire dataset.
 
-The single highest-viewed video in the last 30 days was a Flip the Script hook at **2.1M views**. People share videos that prove their existing opinion right or refute the dominant narrative.
-
-**Real examples from the last 30 days:**
+**Pattern:** "Everyone thinks X, but the reality is Y." The single highest-viewed video in the last 30 days (2.1M) was a Flip the Script hook. People share videos that prove their existing opinion right or refute the dominant narrative.
 
 <HookExample quote="Everyone thinks Diego Pavia nuked his career after the Heisman ceremony with this stunt that he pulled, but the reality is NFL GMs are looking for any reason to pass on this dude anyway." creator="evhandagain" views="2.1M" />
 <HookExample quote="I don't get the sense I'll be the fan favorite but..." creator="wunderpargolf" views="791K" />
 <HookExample quote="Unpopular opinion. And one of the creators who is on here constantly complaining about the TikTok algorithm." creator="nicoledanilamoureux" views="1.9K (27% engagement)" />
 
-The Diego Pavia hook is a textbook Flip the Script opener. "Everyone thinks X, but the reality is Y." It tells the viewer they're about to learn the inside angle nobody else has.
-
-<WhenToUse>When you can credibly contradict the dominant take. Works in any niche where there's a popular narrative you can flip with evidence. Sports, politics, marketing, finance, content strategy itself.</WhenToUse>
+<WhenToUse>When you can credibly contradict the dominant take. Sports, politics, marketing, finance. Any niche with a popular narrative you can flip with evidence.</WhenToUse>
 
 </HookSection>
 
 <HookSection rank={3} name="Pull Them In" tagline="Open a mystery. Set up a question that the viewer has to watch to resolve." engagement="4.71%" videos="164" topViews="1.5M">
 
-Down 1.28 points. The format still drives huge views (top video this month: 1.5M), but the average engagement is fatiguing as everyone runs "here's why X happened" hooks.
+**Status:** Cooling. **-1.28pt** vs prior 90 days. Still drives huge views (1.5M top video), but the average is fatiguing.
 
-**Real examples from the last 30 days:**
+**Pattern:** Open-loop question or "wait, what?" moment. Generic "here's what nobody told you about X" hooks are getting filtered. The mystery itself has to be specific and unfamiliar to break through now.
 
 <HookExample quote="This guy just created the world's biggest headache of Dan Campbell's coaching career so far." creator="evhandagain" views="432K" />
 <HookExample quote="Here we are. The most confusing place on the golf course." creator="wunderpargolf" views="1.5M" />
 <HookExample quote="What do you suppose is going on with my eyeball right now? It hurts like an MF'er." creator="nicoledanilamoureux" views="1.3K (13.55% engagement)" />
 
-The format still works in volume, but viewers are getting savvy to the open-loop pattern. To win with Pull Them In hooks in May 2026, the mystery itself has to be *specific* and *unfamiliar*. Generic "here's what nobody told you about X" hooks are getting filtered out.
-
-<WhenToUse>When you have a real mystery, breakdown, or behind-the-scenes angle. Investigations, explainers, "wait, what happened" stories. The hook is best when the question itself is unusual.</WhenToUse>
+<WhenToUse>When you have a real mystery, breakdown, or behind-the-scenes angle. Investigations, explainers, "wait, what happened" stories. Skip generic open-loops.</WhenToUse>
 
 </HookSection>
 
 <HookSection rank={4} name="Hot Take" tagline="Lead with a strong opinion. Force the audience to agree or disagree." engagement="4.70%" videos="220" topViews="1.9M">
 
-The biggest decline in the dataset. Down 1.90 points, a 29% drop. Still drives the highest average views (129K), but engagement is falling because the format is everywhere now.
+**Status:** Cooling fast. **-1.90pt** vs prior 90 days, the biggest decline in the dataset. Still drives the highest avg views (129K), but per-view engagement is the issue.
 
-**Real examples from the last 30 days:**
+**Pattern:** The 1.9M-view Rory McIlroy hook worked because the take was specific, timely, and grounded in a real moment. Generic "controversial opinion" hooks are getting scrolled past.
 
 <HookExample quote="Rory McIlroy just reminded all of us how poor we really are." creator="evhandagain" views="1.9M" />
 <HookExample quote="This guy is already having the worst Master Sunday in the history of golf." creator="wunderpar" views="1.1M" />
 <HookExample quote="This is gonna piss a lot of people off." creator="nicoledanilamoureux" views="1.7K (17.82% engagement)" />
 
-Hot Takes still hit when they're earned. The Rory McIlroy hook hit 1.9M views because the take was specific, timely, and grounded in a real moment. Generic "controversial opinion" hooks are getting scrolled past.
-
-<WhenToUse>When you have a take that you can actually back up. Specific, timely, opinionated. Skip it if you're just trying to be edgy without a point.</WhenToUse>
+<WhenToUse>When you have a take you can actually back up. Specific, timely, opinionated. Skip if you're just trying to be edgy without a point.</WhenToUse>
 
 </HookSection>
 
 <HookSection rank={5} name="Drop a Useful Fact" tagline="Lead with a piece of useful information. 'Did you know' or 'turn off this setting' formats." engagement="4.56%" videos="119" topViews="526K">
 
-Held flat. Down only 0.07 points. The format is steady because it actually delivers value, not just emotion.
+**Status:** Flat. **-0.07pt** vs prior 90 days. Steady because it actually delivers value, not just emotion.
 
-**Real examples from the last 30 days:**
+**Pattern:** Lower view counts on average, higher engagement-per-view. Saves and shares run higher than other hook types. The audience that watches is invested.
 
 <HookExample quote="Did you know that Boise State has a legal monopoly on college football fields?" creator="evhandagain" views="37K" />
 <HookExample quote="Turn off this setting in TikTok immediately." creator="nicoledanilamoureux" views="89.3K" />
 <HookExample quote="I'm going to tell you exactly why TikTok Shop wants you to niche down. As a CEO of a seven-figure organization who spends money on advertising." creator="nicoledanilamoureux" views="1.9K (17.88% engagement)" />
 
-Drop-a-Useful-Fact hooks tend to drive lower view counts on average but high engagement-per-view. The audience that does watch is invested. Saves and shares run higher than other hook types.
-
-<WhenToUse>When you have specific, useful information your audience can apply immediately. Settings, hacks, "did you know" facts, tactical advice with a number or specific outcome attached.</WhenToUse>
+<WhenToUse>When you have specific, useful information your audience can apply immediately. Settings, hacks, "did you know" facts, tactical advice with a number attached.</WhenToUse>
 
 </HookSection>
 
 <HookSection rank={6} name="Tell a Story" tagline="Open with a personal narrative. 'This is me when...' or 'Let me tell you about...' formats." engagement="4.14%" videos="25" topViews="73K">
 
-The biggest collapse in the dataset. Down 2.79 points, a 40% drop in 90 days.
+**Status:** Collapsing. **-2.79pt** vs prior 90 days. A 40% engagement crash.
 
-The story format itself isn't dead, but the *opening pattern* has been pattern-matched to death. Viewers can now predict the structure from the first two seconds and they swipe before the story starts.
-
-**Real examples from the last 30 days:**
+**Pattern:** The story format isn't dead, the *opening* is. Viewers can predict the structure from the first 2 seconds and they swipe. Lead with the surprise or the consequence, not the setup.
 
 <HookExample quote="this is me standing up for myself in a job interview" creator="realisticrecruiting" views="72.7K" />
 <HookExample quote="I got laid off at the height of my career and it crushed me mentally in a way that I am not proud of." creator="RealisticRecruiting" views="6.2K" />
 
-Story still works for *some* creators in *some* niches (relationship, career, recovery content), but the days of the generic "let me tell you about the time" opener are over.
-
-<WhenToUse>Only when the story itself is unusual or the stakes are unmistakable in the first 2 seconds. Skip the "this is me when" opener entirely. Lead with the surprise or the consequence.</WhenToUse>
+<WhenToUse>Only when the story itself is unusual or the stakes are unmistakable in the first 2 seconds. Skip the "this is me when" opener entirely.</WhenToUse>
 
 </HookSection>
 
@@ -206,35 +203,19 @@ Story still works for *some* creators in *some* niches (relationship, career, re
 
 ## What this means for May
 
-Three concrete moves if you're scripting for the next 30 days:
-
 <NumberBlock items={[
   { number: "01", text: "Find a prediction angle in your niche. Predict-the-Future is the only hook type rising. Anchor predictions to specific numbers, deadlines, or events for credibility." },
   { number: "02", text: "Stop running pure Hot Takes without specifics. The format still drives views but engagement is collapsing on generic 'controversial opinion' openers. Earn the take with timing and detail." },
   { number: "03", text: "Drop the 'this is me when' personal-story opener. The pattern is dead. Lead with the surprise or the consequence, not the setup." }
 ]} />
 
-The hook formats themselves haven't fundamentally changed. The *fatigue cycle* is what's shifting. Whatever was hottest 3 months ago is the most copied today, which is why it's underperforming now.
+The hook formats themselves haven't changed. The *fatigue cycle* has. Whatever was hottest 3 months ago is the most copied today, which is why it's underperforming now.
 
-If you want the full breakdown of every hook type and how they work as a long-term system, here's the evergreen guide: [The 7 TikTok Hook Formulas That Actually Go Viral](/blog/tiktok-hooks-that-work).
+For the full evergreen system (all 7 hook formulas, when each works, real examples), see: [The 7 TikTok Hook Formulas That Actually Go Viral](/blog/tiktok-hooks-that-work).
 
----
-
-## How we pulled this
-
-808 videos posted in the last 30 days, scraped daily from our users' accounts and their competitors. Each video tagged by Gemini against our hook taxonomy. Engagement rate calculated as (likes + comments + shares + saves) / views per video, then averaged within each hook type.
-
-The 749 videos in this report fall into our 6 most-populated hook types. The other 59 fell into smaller buckets (experiment-style, commentary, pure surprise reveals, proof-drop openers) that don't have enough volume to draw real conclusions from this month. We'll re-run the analysis at the end of May 2026.
-
----
-
-## The bottom line
-
-Hook trends shift faster than most creators are tracking. What worked in Q1 2026 isn't what's working heading into May. Predict-the-Future is up. Hot Take is fatiguing. Personal-story openers are collapsing.
-
-If you're still scripting against last quarter's playbook, you're already behind.
-
-If you want this run against your specific niche (with the actual hooks your competitors are using and which ones are pulling engagement right now), that's what we built TCL to do. We tag every video, surface the patterns, and write you a 30-day calendar around what's currently hitting.
+<Callout type="info">
+  <strong>How we pulled this:</strong> 808 videos posted in the last 30 days, scraped daily from our users' accounts and their competitors. Each video tagged by Gemini against our hook taxonomy. Engagement rate = (likes + comments + shares + saves) / views per video, averaged within each hook type. The 749 in this report fall into our 6 most-populated buckets. Re-run at the end of May 2026.
+</Callout>
 
 <CTA
   headline="See which hook formulas are working in your niche this month."
