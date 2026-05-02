@@ -6,6 +6,7 @@ import { PublicNav } from "@/components/PublicNav";
 import { Footer } from "@/components/landing/Footer";
 import { Breadcrumbs } from "@/components/blog/BlogComponents";
 import { BlogCTACard } from "@/components/blog/BlogCTACard";
+import { BlogPostTracker } from "@/components/blog/BlogPostTracker";
 
 const CATEGORY_LABELS: Record<string, string> = {
   guide: "Guide",
@@ -207,9 +208,17 @@ export default async function BlogPost({
         </div>
       </div>
 
+      <BlogPostTracker
+        slug={slug}
+        category={meta.category}
+        title={meta.title}
+        readingTime={meta.readingTime}
+      />
+
       {/* Article body */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <article
+          data-blog-article
           className={[
             "bg-white rounded-2xl shadow-sm border border-slate-200",
             "px-5 py-8 sm:px-10 sm:py-12 lg:px-14",
