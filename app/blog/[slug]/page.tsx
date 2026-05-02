@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { Metadata } from "next";
 import { getAllSlugs, getPostMeta } from "@/lib/blog";
 import { PublicNav } from "@/components/PublicNav";
@@ -11,6 +13,13 @@ const CATEGORY_LABELS: Record<string, string> = {
   niche: "Niche Guide",
   blog: "Blog",
 };
+
+function resolveHeroImage(slug: string, explicit?: string): string | null {
+  if (explicit) return explicit;
+  const localPath = path.join(process.cwd(), "public", "thumbnails", `${slug}.png`);
+  if (fs.existsSync(localPath)) return `/thumbnails/${slug}.png`;
+  return null;
+}
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -58,6 +67,7 @@ export default async function BlogPost({
   const { slug } = await params;
   const meta = getPostMeta(slug);
   const { default: Post } = await import(`@/content/blog/${slug}.mdx`);
+  const heroImage = resolveHeroImage(slug, meta.heroImage);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -65,7 +75,7 @@ export default async function BlogPost({
     headline: meta.title,
     description: meta.description,
     url: `https://thecontentlabs.app/blog/${slug}`,
-    image: meta.heroImage || meta.ogImage || "https://thecontentlabs.app/og-image.png",
+    image: heroImage || meta.ogImage || "https://thecontentlabs.app/og-image.png",
     datePublished: meta.date,
     dateModified: meta.updatedDate || meta.date,
     author: {
@@ -164,9 +174,9 @@ export default async function BlogPost({
 
         {/* Hero image */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mb-px">
-          {meta.heroImage ? (
+          {heroImage ? (
             <img
-              src={meta.heroImage}
+              src={heroImage}
               alt={meta.title}
               className="w-full aspect-video object-cover rounded-2xl border border-slate-200"
             />
