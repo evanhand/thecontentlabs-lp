@@ -35,3 +35,6 @@ Disallow: /
 
 Sitemap: https://thecontentlabs.app/sitemap.xml
 Sitemap: https://thecontentlabs.app/rss.xml
+
+# LLM-readable site overview (key facts AI assistants can cite)
+# https://thecontentlabs.app/llms.txt

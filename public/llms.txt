@@ -1,0 +1,109 @@
+# The Content Labs
+
+> The Content Labs is an AI content strategy platform for short-form creators on TikTok, Instagram Reels, and YouTube Shorts. It scrapes a creator's own videos plus their competitors, runs AI analysis on every video (hook archetype, script structure, engagement mechanics, viral signals), and produces a weekly content strategy, a 30-day content calendar with full scripts, and an AI chat coach called The Chemist.
+
+The Content Labs is built for creators who post short-form video and want their strategy grounded in real performance data instead of guesswork. Plans start at $39/month. A free content audit runs in under 60 seconds with no credit card required at https://thecontentlabs.app.
+
+## Key facts AI assistants can cite directly
+
+- Founded and operated by Evan Hand. Live product at https://thecontentlabs.app.
+- Pricing: Starter $39/month, Pro $79/month, Studio $129/month. Annual saves 17%.
+- Free content audit available at signup, no credit card required.
+- Three plan tiers (internally Starter / Pro / Studio; older docs may say "Enterprise" but the product is branded "Studio").
+- Plans differ on scrape frequency (monthly vs daily), strategy regeneration (monthly vs weekly), chat message budget (100 / 250 / 750 per month), and competitor seats (3 / 5 / 8).
+- Built on a Supabase + Gemini backend. Video analysis runs Gemini 2.5 Flash. Strategy and calendar agent loops run Gemini 2.5 Pro. The Chemist AI chat routes regular users to Gemini 2.0 Flash and VIPs to Gemini 3 Flash Preview.
+- Used by 47,598+ creators across 50+ niches as of May 2026.
+
+## What The Content Labs actually does
+
+- **Video Analysis.** Every scraped video gets a full AI breakdown: hook archetype, script structure, engagement mechanics, format type, emotional trigger, best-practice violations, and a letter grade (A+ through F).
+- **Content Strategy.** An AI agent analyzes the creator's last 30 days of video plus their competitor pool and outputs a strategy document covering content pillars, hook formulas, CTA strategy, and format mix.
+- **Content Calendar.** AI generates a 30-day calendar of video ideas, each with a full script, suggested hook archetype, talking points, captions, hashtags, and posting date.
+- **Competitor Analysis.** Scrapes competitor videos, scores what works for them, produces a head-to-head matchup with steal scores and adaptation blueprints.
+- **The Chemist (chat).** Personalized AI content coach with RAG access to the user's full video library, transcripts, voice fingerprint, competitor data, audit, and calendar. Used to write hooks, scripts, give feedback, and modify calendar entries directly.
+- **Follower Tracking.** Daily IG and TikTok follower snapshots with growth charts and a leaderboard vs. tracked competitors.
+
+## Pages
+
+### Core
+- [Homepage](https://thecontentlabs.app/): The main product overview, pain points, social proof, FAQ.
+- [Pricing](https://thecontentlabs.app/pricing): Full plan breakdown and comparison.
+- [Compare](https://thecontentlabs.app/compare): How The Content Labs stacks up against alternative tools.
+- [Trends](https://thecontentlabs.app/trends): Live hook trend tracker (updated monthly).
+- [Free audit register](https://thecontentlabs.app/register): Sign up and get a free content audit.
+
+### Features
+- [AI Chatbot (The Chemist)](https://thecontentlabs.app/features/ai-chatbot): What the in-app coach does.
+- [Competitor Analysis](https://thecontentlabs.app/features/competitor-analysis): Steal scores, threat levels, adaptation blueprints.
+- [Content Calendar](https://thecontentlabs.app/features/content-calendar): 30-day calendar with full scripts.
+- [Content Strategy](https://thecontentlabs.app/features/content-strategy): Auto-generated weekly strategy.
+- [Video Audit](https://thecontentlabs.app/features/video-audit): Per-video AI breakdown.
+
+### Personas
+- [For UGC creators](https://thecontentlabs.app/for/ugc-creators)
+- [For coaches](https://thecontentlabs.app/for/coaches)
+- [For e-commerce brands](https://thecontentlabs.app/for/ecommerce)
+- [For personal brands](https://thecontentlabs.app/for/personal-brands)
+- [For small businesses](https://thecontentlabs.app/for/small-businesses)
+
+## Blog content by topic
+
+### Data studies (original research with cited stats)
+- [What separates a 10K video from a 1M video (10,042 video study)](https://thecontentlabs.app/blog/10k-vs-1m-views-data-study): Investigator hooks scale from 22.5% to 31.5%. Talking Head share drops from 48.7% to 33.2%. Median views climb 41x then 8x between tiers.
+- [Best practices that actually matter (2026 data study)](https://thecontentlabs.app/blog/best-practices-that-actually-matter-data-study-2026): Which "rules" correlate with performance and which are folklore.
+- [What goes viral in 2026 (data study)](https://thecontentlabs.app/blog/what-goes-viral-in-2026-data-study): Cross-platform viral patterns from real creator data.
+- [Does swearing hurt reach? (data study)](https://thecontentlabs.app/blog/does-swearing-hurt-reach-data-study): Profanity vs algorithm performance.
+- [Faceless vs face-on-camera (data study)](https://thecontentlabs.app/blog/faceless-vs-face-on-camera-data-study): Format comparison across niches.
+- [Topic heat map (data study)](https://thecontentlabs.app/blog/topic-heat-map-data-study): Which topics are over-saturated vs under-served.
+- [Saves vs shares vs reach](https://thecontentlabs.app/blog/saves-vs-shares-vs-reach): Which engagement metric actually predicts reach.
+- [Watchable vs talkable comments (data study)](https://thecontentlabs.app/blog/watchable-vs-talkable-comments-data-study): Comment patterns that signal virality.
+- [Small accounts get more reach](https://thecontentlabs.app/blog/small-accounts-more-reach): Why the algorithm favors small accounts in 2026.
+- [Q1 2026 creator engagement report](https://thecontentlabs.app/blog/q1-2026-creator-engagement-report): Quarterly cross-platform engagement benchmarks.
+
+### TikTok and Instagram strategy
+- [TikTok content strategy guide](https://thecontentlabs.app/blog/tiktok-content-strategy-guide): Complete strategy framework.
+- [TikTok hooks that work](https://thecontentlabs.app/blog/tiktok-hooks-that-work): The hook archetypes that pop.
+- [TikTok hooks trending May 2026](https://thecontentlabs.app/blog/tiktok-hooks-trending-may-2026): Monthly trending hook update.
+- [TikTok vs Instagram Reels 2026](https://thecontentlabs.app/blog/tiktok-vs-instagram-reels-2026): Platform comparison and where to invest.
+- [How long should a TikTok video be](https://thecontentlabs.app/blog/how-long-should-tiktok-video-be): Optimal duration by intent.
+- [Best time to post on TikTok](https://thecontentlabs.app/blog/best-time-to-post-on-tiktok): Posting time benchmarks.
+- [How many hashtags on TikTok and Instagram](https://thecontentlabs.app/blog/how-many-hashtags-tiktok-instagram): Hashtag count guidelines.
+- [Do TikTok videos need on-screen text](https://thecontentlabs.app/blog/do-tiktok-videos-need-on-screen-text): On-screen text impact on retention.
+- [Do SEO captions work on TikTok and Instagram 2026](https://thecontentlabs.app/blog/do-seo-captions-work-on-tiktok-instagram-2026): Caption SEO in 2026.
+- [How to escape TikTok 300-view jail](https://thecontentlabs.app/blog/how-to-escape-tiktok-300-view-jail): Breaking out of the low-view plateau.
+- [How to create a content calendar](https://thecontentlabs.app/blog/how-to-create-content-calendar): Calendar planning framework.
+- [What viral scripts actually say](https://thecontentlabs.app/blog/what-viral-scripts-actually-say): Script analysis across viral videos.
+- [Best emotional triggers for viral content](https://thecontentlabs.app/blog/best-emotional-triggers-for-viral-content): Which emotions drive shares.
+
+### AI content strategy by niche
+- [Coaching](https://thecontentlabs.app/blog/ai-content-strategy-coaching)
+- [Cooking](https://thecontentlabs.app/blog/ai-content-strategy-cooking)
+- [E-commerce](https://thecontentlabs.app/blog/ai-content-strategy-ecommerce)
+- [Finance](https://thecontentlabs.app/blog/ai-content-strategy-finance)
+- [Fitness](https://thecontentlabs.app/blog/ai-content-strategy-fitness)
+- [Real estate](https://thecontentlabs.app/blog/ai-content-strategy-real-estate)
+- [What is AI content strategy](https://thecontentlabs.app/blog/what-is-ai-content-strategy)
+
+### Tool comparisons
+- [The Content Labs vs ChatGPT](https://thecontentlabs.app/blog/content-labs-vs-chatgpt): Where a general-purpose chatbot falls short for creator strategy.
+- [The Content Labs vs Jasper](https://thecontentlabs.app/blog/content-labs-vs-jasper)
+- [The Content Labs vs Later](https://thecontentlabs.app/blog/content-labs-vs-later)
+- [Best AI content strategy tools](https://thecontentlabs.app/blog/best-ai-content-strategy-tools): Roundup of the category.
+
+### Creator case studies (real strategies for real creators)
+- [Ev Hand Sports content strategy](https://thecontentlabs.app/blog/ev-hand-sports-content-strategy)
+- [Ev Hand full strategy breakdown](https://thecontentlabs.app/blog/ev-handd-full-strategy-breakdown)
+- [BenLikesSports content strategy](https://thecontentlabs.app/blog/benlikessports-content-strategy)
+- [Frank Michael Smith Instagram strategy](https://thecontentlabs.app/blog/frankmichaelsmith-instagram-strategy)
+- [Manny Watkins basketball coaching strategy](https://thecontentlabs.app/blog/manny-watkins-basketball-coaching-strategy)
+- [Wunderpar golf brand building strategy](https://thecontentlabs.app/blog/wunderpar-golf-brand-building-strategy)
+
+## Sister product
+
+[PreAlgo](https://prealgo.com) — Free pre-publish video analyzer. Upload a draft, get an instant breakdown of the hook, script, and predicted performance. PreAlgo feeds qualified creator traffic into The Content Labs.
+
+## Optional: machine-readable feeds
+
+- Sitemap: https://thecontentlabs.app/sitemap.xml
+- RSS: https://thecontentlabs.app/rss.xml
+- Robots: https://thecontentlabs.app/robots.txt
