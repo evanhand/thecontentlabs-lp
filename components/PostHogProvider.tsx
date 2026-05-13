@@ -11,6 +11,9 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
           capture_pageview: true,
           capture_pageleave: true,
           autocapture: true,
+          // Capture window.onerror + unhandledrejection so $exception events
+          // carry the actual error message/type/stack, not just a URL.
+          capture_exceptions: true,
         });
       });
     }

@@ -232,7 +232,12 @@ async function generateBackground(
   const parts: GeminiPart[] = [...refImages, { text: subjectPrompt }];
   const data = await callGemini(IMAGE_MODEL, {
     contents: [{ parts }],
-    generationConfig: { responseModalities: ["IMAGE"] },
+    generationConfig: {
+      responseModalities: ["IMAGE"],
+      // Nano Banana defaults to 1024x1024 (square) regardless of prompt hints.
+      // imageConfig.aspectRatio is the only reliable way to get widescreen output.
+      imageConfig: { aspectRatio: "16:9" },
+    },
   });
   const responseParts: GeminiPart[] = data?.candidates?.[0]?.content?.parts || [];
   const imgPart = responseParts.find(
