@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title:
     "What's Trending on TikTok and Instagram This Month | The Content Labs Trends Report",
   description:
-    "Live monthly trends report. Top hook archetypes, formats, and viral videos in our 1,400+ videos analyzed this month. Updated on the 1st of every month.",
+    "Live monthly trends report. Top hook archetypes, formats, and viral videos from the TikTok and Instagram videos we analyze every month. Updated on the 1st of every month.",
   alternates: { canonical: "https://thecontentlabs.app/trends" },
   openGraph: {
     title: "Trends — The Content Labs",
@@ -26,73 +26,69 @@ export const metadata: Metadata = {
 };
 
 const EDITION = {
-  month: "April 2026",
-  monthSlug: "april-2026",
-  videosAnalyzed: 1439,
-  asOf: "April 25, 2026",
+  month: "August 2026",
+  monthSlug: "august-2026",
+  videosAnalyzed: 460,
+  asOf: "August 20, 2026",
 };
 
 const HOOKS = [
-  { archetype: "Proof Drop", median: 49462, n: 25, march: null, delta: null },
-  { archetype: "Hot Take", median: 32900, n: 296, march: 47268, delta: -30 },
-  { archetype: "Experimenter", median: 22080, n: 30, march: 34750, delta: -36 },
-  { archetype: "Investigator", median: 16800, n: 326, march: 39200, delta: -57 },
-  { archetype: "Contrarian", median: 11600, n: 227, march: 19178, delta: -40 },
-  { archetype: "Fortune Teller", median: 10838, n: 112, march: 29380, delta: -63 },
-  { archetype: "Story", median: 7116, n: 44, march: 37908, delta: -81 },
-  { archetype: "Teacher", median: 6378, n: 235, march: 12052, delta: -47 },
+  { archetype: "Hot Take", median: 93100, n: 98, prior: 103700, delta: -10 },
+  { archetype: "Investigator", median: 69300, n: 121, prior: 51424, delta: 35 },
+  { archetype: "Fortune Teller", median: 58657, n: 51, prior: 38647, delta: 52 },
+  { archetype: "Contrarian", median: 34200, n: 61, prior: 15024, delta: 128 },
+  { archetype: "Teacher", median: 6469, n: 51, prior: 6132, delta: 5 },
 ] as const;
 
 const FORMATS = [
-  { name: "Skit", median: 102771, n: 33 },
-  { name: "Talking Head + Greenscreen + Text", median: 91100, n: 27 },
-  { name: "Talking Head + Greenscreen", median: 63300, n: 41 },
-  { name: "Interview", median: 48621, n: 26 },
-  { name: "Mixed", median: 27700, n: 272 },
-  { name: "Voiceover + B-Roll", median: 20033, n: 28 },
-  { name: "Talking Head (plain)", median: 2308, n: 404 },
+  { name: "Skit", median: 255400, n: 25 },
+  { name: "Talking Head + Voiceover + B-Roll", median: 170433, n: 25 },
+  { name: "Mixed", median: 88590, n: 64 },
+  { name: "Greenscreen", median: 83142, n: 42 },
+  { name: "Voiceover + B-Roll", median: 25620, n: 26 },
+  { name: "Talking Head (plain)", median: 22700, n: 165 },
 ] as const;
 
 const TOP_VIRALS = [
   {
-    handle: "kangaroo_golf",
-    platform: "Instagram",
-    views: "2.6M",
-    text: "When you order a hot dog",
-    url: "https://www.instagram.com/p/DXMuevVjmx9/",
-    hook: "Investigator · Skit",
-  },
-  {
-    handle: "divotdudes.golf",
+    handle: "benlikessports",
     platform: "TikTok",
     views: "2.0M",
-    text: "When you accidentally CALL OUT a professional golfer?",
-    url: "https://www.tiktok.com/@divotdudes.golf/video/7629817831005244685",
-    hook: "Investigator · Interview",
+    text: "I really don't need you on my bumper right now, man",
+    url: "https://www.tiktok.com/@benlikessports/video/7673216728167451934",
+    hook: "Commentary · Skit",
   },
   {
-    handle: "jordanrogers",
-    platform: "Instagram",
-    views: "2.0M",
-    text: "VICE SPORTS",
-    url: "https://www.instagram.com/p/DXIgfUuCfOi/",
-    hook: "Investigator · Talking Head + B-Roll",
-  },
-  {
-    handle: "evhandagain",
+    handle: "jackmacbarstool",
     platform: "TikTok",
-    views: "1.9M",
-    text: "We are SO poor RORY MCILROY JUST",
-    url: "",
-    hook: "Hot Take · Talking Head + Greenscreen",
+    views: "1.8M",
+    text: "Sophie Cunningham was assaulted on the basketball court today",
+    url: "https://www.tiktok.com/@jackmacbarstool/video/7671771746189561101",
+    hook: "Hot Take · Talking Head",
+  },
+  {
+    handle: "theballboypodcast",
+    platform: "Instagram",
+    views: "1.6M",
+    text: "Can we talk about the Raiders drafting a demigod at running back?",
+    url: "https://www.instagram.com/p/DcAWTQkts3N/",
+    hook: "Hot Take · Mixed",
   },
   {
     handle: "hammy.golf",
     platform: "TikTok",
-    views: "1.6M",
-    text: "New method unlocked",
-    url: "https://www.tiktok.com/@hammy.golf/video/7627676212525092109",
+    views: "1.4M",
+    text: "Wow, went in the face. Might need a different club to be honest.",
+    url: "https://www.tiktok.com/@hammy.golf/video/7668869769247886605",
     hook: "Experimenter · Skit",
+  },
+  {
+    handle: "cleoabram",
+    platform: "Instagram",
+    views: "1.4M",
+    text: "The Sun isn't the center of our solar system! At least not right now.",
+    url: "https://www.instagram.com/p/DblYaBMoS6k/",
+    hook: "Contrarian · Mixed",
   },
 ] as const;
 
@@ -192,15 +188,15 @@ export default function TrendsPage() {
                   Skit
                 </p>
                 <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mt-1">
-                  top format (102K median)
+                  top format (255K median)
                 </p>
               </div>
               <div>
                 <p className="text-3xl sm:text-4xl font-heading font-semibold text-content-coral tabular-nums">
-                  -39%
+                  +27%
                 </p>
                 <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mt-1">
-                  median reach vs March
+                  median reach vs July
                 </p>
               </div>
             </div>
@@ -241,7 +237,7 @@ export default function TrendsPage() {
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5">
               <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mb-4">
-                vs. March 2026
+                vs. July 2026
               </p>
               <ul className="space-y-3">
                 {HOOKS.map((h) => (
@@ -266,11 +262,12 @@ export default function TrendsPage() {
 
           <p className="mt-6 text-sm text-slate-600 leading-relaxed max-w-3xl">
             <strong className="text-slate-900">The story:</strong> reach
-            compressed across every archetype this month. Hot Take held strongest
-            (-30%), Story collapsed (-81%). Proof Drop is the new median leader
-            but with a small sample (n=25) so treat as directional. If you're
-            choosing what to film this week, Hot Take and Investigator are the
-            safest workhorses.
+            expanded almost everywhere this month. Contrarian more than doubled
+            (+128%), Fortune Teller jumped +52%, Investigator +35%. Hot Take
+            dipped slightly (-10%) but still holds the top median at 93K, so
+            it remains the workhorse. Teacher went nowhere again (+5% on the
+            lowest median by far). If you're choosing what to film this week:
+            a Hot Take for the floor, a Contrarian for the upside.
           </p>
         </div>
       </section>
@@ -301,11 +298,12 @@ export default function TrendsPage() {
 
           <p className="mt-6 text-sm text-slate-600 leading-relaxed max-w-3xl">
             <strong className="text-slate-900">The story:</strong> Skit content
-            (102K median) and any Greenscreen-augmented format are pulling
-            ~40-50x what plain talking-head content gets (2.3K median, n=404,
-            the most common format and the worst-performing). If your account
-            leans heavily on plain talking head, the cheapest single move
-            available to you this month is adding a greenscreen layer.
+            (255K median) is pulling about 11x what plain talking-head content
+            gets (22.7K median, n=165, still the most common format and still
+            the worst-performing). Layered talking head (voiceover + B-roll on
+            top) runs 170K, roughly 7x the plain version. The lesson hasn't
+            changed since spring: the camera-on-face format isn't the problem,
+            the lack of a second visual layer is.
           </p>
         </div>
       </section>
@@ -350,7 +348,7 @@ export default function TrendsPage() {
           />
 
           <p className="mt-8 text-center text-[11px] font-mono uppercase tracking-[0.18em] text-slate-400">
-            Next edition: May 1, 2026
+            Next edition: September 1, 2026
           </p>
         </div>
       </section>
@@ -365,7 +363,7 @@ export default function TrendsPage() {
             How this report is generated
           </h3>
           <p className="text-sm text-slate-600 leading-relaxed mb-3">
-            Pulled from 1,439 TikTok and Instagram videos posted in
+            Pulled from 460 TikTok and Instagram videos posted in
             {" "}{EDITION.month} that we&rsquo;ve analyzed across hook archetype,
             format, runtime, and emotional trigger. Buckets shown only when
             n&nbsp;&geq;&nbsp;20 to avoid noise.
