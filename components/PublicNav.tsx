@@ -14,7 +14,7 @@ const FEATURE_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
-  { to: '/blog', label: 'Studies & guides', sub: '6 data studies + 24 guides' },
+  { to: '/blog', label: 'Studies & guides', sub: '14 data studies + 31 guides' },
   { to: '/trends', label: 'Live trends', sub: 'Updated monthly · April 2026' },
   { to: '/playbooks', label: 'Niche playbooks', sub: '6 niches, ranked by data' },
 ];

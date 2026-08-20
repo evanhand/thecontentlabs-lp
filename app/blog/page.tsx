@@ -13,12 +13,12 @@ import { getAllGuides } from "@/lib/guides";
 export const metadata: Metadata = {
   title: "Resources — The Content Labs | Data Studies, Guides, Strategy",
   description:
-    "Free data studies, guides, and comparisons for content creators. Built from 10,000+ analyzed TikTok and Instagram videos. AI content strategy, hooks, hashtags, posting times, and more.",
+    "Free data studies, guides, and comparisons for content creators. Built from 14,000+ analyzed TikTok and Instagram videos. AI content strategy, hooks, hashtags, posting times, and more.",
   alternates: { canonical: "https://thecontentlabs.app/blog" },
   openGraph: {
     title: "Resources — The Content Labs",
     description:
-      "Free data studies and guides for content creators. Built from 10,000+ analyzed videos.",
+      "Free data studies and guides for content creators. Built from 14,000+ analyzed videos.",
     url: "https://thecontentlabs.app/blog",
     images: ["https://thecontentlabs.app/og-image.png"],
   },
@@ -88,7 +88,7 @@ export default function BlogIndex() {
               Data studies, guides, and strategy<span className="text-content-coral">.</span>
             </h1>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed lg:max-w-md lg:justify-self-end lg:text-right">
-              Built from 10,000+ analyzed TikTok and Instagram videos. Useful
+              Built from 14,000+ analyzed TikTok and Instagram videos. Useful
               whether you use The Content Labs or not.
             </p>
           </div>
