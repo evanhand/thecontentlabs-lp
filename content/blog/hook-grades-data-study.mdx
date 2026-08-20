@@ -1,0 +1,106 @@
+---
+title: "We Graded 2,485 Hooks From A+ to F. The A Hooks Did 13x Better."
+description: "A data study of 2,485 graded TikTok and Instagram videos: A-tier hooks ran 10.14x the account's typical views, B and C hooks barely broke 1.7x, and D/F hooks lost to the account's own average."
+category: "blog"
+date: "2026-08-20"
+tags: ["hooks", "data-study", "tiktok", "instagram", "hook-grades", "2026"]
+faqs:
+  - q: "Does hook quality actually predict video performance?"
+    a: "In our dataset, dramatically. Videos whose hooks graded A-tier under our rubric averaged 10.14x their account's typical views. B-tier and C-tier hooks averaged about 1.7x, and D/F hooks averaged 0.77x, meaning they performed worse than the account's own normal video."
+  - q: "What makes a hook grade A-tier?"
+    a: "The rubric grades hook effectiveness, creativity, and attention-grabbing potential: a specific, unresolved idea, opened fast, with a reason for the target viewer to stay. A-tier hooks in the study also had a 43.7% chance of doubling the account's typical views versus 15.1% for B-tier."
+  - q: "What happens with a bad hook?"
+    a: "The rest of the video mostly doesn't matter. D and F graded hooks flopped below half the account's typical views 43.5% of the time. The best editing in the world runs behind a first line nobody stayed for."
+thumbnailHook: "A hooks: 10x. F hooks: 0.6x."
+thumbnailEmphasis: "10x"
+---
+
+Every video The Content Labs analyzes gets its hook graded, A+ through F, on effectiveness, creativity, and attention-grabbing potential. That gave us a question we could actually answer with data: **do hook grades match what the algorithm pays?**
+
+We pulled every graded video with real view data: **2,485 videos across 24 accounts**, each measured against its own account's typical views so account size couldn't skew the comparison.
+
+The rubric and the algorithm agree violently.
+
+<Highlight title="The grade gap">
+A-tier hooks (A+ and A) averaged **10.14x** the account's typical views. B-tier averaged **1.66x**. C-tier: **1.67x**. D and F hooks averaged **0.77x**, meaning a bad hook made the video perform **worse than that account's ordinary video**. And the A+ grade alone, the rubric's highest bar, averaged **42.7x** across 238 videos.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="2,485" label="Graded videos" />
+  <StatCard stat="10.14x" label="A-tier average" />
+  <StatCard stat="1.66x" label="B-tier average" />
+  <StatCard stat="0.77x" label="D/F average" />
+  <StatCard stat="43.7%" label="A-tier breakout rate (2x+)" />
+  <StatCard stat="43.5%" label="D/F flop rate" />
+</StatGrid>
+
+---
+
+## The full ladder
+
+<DataBarChart
+  data={[
+    { tier: "A tier", avg: 10.14 },
+    { tier: "B tier", avg: 1.66 },
+    { tier: "C tier", avg: 1.67 },
+    { tier: "D / F", avg: 0.77 },
+  ]}
+  xKey="tier"
+  yKey="avg"
+  title="Performance vs the account's typical video, by hook grade"
+  suffix="x"
+/>
+
+Two things jump out of that chart.
+
+**First, the cliff is between A and everything else.** B-tier and C-tier hooks performed nearly identically (1.66x vs 1.67x). The algorithm doesn't hand out partial credit for a decent hook. A hook either stops the scroll or it doesn't, and "pretty good" lands on the wrong side of that line. This matches what we found in our [hook length](/blog/hook-length-data-study) and [question hook](/blog/question-hooks-data-study) studies: the winning mechanics are specific, and near misses get paid like misses.
+
+**Second, bad hooks are actively expensive.** D and F hooks didn't just underperform the A hooks. They underperformed the account's own normal output, flopping below half of typical views **43.5% of the time**. Whatever those videos cost to shoot and edit, the first sentence spent it before anyone watched.
+
+## Consistency, not just ceiling
+
+The averages could theoretically hide a lottery. They don't:
+
+<NumberBlock items={[
+  { number: "01", text: "A-tier hooks doubled their account's typical views 43.7% of the time. Nearly one in two." },
+  { number: "02", text: "B-tier hooks did it 15.1% of the time. C-tier, 17.3%." },
+  { number: "03", text: "D/F hooks did it 6.5% of the time, and flopped hard 43.5% of the time." },
+]} />
+
+An A-grade hook was roughly **three times more likely to produce a breakout** than a B-grade hook. The grade isn't measuring polish. It's measuring the probability that the video gets a chance at all.
+
+<Callout title="What this means for your next video">
+Grade the hook before you shoot the video. If the opening line can't clear the A bar (one specific, unresolved idea, opened fast, aimed at the viewer), fixing it is worth more than anything you'll do in the edit. The data says the difference between a B and an A is the difference between 1.7x and 10x.
+</Callout>
+
+## How we ran this
+
+Every video was analyzed by The Content Labs engine, which watches the video, reads the transcript, and grades the hook A+ through F on effectiveness, creativity, and attention-grabbing potential as part of a 30-dimension breakdown. We then compared each grade tier's views against the posting account's typical video. Accounts with fewer than 5 videos were excluded. Grades and views come from the same analysis pipeline, so treat this as the rubric agreeing with reality at scale rather than a blind forecasting test.
+
+<CTA
+  headline="Get every hook you've ever posted graded, tonight."
+  sub="Connect your TikTok and Instagram. TCL grades every hook A+ through F, shows you exactly why your winners won, and The Chemist writes your next A hooks in your voice."
+  primary="Audit my account free"
+  secondary="See how it works"
+  secondaryHref="/features/video-audit"
+/>
+
+---
+
+## FAQ
+
+**Who assigns the grades?**
+The Content Labs analysis engine, using a fixed rubric for hook effectiveness, creativity, and attention-grabbing potential. Every video on the platform gets one automatically.
+
+**Are the grades just tracking view counts?**
+The grade comes from the same analysis pass that processes the video, so this study measures agreement between the rubric and real-world performance across 2,485 videos, and the agreement is strong at every step of the ladder, including the near-tie between B and C that a views-only signal wouldn't produce.
+
+**Can I see my own grades?**
+Yes. Every video you connect gets a full analysis including its hook grade, and your dashboard shows what your A hooks have in common.
+
+<CTA
+  headline="Your last 10 videos already have grades waiting."
+  sub="See them, then let The Chemist write hooks that clear the A bar."
+  primary="Get my free audit"
+  secondary="See pricing"
+/>

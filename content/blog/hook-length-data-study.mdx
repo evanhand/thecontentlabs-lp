@@ -1,0 +1,112 @@
+---
+title: "How Long Should a Hook Be? We Analyzed 14,424 Videos to Find Out."
+description: "A data study of 14,424 TikTok and Instagram videos across 355 accounts. Hooks of 9-12 words outperform every other length, and ultra-short hooks are the most overrated advice in short-form."
+category: "blog"
+date: "2026-08-20"
+tags: ["hooks", "data-study", "tiktok", "instagram", "short-form", "2026"]
+faqs:
+  - q: "What is the best hook length for TikTok and Instagram Reels?"
+    a: "9 to 12 words. Across 14,424 analyzed videos, hooks in that range did 9.03x the account's typical views, the best of any length band. Hooks of 1-8 words did 7.15x, and hooks of 17-22 words dropped to 6.58x."
+  - q: "Are shorter hooks always better?"
+    a: "No, and the data says the opposite of the common advice. Videos with hooks of 8 words or fewer had the lowest chance of a breakout in the entire study: only 25% of them doubled the account's typical views, the worst rate of any length band."
+  - q: "Do long hooks kill a video?"
+    a: "They cost you upside. Hooks of 17-22 words averaged 6.58x versus 9.03x for the 9-12 word band. That is roughly 27% less performance for the same video, purely from an overloaded opening line."
+thumbnailHook: "9 to 12 words. That's the window."
+thumbnailEmphasis: "9 to 12 words"
+---
+
+"Keep your hook short" might be the most repeated advice in short-form content. So we tested it.
+
+We pulled **14,424 TikTok and Instagram videos** from **355 accounts** in The Content Labs dataset, counted the words in every spoken hook, and compared each video against that same account's typical views. Comparing every video to its own account is the important part: it means a big account's numbers don't drown out everyone else, and a small account's breakout counts as the breakout it actually was.
+
+The result: short is not the goal. **9 to 12 words is the goal.**
+
+<Highlight title="The 9-12 word window">
+Hooks of 9-12 words averaged **9.03x** the account's typical views, the best of any length band in the study. The "short punchy hook" band of 1-8 words managed **7.15x**, and it had the **lowest breakout rate in the entire dataset**: just 25% of ultra-short hooks doubled the account's typical views.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="14,424" label="Videos analyzed" />
+  <StatCard stat="355" label="Accounts" />
+  <StatCard stat="9.03x" label="Typical views, 9-12 word hooks" />
+  <StatCard stat="6.58x" label="Typical views, 17-22 word hooks" />
+  <StatCard stat="25%" label="Breakout rate of 1-8 word hooks (worst)" />
+  <StatCard stat="2" label="Platforms (TT + IG)" />
+</StatGrid>
+
+---
+
+## The full curve
+
+<DataBarChart
+  data={[
+    { band: "1-8 words", avg: 7.15 },
+    { band: "9-12 words", avg: 9.03 },
+    { band: "13-16 words", avg: 7.93 },
+    { band: "17-22 words", avg: 6.58 },
+    { band: "23+ words", avg: 6.85 },
+  ]}
+  xKey="band"
+  yKey="avg"
+  title="Performance vs the account's typical video, by hook length"
+  suffix="x"
+/>
+
+The shape matters more than any single number. Performance climbs from ultra-short to the 9-12 band, holds up through 16 words, then falls off. This is not a "shorter is better" curve. It's a **"one complete idea" curve**.
+
+## Why ultra-short hooks underperform
+
+Eight words is usually not enough to open a real gap. "This changed everything for me" is short, but it gives the viewer nothing specific to wait for. The scroll continues.
+
+Twelve words is enough to name something concrete and still withhold the payoff:
+
+<NumberBlock items={[
+  { number: "01", text: "\"What's happening on TikTok right now should absolutely terrify you.\" (10 words, did 1,744x that account's typical views)" },
+  { number: "02", text: "\"Are you posting to your TikTok Stories? If not... START\" (10 words, 1,249x)" },
+  { number: "03", text: "\"Hey mom. Who inspired you to be an entrepreneur?\" (9 words, 2,404x)" },
+]} />
+
+Each of those names a specific subject and leaves a specific question open. That combination needs roughly a sentence. Not a fragment, not a paragraph.
+
+## Why long hooks underperform
+
+Past 16 words, hooks start answering their own question. The extra words are usually the detail the viewer should have had to watch for. A 20-word hook is very often a 11-word hook plus the spoiler.
+
+<Callout title="The practical rule">
+Write the hook, count the words. Under 8: you probably haven't named anything specific enough to wait for. Over 16: you're probably giving away the answer. Rewrite toward one complete, specific, unresolved sentence.
+</Callout>
+
+## How we ran this
+
+Every video in the dataset was processed by The Content Labs analysis engine, which transcribes the video and extracts the spoken hook (the actual first line said on camera, not the caption). We counted words per hook, then measured each video's views against that account's typical video so account size couldn't skew the result. Accounts with fewer than 5 videos were excluded.
+
+<CTA
+  headline="Find out what your hooks are doing to your views."
+  sub="TCL analyzes every video you post, grades every hook, and tells you exactly what your best-performing openers have in common. Then The Chemist writes new ones in your voice."
+  primary="Audit my account free"
+  secondary="See how it works"
+  secondaryHref="/features/video-audit"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+14,424 short-form videos across 355 TikTok and Instagram accounts, combining creators on The Content Labs and the competitor accounts they track.
+
+**What counts as the "hook" here?**
+The spoken opening line of the video, pulled from the transcript by our analysis engine. Not the caption, not the on-screen text.
+
+**Why measure against the account's typical video instead of raw views?**
+Raw view averages mostly measure account size. Measuring each video against its own account's typical performance isolates what the hook actually contributed.
+
+**Does this apply to both TikTok and Instagram?**
+The dataset is both platforms combined, and the 9-12 word band led on the blended data. We'll publish a platform split if the two ever meaningfully diverge.
+
+<CTA
+  headline="Stop guessing your hook length."
+  sub="The Chemist writes hooks against your own performance data, in your voice, sized to the window that actually wins."
+  primary="Get my free audit"
+  secondary="See pricing"
+/>
