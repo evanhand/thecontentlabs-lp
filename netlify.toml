@@ -59,6 +59,61 @@ from = "/reset-password"
 to = "https://stirring-griffin-e64878.netlify.app/reset-password"
 status = 200
 
+[[redirects]]
+from = "/forgot-password"
+to = "https://stirring-griffin-e64878.netlify.app/forgot-password"
+status = 200
+
+[[redirects]]
+from = "/setup-wizard-results"
+to = "https://stirring-griffin-e64878.netlify.app/setup-wizard-results"
+status = 200
+
+# OAuth consent screen for the ChatGPT / Claude connector (Supabase Auth
+# redirects here with ?authorization_id=...)
+[[redirects]]
+from = "/oauth/consent"
+to = "https://stirring-griffin-e64878.netlify.app/oauth/consent"
+status = 200
+
+# MCP server (the `mcp` Supabase edge function) and the OAuth discovery
+# documents MCP clients fetch from this origin.
+[[redirects]]
+from = "/mcp"
+to = "https://jzhpazqyoceojfvjhpoo.supabase.co/functions/v1/mcp"
+status = 200
+force = true
+
+[[redirects]]
+from = "/mcp/*"
+to = "https://jzhpazqyoceojfvjhpoo.supabase.co/functions/v1/mcp/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/.well-known/oauth-protected-resource"
+to = "https://jzhpazqyoceojfvjhpoo.supabase.co/functions/v1/mcp/.well-known/oauth-protected-resource"
+status = 200
+force = true
+
+[[redirects]]
+from = "/.well-known/oauth-protected-resource/*"
+to = "https://jzhpazqyoceojfvjhpoo.supabase.co/functions/v1/mcp/.well-known/oauth-protected-resource/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/.well-known/oauth-authorization-server"
+to = "https://jzhpazqyoceojfvjhpoo.supabase.co/.well-known/oauth-authorization-server/auth/v1"
+status = 200
+force = true
+
+[[redirects]]
+from = "/.well-known/oauth-authorization-server/*"
+to = "https://jzhpazqyoceojfvjhpoo.supabase.co/.well-known/oauth-authorization-server/auth/v1"
+status = 200
+force = true
+
 # Cache hashed Next.js assets forever (content-hashed filenames)
 [[headers]]
 for = "/_next/static/*"
