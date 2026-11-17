@@ -126,10 +126,12 @@ interface GeminiBody {
 }
 
 async function callGemini(model: string, body: GeminiBody): Promise<any> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${getKey()}`;
+  // Key goes in the header, not the query string, so it never lands in logs
+  // or proxies as part of the URL.
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-goog-api-key": getKey() },
     body: JSON.stringify(body),
   });
   if (!res.ok) {
