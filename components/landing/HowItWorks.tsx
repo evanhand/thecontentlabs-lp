@@ -22,10 +22,10 @@ export function HowItWorks() {
           className="text-center mb-14"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-tight">
-            <TextReveal>We Do the Research. You Hit Record.</TextReveal>
+            <TextReveal>Three steps. The first one takes a minute.</TextReveal>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Connect your accounts, tell us your niche, and we'll hand you a complete content plan with full scripts.
+            Give us your handles. We pull your videos and read them. You post what wins.
           </p>
         </motion.div>
 
@@ -36,9 +36,9 @@ export function HowItWorks() {
           />
 
           {[
-            { step: "01", element: "In", title: "Tell Us About You", description: "Connect your TikTok and Instagram and tell us your niche, goals, and content style.", icon: Target, borderColor: 'border-content-coral/30', bgColor: 'bg-content-coral/5', textColor: 'text-content-coral', dotColor: 'bg-content-coral' },
-            { step: "02", element: "An", title: "We Do the Research", description: "We audit your content and break down your competitors' best videos to find what's actually working and why.", icon: Microscope, borderColor: 'border-content-coral-500/30', bgColor: 'bg-content-coral-500/5', textColor: 'text-content-coral-600', dotColor: 'bg-content-coral-500' },
-            { step: "03", element: "Rs", title: "Get Your Plan", description: "Get a personalized content strategy and 30-day calendar with full scripts, hooks, and CTAs. You just hit record.", icon: Brain, borderColor: 'border-content-coral/30', bgColor: 'bg-content-coral/5', textColor: 'text-content-coral', dotColor: 'bg-content-coral' },
+            { step: "01", element: "In", title: "Connect your handles", description: "TikTok, Instagram, YouTube. Tell us your niche, your pillars and how you talk. No card.", icon: Target, borderColor: 'border-content-coral/30', bgColor: 'bg-content-coral/5', textColor: 'text-content-coral', dotColor: 'bg-content-coral' },
+            { step: "02", element: "An", title: "We analyze your videos", description: "Every video gets a beat map and a set of traits. Across all of them we work out what wins for you: hook length, payoff timing, tangents, text, topic.", icon: Microscope, borderColor: 'border-content-coral-500/30', bgColor: 'bg-content-coral-500/5', textColor: 'text-content-coral-600', dotColor: 'bg-content-coral-500' },
+            { step: "03", element: "Rs", title: "Post what wins", description: "Your numbers arrive every week. The Chemist writes the next video in your voice from what worked. Paid plans add competitors, strategy and a calendar.", icon: Brain, borderColor: 'border-content-coral/30', bgColor: 'bg-content-coral/5', textColor: 'text-content-coral', dotColor: 'bg-content-coral' },
           ].map((step, index) => {
             const isEven = index % 2 === 0;
             return (

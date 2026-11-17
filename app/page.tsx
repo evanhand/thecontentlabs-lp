@@ -1,15 +1,10 @@
 import { PublicNav } from '@/components/PublicNav';
 import { DesktopEffects } from '@/components/landing/DesktopEffects';
 import { Hero } from '@/components/landing/Hero';
-import { PainSection } from '@/components/landing/PainSection';
-import { WhoItsFor } from '@/components/landing/WhoItsFor';
+import { WhatYouGet } from '@/components/landing/WhatYouGet';
 import { HowItWorks } from '@/components/landing/HowItWorks';
-import { Features } from '@/components/landing/Features';
-import { SocialProof } from '@/components/landing/SocialProof';
-import { Testimonials } from '@/components/landing/Testimonials';
 import { FAQ } from '@/components/landing/FAQ';
 import { PricingPreview } from '@/components/landing/PricingPreview';
-import { LatestContent } from '@/components/landing/LatestContent';
 import { FinalCTA } from '@/components/landing/FinalCTA';
 import { Footer } from '@/components/landing/Footer';
 import { StickyMobileCTA } from '@/components/StickyMobileCTA';
@@ -23,7 +18,7 @@ const faqSchema = {
       name: "Can't I just use ChatGPT for this?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "ChatGPT doesn't know your content history, your niche, or your competitors. It's never seen your analytics. We pull real performance data from your account and your competitors' accounts, then build your strategy from what's actually working.",
+        text: "ChatGPT has never seen your videos or your numbers. We pull every video you post, timestamp it, score its traits and compare them against your own median. The Chemist answers from that, not from the internet's average advice.",
       },
     },
     {
@@ -47,7 +42,7 @@ const faqSchema = {
       name: "Will the scripts sound like me?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We give you the structure, the hooks, the flow, and the CTA, all built from what's working in your niche. You bring your voice and your personality.",
+        text: "The Chemist writes from your own transcripts, so it has your phrasing, your pacing and the structure of your videos that worked. It's your voice with the tangents cut out.",
       },
     },
     {
@@ -55,7 +50,7 @@ const faqSchema = {
       name: "What if I don't like it?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Cancel anytime. No contracts. No questions asked. Start with a free content audit to see what we deliver before you pay anything.",
+        text: "The free plan is free for good: your numbers every week, three videos analyzed, 20 Chemist messages a month, no card. If you go paid and it's not for you, cancel in two clicks. No contracts.",
       },
     },
     {
@@ -63,7 +58,7 @@ const faqSchema = {
       name: "How much does it cost?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Plans start at $39/month for the Starter plan, which includes video audits, competitor analysis, full strategy generation, a 30-day content calendar with scripts, and access to The Chemist AI. The Pro plan is $79/month with higher limits, and Studio is $129/month for teams and agencies. Save 17% with annual billing.",
+        text: "Free is $0 and stays that way. Starter is $19/month ($5 for your first month) and analyzes every video you post, with 4 competitors, a monthly strategy and a 30-day calendar. Pro is $39/month ($5 first month) with daily tracking, 6 competitors and a weekly refresh. Studio is $99/month for agencies. Yearly billing is two months free.",
       },
     },
     {
@@ -88,15 +83,10 @@ export default function Home() {
       <PublicNav />
       <main>
         <Hero />
-        <PainSection />
-        <WhoItsFor />
+        <WhatYouGet />
         <HowItWorks />
-        <Features />
-        <SocialProof />
-        <Testimonials />
-        <FAQ />
         <PricingPreview />
-        <LatestContent />
+        <FAQ />
         <FinalCTA />
       </main>
       <Footer />

@@ -742,7 +742,7 @@ export default function BlogIndex() {
             Ready to Put Strategy Into Action?
           </h2>
           <p className="text-slate-600 mb-6 max-w-xl mx-auto">
-            47,598+ creators use The Content Labs to turn data into content
+            21,000+ videos analyzed by The Content Labs
             plans. Competitor analysis, 30-day calendars, and full scripts —
             starting at $39/mo.
           </p>

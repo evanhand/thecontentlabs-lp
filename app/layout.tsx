@@ -13,11 +13,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "The Content Labs - AI-Powered Content Strategy Platform for Creators",
   description:
-    "The Content Labs is an AI-powered content strategy platform for creators. Get a 30-day content plan with full scripts, hooks, and CTAs built from 10,000+ analyzed videos in your niche. Used by 47,598+ creators across 50+ niches. Plans from $39/mo.",
+    "The Content Labs analyzes every video you post and tells you what wins for you: hook length, payoff timing, tangents, text, topic. Then the Chemist writes the next one in your voice. 21,000+ videos analyzed. Free plan, no card. Paid from $19/mo.",
   openGraph: {
     title: "The Content Labs - AI-Powered Content Strategy Platform",
     description:
-      "AI-powered content strategy platform for creators. Get a 30-day content plan with full scripts built from 10,000+ analyzed videos. Trusted by 47,598+ creators across 50+ niches.",
+      "See why your last videos did what they did. Weekly numbers, a beat map per video, and the Chemist writing the next one in your voice. 21,000+ videos analyzed. Free plan, no card.",
     url: "https://thecontentlabs.app/",
     siteName: "The Content Labs",
     images: [{ url: "https://thecontentlabs.app/og-image.png" }],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Content Labs - AI-Powered Content Strategy Platform",
     description:
-      "AI-powered content strategy for creators. 30-day plans with full scripts from 10,000+ analyzed videos. Trusted by 47,598+ creators.",
+      "See why your last videos did what they did. 21,000+ videos analyzed. Free plan, no card.",
     images: ["https://thecontentlabs.app/og-image.png"],
   },
   alternates: {
@@ -103,16 +103,16 @@ const softwareSchema = {
   "@type": "SoftwareApplication",
   name: "The Content Labs",
   description:
-    "AI-powered content strategy platform that helps creators build data-driven content strategies. Analyzes 10,000+ videos across 50+ niches to generate 30-day content plans with full scripts, hooks, and CTAs. Used by 47,598+ creators.",
+    "Content analytics for creators. Analyzes every video a creator posts (21,000+ videos analyzed), maps each one beat by beat, finds the traits that win for that creator, and writes the next script in their voice.",
   url: "https://thecontentlabs.app",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   offers: {
     "@type": "AggregateOffer",
-    lowPrice: "39",
-    highPrice: "129",
+    lowPrice: "0",
+    highPrice: "99",
     priceCurrency: "USD",
-    offerCount: "3",
+    offerCount: "4",
     availability: "https://schema.org/InStock",
   },
   aggregateRating: {

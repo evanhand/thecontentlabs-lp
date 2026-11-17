@@ -50,7 +50,7 @@ export function StickyMobileCTA({ watchId = 'hero-section' }: StickyMobileCTAPro
     >
       <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.15)] flex items-center gap-3 p-2.5">
         <div className="flex-1 pl-2">
-          <p className="text-[13px] font-bold text-slate-900 leading-tight">Get your free audit</p>
+          <p className="text-[13px] font-bold text-slate-900 leading-tight">Start free, no card</p>
           <p className="text-[11px] text-slate-500 leading-tight">60 seconds &middot; No card</p>
         </div>
         <a

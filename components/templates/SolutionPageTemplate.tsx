@@ -200,7 +200,7 @@ export function SolutionPageTemplate({ config }: { config: SolutionPageConfig })
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 mb-4">{cta}</h2>
-          <p className="text-slate-600 mb-8">Join 47,598+ creators building data-driven content strategies.</p>
+          <p className="text-slate-600 mb-8">21,000+ videos analyzed. Start on the free plan, no card.</p>
           <a
             href="/register"
             className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"

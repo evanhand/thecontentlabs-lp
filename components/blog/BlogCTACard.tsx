@@ -44,7 +44,7 @@ export function BlogCTACard({ slug }: BlogCTACardProps) {
             <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-3 text-xs text-slate-400">
-            Trusted by 47,598 creators · Cancel anytime
+            21,000+ videos analyzed · Free plan, no card
           </p>
         </div>
       </div>

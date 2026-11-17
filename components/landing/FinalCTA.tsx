@@ -34,14 +34,14 @@ export function FinalCTA() {
               transition={{ duration: 0.7 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 tracking-tight leading-[1.05]"
             >
-              <TextReveal>Your Content Formula Is Ready</TextReveal>
+              <TextReveal>Your next video is already in your last ten.</TextReveal>
             </motion.h2>
             <motion.p
               variants={fadeUp}
               transition={{ duration: 0.6 }}
               className="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
             >
-              Every week without a strategy is another week of posting into the void. Join Jen, Matt, and Manny - they stopped guessing and look what happened.
+              Connect your handles and the free plan starts tracking today. Three videos analyzed by tonight, your numbers every week after that.
             </motion.p>
 
             <motion.div
@@ -51,7 +51,7 @@ export function FinalCTA() {
             >
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-content-coral-400" />
-                <span className="text-slate-200 text-sm font-medium">Free content audit in minutes</span>
+                <span className="text-slate-200 text-sm font-medium">Free plan, no card</span>
               </div>
               <div className="hidden sm:block h-4 w-px bg-white/20"></div>
               <div className="flex items-center gap-2">
@@ -68,7 +68,7 @@ export function FinalCTA() {
                 >
                   <span className="flex items-center">
                     <Rocket className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
-                    Get Your Free Audit
+                    Start free
                     <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </a>
@@ -81,8 +81,8 @@ export function FinalCTA() {
               className="mt-10 inline-block bg-white/[0.06] border border-white/10 rounded-lg px-4 py-2.5 sm:px-6 sm:py-3"
             >
               <p className="font-mono text-[10px] sm:text-xs text-slate-400 tracking-wide">
-                <span className="hidden sm:inline">30-day plan&nbsp;&nbsp;|&nbsp;&nbsp;Built for your niche&nbsp;&nbsp;|&nbsp;&nbsp;Full scripts + hooks&nbsp;&nbsp;|&nbsp;&nbsp;From $39/mo</span>
-                <span className="sm:hidden">30-day plan · Full scripts · From $39/mo</span>
+                <span className="hidden sm:inline">Weekly numbers&nbsp;&nbsp;|&nbsp;&nbsp;Beat map per video&nbsp;&nbsp;|&nbsp;&nbsp;Chemist in your voice&nbsp;&nbsp;|&nbsp;&nbsp;Paid from $19/mo, $5 first month</span>
+                <span className="sm:hidden">Free plan · Paid from $19/mo · $5 first month</span>
               </p>
             </motion.div>
           </div>

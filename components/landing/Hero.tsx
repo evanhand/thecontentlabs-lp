@@ -88,27 +88,27 @@ export function Hero() {
           <div
             className="inline-flex items-center px-4 py-2 sm:py-1.5 font-mono text-[13px] sm:text-xs border border-content-coral-500/30 sm:border-content-coral-500/20 bg-content-coral-500/10 sm:bg-content-coral-500/5 rounded-full text-content-coral-700 sm:text-content-coral-600 mb-6 tracking-wider font-semibold sm:font-normal"
           >
-            TRUSTED BY 47,598 CREATORS
+            21,000+ VIDEOS ANALYZED
           </div>
 
           <h1 className="font-heading font-bold tracking-tight mb-5 text-[2rem] sm:text-5xl md:text-6xl leading-[1.05]">
             {fromPrealgo ? (
               <>
                 <span className="block text-slate-900">You picked the right hooks.</span>
-                <span className="block text-content-coral">Now get the full strategy.</span>
+                <span className="block text-content-coral">Now see why your videos land.</span>
               </>
             ) : (
               <>
-                <span className="block text-slate-900">Stop Guessing What to Post.</span>
-                <span className="block text-content-coral">Post What Actually Works.</span>
+                <span className="block text-slate-900">See why your last videos</span>
+                <span className="block text-content-coral">did what they did.</span>
               </>
             )}
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed mb-8">
             {fromPrealgo
-              ? 'PreAlgo gave you the trending sounds and hooks. The Content Labs gives you the 30-day plan that uses them. Free audit in under 60 seconds.'
-              : "Get your first content strategy in under 10 minutes. A 30-day plan with full scripts, built from what's going viral in your niche. You just hit record."}
+              ? 'PreAlgo gave you the trending sounds and hooks. The Content Labs analyzes every video you post, shows you what wins for you, and writes the next one in your voice. Free plan, no card.'
+              : 'The Content Labs analyzes every video you post and tells you what wins for you specifically: hook length, payoff timing, tangents, on-screen text, topic. Then the Chemist writes the next one in your voice.'}
           </p>
 
           <div className="mb-2 flex flex-col sm:flex-row gap-3 items-center justify-center">
@@ -118,7 +118,7 @@ export function Hero() {
                 onClick={handleHeroCtaClick}
                 className="lab-bubbles group inline-flex items-center px-6 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-base sm:text-lg text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                {fromPrealgo ? 'Claim my free audit' : 'Get Your Free Audit'}
+                Start free
                 <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </MagneticButton>
@@ -131,7 +131,7 @@ export function Hero() {
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </a>
           </div>
-          <p className="text-sm text-slate-400 mt-3">Free content audit in under 60 seconds &middot; No credit card required</p>
+          <p className="text-sm text-slate-400 mt-3">Free plan. No card. Your numbers every week and three videos analyzed.</p>
 
           {/* Mobile-only social proof — sits between CTA and video so phone
               users see real creator results in the first viewport instead of

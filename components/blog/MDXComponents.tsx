@@ -98,7 +98,7 @@ export function CTA({
         <p className="text-[12px] text-slate-400 mt-6 flex flex-wrap items-center gap-x-3 gap-y-1">
           <span className="inline-flex items-center gap-1.5">
             <Check className="h-3.5 w-3.5 text-content-coral" />
-            47,598 creators
+            21,000+ videos analyzed
           </span>
           <span className="text-slate-600">·</span>
           <span>No credit card required</span>

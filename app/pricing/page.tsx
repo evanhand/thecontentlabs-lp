@@ -12,12 +12,10 @@ import {
   Target,
   Sparkles,
   Star,
-  ChevronLeft,
   ChevronDown,
   Crown,
   Shield,
   ArrowRight,
-  TrendingUp,
 } from 'lucide-react';
 import { capture } from '@/lib/analytics';
 
@@ -41,7 +39,7 @@ const PLAN_LIMITS = {
   starter: {
     calendarItems: 30,
     videoAudits: 40,
-    competitors: 6,
+    competitors: 4,
     videosPerCompetitor: 10,
     labCreditsPerMonth: 1000,
     strategiesPerMonth: 1,
@@ -68,10 +66,12 @@ const PLAN_LIMITS = {
 } as const;
 
 const PRODUCTS = {
-  starter: { price: 39, yearlyPrice: 390 },
-  pro: { price: 79, yearlyPrice: 790 },
-  enterprise: { price: 129, yearlyPrice: 1290 },
+  starter: { price: 19, yearlyPrice: 190, firstMonth: 5 },
+  pro: { price: 39, yearlyPrice: 390, firstMonth: 5 },
+  enterprise: { price: 99, yearlyPrice: 990 },
 } as const;
+
+const FREE_PLAN = ['Weekly numbers on your videos', '3 videos analyzed', '20 Chemist messages / mo', 'Your Videos + Analytics pages', 'No card'];
 
 /* ------------------------------------------------------------------ */
 /*  Motion variants (inlined to avoid importing app internals)        */
@@ -121,10 +121,10 @@ const faqSchemaData = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: "Can't I just use ChatGPT for this?", acceptedAnswer: { '@type': 'Answer', text: "ChatGPT doesn't know your content performance, your niche, or your competitors. We've analyzed over 10,000 videos across every niche and use that data, plus your content and your competitors', to build a strategy based on what's actually working." } },
-    { '@type': 'Question', name: 'Is it actually worth $39-129 a month?', acceptedAnswer: { '@type': 'Answer', text: 'A content strategist costs $2-5K a month. Doing the research yourself takes 10+ hours a week. We give you the same output for less than the cost of a nice dinner. Try our free content audit before you pay anything.' } },
+    { '@type': 'Question', name: 'Is it worth $19 to $99 a month?', acceptedAnswer: { '@type': 'Answer', text: 'The free plan is free for good. Starter is $19 a month and the first month is $5, so you see every one of your videos analyzed before you pay full price. A strategist costs far more and has never watched your videos.' } },
     { '@type': 'Question', name: 'Will the scripts actually sound like me?', acceptedAnswer: { '@type': 'Answer', text: "We don't write content for you. We give you the strategy, the structure, and the hooks based on what's working in your niche. You bring your voice and personality." } },
     { '@type': 'Question', name: "What if it doesn't work for my niche?", acceptedAnswer: { '@type': 'Answer', text: "Every strategy we generate is built from real data in your niche: your content performance and your competitors' top-performing videos. Cancel anytime, no contracts, no hassle." } },
-    { '@type': 'Question', name: "What's the difference between plans?", acceptedAnswer: { '@type': 'Answer', text: 'Starter gives you a monthly content audit, competitor analysis, strategy, and 30-idea calendar. Pro adds daily automatic video tracking, weekly competitor refreshes, a fresh 7-day calendar and strategy every week, advanced analytics, and priority support. Studio includes everything in Pro plus more competitors, more videos per competitor, team seats, and higher Chemist credits.' } },
+    { '@type': 'Question', name: "What's the difference between plans?", acceptedAnswer: { '@type': 'Answer', text: 'Free tracks your videos weekly and analyzes three. Starter ($19) analyzes every video, adds 4 competitors, a monthly strategy and a 30-day calendar. Pro ($39) tracks daily, with 6 competitors, a weekly strategy refresh and a 7-day calendar every week. Studio ($99) adds 8 competitors, YouTube Shorts, 5,000 Chemist credits and 2 seats.' } },
     { '@type': 'Question', name: 'Can I cancel my subscription anytime?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period. No hidden fees, no hassle.' } },
     { '@type': 'Question', name: 'Can I upgrade or downgrade my plan?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. You can change your plan at any time through your account settings. Changes are prorated and take effect immediately.' } },
   ],
@@ -139,9 +139,10 @@ const softwareSchemaData = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   offers: [
-    { '@type': 'Offer', name: 'Starter Plan', price: '39', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
-    { '@type': 'Offer', name: 'Pro Plan', price: '79', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
-    { '@type': 'Offer', name: 'Studio Plan', price: '129', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
+    { '@type': 'Offer', name: 'Free Plan', price: '0', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
+    { '@type': 'Offer', name: 'Starter Plan', price: '19', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
+    { '@type': 'Offer', name: 'Pro Plan', price: '39', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
+    { '@type': 'Offer', name: 'Studio Plan', price: '99', priceCurrency: 'USD', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock' },
   ],
 };
 
@@ -252,7 +253,7 @@ export default function PricingPage() {
             <div className="flex flex-col items-center gap-3 mb-8">
               <div className="inline-flex items-center px-4 py-2 bg-content-coral/10 backdrop-blur-sm rounded-full border border-content-coral/20">
                 <Shield className="h-4 w-4 text-content-coral mr-2" />
-                <span className="text-sm font-medium text-content-coral-700">Get a free content audit in minutes</span>
+                <span className="text-sm font-medium text-content-coral-700">Free plan, no card. Paid plans are $5 for the first month.</span>
               </div>
             </div>
           </motion.div>
@@ -264,10 +265,10 @@ export default function PricingPage() {
             className="text-[clamp(1.45rem,4.5vw,4.5rem)] font-bold tracking-tight mb-6"
           >
             <span className="block whitespace-nowrap text-slate-900 pb-1 leading-tight">
-              Post What Actually Works.
+              Free to start.
             </span>
             <span className="block whitespace-nowrap bg-gradient-to-r from-content-cta-dark to-content-cta bg-clip-text text-transparent pb-2 leading-tight">
-              Pick Your Plan.
+              $5 to go further.
             </span>
           </motion.h1>
           <motion.p
@@ -277,7 +278,7 @@ export default function PricingPage() {
             variants={fadeUp}
             className="text-xl text-slate-600 max-w-3xl mx-auto"
           >
-            Your content strategy, competitor insights, and a 30-day calendar with scripts. All based on what&apos;s working in your niche.
+            The free plan tracks your videos for good. Paid plans analyze every one you post, then add competitors, a strategy and a calendar.
           </motion.p>
 
           {/* Billing toggle */}
@@ -314,8 +315,8 @@ export default function PricingPage() {
               <Sparkles className="h-4 w-4 text-content-cta" />
               <span className="text-sm font-bold text-content-cta-dark">
                 {billingInterval === 'yearly'
-                  ? "You're saving up to $258/year!"
-                  : 'Go yearly and save up to $258'
+                  ? 'Yearly is two months free'
+                  : 'Go yearly for two months free'
                 }
               </span>
             </div>
@@ -333,6 +334,44 @@ export default function PricingPage() {
             className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-8"
           >
 
+            {/* Free Plan */}
+            <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
+              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm hover:border-slate-300 transition-all duration-300 h-full flex flex-col">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-slate-100 rounded-xl">
+                    <BarChart3 className="h-6 w-6 text-slate-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900">Free</h3>
+                    <p className="text-xs text-slate-500">Your numbers, for good</p>
+                  </div>
+                </div>
+
+                <div className="flex items-baseline mb-6">
+                  <span className="text-4xl sm:text-5xl font-bold text-slate-900">$0</span>
+                  <span className="ml-2 text-xl text-slate-400">/month</span>
+                </div>
+
+                <a
+                  href="https://thecontentlabs.app/register"
+                  onClick={() => capture('pricing_cta_clicked', { plan: 'free', billing_period: billingInterval, location: 'marketing', position: 'plan_card', is_logged_in: false })}
+                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-sm hover:bg-slate-800 transition-all hover:scale-[1.02] active:scale-95"
+                >
+                  Start free
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </a>
+
+                <ul className="mt-8 space-y-4 flex-1">
+                  {FREE_PLAN.map((feature) => (
+                    <li key={feature} className="flex items-start">
+                      <Check className="h-5 w-5 text-slate-400 mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-slate-600">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
             {/* Starter Plan */}
             <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
               <div className="relative bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-md hover:border-slate-300 transition-all duration-300 h-full flex flex-col">
@@ -342,7 +381,7 @@ export default function PricingPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Starter</h3>
-                    <p className="text-xs text-slate-500">For creators ready to start growing</p>
+                    <p className="text-xs text-slate-500">Every video, analyzed</p>
                   </div>
                 </div>
 
@@ -357,13 +396,14 @@ export default function PricingPage() {
                     <>
                       <span className="text-4xl sm:text-5xl font-bold text-slate-900">${starter.price}</span>
                       <span className="ml-2 text-xl text-slate-400">/month</span>
+                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-content-coral">${starter.firstMonth} first month</span>
                     </>
                   )}
                 </div>
                 {billingInterval === 'yearly' && (
                   <div className="-mt-4 mb-6">
                     <p className="text-sm text-content-cta">${starter.yearlyPrice} billed annually. You save ${starter.price * 12 - starter.yearlyPrice}</p>
-                    <p className="text-xs text-slate-400 mt-1">That&apos;s ${(starter.yearlyPrice / 365).toFixed(2)}/day, less than a coffee</p>
+                    <p className="text-xs text-slate-400 mt-1">Two months free</p>
                   </div>
                 )}
 
@@ -378,13 +418,12 @@ export default function PricingPage() {
 
                 <ul className="mt-8 space-y-4 flex-1">
                   {[
-                    'Monthly Content Analysis (25 videos / platform)',
-                    `${PLAN_LIMITS.starter.competitors} Competitors (${PLAN_LIMITS.starter.videosPerCompetitor} videos each)`,
-                    '30-Day Content Calendar (monthly)',
-                    'Monthly Strategy Refresh',
-                    `The Chemist AI (${PLAN_LIMITS.starter.labCreditsPerMonth} Credits / mo)`,
-                    'Video Compare Tool',
-                    'Email Support',
+                    '25 videos / platform tracked monthly',
+                    'Every video analyzed: beat map + traits',
+                    `${PLAN_LIMITS.starter.competitors} competitors (${PLAN_LIMITS.starter.videosPerCompetitor} videos each)`,
+                    'Monthly strategy + 30-day calendar',
+                    `The Chemist (${PLAN_LIMITS.starter.labCreditsPerMonth.toLocaleString()} credits / mo)`,
+                    'Weekly lab note by email',
                   ].map((feature) => (
                     <li key={feature} className="flex items-start">
                       <Check className="h-5 w-5 text-content-coral mr-3 flex-shrink-0 mt-0.5" />
@@ -411,7 +450,7 @@ export default function PricingPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Pro</h3>
-                    <p className="text-xs text-slate-500">For creators ready to break through</p>
+                    <p className="text-xs text-slate-500">Daily tracking, weekly refresh</p>
                   </div>
                 </div>
 
@@ -426,13 +465,14 @@ export default function PricingPage() {
                     <>
                       <span className="text-4xl sm:text-5xl font-bold text-slate-900">${pro.price}</span>
                       <span className="ml-2 text-xl text-slate-400">/month</span>
+                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-content-coral">${pro.firstMonth} first month</span>
                     </>
                   )}
                 </div>
                 {billingInterval === 'yearly' && (
                   <div className="-mt-4 mb-6">
                     <p className="text-sm text-content-cta">${pro.yearlyPrice} billed annually. You save ${pro.price * 12 - pro.yearlyPrice}</p>
-                    <p className="text-xs text-slate-400 mt-1">That&apos;s ${(pro.yearlyPrice / 365).toFixed(2)}/day</p>
+                    <p className="text-xs text-slate-400 mt-1">Two months free</p>
                   </div>
                 )}
 
@@ -447,15 +487,13 @@ export default function PricingPage() {
 
                 <ul className="mt-8 space-y-4 flex-1">
                   {[
-                    'Daily Video Tracking (7 videos / platform)',
-                    `${PLAN_LIMITS.pro.competitors} Competitors (${PLAN_LIMITS.pro.videosPerCompetitor} videos each)`,
-                    'Weekly Competitor Refreshes',
-                    '7-Day Content Calendar (weekly)',
-                    'Weekly Strategy Refresh',
-                    `The Chemist AI (${PLAN_LIMITS.pro.labCreditsPerMonth} Credits / mo)`,
-                    'Video Compare Tool',
-                    'Advanced Analytics Dashboard',
-                    'Priority Support (24hr response)',
+                    'Daily tracking, every video analyzed',
+                    `${PLAN_LIMITS.pro.competitors} competitors (${PLAN_LIMITS.pro.videosPerCompetitor} videos each), refreshed weekly`,
+                    'Weekly strategy refresh',
+                    '7-day calendar, every week',
+                    `The Chemist (${PLAN_LIMITS.pro.labCreditsPerMonth.toLocaleString()} credits / mo)`,
+                    'What wins for you, across all your videos',
+                    'Weekly lab note by email',
                   ].map((feature) => (
                     <li key={feature} className="flex items-start">
                       <Check className="h-5 w-5 text-content-cta mr-3 flex-shrink-0 mt-0.5" />
@@ -476,7 +514,7 @@ export default function PricingPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Studio</h3>
-                    <p className="text-xs text-slate-500">For teams and agencies</p>
+                    <p className="text-xs text-slate-500">For agencies</p>
                   </div>
                 </div>
 
@@ -497,7 +535,7 @@ export default function PricingPage() {
                 {billingInterval === 'yearly' && (
                   <div className="-mt-4 mb-6">
                     <p className="text-sm text-purple-600">${enterprise.yearlyPrice} billed annually. You save ${enterprise.price * 12 - enterprise.yearlyPrice}</p>
-                    <p className="text-xs text-slate-400 mt-1">That&apos;s ${(enterprise.yearlyPrice / 365).toFixed(2)}/day</p>
+                    <p className="text-xs text-slate-400 mt-1">Two months free</p>
                   </div>
                 )}
 
@@ -512,16 +550,13 @@ export default function PricingPage() {
 
                 <ul className="mt-8 space-y-4 flex-1">
                   {[
-                    'Daily Video Tracking (10 videos / platform)',
-                    `${PLAN_LIMITS.enterprise.competitors} Competitors (${PLAN_LIMITS.enterprise.videosPerCompetitor} videos each)`,
-                    'Weekly Competitor Refreshes',
-                    '7-Day Content Calendar (weekly)',
-                    'Weekly Strategy Refresh',
-                    `The Chemist AI (${PLAN_LIMITS.enterprise.labCreditsPerMonth} Credits / mo)`,
-                    'Video Compare Tool',
-                    '2 Team Seats',
-                    'Advanced Analytics Dashboard',
-                    'Priority Support (24hr response)',
+                    'Daily tracking, every video analyzed',
+                    `${PLAN_LIMITS.enterprise.competitors} competitors (${PLAN_LIMITS.enterprise.videosPerCompetitor} videos each), refreshed weekly`,
+                    'YouTube Shorts tracking',
+                    'Weekly strategy refresh + 7-day calendar',
+                    `The Chemist (${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} credits / mo)`,
+                    '2 team seats',
+                    'Priority support',
                   ].map((feature) => (
                     <li key={feature} className="flex items-start">
                       <Check className="h-5 w-5 text-purple-600 mr-3 flex-shrink-0 mt-0.5" />
@@ -538,7 +573,7 @@ export default function PricingPage() {
             <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-6 px-6 sm:px-8 py-4 bg-content-coral/10 backdrop-blur-sm rounded-2xl border border-content-coral/20">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-content-coral" />
-                <span className="text-content-coral-700 font-medium text-sm">Free content audit included</span>
+                <span className="text-content-coral-700 font-medium text-sm">Free plan needs no card</span>
               </div>
               <div className="hidden sm:block h-6 w-px bg-slate-300"></div>
               <div className="flex items-center gap-2">
@@ -564,7 +599,7 @@ export default function PricingPage() {
             </button>
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                showComparison ? 'max-h-[800px] opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
+                showComparison ? 'max-h-[1000px] opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
               }`}
             >
               <div className="bg-white border border-slate-200 rounded-3xl overflow-x-auto shadow-sm">
@@ -572,6 +607,7 @@ export default function PricingPage() {
                   <thead>
                     <tr className="border-b border-slate-200">
                       <th className="text-left text-xs sm:text-sm font-medium text-slate-500 py-4 sm:py-5 px-3 sm:px-6">Feature</th>
+                      <th className="text-center text-xs sm:text-sm font-bold text-slate-600 py-4 sm:py-5 px-2 sm:px-4">Free</th>
                       <th className="text-center text-xs sm:text-sm font-bold text-content-coral py-4 sm:py-5 px-2 sm:px-4">Starter</th>
                       <th className="text-center text-xs sm:text-sm font-bold text-content-cta py-4 sm:py-5 px-2 sm:px-4">Pro</th>
                       <th className="text-center text-xs sm:text-sm font-bold text-purple-600 py-4 sm:py-5 px-2 sm:px-4">Studio</th>
@@ -579,21 +615,33 @@ export default function PricingPage() {
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {([
-                      { feature: 'Video Tracking', starter: '25 / month', pro: '7 / day', enterprise: '10 / day' },
-                      { feature: 'Tracking Cadence', starter: 'Monthly', pro: 'Daily', enterprise: 'Daily' },
-                      { feature: 'Competitors', starter: `${PLAN_LIMITS.starter.competitors}`, pro: `${PLAN_LIMITS.pro.competitors}`, enterprise: `${PLAN_LIMITS.enterprise.competitors}` },
-                      { feature: 'Videos per Competitor', starter: `${PLAN_LIMITS.starter.videosPerCompetitor}`, pro: `${PLAN_LIMITS.pro.videosPerCompetitor}`, enterprise: `${PLAN_LIMITS.enterprise.videosPerCompetitor}` },
-                      { feature: 'Competitor Refreshes', starter: 'Monthly', pro: 'Weekly', enterprise: 'Weekly' },
-                      { feature: 'Content Calendar', starter: '30 ideas / month', pro: '7-day / week', enterprise: '7-day / week' },
-                      { feature: 'Strategy Refresh', starter: '1 / month', pro: '1 / week', enterprise: '1 / week' },
-                      { feature: 'The Chemist AI', starter: `${PLAN_LIMITS.starter.labCreditsPerMonth} Credits`, pro: `${PLAN_LIMITS.pro.labCreditsPerMonth} Credits`, enterprise: `${PLAN_LIMITS.enterprise.labCreditsPerMonth} Credits` },
-                      { feature: 'Video Compare Tool', starter: true as string | boolean, pro: true as string | boolean, enterprise: true as string | boolean },
-                      { feature: 'Team Seats', starter: '1', pro: '1', enterprise: '2' },
-                      { feature: 'Advanced Analytics', starter: false as string | boolean, pro: true as string | boolean, enterprise: true as string | boolean },
-                      { feature: 'Priority Support', starter: false as string | boolean, pro: true as string | boolean, enterprise: true as string | boolean },
-                    ] as { feature: string; starter: string | boolean; pro: string | boolean; enterprise: string | boolean }[]).map(({ feature, starter: s, pro: p, enterprise: e }) => (
+                      { feature: 'Your videos tracked', free: '10 / week', starter: '25 / month', pro: 'Daily', enterprise: 'Daily' },
+                      { feature: 'Videos analyzed', free: '3, ever', starter: 'Every one', pro: 'Every one', enterprise: 'Every one' },
+                      { feature: 'Beat map per video', free: '3 videos', starter: true, pro: true, enterprise: true },
+                      { feature: 'What wins for you', free: false, starter: true, pro: true, enterprise: true },
+                      { feature: 'Competitors', free: '0', starter: `${PLAN_LIMITS.starter.competitors}`, pro: `${PLAN_LIMITS.pro.competitors}`, enterprise: `${PLAN_LIMITS.enterprise.competitors}` },
+                      { feature: 'Videos per competitor', free: '0', starter: `${PLAN_LIMITS.starter.videosPerCompetitor}`, pro: `${PLAN_LIMITS.pro.videosPerCompetitor}`, enterprise: `${PLAN_LIMITS.enterprise.videosPerCompetitor}` },
+                      { feature: 'Strategy', free: false, starter: 'Monthly', pro: 'Weekly', enterprise: 'Weekly' },
+                      { feature: 'Calendar', free: false, starter: '30-day / month', pro: '7-day / week', enterprise: '7-day / week' },
+                      { feature: 'YouTube Shorts', free: false, starter: false, pro: false, enterprise: true },
+                      { feature: 'The Chemist', free: '20 messages', starter: `${PLAN_LIMITS.starter.labCreditsPerMonth.toLocaleString()} credits`, pro: `${PLAN_LIMITS.pro.labCreditsPerMonth.toLocaleString()} credits`, enterprise: `${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} credits` },
+                      { feature: 'Weekly email', free: 'Your numbers', starter: 'Lab note', pro: 'Lab note', enterprise: 'Lab note' },
+                      { feature: 'Team seats', free: '1', starter: '1', pro: '1', enterprise: '2' },
+                      { feature: 'Priority support', free: false, starter: false, pro: false, enterprise: true },
+                    ] as { feature: string; free: string | boolean; starter: string | boolean; pro: string | boolean; enterprise: string | boolean }[]).map(({ feature, free: f, starter: s, pro: p, enterprise: e }) => (
                       <tr key={feature} className="hover:bg-slate-50 transition-colors">
                         <td className="text-xs sm:text-sm text-slate-700 py-3 sm:py-4 px-3 sm:px-6">{feature}</td>
+                        <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
+                          {typeof f === 'boolean' ? (
+                            f ? (
+                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-slate-500 mx-auto" />
+                            ) : (
+                              <span className="text-slate-300">&mdash;</span>
+                            )
+                          ) : (
+                            <span className="text-xs sm:text-sm text-slate-600">{f}</span>
+                          )}
+                        </td>
                         <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
                           {typeof s === 'boolean' ? (
                             s ? (
@@ -646,8 +694,8 @@ export default function PricingPage() {
               variants={fadeUp}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Everything You Need in One Platform</h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">Stop juggling a dozen tools. The Content Labs gives you the complete toolkit to go from idea to viral content.</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What the paid plans add</h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">The free plan is the numbers and three analyzed videos. Paid analyzes every video you post and adds the rest.</p>
             </motion.div>
 
             <motion.div
@@ -658,10 +706,10 @@ export default function PricingPage() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             >
               {[
-                { icon: Atom, title: 'The Chemist', desc: 'Your content strategist trained on viral patterns', gradient: 'from-content-coral/20 to-content-coral/5' },
-                { icon: Target, title: 'Competitor Intel', desc: "See exactly what's working in your niche", gradient: 'from-content-coral/20 to-content-coral/5' },
-                { icon: BarChart3, title: 'Content Audits', desc: "Deep analysis of what's performing and why", gradient: 'from-content-coral/20 to-content-coral/5' },
-                { icon: Calendar, title: 'Smart Calendar', desc: "AI-generated content calendar you'll actually follow", gradient: 'from-content-coral/20 to-content-coral/5' },
+                { icon: BarChart3, title: 'Every video analyzed', desc: 'Beat map, traits and what wins for you across all of them', gradient: 'from-content-coral/20 to-content-coral/5' },
+                { icon: Target, title: 'Competitors', desc: 'Their best videos, read the same way as yours', gradient: 'from-content-coral/20 to-content-coral/5' },
+                { icon: Calendar, title: 'Strategy and calendar', desc: 'Built from your own numbers, refreshed monthly or weekly', gradient: 'from-content-coral/20 to-content-coral/5' },
+                { icon: Atom, title: 'More Chemist', desc: 'Scripts in your voice, 1,000 to 5,000 credits a month', gradient: 'from-content-coral/20 to-content-coral/5' },
               ].map(({ icon: Icon, title, desc, gradient }) => (
                 <motion.div key={title} variants={popIn} className="group relative">
                   <div className="relative bg-white rounded-2xl p-6 border border-slate-200 hover:border-content-coral/20 transition-all duration-300 h-full shadow-sm group-hover:-translate-y-1">
@@ -748,11 +796,11 @@ export default function PricingPage() {
           </motion.div>
           <div className="space-y-4">
             {[
-              { question: "Can't I just use ChatGPT for this?", answer: "ChatGPT doesn't know your content performance, your niche, or your competitors. It gives generic advice because it has no data to work with. We've analyzed over 10,000 videos across every niche and we use that data, plus your content and your competitors', to build a strategy based on what's actually working." },
-              { question: "Is it actually worth $39-129 a month?", answer: "A content strategist costs $2-5K a month. Doing the research yourself takes 10+ hours a week. We give you the same output for less than the cost of a nice dinner. One of our creators grew so fast he had to start turning away clients. Plus, you can try our free content audit before you pay anything." },
-              { question: "Will the scripts actually sound like me?", answer: "We don't write content for you. We give you the strategy, the structure, and the hooks based on what's working in your niche. You bring your voice and personality. Think of it as getting a brief from a strategist, not a script from a ghostwriter." },
-              { question: "What if it doesn't work for my niche?", answer: "Every strategy we generate is built from real data in your niche: your content performance and your competitors' top-performing videos. It's not generic advice. And you can cancel anytime, no contracts, no hassle." },
-              { question: "What's the difference between plans?", answer: `Starter gives you ${PLAN_LIMITS.starter.videoAudits} video audits, ${PLAN_LIMITS.starter.competitors} competitor analyses, and ${PLAN_LIMITS.starter.calendarItems} calendar ideas per month. Pro bumps that to ${PLAN_LIMITS.pro.videoAudits} audits, ${PLAN_LIMITS.pro.competitors} competitors, ${PLAN_LIMITS.pro.calendarItems} calendar ideas, plus analytics and priority support. Studio goes further with ${PLAN_LIMITS.enterprise.videoAudits} audits, ${PLAN_LIMITS.enterprise.competitors} competitors, ${PLAN_LIMITS.enterprise.calendarItems} calendar ideas, ${PLAN_LIMITS.enterprise.strategiesPerMonth} strategies/mo, ${PLAN_LIMITS.enterprise.calendarGenerationsPerMonth} calendar generations/mo, ${PLAN_LIMITS.enterprise.labCreditsPerMonth} Chemist Lab Credits/mo, 2 team seats, and 2 analysis cycles per month.` },
+              { question: "Can't I just use ChatGPT for this?", answer: "ChatGPT has never seen your videos or your numbers. We pull every video you post, timestamp it, score its traits and compare them against your own median. The Chemist answers from that, not from the internet's average advice." },
+              { question: "Is it worth $19 to $99 a month?", answer: "The free plan is free for good. Starter is $19 a month and the first month is $5, so you see every one of your videos analyzed before you pay full price. A strategist costs far more and has never watched your videos." },
+              { question: "What does the $5 first month mean?", answer: "Starter and Pro bill $5 for your first month, then the normal price. Card required, cancel any time before the second charge and you've paid $5." },
+              { question: "Will the scripts actually sound like me?", answer: "The Chemist writes from your own transcripts, so it has your phrasing, your pacing and the structure of your videos that worked. It's your voice with the tangents cut out." },
+              { question: "What's the difference between plans?", answer: `Free tracks your videos weekly and analyzes three. Starter ($${PRODUCTS.starter.price}) analyzes every video, adds ${PLAN_LIMITS.starter.competitors} competitors, a monthly strategy and a 30-day calendar. Pro ($${PRODUCTS.pro.price}) tracks daily, with ${PLAN_LIMITS.pro.competitors} competitors, a weekly strategy refresh and a 7-day calendar every week. Studio ($${PRODUCTS.enterprise.price}) adds ${PLAN_LIMITS.enterprise.competitors} competitors, YouTube Shorts, ${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} Chemist credits and 2 seats.` },
               { question: "Can I cancel my subscription anytime?", answer: "Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period. No hidden fees, no hassle." },
               { question: "Can I upgrade or downgrade my plan?", answer: "Absolutely. You can change your plan at any time through your account settings. Changes are prorated and take effect immediately." },
             ].map((item, index) => (
@@ -777,14 +825,14 @@ export default function PricingPage() {
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-content-coral/10 border border-content-coral/25">
               <span className="h-1.5 w-1.5 rounded-full bg-content-coral animate-pulse" />
               <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
-                47,598 creators · No card · 60 seconds
+                21,000+ videos analyzed · Free plan · No card
               </span>
             </motion.div>
             <motion.h2 variants={fadeUp} className="font-heading text-3xl sm:text-5xl md:text-[56px] font-semibold tracking-tight text-slate-900 mb-5 leading-[1.05]">
-              Stop guessing what to post<span className="text-content-coral">.</span>
+              See why your last videos did what they did<span className="text-content-coral">.</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Every week without a strategy is another week of posting and hoping. Connect TikTok and Instagram, get a 30-day calendar in under 10 minutes.
+              Connect your handles and the free plan starts tracking today. Three videos analyzed by tonight, your numbers every week after that.
             </motion.p>
             <motion.div variants={scaleIn} className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
               <a
@@ -792,7 +840,7 @@ export default function PricingPage() {
                 onClick={() => capture('pricing_cta_clicked', { plan: 'unspecified', billing_period: billingInterval, location: 'marketing', position: 'final_cta', is_logged_in: false })}
                 className="lab-bubbles group inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-lg text-white shadow-lg shadow-content-cta/30 hover:shadow-xl hover:shadow-content-cta/50 transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                Get my free audit
+                Start free
                 <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
               </a>
               <a
