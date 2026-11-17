@@ -158,17 +158,31 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Product capture: a real video page, beat map in view. */}
+      {/* Product demo: a 36-second recorded walkthrough of the real app
+          (dashboard, a video's beat map, what wins, the Chemist), framed
+          like a browser window. Autoplays muted and loops. */}
       <div className="-mt-1 max-w-3xl lg:max-w-5xl mx-auto" style={{ transform: 'translateZ(0)' }}>
-        <img
-          src="/screens/hero-video-page.jpg"
-          alt="A video's page in The Content Labs: views, likes, engagement, honest feedback, and the beat map showing hook, setup, build, payoff and where viewers swipe"
-          width={2440}
-          height={1720}
-          fetchPriority="high"
-          decoding="async"
-          className="w-full rounded-2xl shadow-2xl border border-slate-200/70"
-        />
+        <div className="rounded-2xl bg-slate-950 shadow-2xl ring-1 ring-black/10 overflow-hidden">
+          <div className="flex items-center gap-1.5 px-4 h-9 bg-slate-900 border-b border-white/[0.06]">
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="ml-3 h-5 flex-1 max-w-xs rounded-md bg-white/[0.06] text-[11px] leading-5 text-slate-400 px-3 font-mono truncate">thecontentlabs.app/dashboard</span>
+          </div>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="/hero-demo-poster.jpg"
+            width={1440}
+            height={900}
+            className="w-full block"
+            src="/hero-demo.mp4"
+            aria-label="Walkthrough of The Content Labs: the dashboard, a video's beat map, what wins for you, and the Chemist writing the next script"
+          />
+        </div>
       </div>
 
       {/* Persona chips */}
