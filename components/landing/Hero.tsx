@@ -158,7 +158,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Product demo: a 36-second recorded walkthrough of the real app
+      {/* Product demo: a 30-second motion cut of the real app
           (dashboard, a video's beat map, what wins, the Chemist), framed
           like a browser window. Autoplays muted and loops. */}
       <div className="-mt-1 max-w-3xl lg:max-w-5xl mx-auto" style={{ transform: 'translateZ(0)' }}>
