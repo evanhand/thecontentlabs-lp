@@ -1,0 +1,117 @@
+---
+title: "Does Controversial Content Get More Views? 5,019 Videos Graded 1 to 5 on Controversy"
+description: "A data study of 5,019 short-form videos from 76 creators, each graded 1 (nobody could object) to 5 (half the audience will argue). Level 5 videos ran at 1.63x the creator's normal views; level 1 videos ran at 0.93x. The curve is flat until level 4, then bends hard."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "hot-takes", "controversy", "tiktok", "instagram", "engagement", "2026"]
+faqs:
+  - q: "Does controversial content get more views?"
+    a: "Yes, and the effect is the largest single-feature gap in the study. Videos graded 5 on a 1 to 5 controversy scale ran at 1.63x the creator's normal views across 426 videos, with 43.4% doubling and 22.8% doing 5x. Videos graded 1 ran at 0.93x with 25.8% doubling."
+  - q: "Is a little controversy enough?"
+    a: "No. Levels 2 and 3 ran at 1.03x and 1.01x, which is a normal video. The curve is flat until level 4 (1.18x) and only bends hard at level 5 (1.63x). A mild take is just a take."
+  - q: "Does an angry tone do the same thing?"
+    a: "Partly. Outraged videos ran at 1.29x across 1,003 videos and Hype videos at 1.10x. Calm videos ran at 0.85x and Sentimental at 0.83x. But tone is weaker than the claim itself: level 5 controversy at 1.63x beats any tone bucket."
+  - q: "What is the risk?"
+    a: "The same data shows the downside. Level 1 videos have the lowest 5x rate (10.0%) but they also almost never tank an account. Level 5 is a wider spread in both directions. If your business depends on being liked by everyone, the 1.63x may not be worth the comments."
+thumbnailHook: "Controversy pays at level 5. Not before."
+thumbnailEmphasis: "1.63x"
+---
+
+Everyone says controversy gets views. Nobody says how much controversy, or how much it pays. We graded it.
+
+We pulled **5,019 short-form videos** from **76 creators** in The Content Labs dataset. The analysis engine graded each video's central claim on a 1 to 5 controversy scale: 1 means nobody could object, 3 means some people will push back, 5 means half the audience will argue in the comments. We then compared each video against that same creator's normal views, so a big account's hot take and a small account's hot take are measured on the same scale.
+
+<Highlight title="Flat, flat, flat, bend">
+Level 1 videos ran at **0.93x** the creator's normal. Levels 2 and 3 ran at **1.03x** and **1.01x**, a normal video. Level 4 ran at **1.18x**. Level 5 ran at **1.63x**, with **43.4%** of them doubling the creator's normal and **22.8%** doing five times it. That is the largest gap between the top and bottom of any single feature we measured.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="5,019" label="Videos graded for controversy" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.63x" label="Normal views, level 5" />
+  <StatCard stat="0.93x" label="Normal views, level 1" />
+  <StatCard stat="43.4%" label="Breakout rate (2x), level 5" />
+  <StatCard stat="22.8%" label="5x rate, level 5" />
+</StatGrid>
+
+---
+
+## The curve
+
+<DataBarChart
+  data={[
+    { level: "1 (nobody objects)", avg: 0.93 },
+    { level: "2", avg: 1.03 },
+    { level: "3", avg: 1.01 },
+    { level: "4", avg: 1.18 },
+    { level: "5 (half will argue)", avg: 1.63 },
+  ]}
+  xKey="level"
+  yKey="avg"
+  title="Views vs the creator's normal video, by controversy level"
+  suffix="x"
+/>
+
+The shape is the finding. A mild take does nothing: 819 level-2 videos and 1,233 level-3 videos both landed within three percent of a normal video. The lift starts at level 4 (1,205 videos, 34.4% doubling) and nearly triples at level 5. In plain terms, the audience does not reward "some people might disagree." It rewards "I know a lot of you are going to disagree, and here is why you are wrong."
+
+The breakout rates make the same point. The share of videos that did 5x the creator's normal: 10.0% at level 1, 14.0% at level 2, 15.5% at level 3, 16.8% at level 4, 22.8% at level 5.
+
+## Tone helps, but less
+
+A controversial claim and an angry delivery are different things, and the data separates them.
+
+<NumberBlock items={[
+  { number: "01", text: "Outraged tone: 1.29x across 1,003 videos, 36.9% doubling. The strongest tone, but still below level 5 controversy." },
+  { number: "02", text: "Hype tone: 1.10x across 1,599 videos. Humorous and Serious both sat near 1.0x." },
+  { number: "03", text: "Calm tone: 0.85x across 554 videos, with only 6.7% doing 5x. Sentimental: 0.83x. The quiet, measured video is the one the feed skips." },
+]} />
+
+Put together: the claim does more work than the voice. A level 5 claim delivered calmly still carries the argument. An outraged delivery of a level 2 claim is just loud.
+
+## What a level 5 claim looks like
+
+It is specific, it names a side, and it leaves no room to nod along. Our specificity grade confirms it: videos graded 5 on specificity ran at 1.20x and 4s at 1.15x, while 3s ran at 0.89x. A vague take ("the league is in a bad place") cannot be argued with. A specific one ("this player is the most overrated in the league and these three numbers prove it") can, and the comments do the distribution.
+
+<Callout title="The practical rule">
+Before you post a take, ask: could someone who loves this topic be angry at me for it? If the honest answer is no, you are at level 2 and the data says you are posting a normal video. Sharpen the claim until someone will argue, then back it with the number that makes the argument worth having.
+</Callout>
+
+## The cost
+
+The curve has a downside the median hides. Level 5 is a wider distribution in both directions: more breakouts and more comments you will not enjoy. Level 1 videos almost never break out (10.0% at 5x) but they also do not start fights. For a creator whose business is a personal brand that needs to be liked, the gap between 0.93x and 1.63x may not be worth it. For a commentary account, it is the whole job.
+
+The sample also skews toward commentary, sports and news, where arguing is the format. A level 5 claim in a cooking niche may land differently. The direction of the curve is almost certainly the same; the size of the bend may not be.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine, which watches the video, reads the transcript and grades the central claim on a 1 to 5 controversy scale using one fixed definition for every video. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 5,019 had a controversy grade and a measured baseline.
+
+<CTA
+  headline="See how sharp your own takes are."
+  sub="The free plan tracks your videos every week and fully analyses three of them, controversy grade included. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+5,019 short-form videos with a controversy grade, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**What does level 5 mean exactly?**
+A central claim that roughly half the audience for that topic would argue with. Level 1 is a claim nobody could object to. The same definition is applied to every video, which is what makes the levels comparable.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the claim contributed.
+
+**Is this just saying "be angry"?**
+No. Outraged tone ran at 1.29x; level 5 controversy ran at 1.63x. The claim matters more than the delivery.
+
+<CTA
+  headline="Make the claim worth arguing about."
+  sub="The Chemist writes takes from your own numbers, in your voice, sharpened to the level that actually moves views."
+  primary="Start free"
+  secondary="See pricing"
+/>

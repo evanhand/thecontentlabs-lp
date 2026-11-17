@@ -1,0 +1,126 @@
+---
+title: "Which Call to Action Gets Views? 4,914 Videos: Ask for the Follow, Ask in the Middle"
+description: "A data study of 4,914 short-form videos from 76 creators. Videos that asked for a follow ran at 1.25x the creator's normal views; videos that asked people to click or buy ran at 0.82x. A call to action in the middle of the video ran at 1.37x; one at the end ran at 0.96x."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "call-to-action", "followers", "tiktok", "instagram", "scripting", "2026"]
+faqs:
+  - q: "Does asking for a follow hurt your views?"
+    a: "No, the opposite. Across 4,914 analyzed videos, videos that asked for a follow ran at 1.25x the creator's normal views with 36.9% doubling and 18.2% doing 5x. Videos with no ask at all ran at 1.05x. Videos that asked for a comment ran at 1.03x."
+  - q: "When should the call to action go?"
+    a: "In the middle. Videos with a mid-video ask ran at 1.37x the creator's normal across 905 videos, with 40.3% doubling and 20.9% doing 5x. Videos with the ask at the end ran at 0.96x. The end is where the viewers who already left would have heard it."
+  - q: "What about a link or a buy ask?"
+    a: "It is the worst ask in the data. Videos that asked people to click a link or buy something ran at 0.82x across 449 videos, with 25.2% doubling. Promo videos as a category ran at 0.83x. Selling in the video costs about a fifth of a normal video."
+  - q: "Should every video ask for a follow?"
+    a: "The data says a follow ask does not cost reach and often comes with more of it. The catch is that the ask has to land while people are still watching, which is why mid-video asks (1.37x) beat end asks (0.96x) by so much."
+thumbnailHook: "Ask for the follow. In the middle."
+thumbnailEmphasis: "In the middle"
+---
+
+Creators argue about calls to action constantly. "Asking for a follow looks desperate." "Always end with a question." "Never sell in the video." We stopped arguing and counted.
+
+We pulled **4,914 short-form videos** from **76 creators** in The Content Labs dataset, had the analysis engine record what each video asked the viewer to do (nothing, follow, comment, click or buy) and when it asked (never, middle, end), and compared each video against that same creator's normal views. Measuring against the creator's own median means the result is about the ask, not the size of the account.
+
+<Highlight title="Follow beats comment, middle beats end">
+Videos that asked for a **follow** ran at **1.25x** the creator's normal views across 1,226 videos. Videos that asked for a **comment** ran at **1.03x**. Videos that asked people to **click or buy** ran at **0.82x**. And when the ask came in the **middle** of the video, it ran at **1.37x**, with **40.3%** doubling and **20.9%** doing five times the creator's normal. The same ask at the **end** ran at **0.96x**.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="4,914" label="Videos with a recorded ask" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.25x" label="Normal views, follow ask" />
+  <StatCard stat="0.82x" label="Normal views, link or buy ask" />
+  <StatCard stat="1.37x" label="Normal views, ask in the middle" />
+  <StatCard stat="0.96x" label="Normal views, ask at the end" />
+</StatGrid>
+
+---
+
+## What you ask for
+
+<DataBarChart
+  data={[
+    { ask: "Link or buy", avg: 0.82 },
+    { ask: "Comment", avg: 1.03 },
+    { ask: "None", avg: 1.05 },
+    { ask: "Follow", avg: 1.25 },
+  ]}
+  xKey="ask"
+  yKey="avg"
+  title="Views vs the creator's normal video, by what the video asks for"
+  suffix="x"
+/>
+
+The follow ask is the only one that beats saying nothing. It ran at 1.25x across 1,226 videos from 18 creators, doubled 36.9% of the time and did 5x 18.2% of the time. No ask at all was a normal video (1.05x, 2,223 videos). The comment ask, the one most advice recommends, was also a normal video (1.03x, 1,016 videos), with 30.0% doubling.
+
+The link or buy ask is the one to notice. It ran at 0.82x across 449 videos from 21 creators, with a 25.2% breakout rate and average views of 35,574, less than a third of the follow-ask average. Promo as a content category told the same story at 0.83x. The audience can feel the pitch coming and leaves before it arrives.
+
+## When you ask
+
+<DataBarChart
+  data={[
+    { timing: "End", avg: 0.96 },
+    { timing: "None", avg: 1.06 },
+    { timing: "Middle", avg: 1.37 },
+  ]}
+  xKey="timing"
+  yKey="avg"
+  title="Views vs the creator's normal video, by when the ask lands"
+  suffix="x"
+/>
+
+This is the bigger finding. An ask in the middle of the video ran at 1.37x across 905 videos, the strongest single bucket in this study, with 40.3% doubling and 20.9% at 5x. An ask at the end ran at 0.96x across 1,882 videos, below saying nothing at all (1.06x).
+
+The reason is simple. Most viewers never reach the end. An ask at the end is heard by the loyal minority who were going to follow anyway. An ask in the middle, placed just after the first payoff, is heard by everyone who is still interested and has just been given a reason.
+
+<NumberBlock items={[
+  { number: "01", text: "Best combination in the data: a follow ask, in the middle, right after the first thing worth following for." },
+  { number: "02", text: "Worst combination: a link or buy ask at the end. 0.82x on the ask and 0.96x on the timing, stacked on a video the viewer already left." },
+  { number: "03", text: "The comment ask at the end, which is the most common advice, is two below-normal choices in one line." },
+]} />
+
+## Why the follow ask does not hurt
+
+The follow ask runs at 1.25x partly because of who uses it. Creators who ask for the follow are usually the ones making the kind of video people want more of: stories (1.26x), news (1.42x), takes with a number behind them. The ask is not magic. It is a habit of creators whose videos already give a reason, and it turns the reason into a follower instead of a one-time view.
+
+<Callout title="The practical rule">
+Find the first moment in the script where the viewer thinks "that was good." Put the follow ask right there, one line, and keep going. Cut the end ask. If you need to sell, put it in the caption or the next video, not in the one you want to travel.
+</Callout>
+
+## Caveats
+
+The sample skews toward commentary, sports and news, where a follow is the natural ask. In a product niche the link ask may be the whole point of the video; the data says it costs reach, not that it costs money. And the timing finding depends on having a first payoff early enough to hang the ask on, which brings this back to structure.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine, which watches the video, reads the transcript and records what the video asks the viewer to do and at what point, using one definition for every video. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 4,914 had a recorded ask and a measured baseline.
+
+<CTA
+  headline="See which asks are working on your account."
+  sub="The free plan tracks your videos every week and fully analyses three of them, call to action and timing included. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+4,914 short-form videos with a recorded call to action, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**Does this measure followers gained or views?**
+Views, relative to the creator's normal video. A separate check on one account found that follow asks also raised follows per thousand views on TikTok and Instagram, which is why we trust the direction.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the ask contributed.
+
+**Is a comment ask bad?**
+No. It is a normal video (1.03x). It just is not the lift most advice promises, and at the end of the video it lands on people who already left.
+
+<CTA
+  headline="Ask at the right second."
+  sub="The Chemist writes scripts from your own numbers, in your voice, with the follow ask placed where people are still watching."
+  primary="Start free"
+  secondary="See pricing"
+/>

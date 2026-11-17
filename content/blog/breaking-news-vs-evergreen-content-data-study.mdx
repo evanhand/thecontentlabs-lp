@@ -1,0 +1,129 @@
+---
+title: "Breaking News vs Evergreen Content: 4,982 Videos Say Fresh Beats Timeless by 67%"
+description: "A data study of 4,982 short-form videos from 76 creators. Videos about something under 24 hours old ran at 1.57x the creator's normal views; evergreen videos ran at 0.94x. News reports (1.42x) and stories (1.26x) led the categories; promos (0.83x) and predictions (0.73x) trailed."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "content-strategy", "news", "evergreen", "tiktok", "instagram", "2026"]
+faqs:
+  - q: "Does evergreen content perform worse than timely content?"
+    a: "In this data, clearly. Across 4,982 analyzed videos, videos about something under 24 hours old ran at 1.57x the creator's normal views with 41.1% doubling. Videos about something from the past week ran at 1.13x. Evergreen videos ran at 0.94x with 25.2% doubling."
+  - q: "What type of content gets the most views?"
+    a: "News reports (1.42x across 211 videos) and stories (1.26x across 936 videos). Breakdowns ran at 1.20x and hot takes at 1.09x. Explainers were a normal video at 0.99x. Promos (0.83x) and predictions (0.73x) were the weakest categories."
+  - q: "Does novelty matter?"
+    a: "Yes. Videos graded 5 for novelty (an angle the audience has not seen) ran at 1.37x, 4s at 1.19x, and 3s at 0.95x. Specificity shows the same curve: grade 5 ran at 1.20x and grade 1 ran at 0.95x with a 3.3% 5x rate, the lowest in the study."
+  - q: "Should I stop making evergreen videos?"
+    a: "No, but stop expecting them to break out. Evergreen videos ran at 0.94x with a 10.9% 5x rate. They are the floor of an account. The ceiling comes from being first and specific on something that is happening now."
+thumbnailHook: "Under 24 hours old: 1.57x."
+thumbnailEmphasis: "1.57x"
+---
+
+"Make evergreen content" is advice built for blogs. Short-form feeds are not blogs. We measured how much the clock is worth.
+
+We pulled **4,982 short-form videos** from **76 creators** in The Content Labs dataset. The analysis engine labelled each one for how recent its subject was (breaking, this week, evergreen), what kind of video it was (news report, story, breakdown, hot take, explainer, promo, prediction) and how novel and specific the angle was on a 1 to 5 scale. We then compared each video against that same creator's normal views, so the result is about the content and not the size of the account.
+
+<Highlight title="Fresh beats timeless by two thirds">
+Videos about something **under 24 hours old** ran at **1.57x** the creator's normal views across 455 videos from 19 creators, with **41.1%** doubling and **20.2%** doing five times it. Videos about something from **this week** ran at **1.13x**. **Evergreen** videos ran at **0.94x** across 2,054 videos, with 25.2% doubling. Being first is worth more than being right forever.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="4,982" label="Videos labelled for recency" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.57x" label="Normal views, under 24h old" />
+  <StatCard stat="0.94x" label="Normal views, evergreen" />
+  <StatCard stat="1.42x" label="Normal views, news reports" />
+  <StatCard stat="0.73x" label="Normal views, predictions" />
+</StatGrid>
+
+---
+
+## How fresh
+
+<DataBarChart
+  data={[
+    { recency: "Evergreen", avg: 0.94 },
+    { recency: "This week", avg: 1.13 },
+    { recency: "Under 24h", avg: 1.57 },
+  ]}
+  xKey="recency"
+  yKey="avg"
+  title="Views vs the creator's normal video, by how recent the subject is"
+  suffix="x"
+/>
+
+The curve is steep and it is not a small-sample artefact. The "this week" bucket is 2,473 videos from 20 creators at 1.13x. Evergreen is 2,054 videos from 29 creators at 0.94x, with average views of 64,638 against 137,200 for breaking. The 24-hour bucket is smaller (455 videos) but has the highest breakout rate of any recency bucket, 41.1%.
+
+The mechanism is search and feed at once. A video on something that happened this morning gets the search traffic for the next 48 hours, and the feed pushes what is getting watched right now. An evergreen video is competing with every other evergreen video ever made on the subject.
+
+## What kind of video
+
+<DataBarChart
+  data={[
+    { category: "Prediction", avg: 0.73 },
+    { category: "Promo", avg: 0.83 },
+    { category: "Explainer", avg: 0.99 },
+    { category: "Hot take", avg: 1.09 },
+    { category: "Breakdown", avg: 1.20 },
+    { category: "Story", avg: 1.26 },
+    { category: "News report", avg: 1.42 },
+  ]}
+  xKey="category"
+  yKey="avg"
+  title="Views vs the creator's normal video, by content category"
+  suffix="x"
+/>
+
+News reports lead at 1.42x (211 videos from 12 creators, 21.8% at 5x). Stories are the biggest winning category at 1.26x across 936 videos from 22 creators, with 39.4% doubling. Breakdowns run at 1.20x but come from only 4 creators. Hot takes, the largest bucket at 1,857 videos, are a modest 1.09x: the take alone is not the lift, the take on something fresh is.
+
+The bottom is instructive. Explainers are a normal video (0.99x, 1,080 videos). Promos run at 0.83x (326 videos, 6.1% at 5x). Predictions are the weakest category at 0.73x across 60 videos, though with a 15.0% 5x rate: a prediction is a coin flip that occasionally pays.
+
+## Novel and specific
+
+<NumberBlock items={[
+  { number: "01", text: "Novelty 5 (an angle the audience has not seen): 1.37x across 145 videos, 40.0% doubling. Novelty 4: 1.19x across 2,681 videos. Novelty 3 (the usual take): 0.95x across 2,149 videos." },
+  { number: "02", text: "Specificity 5 (names, numbers, exact claims): 1.20x across 401 videos, 20.7% at 5x. Specificity 1 (vague): 0.95x across 120 videos, with a 3.3% 5x rate and average views of 5,066, the lowest in the study." },
+  { number: "03", text: "Hook structure follows the same logic: breaking news openers 1.36x, story openers 1.16x, bold claims 1.13x, questions 0.98x, direct address 0.88x." },
+]} />
+
+Put the three together and the winning video is easy to describe: something that happened today, told as a story or reported as news, with a specific number or name in the first line and an angle the audience has not heard yet.
+
+<Callout title="The practical rule">
+Decide what in your niche happened in the last 24 hours and film that first. Lead with the specific fact. Save the explainer for the days nothing happened, and expect it to do a normal video's numbers, not a breakout's.
+</Callout>
+
+## Caveats
+
+The creators in this dataset skew toward commentary, sports and news, where "breaking" is a daily option. In a niche with no news cycle (fitness, cooking), the "this week" bucket is probably the realistic top: a reaction to a trend, a new product, a season. The direction holds; the 1.57x is the ceiling for niches that have a clock.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine, which watches the video, reads the transcript and labels subject recency, content category, novelty and specificity using one fixed definition per label for every video. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 4,982 had a recency label and a measured baseline.
+
+<CTA
+  headline="See which of your videos were fresh, and what it was worth."
+  sub="The free plan tracks your videos every week and fully analyses three of them, recency and category included. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+4,982 short-form videos with a recency label, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**What counts as breaking?**
+A subject under 24 hours old at the time of posting, as judged from the video itself. "This week" is up to seven days. Everything else is evergreen.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the subject contributed.
+
+**Is a story the same as a news report?**
+No. A news report delivers what happened. A story has a build and a payoff, and it does not need to be new to work: stories ran at 1.26x across all recency buckets.
+
+<CTA
+  headline="Be first, be specific."
+  sub="The Chemist writes from your own numbers, in your voice, and tells you which of today's stories your account should own."
+  primary="Start free"
+  secondary="See pricing"
+/>

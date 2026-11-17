@@ -1,0 +1,123 @@
+---
+title: "The 30 to 60 Second Dead Zone: Why Mid-Length Videos Underperform (4,470-Video Study)"
+description: "A data study of 4,470 short-form videos from 76 creators. Videos over two minutes ran at 1.29x the creator's normal views. Videos of 30 to 60 seconds ran at 0.96x, the weakest bucket. The middle is too long to be a moment and too short to be a story."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "video-length", "retention", "tiktok", "instagram", "youtube shorts", "2026"]
+faqs:
+  - q: "How long should a TikTok or Reel be in 2026?"
+    a: "Either short or long, not in between. Across 4,470 analyzed videos, videos over two minutes ran at 1.29x the creator's normal views and videos of one to two minutes ran at 1.08x. Videos of 30 to 60 seconds ran at 0.96x, the weakest bucket. Under 15 seconds ran at 1.02x."
+  - q: "Why do 30 to 60 second videos underperform?"
+    a: "They are too long to be a single moment and too short to earn a build. In the same dataset, single-point videos ran at 0.96x and build-up videos at 1.23x. A 45-second video usually tries to be one point stretched, or a story cut short."
+  - q: "Do long videos really work on short-form platforms?"
+    a: "In this data, yes. The two-minute-plus bucket had the highest breakout rate (38.7% doubled the creator's normal) and the highest 5x rate (18.8%). It also had the highest average views at 212,618. The platforms reward watch time, and a long video that holds has more of it to give."
+  - q: "Should I stop making short videos?"
+    a: "No. Under 15 seconds ran at 1.02x, a normal video, and it is the cheapest video to make. Its ceiling is low (7.2% did 5x) but it does not hurt. The bucket to avoid is the middle."
+thumbnailHook: "30 to 60 seconds is the dead zone."
+thumbnailEmphasis: "dead zone"
+---
+
+The standard advice is "keep it under a minute." The standard advice is producing the weakest videos in our dataset.
+
+We pulled **4,470 short-form videos** from **76 creators** in The Content Labs dataset, bucketed them by length, and compared each one against that same creator's normal views. Measuring against the creator's own median is the point: a 2M-follower account and a 3K-follower account are scored on the same scale, and a 1.0x always means "a normal video for this person."
+
+<Highlight title="Short is fine. Long is better. The middle is worst.">
+Videos over **two minutes** ran at **1.29x** the creator's normal views across 879 videos, with **38.7%** doubling and **18.8%** doing five times it. Videos of **30 to 60 seconds** ran at **0.96x** across 508 videos, with 24.4% doubling. Under 15 seconds ran at 1.02x. The curve is not a line. It is a dip in the middle.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="4,470" label="Videos with a measured length" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.29x" label="Normal views, 2 min or more" />
+  <StatCard stat="0.96x" label="Normal views, 30-60s" />
+  <StatCard stat="38.7%" label="Breakout rate (2x), 2 min or more" />
+  <StatCard stat="7.2%" label="5x rate, under 15s (lowest)" />
+</StatGrid>
+
+---
+
+## The curve
+
+<DataBarChart
+  data={[
+    { band: "Under 15s", avg: 1.02 },
+    { band: "15-30s", avg: 0.99 },
+    { band: "30-60s", avg: 0.96 },
+    { band: "1-2 min", avg: 1.08 },
+    { band: "2 min or more", avg: 1.29 },
+  ]}
+  xKey="band"
+  yKey="avg"
+  title="Views vs the creator's normal video, by length"
+  suffix="x"
+/>
+
+Read it left to right. Under 15 seconds is a normal video (1.02x). It slides through 15 to 30 seconds (0.99x) to the bottom at 30 to 60 seconds (0.96x), then climbs through one to two minutes (1.08x, the largest bucket at 2,726 videos) to the top at two minutes and over (1.29x).
+
+The breakout rates follow the same shape: 20.9% of sub-15-second videos doubled the creator's normal, 20.2% at 15 to 30, 24.4% at 30 to 60, 32.2% at one to two minutes, 38.7% past two minutes.
+
+## Why the middle dies
+
+A video has two ways to win. It can be a **moment**: one thing, delivered instantly, done before anyone can swipe. Or it can be a **build**: a setup that earns a payoff. The 30 to 60 second video is usually neither.
+
+The structure data in the same dataset says it plainly:
+
+<NumberBlock items={[
+  { number: "01", text: "Single point: 0.96x across 688 videos. One fact, stretched. This is what most 45-second videos are." },
+  { number: "02", text: "Build up to reveal: 1.23x across 277 videos, 39.4% doubling. This needs runway, and 45 seconds rarely has enough." },
+  { number: "03", text: "Linear story: 1.17x across 1,880 videos. The most common winning structure, and it averages well over a minute." },
+]} />
+
+Our payoff-timing study found the same thing from the other side: videos that held the payoff past 60 seconds ran at 1.15x, while videos that paid off inside 10 seconds ran at 0.98x. A 45-second video cannot hold a payoff for 60 seconds and usually does not deliver one in 10 either.
+
+## The case for long
+
+Two minutes and over is the best bucket on every measure we have: median (1.29x), breakout rate (38.7%), 5x rate (18.8%) and average views (212,618, against 11,422 for the 30 to 60 second bucket). It is also the bucket with the fewest creators (17), which means the creators who commit to long videos are a minority and they are winning.
+
+The reason is watch time. A two-minute video that holds the viewer for 90 seconds has given the platform more than a 45-second video can give at all. The platforms are built to keep people in the app, and they pay for it in distribution.
+
+<Callout title="The practical rule">
+Before you cut, ask what the video is. If it is one moment, cut it to the moment and keep it under 15 seconds. If it is a story or an argument, give it the full build and let it run past a minute, past two if the material holds. Do not land at 45 seconds because 45 seconds felt safe.
+</Callout>
+
+## The case for short
+
+Under 15 seconds is not a bad bucket. It is a normal video (1.02x) that costs almost nothing to make, and the sample is small (139 videos). Its ceiling is low: 7.2% did 5x, and average views in the bucket were 7,204. Use it for the moment that is only a moment. Do not use it as a format.
+
+## Caveats
+
+The creators in this dataset skew toward commentary, sports and news, where a two-minute argument is natural. Formats built on one visual beat (a recipe reveal, a transformation) may not have a two-minute version. The dip at 30 to 60 seconds is the finding we would bet on across niches; the size of the lift past two minutes is the part most likely to vary.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine. Length comes from the video file. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 4,470 had a measured length and a baseline.
+
+<CTA
+  headline="Find your own dead zone."
+  sub="The free plan tracks your videos every week and shows which lengths win on your account. Three videos fully analysed. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+4,470 short-form videos with a measured length, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**Is this TikTok only?**
+No. TikTok and Instagram make up most of it, with YouTube, Facebook and X included. The platforms are combined.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the length contributed.
+
+**What if my audience only watches short videos?**
+Check your own numbers. The free plan tracks every video you post and shows which lengths win for you, which beats any chart built from someone else's audience.
+
+<CTA
+  headline="Make the video the length it needs."
+  sub="The Chemist writes from your own numbers, in your voice, and tells you whether an idea is a moment or a build."
+  primary="Start free"
+  secondary="See pricing"
+/>

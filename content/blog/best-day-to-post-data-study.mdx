@@ -1,0 +1,135 @@
+---
+title: "Best Day to Post on TikTok and Instagram in 2026: 4,959 Videos Ranked by Weekday and Hour"
+description: "A data study of 4,959 short-form videos from 76 creators. Sunday posts ran at 1.25x the creator's normal views, Monday posts at 0.92x. Morning posts (5 to 11am Eastern) ran at 1.15x. Night posts after 9pm were the weakest slot in the study."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "posting-time", "tiktok", "instagram", "algorithm", "2026"]
+faqs:
+  - q: "What is the best day to post on TikTok and Instagram?"
+    a: "Sunday, then Saturday. Across 4,959 analyzed videos, Sunday posts ran at 1.25x the creator's normal views and Saturday at 1.18x. Wednesday was the best weekday at 1.14x. Monday was the weakest day at 0.92x."
+  - q: "What is the best time of day to post?"
+    a: "Morning. Posts published between 5am and 11am Eastern ran at 1.15x the creator's normal, with 34.6% doubling and 17.6% doing 5x. Midday and evening both ran at 1.06x. Posts after 9pm ran at 0.98x and had the lowest breakout rate in the study, 21.7%."
+  - q: "Should I stop posting on Monday?"
+    a: "Not necessarily. Monday's median was the lowest (0.92x) but its 5x rate was 16.0%, higher than Tuesday through Friday. Monday posts are more of a coin flip: more ordinary videos, but the ones that hit still hit."
+  - q: "Why do weekend posts do better?"
+    a: "Two things the data shows and one it suggests. Weekend posts were rarer (406 on Sunday versus 888 on Thursday), so each one competed with less from the same creators. They also had the highest 5x rates (18.7% Sunday, 18.2% Saturday). The likely reason is that the audience has more time to watch a full video on a weekend, and watch time drives everything else."
+thumbnailHook: "Sunday morning. Not Monday night."
+thumbnailEmphasis: "Sunday morning"
+---
+
+Every "best time to post" chart on the internet is built from the same two or three recycled surveys. We built one from videos.
+
+We pulled **4,959 short-form videos** from **76 creators** in The Content Labs dataset, took the exact posting timestamp of each one, and compared every video against that same creator's normal views. Measuring against the creator's own median is what makes this fair: a big account's Sunday does not outweigh a small account's Sunday, and a 1.0x always means "a normal video for this person." All times are US Eastern.
+
+<Highlight title="Sunday beats Monday by a third">
+Sunday posts ran at **1.25x** the creator's normal views. Monday posts ran at **0.92x**. That is the whole spread of the week, and it lines up with the time of day too: **morning** posts (5 to 11am) ran at **1.15x**, while posts after **9pm** ran at **0.98x** and doubled only 21.7% of the time, the lowest breakout rate of any slot.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="4,959" label="Videos with a posting time" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.25x" label="Normal views, Sunday" />
+  <StatCard stat="0.92x" label="Normal views, Monday" />
+  <StatCard stat="1.15x" label="Normal views, 5-11am" />
+  <StatCard stat="21.7%" label="Breakout rate after 9pm (worst)" />
+</StatGrid>
+
+---
+
+## The week, ranked
+
+<DataBarChart
+  data={[
+    { day: "Mon", avg: 0.92 },
+    { day: "Tue", avg: 1.08 },
+    { day: "Wed", avg: 1.14 },
+    { day: "Thu", avg: 0.97 },
+    { day: "Fri", avg: 1.03 },
+    { day: "Sat", avg: 1.18 },
+    { day: "Sun", avg: 1.25 },
+  ]}
+  xKey="day"
+  yKey="avg"
+  title="Views vs the creator's normal video, by day posted (Eastern)"
+  suffix="x"
+/>
+
+Three things stand out.
+
+**The weekend is real.** Sunday (1.25x, 406 videos) and Saturday (1.18x, 534 videos) are the top two days, and they also have the top two breakout rates: 36.0% and 36.9% of weekend posts doubled the creator's normal, and 18.7% and 18.2% did five times it.
+
+**Wednesday is the weekday to use.** It ran at 1.14x across 816 videos from 29 creators, the broadest sample of any day. Tuesday (1.08x) is a reasonable second. Thursday (0.97x) and Monday (0.92x) are below normal.
+
+**Monday is a coin flip, not a dead day.** Its median is the lowest of the week, but 16.0% of Monday posts did 5x, better than Tuesday (13.5%), Wednesday (14.5%), Thursday (12.8%) or Friday (13.4%). Monday produces more ordinary videos and about the same number of big ones.
+
+## The day, ranked
+
+<DataBarChart
+  data={[
+    { slot: "5-11am", avg: 1.15 },
+    { slot: "11am-2pm", avg: 1.06 },
+    { slot: "2-5pm", avg: 0.98 },
+    { slot: "5-9pm", avg: 1.06 },
+    { slot: "9pm-5am", avg: 0.98 },
+  ]}
+  xKey="slot"
+  yKey="avg"
+  title="Views vs the creator's normal video, by hour posted (Eastern)"
+  suffix="x"
+/>
+
+Morning wins on every measure. Posts between 5 and 11am ran at 1.15x across 1,437 videos, doubled 34.6% of the time, and did 5x 17.6% of the time. Midday (1.06x, 1,469 videos) and evening (1.06x, 896 videos) are fine. The afternoon dip to 0.98x is small.
+
+The slot to avoid is after 9pm. Those 226 videos ran at 0.98x, doubled only 21.7% of the time, and did 5x only 10.2% of the time. A video posted at midnight is competing for a feed that will be rebuilt by morning.
+
+<NumberBlock items={[
+  { number: "01", text: "Best single slot in the data: Sunday morning. Both the day (1.25x) and the hour band (1.15x) are the top of their chart." },
+  { number: "02", text: "Best weekday slot: Wednesday morning. 1.14x on the day, 1.15x on the hour." },
+  { number: "03", text: "Worst slot: Monday night. 0.92x on the day, 0.98x and a 21.7% breakout rate on the hour." },
+]} />
+
+## Why the weekend works
+
+Part of it is competition. The creators in this dataset posted roughly half as often on weekends (406 Sunday posts versus 888 Thursday posts), so each weekend video shares the audience with fewer of its own siblings. Part of it is almost certainly watch time: an audience with a free morning finishes a two-minute video, and finished videos are the ones the platform keeps pushing. Our length study found videos over two minutes ran at 1.29x, and those are easier to finish on a Sunday than on a Monday commute.
+
+<Callout title="The practical rule">
+If you post once a day, post in the morning. If you post four times a week, make two of them Saturday and Sunday. If you have one video you believe in, hold it for Sunday morning rather than publishing it the moment it is done on Monday night.
+</Callout>
+
+## Caveats
+
+These are one dataset's numbers, from creators who skew toward commentary, sports and news. A niche with a Monday-morning audience (business, productivity) may run the other way. The right use of this chart is as a default, and the right next step is to check your own week: if your Thursdays beat everyone's Sundays, trust your Thursdays.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine. We took the posting timestamp, converted it to US Eastern, and bucketed by weekday and by hour band. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 4,959 had a posting time and a measured baseline.
+
+<CTA
+  headline="Find out which day works for you, not for everyone."
+  sub="The free plan tracks your videos every week and shows what wins on your account, day of week included. Three videos fully analysed. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+4,959 short-form videos with a posting time, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**What time zone are these in?**
+US Eastern. Most creators in the dataset are US based. If your audience is elsewhere, shift the hour bands to their morning.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the posting slot contributed.
+
+**Does the day matter more than the video?**
+No. The spread across days is 0.92x to 1.25x. The spread across content types in the same dataset is wider than that. Post the right video on the right day; the day alone will not save a weak one.
+
+<CTA
+  headline="Post what wins, when it wins."
+  sub="The Chemist builds your week from your own numbers, in your voice, and tells you which day each idea belongs on."
+  primary="Start free"
+  secondary="See pricing"
+/>

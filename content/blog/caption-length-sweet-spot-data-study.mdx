@@ -1,0 +1,126 @@
+---
+title: "How Long Should a TikTok Caption Be? 5,030 Videos Say 150 to 300 Characters, and Skip the Hashtags"
+description: "A data study of 5,030 short-form videos from 76 creators. Captions of 150 to 300 characters ran at 1.13x the creator's normal views; captions under 50 characters ran at 0.96x. Videos with no hashtags ran at 1.08x, better than one to three (0.97x) or four to eight (1.02x)."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "captions", "hashtags", "tiktok", "instagram", "seo", "2026"]
+faqs:
+  - q: "How long should a TikTok or Instagram caption be?"
+    a: "150 to 300 characters. Across 5,030 analyzed videos, captions in that range ran at 1.13x the creator's normal views with 35.0% doubling. Captions over 300 characters ran at 1.04x, 50 to 150 at 0.96x, and under 50 at 0.96x with only 20.1% doubling."
+  - q: "Do hashtags help in 2026?"
+    a: "Not in this data. Videos with no hashtags ran at 1.08x the creator's normal across 3,662 videos, with 33.2% doubling. One to three hashtags ran at 0.97x and four to eight ran at 1.02x. The creators who dropped hashtags did not lose reach."
+  - q: "Should the caption ask a question?"
+    a: "The data says no. Captions with a question mark ran at 0.96x across 970 videos; captions without one ran at 1.08x. A question in the caption is usually a weaker version of the claim the video should be making."
+  - q: "Do emoji in the caption matter?"
+    a: "A little, in the right direction. Captions with emoji ran at 1.11x across 1,164 videos versus 1.03x without, and did 5x at 18.0% versus 13.8%. It is a small lift and probably reflects captions that were written with more care overall."
+thumbnailHook: "150 to 300 characters. No hashtags."
+thumbnailEmphasis: "No hashtags"
+---
+
+Caption advice has gone in circles for years: keep it short, no, write an essay for SEO, no, just hashtags, no, no hashtags. We measured all of it on one dataset.
+
+We pulled **5,030 short-form videos** from **76 creators** in The Content Labs dataset, read every caption for length, hashtag count, question marks and emoji, and compared each video against that same creator's normal views. Measuring against the creator's own median is what makes a big account and a small account comparable; a 1.0x always means "a normal video for this person."
+
+<Highlight title="Medium caption, zero hashtags">
+Captions of **150 to 300 characters** ran at **1.13x** the creator's normal views across 2,810 videos, with **35.0%** doubling and **17.2%** doing five times it. Captions **under 50 characters** ran at **0.96x** with only 20.1% doubling. And videos with **no hashtags** ran at **1.08x**, ahead of one to three hashtags (**0.97x**) and four to eight (**1.02x**).
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="5,030" label="Captions analyzed" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.13x" label="Normal views, 150-300 chars" />
+  <StatCard stat="0.96x" label="Normal views, under 50 chars" />
+  <StatCard stat="1.08x" label="Normal views, no hashtags" />
+  <StatCard stat="0.96x" label="Normal views, caption asks a question" />
+</StatGrid>
+
+---
+
+## Caption length
+
+<DataBarChart
+  data={[
+    { band: "Under 50 chars", avg: 0.96 },
+    { band: "50-150 chars", avg: 0.96 },
+    { band: "150-300 chars", avg: 1.13 },
+    { band: "300+ chars", avg: 1.04 },
+  ]}
+  xKey="band"
+  yKey="avg"
+  title="Views vs the creator's normal video, by caption length"
+  suffix="x"
+/>
+
+The shape is a hill with the top at 150 to 300 characters. Short captions (under 50, 338 videos) and shortish captions (50 to 150, 817 videos) both ran at 0.96x. The 150 to 300 band is the largest (2,810 videos from 28 creators) and the strongest. Past 300 characters it drops to 1.04x across 1,065 videos.
+
+Two to four sentences, in other words. Enough to state the claim, add the one detail that makes it specific and give the feed something to index. Not a paragraph.
+
+The under-50 bucket is worth a second look. It has the lowest breakout rate in this study (20.1%), the lowest 5x rate (7.7%) and average views of 8,453. A one-word caption with a hashtag is what a throwaway video looks like, and the numbers treat it that way.
+
+## Hashtags
+
+<DataBarChart
+  data={[
+    { count: "None", avg: 1.08 },
+    { count: "1-3", avg: 0.97 },
+    { count: "4-8", avg: 1.02 },
+  ]}
+  xKey="count"
+  yKey="avg"
+  title="Views vs the creator's normal video, by hashtag count"
+  suffix="x"
+/>
+
+No hashtags was the best bucket, and it was not close to being a small sample: 3,662 videos from 21 creators ran at 1.08x, doubled 33.2% of the time and did 5x 15.8% of the time. One to three hashtags, the "just a couple of relevant ones" advice, ran at 0.97x across 991 videos. Four to eight ran at 1.02x across 376 videos, with average views of 27,375 against 138,959 for the no-hashtag bucket.
+
+This does not prove hashtags lower reach. It proves the creators who stopped using them did not pay for it, which is the question most creators are actually asking.
+
+## Questions and emoji
+
+<NumberBlock items={[
+  { number: "01", text: "Question in the caption: 0.96x across 970 videos, versus 1.08x without. 'Do you agree?' is a softer version of 'Here is why you are wrong,' and the softer version loses." },
+  { number: "02", text: "Emoji in the caption: 1.11x across 1,164 videos, versus 1.03x without. The 5x rate was 18.0% with emoji and 13.8% without. Small, but consistent." },
+  { number: "03", text: "The caption is not the hook. Hook structure in the same dataset ran from 1.36x (breaking news) to 0.83x (visual reveal). The caption moves the number by a tenth; the first three seconds move it by half." },
+]} />
+
+<Callout title="The practical rule">
+Write the claim as a sentence, add the one detail that makes it specific, and stop between 150 and 300 characters. No question mark. No hashtags unless you have a reason that is not "reach." An emoji is fine if it is how you write.
+</Callout>
+
+## Caveats
+
+The creators in this dataset skew toward commentary, sports and news, where captions carry a claim rather than a product name or a recipe. A niche where hashtags still function as search (some Instagram categories) may differ. The direction on caption length and on question marks is the part we would bet on anywhere.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine. Caption length, hashtag count, question marks and emoji are read straight from the posted caption, with no model involved. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 5,030 had a caption and a measured baseline.
+
+<CTA
+  headline="See what your own captions are doing."
+  sub="The free plan tracks your videos every week and shows which caption habits win on your account. Three videos fully analysed. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+5,030 short-form videos with a caption, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**Is 150 to 300 characters words or letters?**
+Characters, including spaces. Roughly 25 to 50 words.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the caption contributed.
+
+**Do hashtags hurt?**
+The data cannot say they hurt. It says that dropping them did not cost the creators who dropped them anything, and their videos ran at 1.08x.
+
+<CTA
+  headline="Write the caption once, right."
+  sub="The Chemist writes captions from your own numbers, in your voice, at the length that wins."
+  primary="Start free"
+  secondary="See pricing"
+/>

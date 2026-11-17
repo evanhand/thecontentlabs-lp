@@ -1,0 +1,120 @@
+---
+title: "Heavy On-Screen Text vs Light: 5,012 Videos Say More Text Wins"
+description: "A data study of 5,012 short-form videos from 76 creators. Videos with heavy on-screen text ran at 1.22x the creator's normal views; videos with none ran at 0.78x. A text overlay on the hook, screenshots and clips all moved the number the same direction."
+category: "blog"
+date: "2026-11-17"
+tags: ["data-study", "on-screen-text", "editing", "tiktok", "instagram", "captions", "2026"]
+faqs:
+  - q: "Does on-screen text help a TikTok or Reel get views?"
+    a: "Yes, and more of it helps more. In 5,012 analyzed videos, heavy on-screen text ran at 1.22x the creator's normal views with 38.2% doubling. Light text ran at 1.03x. No text at all ran at 0.78x with only 23.5% doubling."
+  - q: "Does the hook need a text overlay?"
+    a: "The data says yes. Videos with a text overlay on the hook ran at 1.07x across 4,703 videos. The 327 videos without one ran at 0.84x. Most creators already do this, and the ones who skip it pay for it."
+  - q: "Do screenshots and clips count as visual text?"
+    a: "They behave the same way. Videos that used screenshots ran at 1.19x versus 1.01x without, and did 5x at 19.7% versus 12.5%. Videos that used clips ran at 1.19x versus 0.94x without. Anything that puts the evidence on screen instead of only in the audio moved the number up."
+  - q: "What about captions on the speech?"
+    a: "Styled captions ran at 1.08x, auto captions at 1.03x, and no captions at 0.69x across 155 videos. The style matters a little. Having captions at all matters a lot."
+thumbnailHook: "Heavy text: 1.22x. No text: 0.78x."
+thumbnailEmphasis: "1.22x"
+---
+
+Short-form is watched on mute, in a feed, at speed. Everything you say has to also be seen. We measured how much that is worth.
+
+We pulled **5,012 short-form videos** from **76 creators** in The Content Labs dataset, had the analysis engine rate the density of on-screen text in each one (none, light, heavy), and compared each video against that same creator's normal views. Measuring against the creator's own median keeps a big account from drowning out a small one; a 1.0x always means "a normal video for this person."
+
+<Highlight title="The more the better">
+Videos with **heavy** on-screen text ran at **1.22x** the creator's normal views across 857 videos from 29 creators, with **38.2%** doubling and **19.3%** doing five times it. **Light** text ran at **1.03x**. **No** text at all ran at **0.78x** across 238 videos, with only 23.5% doubling. The gap between heavy and none is 44 points of a normal video.
+</Highlight>
+
+<StatGrid>
+  <StatCard stat="5,012" label="Videos rated for text density" />
+  <StatCard stat="76" label="Creators" />
+  <StatCard stat="1.22x" label="Normal views, heavy text" />
+  <StatCard stat="0.78x" label="Normal views, no text" />
+  <StatCard stat="38.2%" label="Breakout rate (2x), heavy text" />
+  <StatCard stat="0.69x" label="Normal views, no speech captions" />
+</StatGrid>
+
+---
+
+## Density, ranked
+
+<DataBarChart
+  data={[
+    { density: "None", avg: 0.78 },
+    { density: "Light", avg: 1.03 },
+    { density: "Heavy", avg: 1.22 },
+  ]}
+  xKey="density"
+  yKey="avg"
+  title="Views vs the creator's normal video, by on-screen text density"
+  suffix="x"
+/>
+
+Light text is the default (3,917 videos) and it buys you a normal video. Heavy text is rarer (857 videos) and it is where the breakouts live. No text is rare (238 videos) and it is the worst bucket in this study.
+
+Heavy here means the text is doing real work: the key stat on screen when it is said, the name of the thing being discussed, the claim in a title card, the quote from the screenshot. It does not mean a wall of words over the creator's face.
+
+## Everything on screen points the same way
+
+Four more features in the dataset describe how much of the argument is visible rather than only audible. Every one of them moved the same direction.
+
+<NumberBlock items={[
+  { number: "01", text: "Text overlay on the hook: 1.07x with one (4,703 videos) versus 0.84x without (327 videos). Skipping the hook overlay costs about a fifth of a normal video." },
+  { number: "02", text: "Screenshots in the video: 1.19x with (1,559 videos) versus 1.01x without. The 5x rate was 19.7% with screenshots and 12.5% without." },
+  { number: "03", text: "Clips in the video: 1.19x with (3,003 videos) versus 0.94x without (2,027 videos). Videos that only showed the creator talking doubled 25.1% of the time; videos with clips doubled 35.8% of the time." },
+  { number: "04", text: "Speech captions: styled 1.08x, auto 1.03x, none 0.69x (155 videos). Captions at all is the big step; the style is a small one." },
+]} />
+
+The common thread is proof. A video that says "his numbers this season are insane" is a claim. A video that says it while the stat line sits on screen is evidence, and evidence gets screenshotted, shared and argued over.
+
+## Why heavy text wins
+
+Three reasons, all visible in the rest of the dataset.
+
+**Sound off.** A feed viewer decides in the first second or two whether to turn the sound on. Text gives them a reason. The hook overlay number (1.07x versus 0.84x) is that decision in one line.
+
+**Specificity.** On-screen text forces a specific number or name, and specific videos ran at 1.20x (grade 5) against 0.89x (grade 3) in the same dataset. Vague claims are hard to put on screen.
+
+**Rewatches and shares.** A stat on screen is a screenshot waiting to happen. Screenshot-heavy videos had a 5x rate of 19.7%, among the highest of any bucket we measured.
+
+<Callout title="The practical rule">
+Every number you say, put on screen as you say it. Every name, every quote, every score. Put the hook on screen in the first frame. If the video has no number, name or quote worth showing, that is a note about the script, not the editing.
+</Callout>
+
+## Caveats
+
+The creators here skew toward commentary, sports and news, where stats and screenshots are the native evidence. A vlog or a cooking video has fewer numbers to show, and "heavy" would look different there. The direction is very unlikely to flip; the size of the gap might shrink.
+
+## How we ran this
+
+Every video was processed by The Content Labs analysis engine, which watches the video and rates on-screen text density (none, light, heavy), whether the hook carries a text overlay, whether screenshots or clips appear, and the caption style, using one definition per label for every video. We then divided each video's views by that creator's median views over the period, so the numbers are relative to each creator's normal rather than raw counts. Buckets with fewer than 60 videos are not reported. The dataset is 9,289 analysed videos from 76 creators across TikTok, Instagram, YouTube, Facebook and X; 5,012 had a text-density rating and a measured baseline.
+
+<CTA
+  headline="See what your own best videos put on screen."
+  sub="The free plan tracks your videos every week and fully analyses three of them, text density and hook overlay included. No card."
+  primary="Start free"
+  secondary="See pricing"
+/>
+
+---
+
+## FAQ
+
+**How big was the dataset?**
+5,012 short-form videos with a text-density rating, from 76 creators on The Content Labs, drawn from 9,289 analysed videos across five platforms.
+
+**What counts as heavy text?**
+Text that carries the argument: stats, names, quotes and claims on screen as they are said. Light is a hook overlay and little else. None is a bare video.
+
+**Why measure against the creator's normal video instead of raw views?**
+Raw views mostly measure account size. Dividing by the creator's own median isolates what the editing contributed.
+
+**Should I add text to every video?**
+Add the text the video has a reason for. The data rewards evidence on screen, not decoration.
+
+<CTA
+  headline="Put the proof on screen."
+  sub="The Chemist writes scripts from your own numbers, with the stat, the name and the quote marked for the screen."
+  primary="Start free"
+  secondary="See pricing"
+/>
