@@ -158,19 +158,16 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Product Demo Video */}
-      <div className="-mt-1 max-w-3xl lg:max-w-4xl mx-auto" style={{ transform: 'translateZ(0)' }}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster="/hero-demo-poster.jpg"
-          width={1920}
-          height={1080}
-          className="w-full rounded-2xl shadow-2xl"
-          src="/hero-demo.mp4"
+      {/* Product capture: a real video page, beat map in view. */}
+      <div className="-mt-1 max-w-3xl lg:max-w-5xl mx-auto" style={{ transform: 'translateZ(0)' }}>
+        <img
+          src="/screens/hero-video-page.jpg"
+          alt="A video's page in The Content Labs: views, likes, engagement, honest feedback, and the beat map showing hook, setup, build, payoff and where viewers swipe"
+          width={2440}
+          height={1720}
+          fetchPriority="high"
+          decoding="async"
+          className="w-full rounded-2xl shadow-2xl border border-slate-200/70"
         />
       </div>
 
