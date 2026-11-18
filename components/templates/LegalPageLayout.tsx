@@ -17,7 +17,7 @@ export function LegalPageLayout({
     <div className="min-h-screen bg-canvas text-ink">
       <PublicNav />
       <main className="px-4 sm:px-6 pt-32 sm:pt-40 pb-20 sm:pb-28">
-        <article className="mx-auto w-full max-w-[68ch]">
+        <article className="mx-auto w-full max-w-[40rem]">
           <header className="flex flex-col gap-4">
             <MarketingBreadcrumbs items={[{ label: 'Home', href: '/' }, { label: title }]} />
             <h1 className="font-heading text-4xl sm:text-5xl font-semibold tracking-[-0.03em] leading-[1.08] text-ink">

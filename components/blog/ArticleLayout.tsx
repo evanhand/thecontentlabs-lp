@@ -56,7 +56,7 @@ export function ArticleLayout({
       ))}
 
       <main className="px-4 sm:px-6 pt-32 sm:pt-40 pb-20 sm:pb-28">
-        <div className="mx-auto w-full max-w-[68ch] text-[17px]">
+        <div className="mx-auto w-full max-w-[40rem] text-[17px]">
           <header className="flex flex-col gap-4 sm:gap-5">
             <Breadcrumbs items={crumbs} />
             <h1 className="font-heading text-4xl sm:text-5xl font-semibold tracking-[-0.03em] leading-[1.08] text-ink text-balance">
