@@ -74,7 +74,7 @@ export function Hero() {
               href="/trends"
               className="group inline-flex items-center gap-2 mb-4 pl-2 pr-4 py-1 rounded-full bg-white/80 border border-slate-200 hover:border-content-coral/40 hover:bg-white transition-all"
             >
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[9px] font-mono uppercase tracking-[0.2em] font-bold">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[11px] font-mono uppercase tracking-[0.2em] font-bold">
                 <span className="h-1 w-1 rounded-full bg-white animate-pulse" />
                 Live
               </span>
@@ -149,8 +149,8 @@ export function Hero() {
                   className="w-6 h-6 rounded-full object-cover border border-slate-200 flex-shrink-0"
                 />
                 <div className="text-left">
-                  <p className="font-mono text-[10px] font-semibold text-slate-900 leading-none">{t.name}</p>
-                  <p className="font-mono text-[9px] text-content-coral-600 leading-tight mt-0.5">{t.stat}</p>
+                  <p className="font-mono text-[11px] font-semibold text-slate-900 leading-none">{t.name}</p>
+                  <p className="font-mono text-[11px] text-content-coral-600 leading-tight mt-0.5">{t.stat}</p>
                 </div>
               </div>
             ))}
@@ -217,7 +217,7 @@ export function Hero() {
               />
               <div>
                 <p className="font-mono text-xs font-semibold text-slate-900">{t.name}</p>
-                <p className="font-mono text-[10px] text-content-coral-600">{t.stat}</p>
+                <p className="font-mono text-[11px] text-content-coral-600">{t.stat}</p>
               </div>
             </div>
           ))}

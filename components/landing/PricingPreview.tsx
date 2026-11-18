@@ -75,7 +75,7 @@ export function PricingPreview() {
                     <span className={`text-sm ${isPopular ? 'text-slate-400' : 'text-slate-500'}`}>/mo</span>
                   </div>
                   {plan.firstMonth != null && (
-                    <span className={`mt-2 inline-block rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] ${isPopular ? 'bg-content-coral/20 text-content-coral-400' : 'bg-content-coral/10 text-content-coral'}`}>
+                    <span className={`mt-2 inline-block rounded-full px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.16em] ${isPopular ? 'bg-content-coral/20 text-content-coral-400' : 'bg-content-coral/10 text-content-coral'}`}>
                       ${plan.firstMonth} first month
                     </span>
                   )}

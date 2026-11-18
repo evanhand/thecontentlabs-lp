@@ -70,7 +70,7 @@ export function PublicNav() {
                       <a
                         key={item.to}
                         href={item.to}
-                        className="block px-3.5 py-2 text-sm transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                        className="block px-3.5 py-2 text-sm transition-colors text-slate-300 hover:text-white hover:bg-white/[0.05]"
                       >
                         {item.label}
                       </a>
@@ -105,10 +105,10 @@ export function PublicNav() {
                       <a
                         key={item.to}
                         href={item.to}
-                        className="block px-3.5 py-2.5 transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                        className="block px-3.5 py-2.5 transition-colors text-slate-300 hover:text-white hover:bg-white/[0.05]"
                       >
                         <span className="block text-sm font-semibold">{item.label}</span>
-                        <span className="block text-[11px] text-slate-500 mt-0.5">{item.sub}</span>
+                        <span className="block text-xs text-slate-400 mt-0.5">{item.sub}</span>
                       </a>
                     ))}
                   </div>
@@ -120,7 +120,7 @@ export function PublicNav() {
             <div className="flex items-center gap-2 sm:gap-3">
               <a
                 href="/login"
-                className="hidden md:block px-3 py-1.5 rounded-lg text-sm transition-colors text-slate-500 hover:text-slate-300"
+                className="hidden md:block px-3 py-1.5 rounded-lg text-sm transition-colors text-slate-300 hover:text-white"
               >
                 Log In
               </a>
@@ -132,7 +132,7 @@ export function PublicNav() {
               </a>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg transition-colors text-slate-400 hover:text-white"
+                className="md:hidden p-2 rounded-lg transition-colors text-slate-300 hover:text-white"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -152,7 +152,7 @@ export function PublicNav() {
               className="md:hidden border-t overflow-hidden border-white/[0.06]"
             >
               <div className="px-4 py-3 space-y-0.5">
-                <p className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                <p className="px-3 py-1.5 text-xs font-semibold text-slate-400">
                   Features
                 </p>
                 {FEATURE_LINKS.map((item) => (
@@ -160,7 +160,7 @@ export function PublicNav() {
                     key={item.to}
                     href={item.to}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-sm transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                    className="block px-3 py-2.5 rounded-lg text-sm transition-colors text-slate-300 hover:text-white hover:bg-white/[0.05]"
                   >
                     {item.label}
                   </a>
@@ -169,18 +169,18 @@ export function PublicNav() {
                 <a
                   href="/pricing"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white hover:bg-white/[0.05]"
                 >
                   Pricing
                 </a>
                 <a
                   href="/compare"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-slate-300 hover:text-white hover:bg-white/[0.05]"
                 >
                   Compare
                 </a>
-                <p className="px-3 py-1.5 mt-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                <p className="px-3 py-1.5 mt-2 text-xs font-semibold text-slate-400">
                   Resources
                 </p>
                 {RESOURCE_LINKS.map((item) => (
@@ -188,7 +188,7 @@ export function PublicNav() {
                     key={item.to}
                     href={item.to}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-sm transition-colors text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                    className="block px-3 py-2.5 rounded-lg text-sm transition-colors text-slate-300 hover:text-white hover:bg-white/[0.05]"
                   >
                     {item.label}
                   </a>

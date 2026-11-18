@@ -47,7 +47,6 @@ export function WhatYouGet() {
           variants={fadeUp} transition={{ duration: 0.7 }}
           className="max-w-2xl mb-14"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-content-coral mb-3">What you get</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white tracking-tight leading-[1.05]">
             Research on other people&rsquo;s videos is a start. This is research on yours.
           </h2>
@@ -75,7 +74,7 @@ export function WhatYouGet() {
               </div>
               <div className="flex items-center gap-2 mb-5">
                 <item.icon className="h-4 w-4 text-content-coral" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{item.tag}</span>
+                <span className="text-xs font-medium text-slate-300">{item.tag}</span>
               </div>
               <h3 className="font-heading text-xl sm:text-2xl font-semibold text-white tracking-tight leading-tight mb-3">
                 {item.title}

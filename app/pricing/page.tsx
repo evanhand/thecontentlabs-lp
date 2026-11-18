@@ -267,7 +267,7 @@ export default function PricingPage() {
             <span className="block whitespace-nowrap text-slate-900 pb-1 leading-tight">
               Free to start.
             </span>
-            <span className="block whitespace-nowrap bg-gradient-to-r from-content-cta-dark to-content-cta bg-clip-text text-transparent pb-2 leading-tight">
+            <span className="block whitespace-nowrap text-content-coral pb-2 leading-tight">
               $5 to go further.
             </span>
           </motion.h1>
@@ -396,7 +396,7 @@ export default function PricingPage() {
                     <>
                       <span className="text-4xl sm:text-5xl font-bold text-slate-900">${starter.price}</span>
                       <span className="ml-2 text-xl text-slate-400">/month</span>
-                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-content-coral">${starter.firstMonth} first month</span>
+                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-content-coral">${starter.firstMonth} first month</span>
                     </>
                   )}
                 </div>
@@ -465,7 +465,7 @@ export default function PricingPage() {
                     <>
                       <span className="text-4xl sm:text-5xl font-bold text-slate-900">${pro.price}</span>
                       <span className="ml-2 text-xl text-slate-400">/month</span>
-                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-content-coral">${pro.firstMonth} first month</span>
+                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-content-coral">${pro.firstMonth} first month</span>
                     </>
                   )}
                 </div>
@@ -506,11 +506,11 @@ export default function PricingPage() {
 
             {/* Studio Plan */}
             <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
-              <div className="absolute -inset-1 bg-gradient-to-br from-purple-500/30 to-indigo-600/30 rounded-3xl blur-xl opacity-50"></div>
-              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border-2 border-purple-400/40 hover:border-purple-400/60 transition-all duration-300 h-full flex flex-col">
+              <div className="hidden absolute -inset-1 rounded-3xl blur-xl opacity-50"></div>
+              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-300 hover:border-slate-400/60 transition-all duration-300 h-full flex flex-col">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-purple-500/10 rounded-xl">
-                    <Shield className="h-6 w-6 text-purple-600" />
+                  <div className="p-3 bg-slate-700/10 rounded-xl">
+                    <Shield className="h-6 w-6 text-slate-800" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Studio</h3>
@@ -534,7 +534,7 @@ export default function PricingPage() {
                 </div>
                 {billingInterval === 'yearly' && (
                   <div className="-mt-4 mb-6">
-                    <p className="text-sm text-purple-600">${enterprise.yearlyPrice} billed annually. You save ${enterprise.price * 12 - enterprise.yearlyPrice}</p>
+                    <p className="text-sm text-slate-800">${enterprise.yearlyPrice} billed annually. You save ${enterprise.price * 12 - enterprise.yearlyPrice}</p>
                     <p className="text-xs text-slate-400 mt-1">Two months free</p>
                   </div>
                 )}
@@ -542,7 +542,7 @@ export default function PricingPage() {
                 <a
                   href="https://thecontentlabs.app/register"
                   onClick={() => trackPricingCta('enterprise', billingInterval, 'plan_card')}
-                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-bold shadow-lg shadow-purple-600/25 hover:shadow-xl hover:shadow-purple-600/40 transition-all hover:scale-105 active:scale-95"
+                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold shadow-lg shadow-slate-800/25 hover:shadow-xl hover:shadow-slate-800/40 transition-all hover:scale-105 active:scale-95"
                 >
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -559,7 +559,7 @@ export default function PricingPage() {
                     'Priority support',
                   ].map((feature) => (
                     <li key={feature} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-600 mr-3 flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-slate-800 mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-slate-600">{feature}</span>
                     </li>
                   ))}
@@ -610,7 +610,7 @@ export default function PricingPage() {
                       <th className="text-center text-xs sm:text-sm font-bold text-slate-600 py-4 sm:py-5 px-2 sm:px-4">Free</th>
                       <th className="text-center text-xs sm:text-sm font-bold text-content-coral py-4 sm:py-5 px-2 sm:px-4">Starter</th>
                       <th className="text-center text-xs sm:text-sm font-bold text-content-cta py-4 sm:py-5 px-2 sm:px-4">Pro</th>
-                      <th className="text-center text-xs sm:text-sm font-bold text-purple-600 py-4 sm:py-5 px-2 sm:px-4">Studio</th>
+                      <th className="text-center text-xs sm:text-sm font-bold text-slate-800 py-4 sm:py-5 px-2 sm:px-4">Studio</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -667,7 +667,7 @@ export default function PricingPage() {
                         <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
                           {typeof e === 'boolean' ? (
                             e ? (
-                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 mx-auto" />
+                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-slate-800 mx-auto" />
                             ) : (
                               <span className="text-slate-300">&mdash;</span>
                             )
@@ -824,7 +824,7 @@ export default function PricingPage() {
           >
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-content-coral/10 border border-content-coral/25">
               <span className="h-1.5 w-1.5 rounded-full bg-content-coral animate-pulse" />
-              <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
+              <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
                 21,000+ videos analyzed · Free plan · No card
               </span>
             </motion.div>

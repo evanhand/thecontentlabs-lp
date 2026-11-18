@@ -80,7 +80,7 @@ export function FinalCTA() {
               transition={{ duration: 0.5 }}
               className="mt-10 inline-block bg-white/[0.06] border border-white/10 rounded-lg px-4 py-2.5 sm:px-6 sm:py-3"
             >
-              <p className="font-mono text-[10px] sm:text-xs text-slate-400 tracking-wide">
+              <p className="font-mono text-[11px] sm:text-xs text-slate-400 tracking-wide">
                 <span className="hidden sm:inline">Weekly numbers&nbsp;&nbsp;|&nbsp;&nbsp;Beat map per video&nbsp;&nbsp;|&nbsp;&nbsp;Chemist in your voice&nbsp;&nbsp;|&nbsp;&nbsp;Paid from $19/mo, $5 first month</span>
                 <span className="sm:hidden">Free plan · Paid from $19/mo · $5 first month</span>
               </p>

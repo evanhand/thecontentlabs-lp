@@ -1,53 +1,55 @@
 // Buttery spring for most entrances
-export const springBounce = { type: 'spring' as const, stiffness: 100, damping: 12 };
-export const springSnappy = { type: 'spring' as const, stiffness: 200, damping: 18 };
+// One curve for every entrance: fast start, long settle, no bounce.
+export const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+export const springBounce = { duration: 0.6, ease: EASE_OUT };
+export const springSnappy = { duration: 0.45, ease: EASE_OUT };
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0, transition: springBounce },
 };
 
 export const fadeUpBlur = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(6px)', scale: 0.97 },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1, transition: { ...springBounce, duration: 0.8 } },
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: springBounce },
 };
 
 export const slideFromLeft = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { opacity: 0, x: -16 },
   visible: { opacity: 1, x: 0, transition: springBounce },
 };
 
 export const slideFromRight = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { opacity: 0, x: 16 },
   visible: { opacity: 1, x: 0, transition: springBounce },
 };
 
 export const scaleIn = {
-  hidden: { opacity: 0, scale: 0.85 },
+  hidden: { opacity: 0, scale: 0.98 },
   visible: { opacity: 1, scale: 1, transition: springSnappy },
 };
 
 export const popIn = {
-  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  hidden: { opacity: 0, scale: 0.98, y: 8 },
   visible: { opacity: 1, scale: 1, y: 0, transition: springSnappy },
 };
 
 export const fanIn = (index: number) => ({
-  hidden: { opacity: 0, y: 60, rotate: (index - 1) * 3 },
-  visible: { opacity: 1, y: 0, rotate: 0, transition: { ...springBounce, delay: index * 0.15 } },
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { ...springBounce, delay: index * 0.06 } },
 });
 
 export const staggerContainer = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.05 },
   },
 };
 
 export const staggerContainerSlow = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.18 },
+    transition: { staggerChildren: 0.08 },
   },
 };
 

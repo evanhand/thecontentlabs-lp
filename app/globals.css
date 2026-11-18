@@ -631,3 +631,49 @@ html {
     padding: 12px;
   }
 }
+
+/* ── Interaction feel (emil-design-eng) and browser surfaces (impeccable craft floor) ── */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Pressables answer the press. Utility transition classes keep their colour
+   transitions; the scale still lands instantly where they win. */
+button:not(:disabled),
+a[class*="rounded"] {
+  transition-timing-function: var(--ease-out);
+}
+button:not(:disabled):active,
+a[class*="rounded"]:active {
+  transform: scale(0.97);
+}
+
+/* Hover lifts only where hover exists, so taps on phones don't stick. */
+@media (hover: none) {
+  [class*="hover\:-translate-y"]:hover { transform: none; }
+}
+
+::selection { background: rgba(244, 99, 42, 0.22); color: inherit; }
+
+:focus-visible {
+  outline: 2px solid #f4632a;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+html { scrollbar-color: #cbd5e1 transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+.tabular-nums, table td { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

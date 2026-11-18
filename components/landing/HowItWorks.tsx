@@ -32,7 +32,7 @@ export function HowItWorks() {
         {/* Vertical pipeline */}
         <div className="relative">
           {/* Central line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[3px] md:-translate-x-[1.5px] bg-content-coral shadow-[0_0_12px_rgba(244,99,42,0.4),0_0_24px_rgba(244,99,42,0.2)]"
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[3px] md:-translate-x-[1.5px] bg-content-coral "
           />
 
           {[
@@ -51,7 +51,7 @@ export function HowItWorks() {
                 {/* Node on pipeline */}
                 <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
                   <span className={`absolute inset-0 rounded-full ${step.dotColor} opacity-40 blur-md animate-pulse`} />
-                  <div className={`relative w-6 h-6 rounded-full ${step.dotColor} border-4 border-slate-950 shadow-[0_0_14px_rgba(244,99,42,0.7)]`} />
+                  <div className={`relative w-6 h-6 rounded-full ${step.dotColor} border-4 border-slate-950 shadow-[0_2px_6px_rgba(0,0,0,0.35)]`} />
                 </div>
 
                 {/* Card */}
@@ -62,7 +62,7 @@ export function HowItWorks() {
                     <div className="flex items-start gap-4 relative">
                       <div className={`flex-shrink-0 w-12 h-12 flex flex-col items-center justify-center border-2 ${step.borderColor} rounded-lg ${step.bgColor}`}>
                         <span className={`text-sm font-bold ${step.textColor} leading-none`}>{step.step}</span>
-                        <span className={`text-[10px] font-mono font-bold ${step.textColor} leading-none mt-0.5`}>{step.element}</span>
+                        <span className={`text-[11px] font-mono font-bold ${step.textColor} leading-none mt-0.5`}>{step.element}</span>
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
