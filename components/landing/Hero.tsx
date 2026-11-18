@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { MagneticButton } from '@/components/ui/MagneticButton';
-import { AuroraBackground } from '@/components/ui/AuroraBackground';
-import { CursorGlow } from '@/components/ui/CursorGlow';
+import { ArrowRight } from 'lucide-react';
 import { capture } from '@/lib/analytics';
+import { BTN_PRIMARY, CONTAINER, H1, SCREEN_FRAME } from '@/components/landing/Section';
 
 const PERSONAS = [
   { label: 'UGC creators', href: '/for/ugc-creators' },
@@ -55,119 +53,96 @@ export function Hero() {
   };
 
   return (
-    <section id="hero-section" className="relative pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
-      <CursorGlow />
-      <AuroraBackground variant="hero" />
-
-      <div className="max-w-7xl mx-auto pb-8">
+    <section id="hero-section" className="pt-32 sm:pt-40 pb-20 sm:pb-28">
+      <div className={CONTAINER}>
         <div className="text-center max-w-4xl mx-auto">
           {fromPrealgo ? (
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-content-coral text-white text-xs font-bold uppercase tracking-[0.18em]">
-              <Sparkles className="h-3.5 w-3.5" />
-              Welcome from PreAlgo
-              <span className="hidden sm:inline font-normal opacity-90 normal-case tracking-normal">
-                · your free TCL audit is ready
-              </span>
-            </div>
+            <p className="inline-flex items-center gap-1.5 mb-6 px-3 py-1 rounded-full bg-surface border border-line/[0.08] text-meta text-ink-2">
+              <span className="font-medium text-ink">Welcome from PreAlgo</span>
+              <span className="hidden sm:inline">· your free TCL audit is ready</span>
+            </p>
           ) : (
             <a
               href="/trends"
-              className="group inline-flex items-center gap-2 mb-4 pl-2 pr-4 py-1 rounded-full bg-white/80 border border-slate-200 hover:border-content-coral/40 hover:bg-white transition-all"
+              className="group inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-surface border border-line/[0.08] text-meta text-ink-2 hover:border-line/[0.14] hover:text-ink transition-colors duration-150"
             >
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-content-coral text-white text-[11px] font-mono uppercase tracking-[0.2em] font-bold">
-                <span className="h-1 w-1 rounded-full bg-white animate-pulse" />
-                Live
+              <span>
+                <span className="font-medium text-ink">Hot Take</span> is the top hook this month
               </span>
-              <span className="text-[12px] sm:text-[13px] font-medium text-slate-700">
-                <span className="font-bold text-slate-900">Hot Take</span> is the top hook this month
-              </span>
-              <ArrowRight className="h-3 w-3 text-slate-400 group-hover:text-content-coral group-hover:translate-x-0.5 transition-all" />
+              <ArrowRight className="h-3.5 w-3.5 text-ink-3 transition-transform duration-150 group-hover:translate-x-0.5" />
             </a>
           )}
 
-          <div
-            className="inline-flex items-center px-4 py-2 sm:py-1.5 font-mono text-[13px] sm:text-xs border border-content-coral-500/30 sm:border-content-coral-500/20 bg-content-coral-500/10 sm:bg-content-coral-500/5 rounded-full text-content-coral-700 sm:text-content-coral-600 mb-6 tracking-wider font-semibold sm:font-normal"
-          >
-            21,000+ VIDEOS ANALYZED
-          </div>
-
-          <h1 className="font-heading font-bold tracking-tight mb-5 text-[2rem] sm:text-5xl md:text-6xl leading-[1.05]">
+          <h1 className={`${H1} mb-6`}>
             {fromPrealgo ? (
               <>
-                <span className="block text-slate-900">You picked the right hooks.</span>
-                <span className="block text-content-coral">Now see why your videos land.</span>
+                You picked the right hooks.
+                <span className="block text-ink-2">Now see why your videos land.</span>
               </>
             ) : (
               <>
-                <span className="block text-slate-900">See why your last videos</span>
-                <span className="block text-content-coral">did what they did.</span>
+                See why your last videos
+                <span className="block text-ink-2">did what they did.</span>
               </>
             )}
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg text-ink-2 max-w-[60ch] mx-auto mb-8">
             {fromPrealgo
               ? 'PreAlgo gave you the trending sounds and hooks. The Content Labs analyzes every video you post, shows you what wins for you, and writes the next one in your voice. Free plan, no card.'
               : 'The Content Labs analyzes every video you post and tells you what wins for you specifically: hook length, payoff timing, tangents, on-screen text, topic. Then the Chemist writes the next one in your voice.'}
           </p>
 
-          <div className="mb-2 flex flex-col sm:flex-row gap-3 items-center justify-center">
-            <MagneticButton className="inline-block">
-              <a
-                href={registerHref}
-                onClick={handleHeroCtaClick}
-                className="lab-bubbles group inline-flex items-center px-6 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-base sm:text-lg text-white shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                Start free
-                <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </MagneticButton>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-center justify-center">
+            <a href={registerHref} onClick={handleHeroCtaClick} className={`${BTN_PRIMARY} w-full sm:w-auto`}>
+              Start free
+              <ArrowRight className="h-4 w-4" />
+            </a>
             <a
               href="/pricing"
               onClick={handleSecondaryCtaClick}
-              className="inline-flex items-center px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold text-slate-700 hover:text-content-coral transition-colors"
+              className="inline-flex items-center gap-1.5 h-12 px-4 text-[15px] font-medium text-ink-2 hover:text-ink transition-colors duration-150"
             >
               See pricing
-              <ArrowRight className="ml-1.5 h-4 w-4" />
+              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <p className="text-sm text-slate-400 mt-3">Free plan. No card. Your numbers every week and three videos analyzed.</p>
+          <p className="text-meta text-ink-3 mt-4">
+            <span className="font-medium text-ink-2 tabular-nums">21,000+ videos analyzed.</span> Free plan, no card: your numbers every week and three videos analyzed.
+          </p>
 
-          {/* Mobile-only social proof — sits between CTA and video so phone
-              users see real creator results in the first viewport instead of
-              having to scroll past the autoplay product demo. */}
-          <div className="sm:hidden mt-7 flex flex-wrap justify-center gap-2">
+          <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3" aria-label="Creator results">
             {HERO_CHIPS.map((t) => (
-              <div key={`mobile-${t.name}`} className="flex items-center gap-2 px-2.5 py-1.5 border border-slate-200 rounded-lg bg-white/70">
+              <li key={t.name} className="flex items-center gap-2.5">
                 <img
                   src={t.image}
                   alt={t.name}
                   loading="lazy"
                   decoding="async"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 rounded-full object-cover border border-slate-200 flex-shrink-0"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-full object-cover ring-1 ring-line/[0.08] flex-shrink-0"
                 />
-                <div className="text-left">
-                  <p className="font-mono text-[11px] font-semibold text-slate-900 leading-none">{t.name}</p>
-                  <p className="font-mono text-[11px] text-content-coral-600 leading-tight mt-0.5">{t.stat}</p>
-                </div>
-              </div>
+                <p className="text-meta leading-tight">
+                  <span className="block font-medium text-ink">{t.name}</span>
+                  <span className="block text-ink-3 tabular-nums">{t.stat}</span>
+                </p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-      </div>
 
-      {/* Product demo: a 30-second motion cut of the real app
-          (dashboard, a video's beat map, what wins, the Chemist), framed
-          like a browser window. Autoplays muted and loops. */}
-      <div className="-mt-1 max-w-3xl lg:max-w-5xl mx-auto" style={{ transform: 'translateZ(0)' }}>
-        <div className="rounded-2xl bg-slate-950 shadow-2xl ring-1 ring-black/10 overflow-hidden">
-          <div className="flex items-center gap-1.5 px-4 h-9 bg-slate-900 border-b border-white/[0.06]">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-            <span className="ml-3 h-5 flex-1 max-w-xs rounded-md bg-white/[0.06] text-[11px] leading-5 text-slate-400 px-3 font-mono truncate">thecontentlabs.app/dashboard</span>
+        {/* Product demo: a 30-second motion cut of the real app
+            (dashboard, a video's beat map, what wins, the Chemist), framed
+            like a browser window. Autoplays muted and loops. */}
+        <div className={`mt-14 sm:mt-16 max-w-5xl mx-auto ${SCREEN_FRAME}`} style={{ transform: 'translateZ(0)' }}>
+          <div className="flex items-center gap-1.5 px-4 h-10 bg-sunken border-b border-line/[0.08]">
+            <span className="h-2.5 w-2.5 rounded-full bg-ink/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink/10" />
+            <span className="ml-3 h-6 flex-1 max-w-xs rounded-md bg-surface border border-line/[0.08] text-xs leading-[22px] text-ink-3 px-3 truncate">
+              thecontentlabs.app/dashboard
+            </span>
           </div>
           <video
             autoPlay
@@ -178,49 +153,24 @@ export function Hero() {
             poster="/hero-demo-poster.jpg"
             width={1440}
             height={900}
-            className="w-full block"
+            className="w-full h-auto block"
             src="/hero-demo.mp4"
             aria-label="Walkthrough of The Content Labs: the dashboard, a video's beat map, what wins for you, and the Chemist writing the next script"
           />
         </div>
-      </div>
 
-      {/* Persona chips */}
-      <div className="max-w-5xl mx-auto text-center mt-12">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-4">
-          Built for
-        </p>
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {PERSONAS.map((p) => (
-            <a
-              key={p.href}
-              href={p.href}
-              className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-slate-700 bg-white/80 border border-slate-200 rounded-full hover:border-content-coral/40 hover:text-content-coral hover:bg-white transition-all"
-            >
-              {p.label}
-              <ArrowRight className="h-3 w-3 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
-            </a>
-          ))}
-        </div>
-
-        <div className="hidden sm:flex flex-wrap justify-center gap-3">
-          {HERO_CHIPS.map((t) => (
-            <div key={t.name} className="flex items-center gap-2.5 px-3 py-2 border border-slate-200 rounded-lg bg-white/70">
-              <img
-                src={t.image}
-                alt={t.name}
-                loading="lazy"
-                decoding="async"
-                width={32}
-                height={32}
-                className="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0"
-              />
-              <div>
-                <p className="font-mono text-xs font-semibold text-slate-900">{t.name}</p>
-                <p className="font-mono text-[11px] text-content-coral-600">{t.stat}</p>
-              </div>
-            </div>
-          ))}
+        {/* Who it's for */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+          <span className="text-meta text-ink-3 mr-1">Built for</span>
+            {PERSONAS.map((p) => (
+              <a
+                key={p.href}
+                href={p.href}
+                className="inline-flex items-center h-8 px-3 text-meta font-medium text-ink-2 bg-surface border border-line/[0.08] rounded-full hover:text-ink hover:border-line/[0.14] transition-colors duration-150"
+              >
+                {p.label}
+              </a>
+            ))}
         </div>
       </div>
     </section>

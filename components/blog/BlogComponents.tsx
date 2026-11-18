@@ -29,18 +29,18 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
           "itemListElement": schemaItems,
         }) }}
       />
-      <nav aria-label="Breadcrumb" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0">
-        <ol className="flex items-center gap-1 text-sm text-slate-400 flex-wrap">
-          <li><a href="/" className="hover:text-slate-700 transition-colors">Home</a></li>
-          <li><ChevronRight className="h-3 w-3" /></li>
-          <li><a href="/blog" className="hover:text-slate-700 transition-colors">Resources</a></li>
+      <nav aria-label="Breadcrumb">
+        <ol className="flex items-center gap-1 text-meta text-ink-3 flex-wrap">
+          <li><a href="/" className="hover:text-ink transition-colors">Home</a></li>
+          <li aria-hidden><ChevronRight className="h-3.5 w-3.5" /></li>
+          <li><a href="/blog" className="hover:text-ink transition-colors">Resources</a></li>
           {items.map((item, i) => (
-            <li key={i} className="flex items-center gap-1">
-              <ChevronRight className="h-3 w-3" />
+            <li key={i} className="flex items-center gap-1 min-w-0">
+              <ChevronRight aria-hidden className="h-3.5 w-3.5 flex-shrink-0" />
               {item.to ? (
-                <a href={item.to} className="hover:text-slate-700 transition-colors">{item.label}</a>
+                <a href={item.to} className="hover:text-ink transition-colors">{item.label}</a>
               ) : (
-                <span className="text-slate-600">{item.label}</span>
+                <span aria-current="page" className="text-ink-2 line-clamp-1">{item.label}</span>
               )}
             </li>
           ))}
@@ -58,12 +58,6 @@ interface RelatedItem {
   type: 'comparison' | 'guide' | 'niche';
 }
 
-const TYPE_COLORS = {
-  comparison: 'bg-blue-50 text-blue-700 border-blue-200',
-  guide: 'bg-green-50 text-green-700 border-green-200',
-  niche: 'bg-purple-50 text-purple-700 border-purple-200',
-};
-
 const TYPE_LABELS = {
   comparison: 'Comparison',
   guide: 'Guide',
@@ -72,23 +66,21 @@ const TYPE_LABELS = {
 
 export function RelatedResources({ items }: { items: RelatedItem[] }) {
   return (
-    <section className="border-t border-slate-200 pt-8">
-      <h2 className="text-lg font-bold text-slate-900 mb-4">Related Resources</h2>
+    <section className="border-t border-line/[0.08] pt-8">
+      <h2 className="font-heading text-section text-ink mb-4">Related resources</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {items.map(item => (
           <a
             key={item.slug}
             href={`/blog/${item.slug}`}
-            className="group flex flex-col gap-2 p-4 rounded-xl border border-slate-200 hover:border-content-coral/30 hover:shadow-sm transition-all"
+            className="group lab-card flex flex-col gap-1.5 p-5 transition-colors hover:border-line/[0.16]"
           >
-            <span className={`self-start text-xs font-medium px-2 py-0.5 rounded-full border ${TYPE_COLORS[item.type]}`}>
-              {TYPE_LABELS[item.type]}
-            </span>
-            <span className="text-sm font-semibold text-slate-900 group-hover:text-content-coral transition-colors">
+            <span className="text-meta text-ink-3">{TYPE_LABELS[item.type]}</span>
+            <span className="text-[15px] font-semibold text-ink leading-snug">
               {item.title}
             </span>
-            <span className="inline-flex items-center text-xs font-medium text-content-coral">
-              Read more <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+            <span className="mt-1 inline-flex items-center text-meta font-medium text-ink-2 group-hover:text-ink transition-colors">
+              Read more <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </span>
           </a>
         ))}

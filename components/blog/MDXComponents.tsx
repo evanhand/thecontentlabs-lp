@@ -11,6 +11,7 @@ import {
   MessageCircle,
   Share2,
   Bookmark,
+  ExternalLink,
 } from "lucide-react";
 import {
   BarChart,
@@ -50,62 +51,39 @@ export function CTA({
   const primaryLink = href || primaryHref;
 
   return (
-    <section className="not-prose my-10 relative overflow-hidden rounded-2xl border border-content-coral/30 shadow-2xl shadow-content-coral/10 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800">
-      <div className="absolute -top-24 -right-24 w-72 h-72 bg-content-coral/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-content-coral/15 rounded-full blur-3xl pointer-events-none" />
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
+    <section className="not-prose my-12 lab-card px-5 py-8 sm:px-10 sm:py-10">
+      <h3 className="font-heading text-2xl sm:text-[28px] font-semibold text-ink leading-[1.2] tracking-[-0.02em] mb-3 max-w-3xl text-balance">
+        {headline}
+      </h3>
+      <p className="text-[15px] sm:text-base text-ink-2 leading-relaxed mb-6 max-w-[60ch]">
+        {sub}
+      </p>
 
-      <div className="relative px-6 py-9 sm:px-10 sm:py-11">
-        <div className="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full bg-content-coral/15 border border-content-coral/25">
-          <span className="h-1.5 w-1.5 rounded-full bg-content-coral animate-pulse" />
-          <span className="text-[11px] font-bold uppercase tracking-widest text-content-coral">
-            The Content Labs
-          </span>
-        </div>
-
-        <h3 className="text-2xl sm:text-[28px] font-bold text-white leading-[1.2] tracking-tight mb-3 max-w-3xl">
-          {headline}
-        </h3>
-        <p className="text-[15px] sm:text-base text-slate-300 leading-relaxed mb-7 max-w-2xl">
-          {sub}
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+        <a
+          href={primaryLink}
+          className="group inline-flex items-center justify-center h-11 px-5 bg-content-coral rounded-[10px] text-sm font-medium text-white no-underline transition-[background-color,transform] duration-150 hover:bg-content-coral/90 active:scale-[0.97]"
+        >
+          {primaryText}
+          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </a>
+        {secondary && (
           <a
-            href={primaryLink}
-            className="group inline-flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-white shadow-lg shadow-content-cta/30 hover:shadow-xl hover:shadow-content-cta/50 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+            href={secondaryHref}
+            className="inline-flex items-center justify-center h-11 px-5 bg-surface border border-line/[0.14] rounded-[10px] text-sm font-medium text-ink no-underline transition-colors hover:bg-sunken active:scale-[0.97]"
           >
-            {primaryText}
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
+            {secondary}
           </a>
-          {secondary && (
-            <a
-              href={secondaryHref}
-              className="inline-flex items-center justify-center px-6 py-3.5 bg-white/5 border border-white/15 rounded-xl font-semibold text-slate-100 hover:bg-white/10 hover:border-white/25 transition-all"
-            >
-              {secondary}
-            </a>
-          )}
-        </div>
-
-        <p className="text-[12px] text-slate-400 mt-6 flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="inline-flex items-center gap-1.5">
-            <Check className="h-3.5 w-3.5 text-content-coral" />
-            21,000+ videos analyzed
-          </span>
-          <span className="text-slate-600">·</span>
-          <span>No credit card required</span>
-          <span className="text-slate-600">·</span>
-          <span>60 seconds</span>
-        </p>
+        )}
       </div>
+
+      <p className="text-meta text-ink-3 mt-5 flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span>21,000+ videos analyzed</span>
+        <span aria-hidden>·</span>
+        <span>No credit card required</span>
+        <span aria-hidden>·</span>
+        <span>60 seconds</span>
+      </p>
     </section>
   );
 }
@@ -127,37 +105,37 @@ export function ComparisonTable({
   themLabel?: string;
 }) {
   return (
-    <div className="not-prose overflow-x-auto my-8">
-      <table className="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+    <div className="not-prose overflow-x-auto my-8 rounded-xl border border-line/[0.08] bg-surface">
+      <table className="w-full text-sm border-collapse">
         <thead>
-          <tr className="bg-slate-50">
-            <th className="text-left px-4 py-3 font-semibold text-slate-900">
+          <tr className="bg-sunken">
+            <th className="text-left px-4 py-3 text-meta font-semibold text-ink">
               Feature
             </th>
-            <th className="text-center px-4 py-3 font-semibold text-content-coral">
+            <th className="text-center px-4 py-3 text-meta font-semibold text-ink">
               {usLabel}
             </th>
-            <th className="text-center px-4 py-3 font-semibold text-slate-500">
+            <th className="text-center px-4 py-3 text-meta font-semibold text-ink-3">
               {themLabel}
             </th>
           </tr>
         </thead>
         <tbody>
           {features.map((f) => (
-            <tr key={f.name} className="border-t border-slate-100">
-              <td className="px-4 py-3 text-slate-700">{f.name}</td>
+            <tr key={f.name} className="border-t border-line/[0.08]">
+              <td className="px-4 py-3 text-ink-2">{f.name}</td>
               <td className="px-4 py-3 text-center">
                 {f.us ? (
-                  <Check className="h-5 w-5 text-green-500 mx-auto" />
+                  <Check aria-label="Yes" className="h-4 w-4 text-ink mx-auto" />
                 ) : (
-                  <X className="h-5 w-5 text-red-400 mx-auto" />
+                  <X aria-label="No" className="h-4 w-4 text-ink-3 mx-auto" />
                 )}
               </td>
               <td className="px-4 py-3 text-center">
                 {f.them ? (
-                  <Check className="h-5 w-5 text-green-500 mx-auto" />
+                  <Check aria-label="Yes" className="h-4 w-4 text-ink mx-auto" />
                 ) : (
-                  <X className="h-5 w-5 text-red-400 mx-auto" />
+                  <X aria-label="No" className="h-4 w-4 text-ink-3 mx-auto" />
                 )}
               </td>
             </tr>
@@ -177,13 +155,13 @@ export function Callout({
   children: React.ReactNode;
 }) {
   const styles = {
-    info: "bg-blue-50 border-blue-200 text-blue-900",
-    tip: "bg-green-50 border-green-200 text-green-900",
-    warning: "bg-amber-50 border-amber-200 text-amber-900",
+    info: "bg-sunken border-line/[0.08] text-ink-2",
+    tip: "bg-sunken border-line/[0.08] text-ink-2",
+    warning: "bg-amber-500/10 border-amber-500/20 text-amber-800 dark:text-amber-200",
   };
   return (
     <div
-      className={`not-prose rounded-xl border p-4 my-6 text-sm leading-relaxed ${styles[type]}`}
+      className={`not-prose rounded-xl border px-5 py-4 my-8 text-[15px] leading-relaxed [&>p]:my-2 [&>p]:text-[15px] [&>p]:text-inherit [&>:first-child]:mt-0 [&>:last-child]:mb-0 ${styles[type]}`}
     >
       {children}
     </div>
@@ -199,9 +177,9 @@ export function StatCard({
   label: string;
 }) {
   return (
-    <div className="not-prose bg-slate-50 rounded-xl border border-slate-200 p-5 text-center">
-      <p className="text-3xl font-bold text-content-coral">{stat}</p>
-      <p className="text-sm text-slate-600 mt-1">{label}</p>
+    <div className="not-prose lab-card p-5 text-center">
+      <p className="font-heading text-3xl font-semibold text-ink tabular-nums">{stat}</p>
+      <p className="text-meta text-ink-3 mt-1">{label}</p>
     </div>
   );
 }
@@ -232,10 +210,10 @@ export function VideoEmbed({
         playsInline
         preload="metadata"
         poster={poster}
-        className="w-full rounded-xl border border-slate-200"
+        className="w-full rounded-xl border border-line/[0.08] bg-sunken"
       />
       {caption && (
-        <figcaption className="text-sm text-slate-500 text-center mt-2">
+        <figcaption className="text-meta text-ink-3 text-center mt-2">
           {caption}
         </figcaption>
       )}
@@ -262,10 +240,10 @@ export function InstagramEmbed({
         height="580"
         scrolling="no"
         allow="encrypted-media"
-        className="rounded-xl border border-slate-200 max-w-full"
+        className="rounded-xl border border-line/[0.08] max-w-full"
       />
       {caption && (
-        <figcaption className="text-sm text-slate-500 text-center mt-3">
+        <figcaption className="text-meta text-ink-3 text-center mt-3">
           {caption}
         </figcaption>
       )}
@@ -291,10 +269,10 @@ export function TikTokEmbed({
         height="580"
         scrolling="no"
         allow="encrypted-media"
-        className="rounded-xl border border-slate-200"
+        className="rounded-xl border border-line/[0.08] max-w-full"
       />
       {caption && (
-        <figcaption className="text-sm text-slate-500 text-center mt-3">
+        <figcaption className="text-meta text-ink-3 text-center mt-3">
           {caption}
         </figcaption>
       )}
@@ -320,13 +298,13 @@ export function Highlight({
   children: React.ReactNode;
 }) {
   return (
-    <div className="not-prose bg-white rounded-xl border-2 border-content-coral/20 p-6 my-8">
+    <div className="not-prose lab-card p-5 sm:p-6 my-8">
       {title && (
-        <p className="text-sm font-bold text-content-coral uppercase tracking-wide mb-3">
+        <p className="text-[15px] font-semibold text-ink mb-2">
           {title}
         </p>
       )}
-      <div className="text-slate-700 text-[15px] leading-relaxed space-y-2">
+      <div className="text-ink-2 text-[15px] leading-relaxed space-y-2 [&_p]:my-0 [&_p]:text-[15px] [&_ul]:my-2 [&_ol]:my-2 [&_li]:text-[15px]">
         {children}
       </div>
     </div>
@@ -344,12 +322,12 @@ export function NumberBlock({
       {items.map((item) => (
         <div
           key={item.number}
-          className="flex gap-4 items-start bg-slate-50 rounded-xl border border-slate-200 p-5"
+          className="flex gap-4 items-start lab-card p-5"
         >
-          <span className="text-2xl font-bold text-content-coral flex-shrink-0">
+          <span className="font-heading text-2xl font-semibold text-ink tabular-nums flex-shrink-0">
             {item.number}
           </span>
-          <p className="text-sm text-slate-700 leading-relaxed">{item.text}</p>
+          <p className="text-sm text-ink-2 leading-relaxed">{item.text}</p>
         </div>
       ))}
     </div>
@@ -388,28 +366,22 @@ function PhoneMockup({
       className="relative flex-shrink-0"
       style={{ width, height }}
     >
-      {/* Outer bezel with subtle gradient for depth */}
-      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-slate-700 via-slate-900 to-slate-950 p-[5px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
+      {/* Outer bezel */}
+      <div className="absolute inset-0 rounded-[2rem] bg-slate-900 p-[5px] shadow-[0_8px_24px_-12px_rgba(15,23,42,0.35)]">
         {/* Inner screen */}
         <div className="relative h-full w-full rounded-[1.65rem] overflow-hidden bg-slate-950">
-          {/* Visual layer: cinematic mesh gradient */}
+          {/* Visual layer: a flat "frame" stands in for the video */}
           {hasVisual ? (
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-violet-700 via-fuchsia-600 to-amber-500">
-              <div className="absolute -top-6 -left-6 w-32 h-32 rounded-full bg-cyan-400/40 blur-3xl" />
-              <div className="absolute bottom-0 right-0 w-44 h-44 rounded-full bg-amber-300/50 blur-3xl" />
-              <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-24 h-24 rounded-full bg-pink-400/30 blur-2xl" />
-              {/* Subtle vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+            <div aria-hidden className="absolute inset-0 bg-slate-500">
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-slate-600" />
             </div>
           ) : (
-            <div aria-hidden className="absolute inset-0 bg-slate-900">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_70%)]" />
-            </div>
+            <div aria-hidden className="absolute inset-0 bg-slate-900" />
           )}
 
           {/* Status bar */}
           <div aria-hidden className="absolute top-0 inset-x-0 z-30 px-3.5 pt-1.5 flex items-center justify-between text-white">
-            <span className="text-[9px] font-bold tracking-tight">9:41</span>
+            <span className="h-1 w-5 rounded-full bg-white/80" />
             <div className="flex items-center gap-[3px]">
               {/* Signal */}
               <svg width="10" height="8" viewBox="0 0 12 9" fill="currentColor" className="opacity-90">
@@ -439,7 +411,7 @@ function PhoneMockup({
             <div aria-hidden className="absolute right-2 bottom-16 flex flex-col items-center gap-2.5 z-20">
               {[Heart, MessageCircle, Bookmark, Share2].map((Icon, i) => (
                 <div key={i} className="flex flex-col items-center">
-                  <div className="w-7 h-7 rounded-full bg-black/25 backdrop-blur-sm flex items-center justify-center ring-1 ring-white/10">
+                  <div className="w-7 h-7 rounded-full bg-black/25 flex items-center justify-center">
                     <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2} />
                   </div>
                 </div>
@@ -449,8 +421,8 @@ function PhoneMockup({
 
           {/* Bottom: username strip + audio bar */}
           {(hasSpoken || detailed) && hasVisual && (
-            <div className="absolute bottom-0 inset-x-0 z-20 px-3 pb-3 pt-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-              <p className="text-white text-[10px] font-bold mb-1 tracking-tight">{handle}</p>
+            <div className="absolute bottom-0 inset-x-0 z-20 px-3 pb-3 pt-6 bg-black/40">
+              <p className="text-white text-xs font-semibold mb-1 tracking-tight">{handle}</p>
               {hasSpoken ? (
                 <div className="flex items-center gap-1.5 max-w-[80%]">
                   <Volume2 className="h-2.5 w-2.5 text-white flex-shrink-0" />
@@ -458,14 +430,14 @@ function PhoneMockup({
                     {[35, 60, 80, 100, 75, 55, 90, 100, 65, 40, 70, 50, 85, 60].map((h, i) => (
                       <span
                         key={i}
-                        className="flex-1 bg-sky-300 rounded-full"
+                        className="flex-1 bg-white/80 rounded-full"
                         style={{ height: `${h}%` }}
                       />
                     ))}
                   </div>
                 </div>
               ) : (
-                <p className="text-white/60 text-[8px]">—</p>
+                <span aria-hidden className="block h-1 w-8 rounded-full bg-white/40" />
               )}
             </div>
           )}
@@ -473,8 +445,8 @@ function PhoneMockup({
           {/* Text hook overlay */}
           {hasText && (
             <div className="absolute inset-x-3 top-[38%] z-25">
-              <div className="px-3 py-2 rounded-lg bg-content-coral shadow-lg shadow-black/40 ring-1 ring-white/15">
-                <p className="text-white font-bold leading-tight uppercase tracking-tight text-center" style={{ fontSize: width >= 150 ? 12 : 10 }}>
+              <div className="px-3 py-2 rounded-lg bg-white">
+                <p className="text-slate-900 font-semibold leading-tight text-center text-xs">
                   {textHook}
                 </p>
               </div>
@@ -521,48 +493,30 @@ const CHANNEL_INFO = [
   },
 ] as const;
 
-const COLOR_TOKENS = {
-  violet: { tile: "bg-violet-500/15 border-violet-400/40 text-violet-200", icon: "text-violet-300" },
-  coral: { tile: "bg-content-coral/15 border-content-coral/40 text-content-coral", icon: "text-content-coral" },
-  sky: { tile: "bg-sky-500/15 border-sky-400/40 text-sky-200", icon: "text-sky-300" },
-} as const;
-
 export function HookFramework() {
   return (
-    <section className="not-prose my-10 relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800">
-      <div aria-hidden className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-content-coral/15 blur-[80px] pointer-events-none" />
-      <div aria-hidden className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-violet-500/10 blur-[80px] pointer-events-none" />
-
-      <div className="relative grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-12 items-center p-8 sm:p-10">
-        <div className="mx-auto lg:mx-0">
+    <section className="not-prose my-10 lab-card">
+      <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-8 items-center p-5 sm:p-8">
+        <div className="mx-auto sm:mx-0">
           <PhoneMockup hasVisual hasText hasSpoken width={188} />
         </div>
 
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-widest text-content-coral mb-4">
-            The three-hook framework
-          </p>
-          <h3 className="text-2xl sm:text-[26px] font-bold text-white leading-[1.2] tracking-tight mb-6">
+          <h3 className="font-heading text-xl sm:text-2xl font-semibold text-ink leading-[1.2] tracking-[-0.02em] mb-5">
             Every short-form video can fire up to three hook channels at once.
           </h3>
           <ul className="space-y-4">
             {CHANNEL_INFO.map((c) => {
               const Icon = c.icon;
-              const tokens = COLOR_TOKENS[c.color];
               return (
-                <li key={c.id} className="flex items-start gap-4">
-                  <span
-                    className={`flex-shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl border ${tokens.tile} font-mono text-[11px] font-bold`}
-                    aria-hidden
-                  >
-                    <Icon className={`h-5 w-5 ${tokens.icon}`} />
-                  </span>
+                <li key={c.id} className="flex items-start gap-3">
+                  <Icon aria-hidden className="h-4 w-4 mt-0.5 flex-shrink-0 text-ink-3" />
                   <div className="min-w-0">
-                    <h4 className="text-white font-bold text-base leading-tight mb-1">
-                      <span className="font-mono text-xs text-slate-500 mr-2">{c.number}</span>
+                    <h4 className="text-ink font-semibold text-[15px] leading-tight mb-1">
+                      <span className="font-mono text-xs text-ink-3 mr-2 tabular-nums">{c.number}</span>
                       {c.label}
                     </h4>
-                    <p className="text-slate-400 text-sm leading-relaxed">{c.description}</p>
+                    <p className="text-ink-2 text-sm leading-relaxed">{c.description}</p>
                   </div>
                 </li>
               );
@@ -582,27 +536,27 @@ const STATUS_STYLE: Record<
   { ring: string; chipBg: string; chipText: string; label: string }
 > = {
   winner: {
-    ring: "ring-2 ring-emerald-400/60 shadow-lg shadow-emerald-500/10",
-    chipBg: "bg-emerald-500",
-    chipText: "text-white",
+    ring: "",
+    chipBg: "bg-emerald-500/10",
+    chipText: "text-emerald-700 dark:text-emerald-300",
     label: "Winner",
   },
   default: {
-    ring: "ring-1 ring-amber-400/40",
-    chipBg: "bg-amber-500",
-    chipText: "text-white",
+    ring: "",
+    chipBg: "bg-amber-500/10",
+    chipText: "text-amber-700 dark:text-amber-300",
     label: "Default",
   },
   avoid: {
-    ring: "ring-2 ring-red-400/50",
-    chipBg: "bg-red-500",
-    chipText: "text-white",
+    ring: "",
+    chipBg: "bg-red-500/10",
+    chipText: "text-red-700 dark:text-red-300",
     label: "Avoid",
   },
   lottery: {
-    ring: "ring-1 ring-slate-400/30",
-    chipBg: "bg-slate-700",
-    chipText: "text-white",
+    ring: "",
+    chipBg: "bg-sunken",
+    chipText: "text-ink-2",
     label: "Lottery",
   },
 };
@@ -614,22 +568,15 @@ export function HookComboGrid({ children }: { children: React.ReactNode }) {
 }
 
 function ChannelPill({ active, channel }: { active: boolean; channel: "visual" | "text" | "spoken" }) {
-  const palette = {
-    visual: active
-      ? "bg-violet-500/15 border-violet-500/40 text-violet-700"
-      : "bg-slate-50 border-slate-200 text-slate-300",
-    text: active
-      ? "bg-content-coral/10 border-content-coral/40 text-content-coral"
-      : "bg-slate-50 border-slate-200 text-slate-300",
-    spoken: active
-      ? "bg-sky-500/15 border-sky-500/40 text-sky-700"
-      : "bg-slate-50 border-slate-200 text-slate-300",
-  } as const;
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[10px] font-mono uppercase tracking-wider font-semibold ${palette[channel]}`}
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-medium capitalize ${
+        active
+          ? "bg-surface border-line/[0.14] text-ink"
+          : "bg-sunken border-transparent text-ink-3 line-through decoration-ink-3/60"
+      }`}
     >
-      {active ? <Check className="h-2.5 w-2.5" aria-hidden /> : <X className="h-2.5 w-2.5" aria-hidden />}
+      {active ? <Check className="h-3 w-3" aria-hidden /> : <X className="h-3 w-3" aria-hidden />}
       {channel}
     </span>
   );
@@ -659,33 +606,33 @@ export function HookComboCard({
   const s = STATUS_STYLE[status];
   return (
     <div
-      className={`relative rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 ${s.ring}`}
+      className="relative lab-card p-5 sm:p-6"
     >
       <span
-        className={`absolute -top-2.5 left-5 inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${s.chipBg} ${s.chipText}`}
+        className={`inline-flex items-center mb-4 px-2 py-0.5 rounded-full text-xs font-medium ${s.chipBg} ${s.chipText}`}
       >
         {s.label}
       </span>
       <div className="flex items-start gap-5">
         <PhoneMockup hasVisual={visual} hasText={text} hasSpoken={spoken} width={132} textHook={textHook} />
         <div className="flex-1 min-w-0">
-          <h4 className="text-slate-900 font-bold text-lg leading-tight mb-2">{name}</h4>
+          <h4 className="text-ink font-semibold text-[17px] leading-tight mb-2">{name}</h4>
           <div className="flex flex-wrap gap-1.5 mb-4">
             <ChannelPill active={visual} channel="visual" />
             <ChannelPill active={text} channel="text" />
             <ChannelPill active={spoken} channel="spoken" />
           </div>
           <div>
-            <p className="text-3xl font-bold text-slate-900 leading-none tabular-nums">
+            <p className="font-heading text-3xl font-semibold text-ink leading-none tabular-nums">
               {medianViews}
             </p>
-            <p className="text-[11px] text-slate-500 mt-1 uppercase tracking-wider font-semibold">
+            <p className="text-meta text-ink-3 mt-1">
               Median views
             </p>
           </div>
-          <p className="text-[11px] text-slate-400 mt-3">Sample: {sampleSize}</p>
+          <p className="text-xs text-ink-3 mt-3">Sample: {sampleSize}</p>
           {note && (
-            <p className="text-[12px] text-slate-600 mt-3 leading-snug border-t border-slate-100 pt-3">{note}</p>
+            <p className="text-meta text-ink-2 mt-3 border-t border-line/[0.08] pt-3">{note}</p>
           )}
         </div>
       </div>
@@ -724,60 +671,60 @@ export function CaptionCard({
   const s = STATUS_STYLE[status];
   return (
     <div
-      className={`relative rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 ${s.ring}`}
+      className="relative lab-card p-5 sm:p-6"
     >
       <span
-        className={`absolute -top-2.5 left-5 inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase ${s.chipBg} ${s.chipText}`}
+        className={`inline-flex items-center mb-4 px-2 py-0.5 rounded-full text-xs font-medium ${s.chipBg} ${s.chipText}`}
       >
         {s.label}
       </span>
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+        <span className="text-meta font-medium text-ink-2">
           {bucket}
         </span>
-        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+        <span className="text-xs text-ink-3">
           {platform}
         </span>
       </div>
 
       {/* Caption mockup styled like an IG caption */}
-      <div className="rounded-xl bg-slate-50/70 border border-slate-200/80 p-4 mb-5">
-        <p className="text-[13px] font-bold text-slate-900 mb-1.5 leading-tight">{handle}</p>
-        <p className="text-[13px] text-slate-700 leading-relaxed whitespace-pre-line">{caption}</p>
+      <div className="rounded-xl bg-sunken p-4 mb-5">
+        <p className="text-[13px] font-semibold text-ink mb-1.5 leading-tight">{handle}</p>
+        <p className="text-[13px] text-ink-2 leading-relaxed whitespace-pre-line">{caption}</p>
         {hashtags.length > 0 ? (
           <p className="text-[13px] leading-relaxed mt-2">
             {hashtags.map((h, i) => (
               <span key={i}>
-                <span className="text-blue-600 font-medium">#{h}</span>
-                {i < hashtags.length - 1 ? <span className="text-blue-600"> </span> : null}
+                <span className="text-sky-700 dark:text-sky-300 font-medium">#{h}</span>
+                {i < hashtags.length - 1 ? <span> </span> : null}
               </span>
             ))}
           </p>
         ) : (
-          <p className="text-[11px] text-slate-400 italic mt-2">no hashtags</p>
+          <p className="text-xs text-ink-3 italic mt-2">no hashtags</p>
         )}
       </div>
 
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-3xl font-bold text-slate-900 leading-none tabular-nums">
+          <p className="font-heading text-3xl font-semibold text-ink leading-none tabular-nums">
             {medianViews}
           </p>
-          <p className="text-[11px] text-slate-500 mt-1 uppercase tracking-wider font-semibold">
+          <p className="text-meta text-ink-3 mt-1">
             Median views
           </p>
         </div>
         <div className="text-right">
-          <p className="text-[11px] text-slate-400 leading-snug">
-            <span className="text-slate-500 font-semibold">{hashtags.length}</span>{" "}
+          <p className="text-xs text-ink-3 leading-snug">
+            <span className="text-ink-2 font-semibold tabular-nums">{hashtags.length}</span>{" "}
             hashtag{hashtags.length === 1 ? "" : "s"}
           </p>
-          <p className="text-[11px] text-slate-400 leading-snug mt-0.5">{sampleSize}</p>
+          <p className="text-xs text-ink-3 leading-snug mt-0.5">{sampleSize}</p>
         </div>
       </div>
 
       {note && (
-        <p className="text-[12px] text-slate-600 mt-4 leading-snug border-t border-slate-100 pt-3">
+        <p className="text-meta text-ink-2 mt-4 border-t border-line/[0.08] pt-3">
           {note}
         </p>
       )}
@@ -809,12 +756,12 @@ export function HashtagCountBar({
                   : count >= 7
                     ? "bg-amber-400"
                     : "bg-emerald-400"
-                : "bg-slate-200"
+                : "bg-line/[0.12]"
             }`}
           />
         ))}
       </span>
-      {label && <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">{label}</span>}
+      {label && <span className="text-xs font-mono text-ink-3">{label}</span>}
     </span>
   );
 }
@@ -845,33 +792,31 @@ export function HookSection({
   children: React.ReactNode;
 }) {
   return (
-    <section className="not-prose border-t-2 border-slate-200 pt-10 my-10 first:border-t-0 first:pt-0">
-      <div className="flex flex-wrap items-center gap-3 mb-1">
-        <span className="text-content-coral text-sm font-bold">
+    <section className="not-prose border-t border-line/[0.08] pt-10 my-12 first:border-t-0 first:pt-0">
+      <div className="flex flex-wrap items-baseline gap-3 mb-2">
+        <span className="font-mono text-sm text-ink-3 tabular-nums">
           #{rank}
         </span>
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+        <h2 className="font-heading text-[24px] sm:text-[28px] font-semibold tracking-[-0.02em] text-ink scroll-mt-28">
           {name}
         </h2>
       </div>
-      <p className="text-slate-500 text-base mb-6">{tagline}</p>
+      <p className="text-ink-2 text-[17px] mb-6">{tagline}</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
-        <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
-          <p className="text-2xl font-bold text-slate-900">{engagement}</p>
-          <p className="text-xs text-slate-500 mt-1">{engagementLabel || "Avg engagement"}</p>
-        </div>
-        <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
-          <p className="text-2xl font-bold text-slate-900">{videos}</p>
-          <p className="text-xs text-slate-500 mt-1">{videosLabel || "Videos analyzed"}</p>
-        </div>
-        <div className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
-          <p className="text-2xl font-bold text-slate-900">{topViews}</p>
-          <p className="text-xs text-slate-500 mt-1">{topViewsLabel || "Top video views"}</p>
-        </div>
+      <div className="grid grid-cols-3 gap-3 mb-8">
+        {[
+          [engagement, engagementLabel || "Avg engagement"],
+          [videos, videosLabel || "Videos analyzed"],
+          [topViews, topViewsLabel || "Top video views"],
+        ].map(([value, label]) => (
+          <div key={label} className="bg-sunken rounded-xl p-4 text-center">
+            <p className="font-heading text-xl sm:text-2xl font-semibold text-ink tabular-nums">{value}</p>
+            <p className="text-xs text-ink-3 mt-1">{label}</p>
+          </div>
+        ))}
       </div>
 
-      <div className="text-slate-700 text-[16px] leading-relaxed space-y-4">
+      <div className="text-ink-2 text-[17px] leading-7 space-y-4 [&_p]:my-0">
         {children}
       </div>
     </section>
@@ -891,12 +836,12 @@ export function HookExample({
   url?: string;
 }) {
   const inner = (
-    <div className="not-prose bg-white rounded-xl border border-slate-200 px-5 py-4 my-3 flex items-start gap-3 group hover:border-content-coral/30 hover:shadow-sm transition-all">
-      <span className="text-content-coral text-xl leading-none mt-0.5">&ldquo;</span>
+    <div className="not-prose bg-surface rounded-xl border border-line/[0.08] px-5 py-4 my-3 flex items-start gap-3 group transition-colors hover:border-line/[0.16]">
+      <span aria-hidden className="text-ink-3 text-xl leading-none mt-0.5">&ldquo;</span>
       <div className="flex-1 min-w-0">
-        <p className="text-slate-800 font-medium text-[15px] leading-snug">{quote}</p>
+        <p className="text-ink font-medium text-[15px] leading-snug">{quote}</p>
         {(creator || views) && (
-          <p className="text-xs text-slate-400 mt-1.5">
+          <p className="text-xs text-ink-3 mt-1.5">
             {creator && <span>@{creator}</span>}
             {creator && views && <span> &middot; </span>}
             {views && <span>{views} views</span>}
@@ -904,9 +849,7 @@ export function HookExample({
         )}
       </div>
       {url && (
-        <span className="text-xs text-slate-300 group-hover:text-content-coral transition-colors flex-shrink-0 mt-1">
-          &#9654;
-        </span>
+        <ExternalLink aria-hidden className="h-4 w-4 text-ink-3 group-hover:text-ink transition-colors flex-shrink-0 mt-0.5" />
       )}
     </div>
   );
@@ -924,26 +867,45 @@ export function HookExample({
 /* -- "When to use" mini box -- */
 export function WhenToUse({ children }: { children: React.ReactNode }) {
   return (
-    <div className="not-prose bg-slate-50 rounded-xl border border-slate-200 px-5 py-4 mt-6">
-      <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">When to use this</p>
-      <p className="text-sm text-slate-600 leading-relaxed">{children}</p>
+    <div className="not-prose bg-sunken rounded-xl px-5 py-4 mt-6">
+      <p className="text-meta font-semibold text-ink mb-1">When to use this</p>
+      <div className="text-[15px] text-ink-2 leading-relaxed [&_p]:my-0 [&_p]:text-[15px]">{children}</div>
     </div>
   );
 }
 
 /* -- Bar Chart -- */
+// Charts per DESIGN.md: coral for the primary/leading value, neutral slates
+// for everything else. Pie slices step through a neutral ramp after coral.
+const CHART_CORAL = "#f4632a";
+const CHART_NEUTRAL = "#94a3b8"; // slate-400
 const CHART_COLORS = [
-  "#f4632a", // content-coral
-  "#1e293b", // slate-800
-  "#f4632a99", // coral 60%
-  "#475569", // slate-600
-  "#f4632a66", // coral 40%
-  "#94a3b8", // slate-400
-  "#f4632a40", // coral 25%
-  "#cbd5e1", // slate-300
-  "#f4632acc", // coral 80%
+  CHART_CORAL,
   "#334155", // slate-700
+  CHART_NEUTRAL,
+  "#64748b", // slate-500
+  "#cbd5e1", // slate-300
+  "#475569", // slate-600
+  "#e2e8f0", // slate-200
 ];
+const SERIES_COLORS = [CHART_CORAL, "#334155", CHART_NEUTRAL];
+const CHART_AXIS = { fontSize: 12, fill: "#64748b" };
+const CHART_GRID = "rgba(15,23,42,0.08)";
+const CHART_TOOLTIP = {
+  borderRadius: 12,
+  border: "1px solid rgba(15,23,42,0.08)",
+  boxShadow: "0 4px 16px -8px rgba(15,23,42,0.15)",
+  fontSize: 13,
+  padding: "8px 12px",
+};
+
+function barFill(data: Record<string, string | number>[], yKey: string, i: number) {
+  let maxIdx = 0;
+  data.forEach((d, j) => {
+    if (Number(d[yKey]) > Number(data[maxIdx][yKey])) maxIdx = j;
+  });
+  return i === maxIdx ? CHART_CORAL : CHART_NEUTRAL;
+}
 
 export function DataBarChart({
   data,
@@ -966,74 +928,74 @@ export function DataBarChart({
 }) {
   return (
     <figure className="not-prose my-8">
-      {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
-          {title}
-        </p>
-      )}
       <div
-        className="bg-white rounded-xl border border-slate-200 p-3 sm:p-6 overflow-x-auto"
+        className="lab-card p-4 sm:p-6 overflow-x-auto"
         style={{ minHeight: height }}
       >
+        {title && (
+          <figcaption className="text-[15px] font-semibold text-ink mb-4">
+            {title}
+          </figcaption>
+        )}
         <div style={{ width: "100%", height }}>
           <ResponsiveContainer width="100%" height="100%">
             {horizontal ? (
               <BarChart data={data} layout="vertical" margin={{ left: 0, right: 20, top: 5, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+                <CartesianGrid stroke={CHART_GRID} horizontal={false} />
                 <XAxis
                   type="number"
-                  tick={{ fontSize: 10, fill: "#64748b" }}
+                  tick={CHART_AXIS}
+                  axisLine={false}
+                  tickLine={false}
                   tickFormatter={(v) => `${v}${suffix}`}
                 />
                 <YAxis
                   dataKey={xKey}
                   type="category"
-                  tick={{ fontSize: 10, fill: "#334155" }}
-                  width={90}
+                  tick={CHART_AXIS}
+                  axisLine={false}
+                  tickLine={false}
+                  width={96}
                 />
                 <Tooltip
+                  cursor={{ fill: "rgba(15,23,42,0.04)" }}
                   formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
-                  contentStyle={{
-                    borderRadius: 12,
-                    border: "1px solid #e2e8f0",
-                    fontSize: 12,
-                    padding: "8px 12px",
-                  }}
+                  contentStyle={CHART_TOOLTIP}
                 />
-                <Bar dataKey={yKey} radius={[0, 6, 6, 0]} barSize={24}>
+                <Bar dataKey={yKey} radius={[0, 6, 6, 0]} barSize={22}>
                   {data.map((_, i) => (
-                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                    <Cell key={i} fill={barFill(data, yKey, i)} />
                   ))}
                 </Bar>
               </BarChart>
             ) : (
               <BarChart data={data} margin={{ left: -15, right: 5, top: 5, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                <CartesianGrid stroke={CHART_GRID} vertical={false} />
                 <XAxis
                   dataKey={xKey}
-                  tick={{ fontSize: 9, fill: "#64748b" }}
+                  tick={CHART_AXIS}
+                  axisLine={false}
+                  tickLine={false}
                   interval={0}
                   angle={-25}
                   textAnchor="end"
-                  height={55}
+                  height={60}
                 />
                 <YAxis
-                  tick={{ fontSize: 10, fill: "#64748b" }}
+                  tick={CHART_AXIS}
+                  axisLine={false}
+                  tickLine={false}
                   tickFormatter={(v) => `${v}${suffix}`}
-                  width={40}
+                  width={44}
                 />
                 <Tooltip
+                  cursor={{ fill: "rgba(15,23,42,0.04)" }}
                   formatter={(value) => [`${value}${suffix}`, yLabel || yKey]}
-                  contentStyle={{
-                    borderRadius: 12,
-                    border: "1px solid #e2e8f0",
-                    fontSize: 12,
-                    padding: "8px 12px",
-                  }}
+                  contentStyle={CHART_TOOLTIP}
                 />
                 <Bar dataKey={yKey} radius={[6, 6, 0, 0]} barSize={32}>
                   {data.map((_, i) => (
-                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                    <Cell key={i} fill={barFill(data, yKey, i)} />
                   ))}
                 </Bar>
               </BarChart>
@@ -1063,15 +1025,13 @@ export function DataPieChart({
 }) {
   return (
     <figure className="not-prose my-8">
-      {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
-          {title}
-        </p>
-      )}
-      <div
-        className="bg-white rounded-xl border border-slate-200 p-3 sm:p-6"
-        style={{ height }}
-      >
+      <div className="lab-card p-4 sm:p-6">
+        {title && (
+          <figcaption className="text-[15px] font-semibold text-ink mb-4">
+            {title}
+          </figcaption>
+        )}
+        <div style={{ height }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -1087,21 +1047,17 @@ export function DataPieChart({
                 `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
               }
               labelLine={{ stroke: "#94a3b8" }}
-              fontSize={9}
+              fontSize={12}
+              stroke="none"
             >
               {data.map((_, i) => (
                 <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip
-              contentStyle={{
-                borderRadius: 12,
-                border: "1px solid #e2e8f0",
-                fontSize: 13,
-              }}
-            />
+            <Tooltip contentStyle={CHART_TOOLTIP} />
           </PieChart>
         </ResponsiveContainer>
+        </div>
       </div>
     </figure>
   );
@@ -1123,18 +1079,10 @@ export function MetricDelta({
 }) {
   const max = Math.max(...tiers.map((t) => t.value));
   const palette = {
-    slate: { bar: "bg-slate-300", text: "text-slate-600", glow: "" },
-    amber: { bar: "bg-amber-400", text: "text-amber-700", glow: "" },
-    coral: {
-      bar: "bg-gradient-to-r from-content-coral to-content-cta",
-      text: "text-content-coral",
-      glow: "shadow-[0_8px_24px_-6px_rgba(255,107,107,0.55)]",
-    },
-    emerald: {
-      bar: "bg-gradient-to-r from-emerald-400 to-emerald-500",
-      text: "text-emerald-600",
-      glow: "shadow-[0_8px_24px_-6px_rgba(16,185,129,0.5)]",
-    },
+    slate: { bar: "bg-slate-300 dark:bg-slate-600", text: "text-ink" },
+    amber: { bar: "bg-slate-400", text: "text-ink" },
+    coral: { bar: "bg-content-coral", text: "text-ink" },
+    emerald: { bar: "bg-content-coral", text: "text-ink" },
   } as const;
   const winnerIdx = direction === "up"
     ? tiers.indexOf(tiers.reduce((a, b) => (a.value >= b.value ? a : b)))
@@ -1142,50 +1090,42 @@ export function MetricDelta({
   const arrowChar = direction === "up" ? "↑" : "↓";
 
   return (
-    <figure className="not-prose my-10 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
+    <figure className="not-prose my-10 lab-card overflow-hidden">
       {/* Header strip */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-5 sm:px-7 py-4 border-b border-slate-200 bg-white">
-        <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.18em] text-slate-700 font-bold">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-4 border-b border-line/[0.08]">
+        <figcaption className="text-[15px] font-semibold text-ink">
           {metric}
+        </figcaption>
+        <p className="inline-flex items-center gap-1.5 text-meta text-ink-2">
+          <span aria-hidden className="tabular-nums">{arrowChar}</span>
+          {conclusion}
         </p>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-content-coral/10 border border-content-coral/30">
-          <span className="text-content-coral font-bold tabular-nums">
-            {arrowChar}
-          </span>
-          <span className="text-[12px] font-bold text-content-coral uppercase tracking-wide">
-            {conclusion}
-          </span>
-        </div>
       </div>
       {/* Bars */}
-      <div className="px-5 sm:px-7 py-6 space-y-4">
+      <div className="px-5 sm:px-6 py-5 space-y-3">
         {tiers.map((tier, i) => {
           const tone = tier.tone || (i === winnerIdx ? "coral" : i === 0 ? "slate" : "amber");
           const c = palette[tone];
           const widthPct = (tier.value / max) * 100;
           const isWinner = i === winnerIdx;
           return (
-            <div key={tier.label} className="flex items-center gap-4">
-              <div className="w-24 sm:w-32 flex-shrink-0">
-                <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold leading-none">
+            <div key={tier.label} className="flex items-center gap-3 sm:gap-4">
+              <div className="w-20 sm:w-28 flex-shrink-0">
+                <p className="text-meta text-ink-2 leading-tight">
                   {tier.label}
+                  {isWinner && (
+                    <span className="sr-only"> ({direction === "up" ? "highest" : "lowest"})</span>
+                  )}
                 </p>
               </div>
-              <div className="relative flex-1 h-12 sm:h-14 rounded-lg bg-slate-100 overflow-hidden">
+              <div className="relative flex-1 h-8 sm:h-10 rounded-lg bg-sunken overflow-hidden">
                 <div
-                  className={`absolute inset-y-0 left-0 ${c.bar} ${isWinner ? c.glow : ""} transition-all`}
+                  className={`absolute inset-y-0 left-0 rounded-lg ${isWinner ? palette.coral.bar : tone === "slate" ? palette.slate.bar : "bg-slate-400"}`}
                   style={{ width: `${widthPct}%` }}
                 />
-                {isWinner && (
-                  <div className="absolute inset-y-0 right-2 flex items-center">
-                    <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-white/90 px-2 py-0.5 rounded-full bg-black/15 backdrop-blur-sm">
-                      {direction === "up" ? "highest" : "lowest"}
-                    </span>
-                  </div>
-                )}
               </div>
-              <div className="w-20 sm:w-28 flex-shrink-0 text-right">
-                <p className={`text-2xl sm:text-3xl font-bold tabular-nums leading-none ${isWinner ? c.text : "text-slate-700"}`}>
+              <div className="w-16 sm:w-24 flex-shrink-0 text-right">
+                <p className={`font-heading text-xl sm:text-2xl font-semibold tabular-nums leading-none ${isWinner ? c.text : "text-ink-2"}`}>
                   {tier.display}
                   {unit && <span className="text-base ml-0.5">{unit}</span>}
                 </p>
@@ -1219,56 +1159,48 @@ export function ReachTalkQuadrant({
   title?: string;
 }) {
   function quadrant(reach: number, talk: number) {
-    if (reach >= xMid && talk >= yMid) return { label: "TR", style: "bg-emerald-500 text-white", ring: "ring-emerald-400/40" };
-    if (reach >= xMid && talk < yMid) return { label: "BR", style: "bg-content-coral text-white", ring: "ring-content-coral/40" };
-    if (reach < xMid && talk >= yMid) return { label: "TL", style: "bg-sky-500 text-white", ring: "ring-sky-400/40" };
-    return { label: "BL", style: "bg-slate-400 text-white", ring: "ring-slate-300/40" };
+    if (reach >= xMid && talk >= yMid) return { label: "TR", style: "bg-content-coral" };
+    if (reach >= xMid && talk < yMid) return { label: "BR", style: "bg-slate-700 dark:bg-slate-300" };
+    if (reach < xMid && talk >= yMid) return { label: "TL", style: "bg-slate-400" };
+    return { label: "BL", style: "bg-slate-300 dark:bg-slate-600" };
   }
 
   return (
-    <figure className="not-prose my-10">
+    <figure className="not-prose my-10 lab-card p-4 sm:p-6">
       {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+        <figcaption className="text-[15px] font-semibold text-ink mb-1">
           {title}
-        </p>
+        </figcaption>
       )}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
-        <div className="relative" style={{ aspectRatio: "16 / 10", minHeight: 360 }}>
-          {/* Quadrant background tints */}
-          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
-            <div className="bg-sky-50/60 border-r border-b border-slate-200" />
-            <div className="bg-emerald-50/60 border-b border-slate-200" />
-            <div className="bg-slate-50/60 border-r border-slate-200" />
-            <div className="bg-content-coral/5" />
-          </div>
+      <p className="text-meta text-ink-3 mb-4">↑ {yLabel}</p>
+      <div className="overflow-x-auto -mx-1 px-1">
+        <div className="relative min-w-[520px]" style={{ aspectRatio: "16 / 10", minHeight: 340 }}>
+          {/* Quadrant frame */}
+          <div className="absolute inset-0 rounded-xl bg-sunken" />
           {/* Quadrant labels */}
-          <span className="absolute top-2 left-2 text-[9px] font-mono uppercase tracking-[0.18em] text-sky-600 font-bold opacity-80">
+          <span className="absolute top-2 left-3 text-xs text-ink-3">
             Talkable, low reach
           </span>
-          <span className="absolute top-2 right-2 text-[9px] font-mono uppercase tracking-[0.18em] text-emerald-700 font-bold opacity-90">
-            Sweet spot ★
+          <span className="absolute top-2 right-3 text-xs font-medium text-ink">
+            Sweet spot
           </span>
-          <span className="absolute bottom-7 left-2 text-[9px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold opacity-80">
+          <span className="absolute bottom-8 left-3 text-xs text-ink-3">
             Dead zone
           </span>
-          <span className="absolute bottom-7 right-2 text-[9px] font-mono uppercase tracking-[0.18em] text-content-coral font-bold opacity-80">
+          <span className="absolute bottom-8 right-3 text-xs text-ink-3">
             Watchable, low talk
           </span>
           {/* Mid-line crosshair */}
           <div
             aria-hidden
-            className="absolute left-0 right-0 h-px bg-slate-300"
+            className="absolute left-0 right-0 h-px bg-line/[0.14]"
             style={{ bottom: `${(yMid / yMax) * 100}%` }}
           />
           <div
             aria-hidden
-            className="absolute top-0 bottom-6 w-px bg-slate-300"
+            className="absolute top-0 bottom-6 w-px bg-line/[0.14]"
             style={{ left: `${(xMid / xMax) * 100}%` }}
           />
-          {/* Y-axis label */}
-          <span className="absolute -left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 origin-center whitespace-nowrap" style={{ transform: 'translateX(-100%) translateY(-50%) rotate(-90deg)' }}>
-            {yLabel}
-          </span>
           {/* Plot area */}
           <div className="absolute inset-0 pl-6 pr-2 pt-2 pb-6">
             <div className="relative w-full h-full">
@@ -1283,11 +1215,11 @@ export function ReachTalkQuadrant({
                     style={{ left: `${x}%`, bottom: `${y}%`, transform: "translate(-50%, 50%)" }}
                   >
                     <div
-                      className={`w-3.5 h-3.5 rounded-full ring-2 ${q.ring} ${q.style.split(' ')[0]} shadow-md transition-transform group-hover:scale-150`}
+                      className={`w-3 h-3 rounded-full ring-2 ring-surface ${q.style}`}
                       title={`${r.niche}: ${r.reach}% reach · ${r.talk}% comment rate`}
                     />
                     <span
-                      className="absolute left-3 top-1/2 -translate-y-1/2 whitespace-nowrap text-[11px] font-semibold text-slate-700 pointer-events-none px-1.5 py-0.5 rounded bg-white/80 ring-1 ring-slate-200/60 shadow-sm"
+                      className="absolute left-3.5 top-1/2 -translate-y-1/2 whitespace-nowrap text-xs font-medium text-ink-2 pointer-events-none px-1 rounded bg-sunken/80"
                     >
                       {r.niche}
                     </span>
@@ -1297,21 +1229,21 @@ export function ReachTalkQuadrant({
             </div>
           </div>
           {/* X-axis label */}
-          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500">
+          <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-xs text-ink-3 whitespace-nowrap">
             {xLabel} →
           </span>
         </div>
       </div>
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-[10px] font-mono uppercase tracking-[0.16em] text-slate-500">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 text-meta text-ink-3">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded-full bg-emerald-500" /> Sweet spot (high reach + high talk)
+          <span className="h-2.5 w-2.5 rounded-full bg-content-coral" /> Sweet spot (high reach + high talk)
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded-full bg-content-coral" /> Watchable only
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-700 dark:bg-slate-300" /> Watchable only
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded-full bg-sky-500" /> Talkable only
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-400" /> Talkable only
         </span>
       </div>
     </figure>
@@ -1329,52 +1261,44 @@ export function ScriptDNACompare({
   return (
     <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-10">
       {/* Loser card */}
-      <div className="relative rounded-2xl bg-slate-50 border border-slate-200 p-6">
-        <div className="flex items-center gap-2 mb-5">
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-200 text-slate-600 text-sm font-bold">
-            ↓
-          </span>
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 font-bold">
-            {loser.label}
-          </span>
-        </div>
+      <div className="lab-card p-5 sm:p-6">
+        <p className="text-[15px] font-semibold text-ink-2 mb-4">
+          <span aria-hidden className="mr-1.5 text-ink-3">↓</span>
+          {loser.label}
+        </p>
         <ul className="space-y-4">
           {loser.rows.map((r) => (
             <li key={r.metric}>
               <div className="flex items-baseline justify-between gap-3">
-                <span className="text-sm text-slate-600">{r.metric}</span>
-                <span className="text-2xl font-bold tabular-nums text-slate-700">
+                <span className="text-sm text-ink-2">{r.metric}</span>
+                <span className="font-heading text-2xl font-semibold tabular-nums text-ink-2">
                   {r.value}
                 </span>
               </div>
               {r.note && (
-                <p className="text-[11px] text-slate-400 mt-0.5">{r.note}</p>
+                <p className="text-xs text-ink-3 mt-0.5">{r.note}</p>
               )}
             </li>
           ))}
         </ul>
       </div>
       {/* Winner card */}
-      <div className="relative rounded-2xl bg-gradient-to-br from-content-coral/5 via-white to-content-coral/10 border-2 border-content-coral/40 p-6 shadow-[0_8px_28px_-12px_rgba(255,107,107,0.4)]">
-        <div className="flex items-center gap-2 mb-5">
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-content-coral text-white text-sm font-bold">
-            ↑
-          </span>
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-content-coral font-bold">
-            {winner.label}
-          </span>
-        </div>
+      <div className="lab-card p-5 sm:p-6 border-line/[0.16]">
+        <p className="text-[15px] font-semibold text-ink mb-4">
+          <span aria-hidden className="mr-1.5 text-content-coral">↑</span>
+          {winner.label}
+        </p>
         <ul className="space-y-4">
           {winner.rows.map((r) => (
             <li key={r.metric}>
               <div className="flex items-baseline justify-between gap-3">
-                <span className="text-sm text-slate-700">{r.metric}</span>
-                <span className="text-2xl font-bold tabular-nums text-content-coral">
+                <span className="text-sm text-ink-2">{r.metric}</span>
+                <span className="font-heading text-2xl font-semibold tabular-nums text-ink">
                   {r.value}
                 </span>
               </div>
               {r.note && (
-                <p className="text-[11px] text-slate-500 mt-0.5">{r.note}</p>
+                <p className="text-xs text-ink-3 mt-0.5">{r.note}</p>
               )}
             </li>
           ))}
@@ -1394,30 +1318,15 @@ export function OpenerPodium({
 }) {
   const order = [2, 1, 3]; // visual order: 2nd, 1st, 3rd (podium layout)
   const heights: Record<number, string> = { 1: "h-44", 2: "h-32", 3: "h-24" };
-  const colors: Record<number, { bg: string; text: string; ring: string; medal: string }> = {
-    1: {
-      bg: "bg-gradient-to-br from-content-coral to-content-cta",
-      text: "text-white",
-      ring: "ring-content-coral/40",
-      medal: "bg-amber-300 text-amber-900",
-    },
-    2: {
-      bg: "bg-gradient-to-br from-slate-500 to-slate-600",
-      text: "text-white",
-      ring: "ring-slate-400/40",
-      medal: "bg-slate-200 text-slate-700",
-    },
-    3: {
-      bg: "bg-gradient-to-br from-orange-400 to-orange-500",
-      text: "text-white",
-      ring: "ring-orange-300/40",
-      medal: "bg-orange-200 text-orange-800",
-    },
+  const colors: Record<number, { bg: string; text: string }> = {
+    1: { bg: "bg-content-coral", text: "text-white" },
+    2: { bg: "bg-slate-400", text: "text-white" },
+    3: { bg: "bg-slate-300 dark:bg-slate-600", text: "text-slate-700 dark:text-slate-200" },
   };
 
   return (
     <div className="not-prose my-10">
-      <div className="rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 sm:p-8">
+      <div className="lab-card p-5 sm:p-6">
         <div className="grid grid-cols-3 gap-3 sm:gap-4 items-end">
           {order.map((rank) => {
             const entry = podium.find((p) => p.rank === rank);
@@ -1425,26 +1334,21 @@ export function OpenerPodium({
             const c = colors[rank];
             return (
               <div key={rank} className="flex flex-col items-center text-center">
-                <span
-                  className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${c.medal} font-bold text-sm mb-2 ring-1 ring-black/5`}
-                >
-                  {rank}
-                </span>
-                <p className="text-xs font-mono uppercase tracking-wider text-slate-500 mb-0.5">
+                <p className="text-sm font-medium text-ink-2 mb-1">
                   &ldquo;{entry.word}&rdquo;
                 </p>
-                <p className="text-2xl sm:text-3xl font-bold tabular-nums text-slate-900 leading-none mb-2">
+                <p className="font-heading text-2xl sm:text-3xl font-semibold tabular-nums text-ink leading-none mb-2">
                   {entry.value}
                 </p>
                 {entry.note && (
-                  <p className="text-[10px] text-slate-400 mb-2 px-1 leading-tight">
+                  <p className="text-xs text-ink-3 mb-2 px-1 leading-tight">
                     {entry.note}
                   </p>
                 )}
                 <div
-                  className={`relative w-full ${heights[rank]} rounded-t-xl ${c.bg} ${c.text} ring-2 ${c.ring} shadow-md flex items-end justify-center pb-3`}
+                  className={`relative w-full ${heights[rank]} rounded-t-xl ${c.bg} ${c.text} flex items-end justify-center pb-3`}
                 >
-                  <span className="text-3xl sm:text-5xl font-bold opacity-30 tabular-nums">
+                  <span className="font-heading text-2xl sm:text-4xl font-semibold opacity-60 tabular-nums">
                     {rank}
                   </span>
                 </div>
@@ -1453,20 +1357,20 @@ export function OpenerPodium({
           })}
         </div>
         {losers && losers.length > 0 && (
-          <div className="mt-6 pt-6 border-t border-slate-200">
-            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold mb-3 text-center">
-              The bottom shelf — openers to avoid
+          <div className="mt-6 pt-5 border-t border-line/[0.08]">
+            <p className="text-meta font-medium text-ink-2 mb-3 text-center">
+              The bottom shelf: openers to avoid
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {losers.map((l) => (
                 <div
                   key={l.word}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-xs"
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sunken text-xs"
                 >
-                  <span className="text-slate-700 font-semibold">
+                  <span className="text-ink-2 font-medium">
                     &ldquo;{l.word}&rdquo;
                   </span>
-                  <span className="text-slate-400 tabular-nums font-mono">
+                  <span className="text-ink-3 tabular-nums font-mono">
                     {l.value}
                   </span>
                 </div>
@@ -1507,75 +1411,25 @@ export function NicheBubbleMap({
     return Math.round(96 + 144 * t); // 96px..240px
   }
 
+  // Sequential coral ramp: hotter = more coral, cooler = neutral.
   function colorFor(v: number) {
-    if (v >= 32)
-      return {
-        bg: "bg-content-coral",
-        text: "text-white",
-        ring: "ring-content-coral/40",
-        accent: "text-white/85",
-        glow: "shadow-[0_8px_28px_-6px_rgba(255,107,107,0.55)]",
-      };
-    if (v >= 25)
-      return {
-        bg: "bg-content-coral/85",
-        text: "text-white",
-        ring: "ring-content-coral/30",
-        accent: "text-white/85",
-        glow: "shadow-[0_8px_28px_-6px_rgba(255,107,107,0.4)]",
-      };
-    if (v >= 19)
-      return {
-        bg: "bg-orange-400",
-        text: "text-white",
-        ring: "ring-orange-300/40",
-        accent: "text-white/85",
-        glow: "shadow-[0_6px_20px_-6px_rgba(251,146,60,0.5)]",
-      };
-    if (v >= 14)
-      return {
-        bg: "bg-amber-300",
-        text: "text-amber-900",
-        ring: "ring-amber-200/60",
-        accent: "text-amber-900/75",
-        glow: "shadow-[0_6px_18px_-6px_rgba(252,211,77,0.5)]",
-      };
-    if (v >= 9)
-      return {
-        bg: "bg-slate-300",
-        text: "text-slate-700",
-        ring: "ring-slate-200/60",
-        accent: "text-slate-600",
-        glow: "shadow-[0_4px_14px_-4px_rgba(148,163,184,0.4)]",
-      };
-    return {
-      bg: "bg-slate-200",
-      text: "text-slate-500",
-      ring: "ring-slate-200/60",
-      accent: "text-slate-400",
-      glow: "shadow-[0_4px_14px_-4px_rgba(148,163,184,0.3)]",
-    };
+    if (v >= 32) return { bg: "bg-content-coral", text: "text-white", accent: "text-white/85" };
+    if (v >= 25) return { bg: "bg-content-coral/75", text: "text-white", accent: "text-white/85" };
+    if (v >= 19) return { bg: "bg-content-coral/50", text: "text-ink", accent: "text-ink-2" };
+    if (v >= 14) return { bg: "bg-content-coral/30", text: "text-ink", accent: "text-ink-2" };
+    if (v >= 9) return { bg: "bg-slate-300 dark:bg-slate-600", text: "text-ink", accent: "text-ink-2" };
+    return { bg: "bg-sunken", text: "text-ink-2", accent: "text-ink-3" };
   }
 
   return (
-    <figure className="not-prose my-10">
+    <figure className="not-prose my-10 lab-card p-4 sm:p-6">
       {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+        <figcaption className="text-[15px] font-semibold text-ink mb-4">
           {title}
-        </p>
+        </figcaption>
       )}
-      <div className="relative rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-50 p-5 sm:p-8 overflow-hidden">
-        {/* Subtle grid */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(15,23,42,1) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,1) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-        <div className="relative flex flex-wrap gap-3 sm:gap-4 justify-center items-center">
+      <div className="overflow-hidden">
+        <div className="flex flex-wrap gap-3 justify-center items-center">
           {sortedByVolume.map((row) => {
             const c = colorFor(row.value);
             const size = sizeFor(row.volume);
@@ -1583,7 +1437,7 @@ export function NicheBubbleMap({
             return (
               <div
                 key={row.niche}
-                className={`group relative ${c.bg} ${c.text} rounded-full ring-1 ${c.ring} ${c.glow} flex flex-col items-center justify-center text-center p-3 transition-transform hover:scale-[1.04] cursor-default`}
+                className={`relative ${c.bg} ${c.text} rounded-full flex flex-col items-center justify-center text-center p-3 cursor-default max-w-full`}
                 style={{
                   width: size,
                   height: size,
@@ -1592,13 +1446,13 @@ export function NicheBubbleMap({
                 title={`${row.niche}: ${row.value}${suffix} hit rate · ${row.volume.toLocaleString()} videos`}
               >
                 <p
-                  className="font-bold leading-tight tracking-tight px-2"
-                  style={{ fontSize: Math.round(13 * fontScale) }}
+                  className="font-semibold leading-tight tracking-tight px-2"
+                  style={{ fontSize: Math.max(12, Math.round(13 * fontScale)) }}
                 >
                   {row.niche}
                 </p>
                 <p
-                  className="font-bold tabular-nums leading-none mt-1"
+                  className="font-heading font-semibold tabular-nums leading-none mt-1"
                   style={{ fontSize: Math.round(28 * fontScale) }}
                 >
                   {row.value.toFixed(1)}
@@ -1606,8 +1460,7 @@ export function NicheBubbleMap({
                 </p>
                 {row.extra && (
                   <p
-                    className={`${c.accent} font-mono uppercase tracking-wider mt-1`}
-                    style={{ fontSize: Math.round(9 * fontScale) }}
+                    className={`${c.accent} mt-1 text-xs`}
                   >
                     {row.extra}
                   </p>
@@ -1618,24 +1471,24 @@ export function NicheBubbleMap({
         </div>
       </div>
       {/* Legend */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-4 px-1">
-        <div className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-5 pt-4 border-t border-line/[0.08]">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-meta text-ink-3">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-slate-300 ring-1 ring-slate-200" />
-            <span className="h-4 w-4 rounded-full bg-slate-300 ring-1 ring-slate-200" />
-            <span className="h-5 w-5 rounded-full bg-slate-300 ring-1 ring-slate-200" />
+            <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+            <span className="h-3.5 w-3.5 rounded-full bg-slate-300" />
+            <span className="h-4 w-4 rounded-full bg-slate-300" />
             Size = sample
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-sm bg-slate-200" />
-            <span className="h-3 w-3 rounded-sm bg-amber-300" />
-            <span className="h-3 w-3 rounded-sm bg-orange-400" />
+            <span className="h-3 w-3 rounded-sm bg-sunken border border-line/[0.08]" />
+            <span className="h-3 w-3 rounded-sm bg-content-coral/30" />
+            <span className="h-3 w-3 rounded-sm bg-content-coral/50" />
             <span className="h-3 w-3 rounded-sm bg-content-coral" />
             Color = {metric}
           </span>
         </div>
         {legendNote && (
-          <p className="text-[10px] font-mono uppercase tracking-[0.16em] text-slate-400">
+          <p className="text-meta text-ink-3">
             {legendNote}
           </p>
         )}
@@ -1668,61 +1521,60 @@ export function NicheHeatMap({
   // Coral → orange → amber → slate as values descend
   function colorFor(v: number) {
     const t = (v - min) / range; // 0..1, higher = hotter
-    if (t > 0.85) return { bg: "bg-content-coral", text: "text-white", chip: "bg-content-coral text-white" };
-    if (t > 0.65) return { bg: "bg-content-coral/80", text: "text-white", chip: "bg-content-coral/85 text-white" };
-    if (t > 0.45) return { bg: "bg-orange-400", text: "text-white", chip: "bg-orange-400 text-white" };
-    if (t > 0.25) return { bg: "bg-amber-300", text: "text-amber-900", chip: "bg-amber-300 text-amber-900" };
-    if (t > 0.1) return { bg: "bg-slate-300", text: "text-slate-700", chip: "bg-slate-300 text-slate-700" };
-    return { bg: "bg-slate-200", text: "text-slate-500", chip: "bg-slate-200 text-slate-500" };
+    if (t > 0.85) return { bg: "bg-content-coral" };
+    if (t > 0.65) return { bg: "bg-content-coral/75" };
+    if (t > 0.45) return { bg: "bg-content-coral/50" };
+    if (t > 0.25) return { bg: "bg-content-coral/30" };
+    return { bg: "bg-slate-300 dark:bg-slate-600" };
   }
 
   return (
     <figure className="not-prose my-10">
       {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+        <figcaption className="text-[15px] font-semibold text-ink mb-3">
           {title}
-        </p>
+        </figcaption>
       )}
-      <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+      <div className="lab-card overflow-hidden">
         {/* Header */}
-        <div className="grid grid-cols-[1fr_auto] sm:grid-cols-[180px_1fr_70px] gap-2 sm:gap-4 px-4 sm:px-5 py-3 bg-slate-50 border-b border-slate-200 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold">
+        <div className="grid grid-cols-[1fr_auto] sm:grid-cols-[180px_1fr_70px] gap-2 sm:gap-4 px-4 sm:px-5 py-3 bg-sunken border-b border-line/[0.08] text-meta font-medium text-ink-3">
           <span>Niche</span>
           <span className="hidden sm:block">{metric}</span>
           <span className="text-right">Value</span>
         </div>
         {/* Rows */}
-        <ol className="divide-y divide-slate-100">
+        <ol className="divide-y divide-line/[0.08]">
           {rows.map((row, i) => {
             const c = colorFor(row.value);
             const widthPct = ((row.value - 0) / Math.max(1, max)) * 100;
             return (
               <li
                 key={row.niche}
-                className="grid grid-cols-[1fr_auto] sm:grid-cols-[180px_1fr_70px] gap-2 sm:gap-4 items-center px-4 sm:px-5 py-3 hover:bg-slate-50/60 transition-colors"
+                className="grid grid-cols-[1fr_auto] sm:grid-cols-[180px_1fr_70px] gap-2 sm:gap-4 items-center px-4 sm:px-5 py-3"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-[11px] font-mono tabular-nums text-slate-400 w-5 flex-shrink-0">
-                    {String(i + 1).padStart(2, "0")}
+                  <span className="text-xs font-mono tabular-nums text-ink-3 w-5 flex-shrink-0">
+                    {i + 1}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-sm font-bold text-slate-900 leading-tight truncate">
+                    <p className="text-sm font-semibold text-ink leading-tight truncate">
                       {row.niche}
                     </p>
-                    <p className="text-[10px] font-mono text-slate-400 truncate">
+                    <p className="text-xs text-ink-3 truncate">
                       {row.sample}
                       {row.extra ? ` · ${row.extra}` : ""}
                     </p>
                   </div>
                 </div>
-                <div className="hidden sm:block relative h-8 bg-slate-100 rounded-md overflow-hidden">
+                <div className="hidden sm:block relative h-6 bg-sunken rounded-md overflow-hidden">
                   <div
-                    className={`absolute inset-y-0 left-0 ${c.bg} rounded-md transition-all`}
+                    className={`absolute inset-y-0 left-0 ${c.bg} rounded-md`}
                     style={{ width: `${widthPct}%` }}
                   />
                 </div>
                 <div className="text-right">
                   <span
-                    className={`inline-block px-2 py-1 rounded-md text-[12px] font-mono font-bold tabular-nums ${c.chip}`}
+                    className="inline-block text-sm font-semibold tabular-nums text-ink"
                   >
                     {row.value.toFixed(1)}
                     {suffix}
@@ -1734,14 +1586,13 @@ export function NicheHeatMap({
         </ol>
       </div>
       {/* Legend */}
-      <div className="flex items-center justify-end gap-2 mt-3 text-[10px] font-mono uppercase tracking-wider text-slate-500">
+      <div className="flex items-center justify-end gap-2 mt-3 text-meta text-ink-3">
         <span>Low</span>
         <span className="inline-flex items-center gap-0.5">
-          <span className="h-3 w-3 rounded-sm bg-slate-200" />
-          <span className="h-3 w-3 rounded-sm bg-slate-300" />
-          <span className="h-3 w-3 rounded-sm bg-amber-300" />
-          <span className="h-3 w-3 rounded-sm bg-orange-400" />
-          <span className="h-3 w-3 rounded-sm bg-content-coral/80" />
+          <span className="h-3 w-3 rounded-sm bg-slate-300 dark:bg-slate-600" />
+          <span className="h-3 w-3 rounded-sm bg-content-coral/30" />
+          <span className="h-3 w-3 rounded-sm bg-content-coral/50" />
+          <span className="h-3 w-3 rounded-sm bg-content-coral/75" />
           <span className="h-3 w-3 rounded-sm bg-content-coral" />
         </span>
         <span>High</span>
@@ -1771,39 +1622,39 @@ export function TierHeatMatrix({
     const t = v / Math.max(1, max);
     if (t > 0.85) return "bg-content-coral text-white";
     if (t > 0.6) return "bg-content-coral/75 text-white";
-    if (t > 0.4) return "bg-orange-400 text-white";
-    if (t > 0.22) return "bg-amber-300 text-amber-900";
-    if (t > 0.1) return "bg-slate-200 text-slate-700";
-    return "bg-slate-100 text-slate-500";
+    if (t > 0.4) return "bg-content-coral/50 text-ink";
+    if (t > 0.22) return "bg-content-coral/25 text-ink";
+    if (t > 0.1) return "bg-sunken text-ink-2";
+    return "bg-sunken text-ink-3";
   }
 
   return (
     <figure className="not-prose my-10">
       {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
+        <figcaption className="text-[15px] font-semibold text-ink mb-3">
           {title}
-        </p>
+        </figcaption>
       )}
-      <div className="rounded-2xl border border-slate-200 bg-white overflow-x-auto">
+      <div className="lab-card overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500">
-              <th className="text-left px-4 py-3 font-bold">Niche</th>
-              <th className="text-center px-3 py-3 font-bold">Under 100K</th>
-              <th className="text-center px-3 py-3 font-bold">100K-1M</th>
-              <th className="text-center px-3 py-3 font-bold">1M+</th>
+            <tr className="bg-sunken border-b border-line/[0.08] text-meta text-ink-3">
+              <th className="text-left px-4 py-3 font-medium">Niche</th>
+              <th className="text-center px-3 py-3 font-medium whitespace-nowrap">Under 100K</th>
+              <th className="text-center px-3 py-3 font-medium whitespace-nowrap">100K-1M</th>
+              <th className="text-center px-3 py-3 font-medium">1M+</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.niche} className="border-b border-slate-100 last:border-b-0">
+              <tr key={row.niche} className="border-b border-line/[0.08] last:border-b-0">
                 <td className="px-4 py-3 align-middle">
                   <div>
-                    <p className="text-sm font-bold text-slate-900 leading-tight">
+                    <p className="text-sm font-semibold text-ink leading-tight">
                       {row.niche}
                     </p>
                     {row.sample && (
-                      <p className="text-[10px] font-mono text-slate-400">
+                      <p className="text-xs text-ink-3">
                         {row.sample}
                       </p>
                     )}
@@ -1812,7 +1663,7 @@ export function TierHeatMatrix({
                 {([row.t1, row.t2, row.t3] as const).map((v, i) => (
                   <td key={i} className="px-2 py-2 align-middle">
                     <div
-                      className={`mx-auto w-full h-12 sm:h-14 rounded-md flex items-center justify-center font-mono font-bold tabular-nums text-xs sm:text-sm ${cellStyle(v)}`}
+                      className={`mx-auto w-full min-w-[64px] h-11 sm:h-12 rounded-lg flex items-center justify-center font-medium tabular-nums text-xs sm:text-sm ${cellStyle(v)}`}
                     >
                       {v.toFixed(1)}%
                     </div>
@@ -1845,51 +1696,52 @@ export function TierComparisonChart({
 }) {
   return (
     <figure className="not-prose my-8">
-      {title && (
-        <p className="text-xs sm:text-sm font-bold text-slate-700 mb-4 text-center">
-          {title}
-        </p>
-      )}
       <div
-        className="bg-white rounded-xl border border-slate-200 p-3 sm:p-6 overflow-x-auto"
+        className="lab-card p-4 sm:p-6 overflow-x-auto"
         style={{ minHeight: height }}
       >
+        {title && (
+          <figcaption className="text-[15px] font-semibold text-ink mb-4">
+            {title}
+          </figcaption>
+        )}
         <div style={{ width: "100%", height }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} margin={{ left: -10, right: 5, top: 5, bottom: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+              <CartesianGrid stroke={CHART_GRID} vertical={false} />
               <XAxis
                 dataKey={xKey}
-                tick={{ fontSize: 10, fill: "#334155" }}
+                tick={CHART_AXIS}
+                axisLine={false}
+                tickLine={false}
                 interval={0}
                 angle={-20}
                 textAnchor="end"
                 height={60}
               />
               <YAxis
-                tick={{ fontSize: 10, fill: "#64748b" }}
+                tick={CHART_AXIS}
+                axisLine={false}
+                tickLine={false}
                 tickFormatter={(v) => `${v}${suffix}`}
-                width={42}
+                width={44}
               />
               <Tooltip
+                cursor={{ fill: "rgba(15,23,42,0.04)" }}
                 formatter={(value, name) => [`${value}${suffix}`, name]}
-                contentStyle={{
-                  borderRadius: 12,
-                  border: "1px solid #e2e8f0",
-                  fontSize: 12,
-                  padding: "8px 12px",
-                }}
+                contentStyle={CHART_TOOLTIP}
               />
               <Legend
-                wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
+                wrapperStyle={{ fontSize: 12, paddingTop: 8, color: "#64748b" }}
                 iconType="circle"
+                iconSize={8}
               />
-              {series.map((s) => (
+              {series.map((s, i) => (
                 <Bar
                   key={s.key}
                   dataKey={s.key}
                   name={s.label}
-                  fill={s.color}
+                  fill={SERIES_COLORS[i % SERIES_COLORS.length]}
                   radius={[4, 4, 0, 0]}
                   barSize={18}
                 />
@@ -1908,32 +1760,32 @@ type ArchetypeTrend = "scales" | "peaks-mid" | "collapses" | "bimodal" | "flat";
 const TREND_STYLE: Record<ArchetypeTrend, { label: string; chip: string; ring: string; arrow: string }> = {
   scales: {
     label: "Scales with views",
-    chip: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    ring: "ring-1 ring-emerald-200",
+    chip: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
+    ring: "",
     arrow: "↗",
   },
   "peaks-mid": {
     label: "Peaks at 100K-1M",
-    chip: "bg-amber-50 text-amber-700 border-amber-200",
-    ring: "ring-1 ring-amber-200",
+    chip: "bg-amber-500/10 text-amber-700 dark:text-amber-300",
+    ring: "",
     arrow: "△",
   },
   collapses: {
     label: "Collapses past 100K",
-    chip: "bg-rose-50 text-rose-700 border-rose-200",
-    ring: "ring-1 ring-rose-200",
+    chip: "bg-red-500/10 text-red-700 dark:text-red-300",
+    ring: "",
     arrow: "↘",
   },
   bimodal: {
     label: "Bimodal (T1 + T3)",
-    chip: "bg-violet-50 text-violet-700 border-violet-200",
-    ring: "ring-1 ring-violet-200",
+    chip: "bg-sunken text-ink-2",
+    ring: "",
     arrow: "⇡⇣",
   },
   flat: {
     label: "Flat across tiers",
-    chip: "bg-slate-100 text-slate-700 border-slate-200",
-    ring: "ring-1 ring-slate-200",
+    chip: "bg-sunken text-ink-2",
+    ring: "",
     arrow: "→",
   },
 };
@@ -1962,34 +1814,27 @@ export function HookArchetypeCard({
   const t = TREND_STYLE[trend];
   return (
     <div
-      className={`relative rounded-2xl bg-white border border-slate-200 p-5 sm:p-6 ${t.ring} transition-shadow hover:shadow-md`}
+      className="relative lab-card p-5 sm:p-6"
     >
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2">
-          <span
-            className="text-2xl font-bold text-slate-300 tabular-nums leading-none"
-            aria-hidden
-          >
-            {t.arrow}
-          </span>
-          <h4 className="text-slate-900 font-bold text-lg leading-tight">
-            {name}
-          </h4>
-        </div>
+      <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+        <h4 className="text-ink font-semibold text-[17px] leading-tight">
+          {name}
+        </h4>
         <span
-          className={`inline-flex items-center px-2 py-0.5 rounded-md border text-[10px] font-mono uppercase tracking-wider font-semibold whitespace-nowrap ${t.chip}`}
+          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${t.chip}`}
         >
+          <span aria-hidden>{t.arrow}</span>
           {t.label}
         </span>
       </div>
-      <p className="text-[14px] text-slate-700 leading-relaxed mb-3">
+      <p className="text-sm text-ink-2 leading-relaxed mb-3">
         {meaning}
       </p>
-      <blockquote className="text-[13px] text-slate-500 italic leading-snug border-l-2 border-slate-200 pl-3 py-1 mb-3">
+      <blockquote className="text-[13px] text-ink-3 italic leading-snug border-l border-line/[0.14] pl-3 py-0.5 mb-3">
         &ldquo;{example}&rdquo;
       </blockquote>
       {tierShare && (
-        <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400 border-t border-slate-100 pt-3">
+        <p className="text-xs text-ink-3 border-t border-line/[0.08] pt-3">
           {tierShare}
         </p>
       )}
@@ -2010,14 +1855,14 @@ export function TierScaleVisual({
   }[];
 }) {
   const palette = {
-    slate: { dot: "bg-slate-400", text: "text-slate-700", glow: "bg-slate-200" },
-    coral: { dot: "bg-content-coral", text: "text-content-coral", glow: "bg-content-coral/20" },
-    emerald: { dot: "bg-emerald-500", text: "text-emerald-700", glow: "bg-emerald-200" },
+    slate: { dot: "bg-slate-400", text: "text-ink" },
+    coral: { dot: "bg-content-coral", text: "text-ink" },
+    emerald: { dot: "bg-slate-700 dark:bg-slate-300", text: "text-ink" },
   } as const;
 
   return (
     <figure className="not-prose my-10">
-      <div className="relative rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-50 border border-slate-200 p-6 sm:p-10">
+      <div className="relative lab-card p-5 sm:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-3 items-end relative">
           {tiers.map((tier, i) => {
             const c = palette[tier.color || "slate"];
@@ -2032,33 +1877,29 @@ export function TierScaleVisual({
               <div key={tier.label} className="relative flex flex-col items-center text-center">
                 <div className="relative mb-4">
                   <div
-                    className={`absolute inset-0 rounded-full blur-2xl ${c.glow}`}
-                    aria-hidden
-                  />
-                  <div
-                    className={`relative rounded-full ${c.dot} flex items-center justify-center shadow-md`}
+                    className={`relative rounded-full ${c.dot} flex items-center justify-center`}
                     style={{ width: dotSize, height: dotSize }}
                     aria-hidden
                   >
-                    <span className="text-white font-bold text-lg">{i + 1}</span>
+                    <span className="text-white font-semibold text-lg tabular-nums">{i + 1}</span>
                   </div>
                 </div>
-                <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 font-bold mb-2">
+                <p className="text-meta font-medium text-ink-2 mb-2">
                   {tier.label}
                 </p>
-                <p className={`${fontSize} font-bold tabular-nums leading-none ${c.text} mb-1`}>
+                <p className={`font-heading ${fontSize} font-semibold tabular-nums leading-none ${c.text} mb-1`}>
                   {tier.median}
                 </p>
-                <p className="text-xs text-slate-500 font-mono">
+                <p className="text-xs text-ink-3">
                   median views
                 </p>
-                <p className="text-[11px] text-slate-400 mt-2">{tier.sample}</p>
+                <p className="text-xs text-ink-3 mt-2">{tier.sample}</p>
                 {multiplier && (
                   <span
-                    className="hidden sm:inline-flex absolute top-1/3 -right-3 translate-x-1/2 items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-[11px] font-mono font-bold text-slate-700 z-10"
+                    className="hidden sm:inline-flex absolute top-1/3 -right-3 translate-x-1/2 items-center gap-1 px-2.5 py-1 rounded-full bg-surface border border-line/[0.14] text-xs font-mono font-medium text-ink-2 tabular-nums z-10"
                     aria-hidden
                   >
-                    <ArrowRight className="h-3 w-3 text-content-coral" />
+                    <ArrowRight className="h-3 w-3 text-ink-3" />
                     {multiplier}x
                   </span>
                 )}

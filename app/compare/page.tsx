@@ -1,5 +1,8 @@
+import { ArrowRight, Check, ChevronRight, Minus } from 'lucide-react';
 import { PublicNav } from '@/components/PublicNav';
-import { ArrowRight, ChevronRight, Scale } from 'lucide-react';
+import { Footer } from '@/components/landing/Footer';
+import { FinalCTA } from '@/components/landing/FinalCTA';
+import { CONTAINER, H1, LEAD, Reveal, Section, SectionHeading } from '@/components/landing/Section';
 
 const comparisons = [
   {
@@ -46,9 +49,62 @@ const breadcrumbSchema = {
   ],
 };
 
+// At-a-glance matrix. Every cell is sourced from the comparison posts
+// (content/blog/content-labs-vs-*.mdx and best-ai-content-strategy-tools.mdx).
+type Mark = boolean | string;
+const TOOLS = ['The Content Labs', 'ChatGPT', 'Later', 'Jasper'] as const;
+const MATRIX: { feature: string; values: [Mark, Mark, Mark, Mark] }[] = [
+  { feature: 'Analyzes your own videos', values: [true, false, false, false] },
+  { feature: 'Competitor video analysis', values: [true, false, false, false] },
+  { feature: 'Hook data per niche', values: [true, false, false, false] },
+  { feature: '30-day strategy and calendar', values: [true, false, false, false] },
+  { feature: 'Video scripts with data-backed hooks', values: [true, false, false, false] },
+  { feature: 'Post scheduling and publishing', values: [false, false, true, false] },
+  { feature: 'Blog, ad and email copy', values: [false, true, 'Basic', true] },
+];
+
+function MarkCell({ value }: { value: Mark }) {
+  if (value === true) {
+    return (
+      <>
+        <Check className="h-4 w-4 text-ink mx-auto" aria-hidden="true" />
+        <span className="sr-only">Yes</span>
+      </>
+    );
+  }
+  if (value === false) {
+    return (
+      <>
+        <Minus className="h-4 w-4 text-ink-3/60 mx-auto" aria-hidden="true" />
+        <span className="sr-only">No</span>
+      </>
+    );
+  }
+  return <span className="text-sm text-ink-2">{value}</span>;
+}
+
+const DIFFERENCES = [
+  {
+    title: 'Built on real data',
+    desc: "Every strategy comes from analyzed videos - your content, your competitors, your niche. Not a language model guessing.",
+  },
+  {
+    title: 'Strategy, not just content',
+    desc: "We don't just write copy. We build full strategies: content pillars, hook frameworks, posting cadence, and growth levers.",
+  },
+  {
+    title: 'For video creators',
+    desc: 'Purpose-built for TikTok, YouTube Shorts, and Instagram Reels. Not a generic writing tool adapted for video.',
+  },
+  {
+    title: 'Full scripts included',
+    desc: 'Your content calendar comes with complete scripts, hooks, and CTAs. Not just topic ideas - everything you need to film.',
+  },
+];
+
 export default function ComparePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-canvas text-ink overflow-x-clip">
       {/* Schema markup */}
       <script
         type="application/ld+json"
@@ -57,154 +113,127 @@ export default function ComparePage() {
 
       <PublicNav />
 
-      {/* Breadcrumbs */}
-      <nav
-        aria-label="Breadcrumb"
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-32"
-      >
-        <ol className="flex items-center gap-1 text-sm text-slate-400">
-          <li>
-            <a href="/" className="hover:text-slate-700 transition-colors">
-              Home
-            </a>
-          </li>
-          <li>
-            <ChevronRight className="h-3 w-3" />
-          </li>
-          <li>
-            <span className="text-slate-600">Compare</span>
-          </li>
-        </ol>
-      </nav>
+      <main>
+        {/* Hero */}
+        <section className="pt-28 sm:pt-32 pb-12 sm:pb-16">
+          <div className={CONTAINER}>
+            <nav aria-label="Breadcrumb" className="mb-10 sm:mb-12">
+              <ol className="flex items-center gap-1 text-meta text-ink-3">
+                <li>
+                  <a href="/" className="hover:text-ink transition-colors">
+                    Home
+                  </a>
+                </li>
+                <li aria-hidden="true">
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </li>
+                <li>
+                  <span className="text-ink-2">Compare</span>
+                </li>
+              </ol>
+            </nav>
 
-      {/* Hero */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6">
-          <Scale className="h-8 w-8 text-blue-600" />
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6">
-          How We Compare
-        </h1>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-          Honest breakdowns of how The Content Labs stacks up against other AI
-          tools. We built something different. Here&apos;s why.
-        </p>
-      </section>
+            <h1 className={H1}>How we compare</h1>
+            <p className={`${LEAD} mt-6`}>
+              Honest breakdowns of how The Content Labs stacks up against other AI
+              tools. We built something different. Here&apos;s why.
+            </p>
+          </div>
+        </section>
 
-      {/* Comparison Cards */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="space-y-4">
-          {comparisons.map((item) => (
-            <a
-              key={item.slug}
-              href={`/blog/${item.slug}`}
-              className="group flex items-center justify-between p-6 bg-white border border-slate-200 rounded-xl hover:border-content-coral/30 hover:shadow-md transition-all"
-            >
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-2">
-                  <h2 className="text-lg font-bold text-slate-900 group-hover:text-content-coral transition-colors">
-                    {item.title}
-                  </h2>
-                  {item.badge && (
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-content-coral/10 text-content-coral">
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-              <ArrowRight className="h-5 w-5 text-slate-300 group-hover:text-content-coral group-hover:translate-x-1 transition-all flex-shrink-0 ml-6" />
-            </a>
-          ))}
-        </div>
-      </section>
+        {/* At a glance */}
+        <section className="pb-20 sm:pb-28">
+          <div className={CONTAINER}>
+            <Reveal className="lab-card relative overflow-x-auto">
+              <table className="w-full min-w-[600px] text-left">
+                <caption className="sr-only">The Content Labs compared with ChatGPT, Later and Jasper</caption>
+                <thead>
+                  <tr className="border-b border-line/[0.08]">
+                    <th scope="col" className="py-4 px-5 sm:px-6 text-meta font-medium text-ink-3">Feature</th>
+                    {TOOLS.map((tool, i) => (
+                      <th
+                        key={tool}
+                        scope="col"
+                        className={`py-4 px-3 text-center text-sm font-semibold text-ink ${i === 0 ? 'bg-sunken/50' : ''}`}
+                      >
+                        {tool}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line/[0.08]">
+                  {MATRIX.map((row) => (
+                    <tr key={row.feature}>
+                      <th scope="row" className="py-3.5 px-5 sm:px-6 text-sm font-normal text-ink">
+                        {row.feature}
+                      </th>
+                      {row.values.map((v, i) => (
+                        <td key={TOOLS[i]} className={`py-3.5 px-3 text-center ${i === 0 ? 'bg-sunken/50' : ''}`}>
+                          <MarkCell value={v} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Reveal>
+          </div>
+        </section>
 
-      {/* Why We're Different */}
-      <section className="bg-slate-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-slate-900 text-center mb-8">
-            What Makes Us Different
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              {
-                title: 'Built on real data',
-                desc: "Every strategy comes from analyzed videos - your content, your competitors, your niche. Not a language model guessing.",
-              },
-              {
-                title: 'Strategy, not just content',
-                desc: "We don't just write copy. We build full strategies: content pillars, hook frameworks, posting cadence, and growth levers.",
-              },
-              {
-                title: 'For video creators',
-                desc: 'Purpose-built for TikTok, YouTube Shorts, and Instagram Reels. Not a generic writing tool adapted for video.',
-              },
-              {
-                title: 'Full scripts included',
-                desc: 'Your content calendar comes with complete scripts, hooks, and CTAs. Not just topic ideas - everything you need to film.',
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-white rounded-xl border border-slate-200 p-5"
+        {/* Full comparisons */}
+        <Section className="!pt-0">
+          <Reveal>
+            <SectionHeading title="Read the full breakdowns" />
+          </Reveal>
+          <Reveal className="lab-card divide-y divide-line/[0.08] overflow-hidden">
+            {comparisons.map((item) => (
+              <a
+                key={item.slug}
+                href={`/blog/${item.slug}`}
+                className="group flex items-center justify-between gap-6 p-5 sm:p-6 hover:bg-sunken/60 transition-colors duration-150"
               >
-                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {item.desc}
-                </p>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1.5">
+                    <h2 className="text-[15px] font-semibold text-ink">{item.title}</h2>
+                    {item.badge && (
+                      <span className="inline-flex items-center h-6 px-2.5 rounded-full bg-sunken text-xs font-medium text-ink-2">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-body text-ink-2 max-w-[65ch]">{item.description}</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-ink-3 group-hover:text-ink group-hover:translate-x-0.5 transition-[color,transform] duration-150 flex-shrink-0" />
+              </a>
+            ))}
+          </Reveal>
+        </Section>
+
+        {/* Why We're Different */}
+        <Section className="!pt-0">
+          <Reveal>
+            <SectionHeading title="What makes us different" />
+          </Reveal>
+          <Reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6">
+            {DIFFERENCES.map((item) => (
+              <div key={item.title} className="border-t border-line/[0.14] pt-6">
+                <h3 className="text-[15px] font-semibold text-ink mb-2">{item.title}</h3>
+                <p className="text-body text-ink-2">{item.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
+          </Reveal>
+        </Section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
-            See it for yourself
-          </h2>
-          <p className="text-slate-600 mb-8">
-            Get a free content audit - no credit card required. See how your
-            content stacks up before you commit.
-          </p>
-          <a
-            href="https://thecontentlabs.app/register"
-            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
-          >
-            Get Your Free Content Audit
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
-        </div>
-      </section>
+        <FinalCTA
+          title="See it for yourself"
+          body="Get a free content audit - no credit card required. See how your content stacks up before you commit."
+          ctaLabel="Get Your Free Content Audit"
+          ctaHref="https://thecontentlabs.app/register"
+          footnote={null}
+        />
+      </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 py-8 text-center">
-        <div className="flex items-center justify-center gap-4 text-sm text-slate-500">
-          <a
-            href="/"
-            className="hover:text-slate-900 transition-colors"
-          >
-            &larr; Home
-          </a>
-          <span>&middot;</span>
-          <a
-            href="/pricing"
-            className="hover:text-slate-900 transition-colors"
-          >
-            Pricing
-          </a>
-          <span>&middot;</span>
-          <a
-            href="/blog"
-            className="hover:text-slate-900 transition-colors"
-          >
-            Resources
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

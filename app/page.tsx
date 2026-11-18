@@ -1,5 +1,4 @@
 import { PublicNav } from '@/components/PublicNav';
-import { DesktopEffects } from '@/components/landing/DesktopEffects';
 import { Hero } from '@/components/landing/Hero';
 import { WhatYouGet } from '@/components/landing/WhatYouGet';
 import { HowItWorks } from '@/components/landing/HowItWorks';
@@ -74,12 +73,11 @@ const faqSchema = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen lab-grid-bg text-slate-900 overflow-hidden">
+    <div className="min-h-screen bg-canvas text-ink overflow-x-clip">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <DesktopEffects />
       <PublicNav />
       <main>
         <Hero />

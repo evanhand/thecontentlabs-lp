@@ -43,46 +43,13 @@ export function ResourcesBrowser({ posts }: { posts: EnrichedPost[] }) {
   const hasMore = shown < filtered.length;
 
   return (
-    <div id="all-resources">
+    <div id="all-resources" className="scroll-mt-28">
       {/* Filter rail */}
-      <div className="mb-8 flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
-        {/* Search */}
-        <div className="relative lg:w-[340px] flex-shrink-0">
-          <label htmlFor="resources-search" className="sr-only">
-            Search resources
-          </label>
-          <Search
-            aria-hidden
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none"
-          />
-          <input
-            id="resources-search"
-            type="search"
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setShown(PAGE_SIZE);
-            }}
-            placeholder="Search studies and guides..."
-            className="w-full h-11 pl-10 pr-9 bg-white border border-slate-200 rounded-full text-sm text-slate-800 placeholder:text-slate-400 placeholder:font-mono placeholder:text-[13px] focus:outline-none focus:ring-2 focus:ring-content-coral/40 focus:border-content-coral/40 transition-all"
-          />
-          {query && (
-            <button
-              type="button"
-              onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full inline-flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
-              aria-label="Clear search"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          )}
-        </div>
-
-        {/* Tabs */}
+      <div className="mb-6 sm:mb-8 flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
         <div
           role="tablist"
           aria-label="Filter resources"
-          className="flex flex-wrap gap-2 -mx-1 px-1 overflow-x-auto"
+          className="flex flex-wrap gap-2 flex-1"
         >
           {TABS.map((tab) => {
             const isActive = active === tab.key;
@@ -96,37 +63,61 @@ export function ResourcesBrowser({ posts }: { posts: EnrichedPost[] }) {
                   setActive(tab.key);
                   setShown(PAGE_SIZE);
                 }}
-                className={`group inline-flex items-center gap-2 h-11 px-4 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-content-coral/40 focus-visible:ring-offset-1 ${
+                className={`inline-flex items-center gap-2 h-9 px-4 rounded-full text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-offset-1 ${
                   isActive
-                    ? "bg-slate-900 text-white shadow-sm"
-                    : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900"
+                    ? "bg-ink text-canvas"
+                    : "bg-surface text-ink-2 border border-line/[0.08] hover:text-ink hover:border-line/[0.14]"
                 }`}
               >
                 <span>{tab.label}</span>
                 <span
-                  className={`text-[10px] font-mono tabular-nums tracking-wider px-1.5 py-0.5 rounded-md ${
-                    isActive
-                      ? "bg-white/15 text-white"
-                      : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
-                  }`}
+                  className={`text-xs tabular-nums ${isActive ? "text-canvas/70" : "text-ink-3"}`}
                 >
-                  {count.toString().padStart(2, "0")}
+                  {count}
                 </span>
               </button>
             );
           })}
         </div>
+
+        {/* Search */}
+        <div className="relative lg:w-[300px] flex-shrink-0">
+          <label htmlFor="resources-search" className="sr-only">
+            Search resources
+          </label>
+          <Search
+            aria-hidden
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-3 pointer-events-none"
+          />
+          <input
+            id="resources-search"
+            type="search"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setShown(PAGE_SIZE);
+            }}
+            placeholder="Search studies and guides"
+            className="w-full h-10 pl-10 pr-9 bg-surface border border-line/[0.14] rounded-[10px] text-sm text-ink placeholder:text-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10 focus:border-line/[0.24] transition-colors"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full inline-flex items-center justify-center text-ink-3 hover:text-ink hover:bg-sunken transition-colors"
+              aria-label="Clear search"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Results meta */}
       {(query || active !== "all") && (
-        <p className="mb-5 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500">
+        <p className="mb-5 text-meta text-ink-3">
           {filtered.length} result{filtered.length === 1 ? "" : "s"}
-          {query && (
-            <span className="text-slate-400">
-              {" "}for &ldquo;{query}&rdquo;
-            </span>
-          )}
+          {query && <> for &ldquo;{query}&rdquo;</>}
         </p>
       )}
 
@@ -142,11 +133,11 @@ export function ResourcesBrowser({ posts }: { posts: EnrichedPost[] }) {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 px-4 rounded-2xl border border-dashed border-slate-300 bg-white">
-          <p className="font-heading text-xl text-slate-900 mb-2">
+        <div className="lab-card text-center py-14 px-5">
+          <p className="font-heading text-section text-ink mb-1">
             No resources match that yet
           </p>
-          <p className="text-sm text-slate-500 mb-4">
+          <p className="text-body text-ink-3 mb-4">
             Try a different search or switch tabs.
           </p>
           <button
@@ -155,7 +146,7 @@ export function ResourcesBrowser({ posts }: { posts: EnrichedPost[] }) {
               setQuery("");
               setActive("all");
             }}
-            className="inline-flex items-center text-sm font-semibold text-content-coral hover:underline"
+            className="inline-flex items-center h-9 px-4 rounded-[10px] border border-line/[0.14] bg-surface text-sm font-medium text-ink hover:bg-sunken transition-colors"
           >
             Reset filters
           </button>
@@ -167,10 +158,10 @@ export function ResourcesBrowser({ posts }: { posts: EnrichedPost[] }) {
           <button
             type="button"
             onClick={() => setShown((s) => s + PAGE_SIZE)}
-            className="inline-flex items-center h-11 px-6 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:border-content-coral/40 hover:text-content-coral transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-content-coral/40"
+            className="inline-flex items-center h-10 px-5 bg-surface border border-line/[0.14] rounded-[10px] text-sm font-medium text-ink hover:bg-sunken transition-colors active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
           >
             Load more
-            <span className="ml-2 text-[10px] font-mono text-slate-400 tracking-wider">
+            <span className="ml-2 text-xs tabular-nums text-ink-3">
               {shown} / {filtered.length}
             </span>
           </button>

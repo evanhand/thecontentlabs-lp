@@ -6,9 +6,8 @@ import {
   CTA,
   DataBarChart,
   HookExample,
-  StatCard,
-  StatGrid,
 } from "@/components/blog/MDXComponents";
+import { ResourceHeader } from "@/components/blog/ResourceHeader";
 
 export const metadata: Metadata = {
   title:
@@ -95,7 +94,7 @@ const TOP_VIRALS = [
 function DeltaPill({ delta }: { delta: number | null }) {
   if (delta === null)
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-mono uppercase tracking-wider">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sunken text-ink-2 text-xs font-medium">
         New
       </span>
     );
@@ -103,13 +102,13 @@ function DeltaPill({ delta }: { delta: number | null }) {
   const isFlat = delta === 0;
   const Icon = isUp ? ArrowUp : isFlat ? Minus : ArrowDown;
   const cls = isUp
-    ? "bg-emerald-100 text-emerald-700"
+    ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
     : isFlat
-      ? "bg-slate-100 text-slate-500"
-      : "bg-red-100 text-red-700";
+      ? "bg-sunken text-ink-2"
+      : "bg-red-500/10 text-red-700 dark:text-red-300";
   return (
     <span
-      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider ${cls} tabular-nums`}
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${cls} tabular-nums`}
     >
       <Icon className="h-3 w-3" />
       {Math.abs(delta)}%
@@ -117,117 +116,115 @@ function DeltaPill({ delta }: { delta: number | null }) {
   );
 }
 
+const STATS = [
+  { value: EDITION.videosAnalyzed.toLocaleString(), label: "videos this month" },
+  { value: "Hot Take", label: "most consistent hook" },
+  { value: "Skit", label: "top format (255K median)" },
+  { value: "+27%", label: "median reach vs July" },
+];
+
+function SectionHeading({ title, aside }: { title: string; aside?: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-4 mb-6 sm:mb-8">
+      <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-tight text-ink">
+        {title}
+      </h2>
+      {aside && (
+        <span className="hidden sm:block text-meta text-ink-3 tabular-nums whitespace-nowrap">
+          {aside}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export default function TrendsPage() {
   return (
-    <div className="min-h-screen bg-[#fffbf9]">
+    <div className="min-h-screen bg-canvas text-ink">
       <PublicNav />
 
-      {/* ========== Header ========== */}
-      <section className="relative pt-32 sm:pt-36 pb-10 sm:pb-14 overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 opacity-[0.045]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(15,23,42,1) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,1) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute -top-20 right-0 -z-10 h-[420px] w-[420px] rounded-full bg-content-coral/15 blur-[120px]"
+      <main>
+        <ResourceHeader
+          title="What’s actually winning on TikTok and Instagram right now"
+          description={`Live cuts from ${EDITION.videosAnalyzed.toLocaleString()} videos analyzed this month. Updated on the 1st. Built for creators who want signal, not vibes.`}
+          meta={`Monthly trends report · ${EDITION.month} · data as of ${EDITION.asOf}`}
         />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-6">
-            <span
-              aria-hidden
-              className="h-2 w-2 rounded-full bg-content-coral animate-pulse"
-            />
-            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
-              Monthly trends report · {EDITION.month}
-            </span>
+        {/* Stat strip */}
+        <section className="pb-16 sm:pb-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <dl className="lab-card grid grid-cols-2 md:grid-cols-4 gap-6 p-5 sm:p-6">
+              {STATS.map((st) => (
+                <div key={st.label} className="flex flex-col-reverse gap-1">
+                  <dt className="text-meta text-ink-3">{st.label}</dt>
+                  <dd className="font-heading text-2xl sm:text-3xl font-semibold tracking-[-0.02em] text-ink tabular-nums">
+                    {st.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 items-end">
-            <h1 className="font-heading font-semibold text-slate-900 tracking-tight leading-[1.02] text-[40px] sm:text-5xl lg:text-[58px]">
-              What&rsquo;s actually winning on TikTok and Instagram right now
-              <span className="text-content-coral">.</span>
-            </h1>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed lg:max-w-md lg:justify-self-end lg:text-right">
-              Live cuts from {EDITION.videosAnalyzed.toLocaleString()} videos
-              analyzed this month. Updated on the 1st. Built for creators who
-              want signal, not vibes.
+        </section>
+
+        {/* Hook leaderboard */}
+        <section className="py-16 sm:py-20 border-t border-line/[0.08]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <SectionHeading title="Hook archetypes ranked by median views" aside={EDITION.month} />
+
+            <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-5 lg:gap-8 items-start [&>figure]:my-0">
+              <DataBarChart
+                data={HOOKS.map((h) => ({ archetype: h.archetype, median: h.median }))}
+                xKey="archetype"
+                yKey="median"
+                title=""
+                yLabel="Median views"
+                height={360}
+                horizontal
+              />
+
+              <div className="lab-card p-5 sm:p-6">
+                <h3 className="text-[15px] font-semibold text-ink mb-2">vs. July 2026</h3>
+                <ul className="divide-y divide-line/[0.08]">
+                  {HOOKS.map((h) => (
+                    <li
+                      key={h.archetype}
+                      className="flex items-center justify-between gap-3 py-3"
+                    >
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-ink leading-tight">
+                          {h.archetype}
+                        </p>
+                        <p className="text-xs text-ink-3 mt-0.5 tabular-nums">
+                          n={h.n}
+                        </p>
+                      </div>
+                      <DeltaPill delta={h.delta} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <p className="mt-8 text-body sm:text-[17px] sm:leading-7 text-ink-2 max-w-[68ch]">
+              <strong className="font-semibold text-ink">The story:</strong> reach
+              expanded almost everywhere this month. Contrarian more than doubled
+              (+128%), Fortune Teller jumped +52%, Investigator +35%. Hot Take
+              dipped slightly (-10%) but still holds the top median at 93K, so
+              it remains the workhorse. Teacher went nowhere again (+5% on the
+              lowest median by far). If you're choosing what to film this week:
+              a Hot Take for the floor, a Contrarian for the upside.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ========== Stat strip ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 mb-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="rounded-2xl border border-slate-200 bg-white px-6 py-6 sm:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div>
-                <p className="text-3xl sm:text-4xl font-heading font-semibold text-slate-900 tabular-nums">
-                  {EDITION.videosAnalyzed.toLocaleString()}
-                </p>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mt-1">
-                  videos this month
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-4xl font-heading font-semibold text-slate-900 tabular-nums">
-                  Hot Take
-                </p>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mt-1">
-                  most consistent hook
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-4xl font-heading font-semibold text-slate-900 tabular-nums">
-                  Skit
-                </p>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mt-1">
-                  top format (255K median)
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-4xl font-heading font-semibold text-content-coral tabular-nums">
-                  +27%
-                </p>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mt-1">
-                  median reach vs July
-                </p>
-              </div>
-            </div>
-          </div>
-          <p className="mt-3 text-[11px] font-mono uppercase tracking-wider text-slate-400">
-            data as of {EDITION.asOf}
-          </p>
-        </div>
-      </section>
+        {/* Format leaderboard */}
+        <section className="py-16 sm:py-20 border-t border-line/[0.08]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 [&>figure]:my-0">
+            <SectionHeading title="The format gap is enormous this month" />
 
-      {/* ========== Hook leaderboard ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-end justify-between mb-6 border-b border-slate-200 pb-4">
-            <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-content-coral font-bold mb-2">
-                01 · Hook leaderboard
-              </p>
-              <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
-                Hook archetypes ranked by median views
-              </h2>
-            </div>
-            <span className="hidden sm:block text-[11px] font-mono uppercase tracking-wider text-slate-500 tabular-nums">
-              {EDITION.month}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8">
             <DataBarChart
-              data={HOOKS.map((h) => ({ archetype: h.archetype, median: h.median }))}
-              xKey="archetype"
+              data={FORMATS.map((f) => ({ name: f.name, median: f.median }))}
+              xKey="name"
               yKey="median"
               title=""
               yLabel="Median views"
@@ -235,149 +232,81 @@ export default function TrendsPage() {
               horizontal
             />
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mb-4">
-                vs. July 2026
-              </p>
-              <ul className="space-y-3">
-                {HOOKS.map((h) => (
-                  <li
-                    key={h.archetype}
-                    className="flex items-center justify-between gap-3 py-2 border-b border-slate-100 last:border-0"
-                  >
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-slate-900 leading-tight">
-                        {h.archetype}
-                      </p>
-                      <p className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mt-0.5 tabular-nums">
-                        n={h.n}
-                      </p>
-                    </div>
-                    <DeltaPill delta={h.delta} />
-                  </li>
-                ))}
-              </ul>
+            <p className="mt-8 text-body sm:text-[17px] sm:leading-7 text-ink-2 max-w-[68ch]">
+              <strong className="font-semibold text-ink">The story:</strong> Skit content
+              (255K median) is pulling about 11x what plain talking-head content
+              gets (22.7K median, n=165, still the most common format and still
+              the worst-performing). Layered talking head (voiceover + B-roll on
+              top) runs 170K, roughly 7x the plain version. The lesson hasn't
+              changed since spring: the camera-on-face format isn't the problem,
+              the lack of a second visual layer is.
+            </p>
+          </div>
+        </section>
+
+        {/* Viral examples */}
+        <section className="py-16 sm:py-20 border-t border-line/[0.08]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <SectionHeading title={`Top virals from ${EDITION.month}`} />
+
+            <div className="space-y-3">
+              {TOP_VIRALS.map((v) => (
+                <HookExample
+                  key={v.handle + v.text}
+                  quote={v.text}
+                  creator={v.handle}
+                  views={v.views + " · " + v.platform + " · " + v.hook}
+                  url={v.url}
+                />
+              ))}
             </div>
           </div>
+        </section>
 
-          <p className="mt-6 text-sm text-slate-600 leading-relaxed max-w-3xl">
-            <strong className="text-slate-900">The story:</strong> reach
-            expanded almost everywhere this month. Contrarian more than doubled
-            (+128%), Fortune Teller jumped +52%, Investigator +35%. Hot Take
-            dipped slightly (-10%) but still holds the top median at 93K, so
-            it remains the workhorse. Teacher went nowhere again (+5% on the
-            lowest median by far). If you're choosing what to film this week:
-            a Hot Take for the floor, a Contrarian for the upside.
-          </p>
-        </div>
-      </section>
+        {/* CTA */}
+        <section className="pb-16 sm:pb-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <CTA
+              headline="Stop chasing trends. Get a calendar built from this data, automatically."
+              sub="The Content Labs runs the same trend cuts you're reading here on your own account every week. Connect TikTok and Instagram, get a 30-day script calendar tuned to what's actually winning in your niche right now."
+              primary="Audit my account free"
+              secondary="See how it works"
+              secondaryHref="/features/content-strategy"
+            />
 
-      {/* ========== Format leaderboard ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-end justify-between mb-6 border-b border-slate-200 pb-4">
-            <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-content-coral font-bold mb-2">
-                02 · Format leaderboard
-              </p>
-              <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
-                The format gap is enormous this month
-              </h2>
+            <p className="mt-6 text-center text-meta text-ink-3">
+              Next edition: September 1, 2026
+            </p>
+          </div>
+        </section>
+
+        {/* Methodology */}
+        <section className="pb-20 sm:pb-28">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <div className="lab-card p-5 sm:p-6">
+              <h3 className="font-heading text-section text-ink mb-3">
+                How this report is generated
+              </h3>
+              <div className="space-y-3 text-body text-ink-2">
+                <p>
+                  Pulled from 460 TikTok and Instagram videos posted in
+                  {" "}{EDITION.month} that we&rsquo;ve analyzed across hook archetype,
+                  format, runtime, and emotional trigger. Buckets shown only when
+                  n&nbsp;&geq;&nbsp;20 to avoid noise.
+                </p>
+                <p>
+                  Median views (not average) is the headline metric. A handful of
+                  celebrity virals can pull averages 10-20x higher than what a
+                  working creator should expect. Median is the honest summary.
+                </p>
+                <p>
+                  Pulled from our analyzed video dataset on {EDITION.asOf}.
+                </p>
+              </div>
             </div>
           </div>
-
-          <DataBarChart
-            data={FORMATS.map((f) => ({ name: f.name, median: f.median }))}
-            xKey="name"
-            yKey="median"
-            title=""
-            yLabel="Median views"
-            height={360}
-            horizontal
-          />
-
-          <p className="mt-6 text-sm text-slate-600 leading-relaxed max-w-3xl">
-            <strong className="text-slate-900">The story:</strong> Skit content
-            (255K median) is pulling about 11x what plain talking-head content
-            gets (22.7K median, n=165, still the most common format and still
-            the worst-performing). Layered talking head (voiceover + B-roll on
-            top) runs 170K, roughly 7x the plain version. The lesson hasn't
-            changed since spring: the camera-on-face format isn't the problem,
-            the lack of a second visual layer is.
-          </p>
-        </div>
-      </section>
-
-      {/* ========== Viral examples ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-end justify-between mb-6 border-b border-slate-200 pb-4">
-            <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-content-coral font-bold mb-2">
-                03 · This month&rsquo;s biggest hits
-              </p>
-              <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
-                Top virals from {EDITION.month}
-              </h2>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            {TOP_VIRALS.map((v) => (
-              <HookExample
-                key={v.handle + v.text}
-                quote={v.text}
-                creator={v.handle}
-                views={v.views + " · " + v.platform + " · " + v.hook}
-                url={v.url}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========== Subscribe / CTA ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="max-w-6xl mx-auto">
-          <CTA
-            headline="Stop chasing trends. Get a calendar built from this data, automatically."
-            sub="The Content Labs runs the same trend cuts you're reading here on your own account every week. Connect TikTok and Instagram, get a 30-day script calendar tuned to what's actually winning in your niche right now."
-            primary="Audit my account free"
-            secondary="See how it works"
-            secondaryHref="/features/content-strategy"
-          />
-
-          <p className="mt-8 text-center text-[11px] font-mono uppercase tracking-[0.18em] text-slate-400">
-            Next edition: September 1, 2026
-          </p>
-        </div>
-      </section>
-
-      {/* ========== Methodology ========== */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
-          <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mb-3">
-            Methodology
-          </p>
-          <h3 className="font-heading text-lg font-semibold text-slate-900 mb-3">
-            How this report is generated
-          </h3>
-          <p className="text-sm text-slate-600 leading-relaxed mb-3">
-            Pulled from 460 TikTok and Instagram videos posted in
-            {" "}{EDITION.month} that we&rsquo;ve analyzed across hook archetype,
-            format, runtime, and emotional trigger. Buckets shown only when
-            n&nbsp;&geq;&nbsp;20 to avoid noise.
-          </p>
-          <p className="text-sm text-slate-600 leading-relaxed mb-3">
-            Median views (not average) is the headline metric. A handful of
-            celebrity virals can pull averages 10-20x higher than what a
-            working creator should expect. Median is the honest summary.
-          </p>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            Pulled from our analyzed video dataset on {EDITION.asOf}.
-          </p>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

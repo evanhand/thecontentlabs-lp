@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { PublicNav } from "@/components/PublicNav";
 import { Footer } from "@/components/landing/Footer";
-import { HexMolecule } from "@/components/ui/HexMolecule";
+import { ResourceHeader } from "@/components/blog/ResourceHeader";
 
 export const metadata: Metadata = {
   title: "Data Reports — The Content Labs",
@@ -59,85 +59,63 @@ const REPORTS = [
 
 export default function ReportsIndex() {
   return (
-    <div className="lab-grid-bg min-h-screen">
+    <div className="min-h-screen bg-canvas text-ink">
       <PublicNav />
 
-      <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <HexMolecule
-          size={180}
-          className="absolute top-20 right-8 opacity-25 pointer-events-none"
-        />
-        <HexMolecule
-          size={140}
-          className="absolute bottom-10 left-6 opacity-20 pointer-events-none"
+      <main>
+        <ResourceHeader
+          title="What the data actually says"
+          description="We analyze thousands of videos, normalize for follower count, and publish what the data really shows. No generic advice. No cherry-picked stats."
         />
 
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-content-coral text-[11px] font-mono uppercase tracking-[0.3em] mb-6">
-              Data Reports
-            </p>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] mb-6 text-slate-900">
-              What the data
-              <br />
-              <span className="text-content-coral">actually says.</span>
-            </h1>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              We analyze thousands of videos, normalize for follower count, and
-              publish what the data really shows. No generic advice. No
-              cherry-picked stats.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {REPORTS.map((r) => (
-              <a
-                key={r.slug}
-                href={`/reports/${r.slug}`}
-                className="group bg-white/80 rounded-2xl border border-content-coral/15 p-7 sm:p-8 hover:border-content-coral/50 hover:shadow-lg hover:shadow-content-coral/10 transition-all flex flex-col"
-              >
-                {r.badge && (
-                  <span className="self-start text-[10px] font-mono uppercase tracking-[0.25em] text-content-coral bg-content-coral/10 rounded-full px-2.5 py-1 mb-4 font-bold">
-                    {r.badge}
-                  </span>
-                )}
-                <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-3 group-hover:text-content-coral transition-colors">
-                  {r.title}
-                </h2>
-                <p className="text-slate-500 leading-relaxed text-[15px] mb-6 flex-1">
-                  {r.description}
-                </p>
-                <div className="flex items-center justify-between pt-5 border-t border-slate-100">
-                  <div>
-                    <p className="text-3xl font-bold text-content-coral tabular-nums tracking-tight">
-                      {r.stat}
-                    </p>
-                    <p className="text-xs text-slate-400 uppercase tracking-wide font-medium">
-                      {r.statLabel}
-                    </p>
+        <section className="pb-20 sm:pb-28">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {REPORTS.map((r) => (
+                <a
+                  key={r.slug}
+                  href={`/reports/${r.slug}`}
+                  className="group lab-card flex flex-col p-5 sm:p-6 transition-colors duration-200 hover:border-line/[0.16] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                >
+                  {r.badge && (
+                    <span className="self-start mb-3 inline-flex items-center px-2 py-0.5 rounded-full bg-sunken text-xs font-medium text-ink-2">
+                      {r.badge}
+                    </span>
+                  )}
+                  <h2 className="font-heading text-2xl font-semibold tracking-[-0.02em] text-ink leading-tight">
+                    {r.title}
+                  </h2>
+                  <p className="mt-2 text-body text-ink-2 flex-1">
+                    {r.description}
+                  </p>
+                  <div className="mt-6 pt-4 border-t border-line/[0.08] flex items-end justify-between gap-4">
+                    <div>
+                      <p className="font-heading text-2xl font-semibold text-ink tabular-nums leading-none">
+                        {r.stat}
+                      </p>
+                      <p className="mt-1 text-meta text-ink-3">{r.statLabel}</p>
+                    </div>
+                    <span className="inline-flex items-center text-sm font-medium text-ink-2 group-hover:text-ink transition-colors">
+                      View report
+                      <ArrowRight aria-hidden className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
                   </div>
-                  <span className="inline-flex items-center text-sm font-bold text-content-coral">
-                    View report
-                    <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
+                </a>
+              ))}
+            </div>
 
-          <div className="mt-16 text-center">
-            <p className="text-slate-400 text-sm">
+            <p className="mt-10 text-meta text-ink-3">
               More reports coming every week. Got one you want us to run?{" "}
               <a
                 href="mailto:business@thecontentlabs.io"
-                className="text-content-coral font-medium hover:underline"
+                className="font-medium text-ink underline decoration-line/[0.24] underline-offset-[3px] hover:decoration-ink"
               >
                 Tell us.
               </a>
             </p>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
       <Footer />
     </div>

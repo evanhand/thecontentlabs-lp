@@ -1,22 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { Check, ChevronDown, ChevronRight, Star } from 'lucide-react';
 import { PublicNav } from '@/components/PublicNav';
-import { motion, type Variants } from 'framer-motion';
-import {
-  Check,
-  Zap,
-  Calendar,
-  BarChart3,
-  Atom,
-  Target,
-  Sparkles,
-  Star,
-  ChevronDown,
-  Crown,
-  Shield,
-  ArrowRight,
-} from 'lucide-react';
+import { Footer } from '@/components/landing/Footer';
+import { FinalCTA } from '@/components/landing/FinalCTA';
+import { FAQList } from '@/components/landing/FAQ';
+import { PlanCard } from '@/components/landing/PlanCard';
+import { CONTAINER, H1, LEAD, Reveal, Section, SectionHeading } from '@/components/landing/Section';
 import { capture } from '@/lib/analytics';
 
 type PlanId = 'starter' | 'pro' | 'enterprise';
@@ -74,46 +65,6 @@ const PRODUCTS = {
 const FREE_PLAN = ['Weekly numbers on your videos', '3 videos analyzed', '20 Chemist messages / mo', 'Your Videos + Analytics pages', 'No card'];
 
 /* ------------------------------------------------------------------ */
-/*  Motion variants (inlined to avoid importing app internals)        */
-/* ------------------------------------------------------------------ */
-const VIEWPORT_ONCE = { once: true, margin: '-50px' } as const;
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
-const fadeUpBlur: Variants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
-const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.85 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const popIn: Variants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-const fanIn = (index: number): Variants => ({
-  hidden: { opacity: 0, y: 40, rotate: index === 0 ? -3 : index === 2 ? 3 : 0 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: { duration: 0.6, ease: 'easeOut', delay: index * 0.1 },
-  },
-});
-
-const staggerContainer: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-/* ------------------------------------------------------------------ */
 /*  Schema markup                                                     */
 /* ------------------------------------------------------------------ */
 const faqSchemaData = {
@@ -156,37 +107,6 @@ const breadcrumbSchemaData = {
 };
 
 /* ------------------------------------------------------------------ */
-/*  FAQ Accordion                                                     */
-/* ------------------------------------------------------------------ */
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <button
-      onClick={() => setOpen(!open)}
-      aria-expanded={open}
-      className="w-full text-left bg-white border border-slate-200 rounded-2xl p-6 hover:border-slate-300 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-content-coral focus-visible:ring-offset-2 focus-visible:outline-none shadow-sm"
-    >
-      <div className="flex items-center justify-between">
-        <h3 className="text-base font-semibold text-slate-900 pr-4">{question}</h3>
-        <span
-          className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-            open
-              ? 'bg-content-coral/15 text-content-coral rotate-180 scale-110'
-              : 'bg-slate-100 text-slate-500'
-          }`}
-          aria-hidden="true"
-        >
-          <ChevronDown className="h-4 w-4" />
-        </span>
-      </div>
-      {open && (
-        <p className="mt-3 text-sm text-slate-600 leading-relaxed">{answer}</p>
-      )}
-    </button>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /*  Hardcoded testimonials                                            */
 /* ------------------------------------------------------------------ */
 const testimonials = [
@@ -195,6 +115,63 @@ const testimonials = [
   { name: 'Manny Watkins', role: 'Former D1 Basketball Star & Coach', quote: "It's a detailed, strategic approach. Not just 'post consistently and hope for growth.'", rating: 5, image: '/testimonials/manny-watkins.jpg' },
 ];
 
+type Cell = string | boolean;
+
+const COMPARISON_ROWS: { feature: string; free: Cell; starter: Cell; pro: Cell; enterprise: Cell }[] = [
+  { feature: 'Your videos tracked', free: '10 / week', starter: '25 / month', pro: 'Daily', enterprise: 'Daily' },
+  { feature: 'Videos analyzed', free: '3, ever', starter: 'Every one', pro: 'Every one', enterprise: 'Every one' },
+  { feature: 'Beat map per video', free: '3 videos', starter: true, pro: true, enterprise: true },
+  { feature: 'What wins for you', free: false, starter: true, pro: true, enterprise: true },
+  { feature: 'Competitors', free: '0', starter: `${PLAN_LIMITS.starter.competitors}`, pro: `${PLAN_LIMITS.pro.competitors}`, enterprise: `${PLAN_LIMITS.enterprise.competitors}` },
+  { feature: 'Videos per competitor', free: '0', starter: `${PLAN_LIMITS.starter.videosPerCompetitor}`, pro: `${PLAN_LIMITS.pro.videosPerCompetitor}`, enterprise: `${PLAN_LIMITS.enterprise.videosPerCompetitor}` },
+  { feature: 'Strategy', free: false, starter: 'Monthly', pro: 'Weekly', enterprise: 'Weekly' },
+  { feature: 'Calendar', free: false, starter: '30-day / month', pro: '7-day / week', enterprise: '7-day / week' },
+  { feature: 'YouTube Shorts', free: false, starter: false, pro: false, enterprise: true },
+  { feature: 'The Chemist', free: '20 messages', starter: `${PLAN_LIMITS.starter.labCreditsPerMonth.toLocaleString()} credits`, pro: `${PLAN_LIMITS.pro.labCreditsPerMonth.toLocaleString()} credits`, enterprise: `${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} credits` },
+  { feature: 'Weekly email', free: 'Your numbers', starter: 'Lab note', pro: 'Lab note', enterprise: 'Lab note' },
+  { feature: 'Team seats', free: '1', starter: '1', pro: '1', enterprise: '2' },
+  { feature: 'Priority support', free: false, starter: false, pro: false, enterprise: true },
+];
+
+function CellValue({ value }: { value: Cell }) {
+  if (value === true) {
+    return (
+      <>
+        <Check className="h-4 w-4 text-ink mx-auto" aria-hidden="true" />
+        <span className="sr-only">Included</span>
+      </>
+    );
+  }
+  if (value === false) {
+    return (
+      <>
+        <span className="text-ink-3" aria-hidden="true">&mdash;</span>
+        <span className="sr-only">Not included</span>
+      </>
+    );
+  }
+  return <span className="text-sm text-ink-2 tabular-nums">{value}</span>;
+}
+
+const PAID_ADDS = [
+  { title: 'Every video analyzed', desc: 'Beat map, traits and what wins for you across all of them' },
+  { title: 'Competitors', desc: 'Their best videos, read the same way as yours' },
+  { title: 'Strategy and calendar', desc: 'Built from your own numbers, refreshed monthly or weekly' },
+  { title: 'More Chemist', desc: 'Scripts in your voice, 1,000 to 5,000 credits a month' },
+];
+
+const FAQS = [
+  { q: "Can't I just use ChatGPT for this?", a: "ChatGPT has never seen your videos or your numbers. We pull every video you post, timestamp it, score its traits and compare them against your own median. The Chemist answers from that, not from the internet's average advice." },
+  { q: 'Is it worth $19 to $99 a month?', a: 'The free plan is free for good. Starter is $19 a month and the first month is $5, so you see every one of your videos analyzed before you pay full price. A strategist costs far more and has never watched your videos.' },
+  { q: 'What does the $5 first month mean?', a: "Starter and Pro bill $5 for your first month, then the normal price. Card required, cancel any time before the second charge and you've paid $5." },
+  { q: 'Will the scripts actually sound like me?', a: "The Chemist writes from your own transcripts, so it has your phrasing, your pacing and the structure of your videos that worked. It's your voice with the tangents cut out." },
+  { q: "What's the difference between plans?", a: `Free tracks your videos weekly and analyzes three. Starter ($${PRODUCTS.starter.price}) analyzes every video, adds ${PLAN_LIMITS.starter.competitors} competitors, a monthly strategy and a 30-day calendar. Pro ($${PRODUCTS.pro.price}) tracks daily, with ${PLAN_LIMITS.pro.competitors} competitors, a weekly strategy refresh and a 7-day calendar every week. Studio ($${PRODUCTS.enterprise.price}) adds ${PLAN_LIMITS.enterprise.competitors} competitors, YouTube Shorts, ${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} Chemist credits and 2 seats.` },
+  { q: 'Can I cancel my subscription anytime?', a: 'Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period. No hidden fees, no hassle.' },
+  { q: 'Can I upgrade or downgrade my plan?', a: 'Absolutely. You can change your plan at any time through your account settings. Changes are prorated and take effect immediately.' },
+];
+
+const REGISTER = 'https://thecontentlabs.app/register';
+
 /* ================================================================== */
 /*  Page Component                                                    */
 /* ================================================================== */
@@ -202,12 +179,23 @@ export default function PricingPage() {
   const [billingInterval, setBillingInterval] = useState<'monthly' | 'yearly'>('yearly');
   const [showComparison, setShowComparison] = useState(false);
 
-  const starter = PRODUCTS.starter;
-  const pro = PRODUCTS.pro;
-  const enterprise = PRODUCTS.enterprise;
+  const yearly = billingInterval === 'yearly';
+
+  const paidPrice = (p: { price: number; yearlyPrice: number }) =>
+    yearly ? `$${Math.round(p.yearlyPrice / 12)}` : `$${p.price}`;
+
+  const paidNote = (p: { price: number; yearlyPrice: number; firstMonth?: number }) =>
+    yearly ? (
+      <>
+        <span className="text-ink-3 line-through tabular-nums">${p.price}/mo</span>{' '}
+        <span className="tabular-nums">${p.yearlyPrice} billed yearly, save ${p.price * 12 - p.yearlyPrice}</span>
+      </>
+    ) : p.firstMonth != null ? (
+      <span className="tabular-nums">${p.firstMonth} first month</span>
+    ) : null;
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 overflow-hidden">
+    <div className="min-h-screen bg-canvas text-ink overflow-x-clip">
       {/* Schema markup */}
       <script
         type="application/ld+json"
@@ -222,639 +210,258 @@ export default function PricingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
       />
 
-      <div className="relative overflow-x-hidden">
-        {/* Navigation */}
-        <PublicNav />
+      <PublicNav />
 
-        <main>
-        {/* Hero + breadcrumb share a single gradient background so there's no
-            harsh transition between the fixed nav area and the hero. */}
-        <section
-          style={{ background: 'radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,124,14,0.08) 0%, transparent 55%)' }}
-        >
-        <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
-          <ol className="flex items-center gap-1 text-sm text-slate-400">
-            <li><a href="/" className="hover:text-slate-700 transition-colors">Home</a></li>
-            <li><ChevronDown className="h-3 w-3 -rotate-90" /></li>
-            <li><span className="text-slate-600">Pricing</span></li>
-          </ol>
-        </nav>
-
+      <main>
         {/* Hero */}
-        <div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 text-center"
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-            variants={fadeUpBlur}
-          >
-            <div className="flex flex-col items-center gap-3 mb-8">
-              <div className="inline-flex items-center px-4 py-2 bg-content-coral/10 backdrop-blur-sm rounded-full border border-content-coral/20">
-                <Shield className="h-4 w-4 text-content-coral mr-2" />
-                <span className="text-sm font-medium text-content-coral-700">Free plan, no card. Paid plans are $5 for the first month.</span>
+        <section className="pt-28 sm:pt-32 pb-12 sm:pb-16">
+          <div className={CONTAINER}>
+            <nav aria-label="Breadcrumb" className="mb-10 sm:mb-12">
+              <ol className="flex items-center gap-1 text-meta text-ink-3">
+                <li><a href="/" className="hover:text-ink transition-colors">Home</a></li>
+                <li aria-hidden="true"><ChevronRight className="h-3.5 w-3.5" /></li>
+                <li><span className="text-ink-2">Pricing</span></li>
+              </ol>
+            </nav>
+
+            <div className="text-center">
+              <h1 className={H1}>
+                Free to start.
+                <span className="block text-ink-2">$5 to go further.</span>
+              </h1>
+              <p className={`${LEAD} mx-auto mt-6`}>
+                The free plan tracks your videos for good. Paid plans analyze every one you post, then add competitors, a strategy and a calendar.
+              </p>
+
+              {/* Billing toggle */}
+              <div className="mt-10 flex flex-col items-center gap-3">
+                <div role="group" aria-label="Billing period" className="inline-flex p-1 rounded-xl bg-sunken border border-line/[0.08]">
+                  {(['monthly', 'yearly'] as const).map((period) => {
+                    const active = billingInterval === period;
+                    return (
+                      <button
+                        key={period}
+                        type="button"
+                        onClick={() => setBillingInterval(period)}
+                        aria-pressed={active}
+                        className={`h-9 px-5 rounded-[10px] text-sm font-medium transition-[background-color,color,box-shadow] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                          active ? 'bg-surface text-ink shadow-card' : 'text-ink-3 hover:text-ink'
+                        }`}
+                      >
+                        {period === 'monthly' ? 'Monthly' : 'Yearly'}
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="text-meta text-ink-3">
+                  {yearly ? 'Yearly is two months free' : 'Go yearly for two months free'}
+                </p>
               </div>
             </div>
-          </motion.div>
-          <motion.h1
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-            variants={fadeUpBlur}
-            className="text-[clamp(1.45rem,4.5vw,4.5rem)] font-bold tracking-tight mb-6"
-          >
-            <span className="block whitespace-nowrap text-slate-900 pb-1 leading-tight">
-              Free to start.
-            </span>
-            <span className="block whitespace-nowrap text-content-coral pb-2 leading-tight">
-              $5 to go further.
-            </span>
-          </motion.h1>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-            variants={fadeUp}
-            className="text-xl text-slate-600 max-w-3xl mx-auto"
-          >
-            The free plan tracks your videos for good. Paid plans analyze every one you post, then add competitors, a strategy and a calendar.
-          </motion.p>
+          </div>
+        </section>
 
-          {/* Billing toggle */}
-          <div className="flex flex-col items-center mt-10 gap-4">
-            <div className="relative inline-flex items-center p-1.5 bg-slate-100 rounded-2xl shadow-sm border border-slate-200">
+        {/* Plans */}
+        <section className="pb-20 sm:pb-28">
+          <div className={CONTAINER}>
+            <Reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <PlanCard
+                name="Free"
+                description="Your numbers, for good"
+                price="$0"
+                features={FREE_PLAN}
+                ctaLabel="Start free"
+                ctaHref={REGISTER}
+                onCtaClick={() => capture('pricing_cta_clicked', { plan: 'free', billing_period: billingInterval, location: 'marketing', position: 'plan_card', is_logged_in: false })}
+              />
+              <PlanCard
+                name="Starter"
+                description="Every video, analyzed"
+                price={paidPrice(PRODUCTS.starter)}
+                priceNote={paidNote(PRODUCTS.starter)}
+                features={[
+                  '25 videos / platform tracked monthly',
+                  'Every video analyzed: beat map + traits',
+                  `${PLAN_LIMITS.starter.competitors} competitors (${PLAN_LIMITS.starter.videosPerCompetitor} videos each)`,
+                  'Monthly strategy + 30-day calendar',
+                  `The Chemist (${PLAN_LIMITS.starter.labCreditsPerMonth.toLocaleString()} credits / mo)`,
+                  'Weekly lab note by email',
+                ]}
+                ctaLabel="Get Started"
+                ctaHref={REGISTER}
+                onCtaClick={() => trackPricingCta('starter', billingInterval, 'plan_card')}
+              />
+              <PlanCard
+                highlighted
+                name="Pro"
+                description="Daily tracking, weekly refresh"
+                price={paidPrice(PRODUCTS.pro)}
+                priceNote={paidNote(PRODUCTS.pro)}
+                features={[
+                  'Daily tracking, every video analyzed',
+                  `${PLAN_LIMITS.pro.competitors} competitors (${PLAN_LIMITS.pro.videosPerCompetitor} videos each), refreshed weekly`,
+                  'Weekly strategy refresh',
+                  '7-day calendar, every week',
+                  `The Chemist (${PLAN_LIMITS.pro.labCreditsPerMonth.toLocaleString()} credits / mo)`,
+                  'What wins for you, across all your videos',
+                  'Weekly lab note by email',
+                ]}
+                ctaLabel="Get Started"
+                ctaHref={REGISTER}
+                onCtaClick={() => trackPricingCta('pro', billingInterval, 'plan_card')}
+              />
+              <PlanCard
+                name="Studio"
+                description="For agencies"
+                price={paidPrice(PRODUCTS.enterprise)}
+                priceNote={paidNote(PRODUCTS.enterprise)}
+                features={[
+                  'Daily tracking, every video analyzed',
+                  `${PLAN_LIMITS.enterprise.competitors} competitors (${PLAN_LIMITS.enterprise.videosPerCompetitor} videos each), refreshed weekly`,
+                  'YouTube Shorts tracking',
+                  'Weekly strategy refresh + 7-day calendar',
+                  `The Chemist (${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} credits / mo)`,
+                  '2 team seats',
+                  'Priority support',
+                ]}
+                ctaLabel="Get Started"
+                ctaHref={REGISTER}
+                onCtaClick={() => trackPricingCta('enterprise', billingInterval, 'plan_card')}
+              />
+            </Reveal>
+
+            <p className="mt-8 text-center text-meta text-ink-3">
+              Free plan needs no card &middot; Paid plans are $5 for the first month &middot; Cancel anytime
+            </p>
+
+            {/* Inline comparison toggle */}
+            <div className="mt-10">
               <button
-                onClick={() => setBillingInterval('monthly')}
-                className={`relative z-10 px-7 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-                  billingInterval === 'monthly'
-                    ? 'text-white'
-                    : 'text-slate-500 hover:text-slate-700'
-                }`}
+                type="button"
+                onClick={() => setShowComparison(!showComparison)}
+                aria-expanded={showComparison}
+                aria-controls="plan-comparison"
+                className="mx-auto flex items-center gap-2 h-11 px-5 rounded-[10px] bg-surface border border-line/[0.14] text-sm font-medium text-ink hover:border-line/[0.24] transition-colors duration-150"
               >
-                Monthly
+                Compare plans side by side
+                <ChevronDown
+                  aria-hidden="true"
+                  className={`h-4 w-4 text-ink-3 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${showComparison ? 'rotate-180' : ''}`}
+                />
               </button>
-              <button
-                onClick={() => setBillingInterval('yearly')}
-                className={`relative z-10 px-7 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-                  billingInterval === 'yearly'
-                    ? 'text-white'
-                    : 'text-slate-500 hover:text-slate-700'
-                }`}
-              >
-                Yearly
-              </button>
-              {/* Sliding background */}
               <div
-                className={`absolute top-1.5 h-[calc(100%-12px)] w-[calc(50%-6px)] rounded-xl bg-gradient-to-r from-content-cta-dark to-content-cta shadow-lg shadow-content-cta/30 transition-all duration-300 ${
-                  billingInterval === 'yearly' ? 'left-[calc(50%+3px)]' : 'left-1.5'
+                id="plan-comparison"
+                className={`overflow-hidden transition-[max-height,opacity,margin] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  showComparison ? 'max-h-[1200px] opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
                 }`}
-              />
-            </div>
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-content-cta/10 border border-content-cta/20 rounded-full">
-              <Sparkles className="h-4 w-4 text-content-cta" />
-              <span className="text-sm font-bold text-content-cta-dark">
-                {billingInterval === 'yearly'
-                  ? 'Yearly is two months free'
-                  : 'Go yearly for two months free'
-                }
-              </span>
-            </div>
-          </div>
-        </div>
-        </section>
-
-        {/* Pricing Cards */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-            variants={staggerContainer}
-            className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-8"
-          >
-
-            {/* Free Plan */}
-            <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
-              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm hover:border-slate-300 transition-all duration-300 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-slate-100 rounded-xl">
-                    <BarChart3 className="h-6 w-6 text-slate-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Free</h3>
-                    <p className="text-xs text-slate-500">Your numbers, for good</p>
-                  </div>
-                </div>
-
-                <div className="flex items-baseline mb-6">
-                  <span className="text-4xl sm:text-5xl font-bold text-slate-900">$0</span>
-                  <span className="ml-2 text-xl text-slate-400">/month</span>
-                </div>
-
-                <a
-                  href="https://thecontentlabs.app/register"
-                  onClick={() => capture('pricing_cta_clicked', { plan: 'free', billing_period: billingInterval, location: 'marketing', position: 'plan_card', is_logged_in: false })}
-                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-sm hover:bg-slate-800 transition-all hover:scale-[1.02] active:scale-95"
-                >
-                  Start free
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-
-                <ul className="mt-8 space-y-4 flex-1">
-                  {FREE_PLAN.map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <Check className="h-5 w-5 text-slate-400 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Starter Plan */}
-            <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
-              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-md hover:border-slate-300 transition-all duration-300 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-content-coral/10 rounded-xl">
-                    <Zap className="h-6 w-6 text-content-coral" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Starter</h3>
-                    <p className="text-xs text-slate-500">Every video, analyzed</p>
-                  </div>
-                </div>
-
-                <div className="flex items-baseline mb-6">
-                  {billingInterval === 'yearly' ? (
-                    <>
-                      <span className="text-4xl sm:text-5xl font-bold text-slate-900">${Math.round(starter.yearlyPrice / 12)}</span>
-                      <span className="ml-2 text-xl text-slate-400">/mo</span>
-                      <span className="ml-3 text-sm text-slate-400 line-through">${starter.price}/mo</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-4xl sm:text-5xl font-bold text-slate-900">${starter.price}</span>
-                      <span className="ml-2 text-xl text-slate-400">/month</span>
-                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-content-coral">${starter.firstMonth} first month</span>
-                    </>
-                  )}
-                </div>
-                {billingInterval === 'yearly' && (
-                  <div className="-mt-4 mb-6">
-                    <p className="text-sm text-content-cta">${starter.yearlyPrice} billed annually. You save ${starter.price * 12 - starter.yearlyPrice}</p>
-                    <p className="text-xs text-slate-400 mt-1">Two months free</p>
-                  </div>
-                )}
-
-                <a
-                  href="https://thecontentlabs.app/register"
-                  onClick={() => trackPricingCta('starter', billingInterval, 'plan_card')}
-                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
-                >
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-
-                <ul className="mt-8 space-y-4 flex-1">
-                  {[
-                    '25 videos / platform tracked monthly',
-                    'Every video analyzed: beat map + traits',
-                    `${PLAN_LIMITS.starter.competitors} competitors (${PLAN_LIMITS.starter.videosPerCompetitor} videos each)`,
-                    'Monthly strategy + 30-day calendar',
-                    `The Chemist (${PLAN_LIMITS.starter.labCreditsPerMonth.toLocaleString()} credits / mo)`,
-                    'Weekly lab note by email',
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <Check className="h-5 w-5 text-content-coral mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Pro Plan */}
-            <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
-              <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="bg-gradient-to-r from-content-cta-dark to-content-cta text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-content-cta/30 flex items-center">
-                  <Star className="h-4 w-4 mr-2 fill-white" />
-                  Most Popular
-                </div>
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-content-cta/30 to-content-cta-dark/30 rounded-3xl blur-xl opacity-50"></div>
-              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border-2 border-content-cta/40 hover:border-content-cta/60 transition-all duration-300 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-content-cta/10 rounded-xl">
-                    <Crown className="h-6 w-6 text-content-cta" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Pro</h3>
-                    <p className="text-xs text-slate-500">Daily tracking, weekly refresh</p>
-                  </div>
-                </div>
-
-                <div className="flex items-baseline mb-6">
-                  {billingInterval === 'yearly' ? (
-                    <>
-                      <span className="text-4xl sm:text-5xl font-bold text-slate-900">${Math.round(pro.yearlyPrice / 12)}</span>
-                      <span className="ml-2 text-xl text-slate-400">/mo</span>
-                      <span className="ml-3 text-sm text-slate-400 line-through">${pro.price}/mo</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-4xl sm:text-5xl font-bold text-slate-900">${pro.price}</span>
-                      <span className="ml-2 text-xl text-slate-400">/month</span>
-                      <span className="ml-3 rounded-full bg-content-coral/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-content-coral">${pro.firstMonth} first month</span>
-                    </>
-                  )}
-                </div>
-                {billingInterval === 'yearly' && (
-                  <div className="-mt-4 mb-6">
-                    <p className="text-sm text-content-cta">${pro.yearlyPrice} billed annually. You save ${pro.price * 12 - pro.yearlyPrice}</p>
-                    <p className="text-xs text-slate-400 mt-1">Two months free</p>
-                  </div>
-                )}
-
-                <a
-                  href="https://thecontentlabs.app/register"
-                  onClick={() => trackPricingCta('pro', billingInterval, 'plan_card')}
-                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold shadow-lg shadow-content-cta/25 hover:shadow-xl hover:shadow-content-cta/40 transition-all hover:scale-105 active:scale-95"
-                >
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-
-                <ul className="mt-8 space-y-4 flex-1">
-                  {[
-                    'Daily tracking, every video analyzed',
-                    `${PLAN_LIMITS.pro.competitors} competitors (${PLAN_LIMITS.pro.videosPerCompetitor} videos each), refreshed weekly`,
-                    'Weekly strategy refresh',
-                    '7-day calendar, every week',
-                    `The Chemist (${PLAN_LIMITS.pro.labCreditsPerMonth.toLocaleString()} credits / mo)`,
-                    'What wins for you, across all your videos',
-                    'Weekly lab note by email',
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <Check className="h-5 w-5 text-content-cta mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Studio Plan */}
-            <motion.div variants={popIn} className="relative w-full max-w-md lg:flex-1 group">
-              <div className="hidden absolute -inset-1 rounded-3xl blur-xl opacity-50"></div>
-              <div className="relative bg-white rounded-3xl p-5 sm:p-8 border-2 border-slate-300 hover:border-slate-400/60 transition-all duration-300 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-slate-700/10 rounded-xl">
-                    <Shield className="h-6 w-6 text-slate-800" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Studio</h3>
-                    <p className="text-xs text-slate-500">For agencies</p>
-                  </div>
-                </div>
-
-                <div className="flex items-baseline mb-6">
-                  {billingInterval === 'yearly' ? (
-                    <>
-                      <span className="text-4xl sm:text-5xl font-bold text-slate-900">${Math.round(enterprise.yearlyPrice / 12)}</span>
-                      <span className="ml-2 text-xl text-slate-400">/mo</span>
-                      <span className="ml-3 text-sm text-slate-400 line-through">${enterprise.price}/mo</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-4xl sm:text-5xl font-bold text-slate-900">${enterprise.price}</span>
-                      <span className="ml-2 text-xl text-slate-400">/month</span>
-                    </>
-                  )}
-                </div>
-                {billingInterval === 'yearly' && (
-                  <div className="-mt-4 mb-6">
-                    <p className="text-sm text-slate-800">${enterprise.yearlyPrice} billed annually. You save ${enterprise.price * 12 - enterprise.yearlyPrice}</p>
-                    <p className="text-xs text-slate-400 mt-1">Two months free</p>
-                  </div>
-                )}
-
-                <a
-                  href="https://thecontentlabs.app/register"
-                  onClick={() => trackPricingCta('enterprise', billingInterval, 'plan_card')}
-                  className="w-full inline-flex items-center justify-center px-6 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold shadow-lg shadow-slate-800/25 hover:shadow-xl hover:shadow-slate-800/40 transition-all hover:scale-105 active:scale-95"
-                >
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-
-                <ul className="mt-8 space-y-4 flex-1">
-                  {[
-                    'Daily tracking, every video analyzed',
-                    `${PLAN_LIMITS.enterprise.competitors} competitors (${PLAN_LIMITS.enterprise.videosPerCompetitor} videos each), refreshed weekly`,
-                    'YouTube Shorts tracking',
-                    'Weekly strategy refresh + 7-day calendar',
-                    `The Chemist (${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} credits / mo)`,
-                    '2 team seats',
-                    'Priority support',
-                  ].map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <Check className="h-5 w-5 text-slate-800 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Trust badges */}
-          <div className="text-center mt-12">
-            <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-6 px-6 sm:px-8 py-4 bg-content-coral/10 backdrop-blur-sm rounded-2xl border border-content-coral/20">
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-content-coral" />
-                <span className="text-content-coral-700 font-medium text-sm">Free plan needs no card</span>
-              </div>
-              <div className="hidden sm:block h-6 w-px bg-slate-300"></div>
-              <div className="flex items-center gap-2">
-                <Check className="h-5 w-5 text-content-coral" />
-                <span className="text-slate-600 text-sm">Cancel anytime</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Inline comparison toggle */}
-          <div className="mt-10">
-            <button
-              onClick={() => setShowComparison(!showComparison)}
-              className="mx-auto flex items-center gap-3 px-6 py-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-2xl text-base font-medium text-slate-600 hover:text-slate-900 transition-all duration-300"
-            >
-              <Atom className="h-5 w-5 text-content-coral" />
-              Compare plans side by side
-              <ChevronDown
-                className={`h-5 w-5 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-                  showComparison ? 'rotate-180 text-content-coral' : ''
-                }`}
-              />
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                showComparison ? 'max-h-[1000px] opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
-              }`}
-            >
-              <div className="bg-white border border-slate-200 rounded-3xl overflow-x-auto shadow-sm">
-                <table className="w-full min-w-[480px]">
-                  <thead>
-                    <tr className="border-b border-slate-200">
-                      <th className="text-left text-xs sm:text-sm font-medium text-slate-500 py-4 sm:py-5 px-3 sm:px-6">Feature</th>
-                      <th className="text-center text-xs sm:text-sm font-bold text-slate-600 py-4 sm:py-5 px-2 sm:px-4">Free</th>
-                      <th className="text-center text-xs sm:text-sm font-bold text-content-coral py-4 sm:py-5 px-2 sm:px-4">Starter</th>
-                      <th className="text-center text-xs sm:text-sm font-bold text-content-cta py-4 sm:py-5 px-2 sm:px-4">Pro</th>
-                      <th className="text-center text-xs sm:text-sm font-bold text-slate-800 py-4 sm:py-5 px-2 sm:px-4">Studio</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {([
-                      { feature: 'Your videos tracked', free: '10 / week', starter: '25 / month', pro: 'Daily', enterprise: 'Daily' },
-                      { feature: 'Videos analyzed', free: '3, ever', starter: 'Every one', pro: 'Every one', enterprise: 'Every one' },
-                      { feature: 'Beat map per video', free: '3 videos', starter: true, pro: true, enterprise: true },
-                      { feature: 'What wins for you', free: false, starter: true, pro: true, enterprise: true },
-                      { feature: 'Competitors', free: '0', starter: `${PLAN_LIMITS.starter.competitors}`, pro: `${PLAN_LIMITS.pro.competitors}`, enterprise: `${PLAN_LIMITS.enterprise.competitors}` },
-                      { feature: 'Videos per competitor', free: '0', starter: `${PLAN_LIMITS.starter.videosPerCompetitor}`, pro: `${PLAN_LIMITS.pro.videosPerCompetitor}`, enterprise: `${PLAN_LIMITS.enterprise.videosPerCompetitor}` },
-                      { feature: 'Strategy', free: false, starter: 'Monthly', pro: 'Weekly', enterprise: 'Weekly' },
-                      { feature: 'Calendar', free: false, starter: '30-day / month', pro: '7-day / week', enterprise: '7-day / week' },
-                      { feature: 'YouTube Shorts', free: false, starter: false, pro: false, enterprise: true },
-                      { feature: 'The Chemist', free: '20 messages', starter: `${PLAN_LIMITS.starter.labCreditsPerMonth.toLocaleString()} credits`, pro: `${PLAN_LIMITS.pro.labCreditsPerMonth.toLocaleString()} credits`, enterprise: `${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} credits` },
-                      { feature: 'Weekly email', free: 'Your numbers', starter: 'Lab note', pro: 'Lab note', enterprise: 'Lab note' },
-                      { feature: 'Team seats', free: '1', starter: '1', pro: '1', enterprise: '2' },
-                      { feature: 'Priority support', free: false, starter: false, pro: false, enterprise: true },
-                    ] as { feature: string; free: string | boolean; starter: string | boolean; pro: string | boolean; enterprise: string | boolean }[]).map(({ feature, free: f, starter: s, pro: p, enterprise: e }) => (
-                      <tr key={feature} className="hover:bg-slate-50 transition-colors">
-                        <td className="text-xs sm:text-sm text-slate-700 py-3 sm:py-4 px-3 sm:px-6">{feature}</td>
-                        <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
-                          {typeof f === 'boolean' ? (
-                            f ? (
-                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-slate-500 mx-auto" />
-                            ) : (
-                              <span className="text-slate-300">&mdash;</span>
-                            )
-                          ) : (
-                            <span className="text-xs sm:text-sm text-slate-600">{f}</span>
-                          )}
-                        </td>
-                        <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
-                          {typeof s === 'boolean' ? (
-                            s ? (
-                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-content-coral mx-auto" />
-                            ) : (
-                              <span className="text-slate-300">&mdash;</span>
-                            )
-                          ) : (
-                            <span className="text-xs sm:text-sm text-slate-600">{s}</span>
-                          )}
-                        </td>
-                        <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
-                          {typeof p === 'boolean' ? (
-                            p ? (
-                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-content-cta mx-auto" />
-                            ) : (
-                              <span className="text-slate-300">&mdash;</span>
-                            )
-                          ) : (
-                            <span className="text-xs sm:text-sm font-medium text-slate-900">{p}</span>
-                          )}
-                        </td>
-                        <td className="text-center py-3 sm:py-4 px-2 sm:px-4">
-                          {typeof e === 'boolean' ? (
-                            e ? (
-                              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-slate-800 mx-auto" />
-                            ) : (
-                              <span className="text-slate-300">&mdash;</span>
-                            )
-                          ) : (
-                            <span className="text-xs sm:text-sm font-medium text-slate-900">{e}</span>
-                          )}
-                        </td>
+              >
+                <div className="lab-card relative overflow-x-auto">
+                  <table className="w-full min-w-[560px] text-left">
+                    <caption className="sr-only">Plan comparison</caption>
+                    <thead>
+                      <tr className="border-b border-line/[0.08]">
+                        <th scope="col" className="text-meta font-medium text-ink-3 py-4 px-5 sm:px-6">Feature</th>
+                        {['Free', 'Starter', 'Pro', 'Studio'].map((h) => (
+                          <th key={h} scope="col" className="text-center text-sm font-semibold text-ink py-4 px-3">{h}</th>
+                        ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-line/[0.08]">
+                      {COMPARISON_ROWS.map((row) => (
+                        <tr key={row.feature}>
+                          <th scope="row" className="text-sm font-normal text-ink py-3.5 px-5 sm:px-6">{row.feature}</th>
+                          <td className="text-center py-3.5 px-3"><CellValue value={row.free} /></td>
+                          <td className="text-center py-3.5 px-3"><CellValue value={row.starter} /></td>
+                          <td className="text-center py-3.5 px-3 bg-sunken/50"><CellValue value={row.pro} /></td>
+                          <td className="text-center py-3.5 px-3"><CellValue value={row.enterprise} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* What You Get */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 relative bg-content-coral/[0.02]">
-          <div className="relative max-w-5xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={VIEWPORT_ONCE}
-              variants={fadeUp}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What the paid plans add</h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">The free plan is the numbers and three analyzed videos. Paid analyzes every video you post and adds the rest.</p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={VIEWPORT_ONCE}
-              variants={staggerContainer}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-              {[
-                { icon: BarChart3, title: 'Every video analyzed', desc: 'Beat map, traits and what wins for you across all of them', gradient: 'from-content-coral/20 to-content-coral/5' },
-                { icon: Target, title: 'Competitors', desc: 'Their best videos, read the same way as yours', gradient: 'from-content-coral/20 to-content-coral/5' },
-                { icon: Calendar, title: 'Strategy and calendar', desc: 'Built from your own numbers, refreshed monthly or weekly', gradient: 'from-content-coral/20 to-content-coral/5' },
-                { icon: Atom, title: 'More Chemist', desc: 'Scripts in your voice, 1,000 to 5,000 credits a month', gradient: 'from-content-coral/20 to-content-coral/5' },
-              ].map(({ icon: Icon, title, desc, gradient }) => (
-                <motion.div key={title} variants={popIn} className="group relative">
-                  <div className="relative bg-white rounded-2xl p-6 border border-slate-200 hover:border-content-coral/20 transition-all duration-300 h-full shadow-sm group-hover:-translate-y-1">
-                    <div className={`inline-flex p-3 bg-gradient-to-br ${gradient} rounded-xl mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className="h-6 w-6 text-content-coral" />
-                    </div>
-                    <h3 className="text-base font-bold text-slate-900 mb-2">{title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
         </section>
+
+        {/* What the paid plans add */}
+        <Section>
+          <Reveal>
+            <SectionHeading
+              title="What the paid plans add"
+              description="The free plan is the numbers and three analyzed videos. Paid analyzes every video you post and adds the rest."
+            />
+          </Reveal>
+          <Reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6">
+            {PAID_ADDS.map(({ title, desc }) => (
+              <div key={title} className="border-t border-line/[0.14] pt-6">
+                <h3 className="text-[15px] font-semibold text-ink mb-2">{title}</h3>
+                <p className="text-body text-ink-2">{desc}</p>
+              </div>
+            ))}
+          </Reveal>
+        </Section>
 
         {/* Testimonials */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 relative bg-content-navy">
-          <div className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '24px 24px'
-          }} />
-          <div className="relative max-w-5xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={VIEWPORT_ONCE}
-              variants={fadeUp}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white">Lab-Tested. Creator-Approved.</h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((t, index) => (
-                <motion.div
-                  key={t.name + index}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={VIEWPORT_ONCE}
-                  variants={fanIn(index % 3)}
-                  className="group relative"
-                >
-                  <div className="relative bg-slate-800/60 backdrop-blur-sm rounded-3xl p-8 border border-slate-700/50 shadow-sm hover:border-content-coral/30 transition-all duration-300 h-full flex flex-col group-hover:-translate-y-2">
-                    <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full overflow-hidden border-4 border-slate-700 shadow-2xl group-hover:scale-110 transition-transform duration-300">
-                      <div className="absolute inset-0 flex items-center justify-center bg-slate-700 text-white text-lg font-bold">{t.name.charAt(0)}</div>
-                      {t.image && <img src={t.image} alt={t.name} className="relative w-full h-full object-cover" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />}
-                    </div>
-
-                    <div className="inline-flex items-center self-start px-3 py-1.5 rounded-full mb-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < t.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'}`} />
-                      ))}
-                    </div>
-
-                    <div className="mb-4 mt-4">
-                      <svg width="40" height="32" className="text-slate-700 fill-current">
-                        <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path>
-                      </svg>
-                    </div>
-
-                    <p className="text-slate-300 text-lg mb-8 leading-relaxed italic flex-1">&ldquo;{t.quote}&rdquo;</p>
-
-                    <div className="mt-auto">
-                      <p className="font-bold text-white">{t.name}</p>
-                      <p className="text-slate-400 text-sm">{t.role}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section>
+          <Reveal>
+            <SectionHeading title="Lab-tested. Creator-approved." />
+          </Reveal>
+          <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {testimonials.map((t) => (
+              <figure key={t.name} className="lab-card p-5 sm:p-6 flex flex-col">
+                <div className="flex gap-0.5 mb-4" aria-label={`${t.rating} out of 5 stars`} role="img">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} aria-hidden="true" className={`h-4 w-4 ${i < t.rating ? 'fill-amber-400 text-amber-400' : 'text-ink-3'}`} />
+                  ))}
+                </div>
+                <blockquote className="text-lg text-ink leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</blockquote>
+                <figcaption className="mt-6 pt-5 border-t border-line/[0.08] flex items-center gap-3">
+                  <span className="relative w-10 h-10 rounded-full overflow-hidden bg-sunken flex-shrink-0 ring-1 ring-line/[0.08]">
+                    <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-ink-2">{t.name.charAt(0)}</span>
+                    {t.image && (
+                      <img
+                        src={t.image}
+                        alt={t.name}
+                        loading="lazy"
+                        className="relative w-full h-full object-cover"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    )}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-medium text-ink">{t.name}</span>
+                    <span className="block text-meta text-ink-3">{t.role}</span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </Reveal>
+        </Section>
 
         {/* FAQ */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-          variants={staggerContainer}
-          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-content-coral/[0.02]"
-        >
-          <motion.div variants={fadeUp} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Got questions?</h2>
-          </motion.div>
-          <div className="space-y-4">
-            {[
-              { question: "Can't I just use ChatGPT for this?", answer: "ChatGPT has never seen your videos or your numbers. We pull every video you post, timestamp it, score its traits and compare them against your own median. The Chemist answers from that, not from the internet's average advice." },
-              { question: "Is it worth $19 to $99 a month?", answer: "The free plan is free for good. Starter is $19 a month and the first month is $5, so you see every one of your videos analyzed before you pay full price. A strategist costs far more and has never watched your videos." },
-              { question: "What does the $5 first month mean?", answer: "Starter and Pro bill $5 for your first month, then the normal price. Card required, cancel any time before the second charge and you've paid $5." },
-              { question: "Will the scripts actually sound like me?", answer: "The Chemist writes from your own transcripts, so it has your phrasing, your pacing and the structure of your videos that worked. It's your voice with the tangents cut out." },
-              { question: "What's the difference between plans?", answer: `Free tracks your videos weekly and analyzes three. Starter ($${PRODUCTS.starter.price}) analyzes every video, adds ${PLAN_LIMITS.starter.competitors} competitors, a monthly strategy and a 30-day calendar. Pro ($${PRODUCTS.pro.price}) tracks daily, with ${PLAN_LIMITS.pro.competitors} competitors, a weekly strategy refresh and a 7-day calendar every week. Studio ($${PRODUCTS.enterprise.price}) adds ${PLAN_LIMITS.enterprise.competitors} competitors, YouTube Shorts, ${PLAN_LIMITS.enterprise.labCreditsPerMonth.toLocaleString()} Chemist credits and 2 seats.` },
-              { question: "Can I cancel my subscription anytime?", answer: "Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period. No hidden fees, no hassle." },
-              { question: "Can I upgrade or downgrade my plan?", answer: "Absolutely. You can change your plan at any time through your account settings. Changes are prorated and take effect immediately." },
-            ].map((item, index) => (
-              <motion.div key={index} variants={popIn}>
-                <FAQItem question={item.question} answer={item.answer} />
-              </motion.div>
-            ))}
+        <Section>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12">
+            <Reveal>
+              <SectionHeading title="Got questions?" />
+            </Reveal>
+            <Reveal>
+              <FAQList items={FAQS} />
+            </Reveal>
           </div>
-        </motion.div>
+        </Section>
 
-        {/* Final CTA */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 relative"
-          style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 60%, rgba(255,124,14,0.08) 0%, transparent 55%)' }}
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-            variants={staggerContainer}
-            className="relative max-w-4xl mx-auto text-center"
-          >
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-content-coral/10 border border-content-coral/25">
-              <span className="h-1.5 w-1.5 rounded-full bg-content-coral animate-pulse" />
-              <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-content-coral font-bold">
-                21,000+ videos analyzed · Free plan · No card
-              </span>
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="font-heading text-3xl sm:text-5xl md:text-[56px] font-semibold tracking-tight text-slate-900 mb-5 leading-[1.05]">
-              See why your last videos did what they did<span className="text-content-coral">.</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Connect your handles and the free plan starts tracking today. Three videos analyzed by tonight, your numbers every week after that.
-            </motion.p>
-            <motion.div variants={scaleIn} className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
-              <a
-                href="https://thecontentlabs.app/register"
-                onClick={() => capture('pricing_cta_clicked', { plan: 'unspecified', billing_period: billingInterval, location: 'marketing', position: 'final_cta', is_logged_in: false })}
-                className="lab-bubbles group inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-xl font-bold text-lg text-white shadow-lg shadow-content-cta/30 hover:shadow-xl hover:shadow-content-cta/50 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                Start free
-                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
-              </a>
-              <a
-                href="/trends"
-                className="inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 bg-white border border-slate-200 rounded-xl font-semibold text-slate-700 hover:border-content-coral/40 hover:text-content-coral transition-all"
-              >
-                See what&rsquo;s trending
-              </a>
-            </motion.div>
-            <motion.p variants={fadeUp} className="mt-6 text-sm text-slate-500">Cancel anytime. No contracts.</motion.p>
-          </motion.div>
-        </section>
-        </main>
-      </div>
+        <FinalCTA
+          title="See why your last videos did what they did."
+          body="Connect your handles and the free plan starts tracking today. Three videos analyzed by tonight, your numbers every week after that."
+          ctaHref={REGISTER}
+          onCtaClick={() => capture('pricing_cta_clicked', { plan: 'unspecified', billing_period: billingInterval, location: 'marketing', position: 'final_cta', is_logged_in: false })}
+          secondary={{ label: 'See what’s trending', href: '/trends' }}
+          footnote="21,000+ videos analyzed · Free plan · No card · Cancel anytime. No contracts."
+        />
+      </main>
+
+      <Footer />
     </div>
   );
 }

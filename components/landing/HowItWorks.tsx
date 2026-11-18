@@ -1,84 +1,48 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Target, Microscope, Brain } from 'lucide-react';
-import { HoverBubbles } from '@/components/ui/HoverBubbles';
-import { TextReveal } from '@/components/ui/TextReveal';
-import { fadeUp, slideFromLeft, slideFromRight, staggerContainer, VIEWPORT_ONCE } from '@/lib/motionVariants';
+import { Reveal, Section, SectionHeading } from '@/components/landing/Section';
+
+const STEPS = [
+  {
+    step: '01',
+    title: 'Connect your handles',
+    description: 'TikTok, Instagram, YouTube. Tell us your niche, your pillars and how you talk. No card.',
+  },
+  {
+    step: '02',
+    title: 'We analyze your videos',
+    description:
+      'Every video gets a beat map and a set of traits. Across all of them we work out what wins for you: hook length, payoff timing, tangents, text, topic.',
+  },
+  {
+    step: '03',
+    title: 'Post what wins',
+    description:
+      'Your numbers arrive every week. The Chemist writes the next video in your voice from what worked. Paid plans add competitors, strategy and a calendar.',
+  },
+];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10 bg-slate-950"
-    >
-      {/* Grid overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: 'linear-gradient(rgba(244,99,42,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(244,99,42,0.03) 1px, transparent 1px)',
-        backgroundSize: '24px 24px'
-      }} />
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
-          variants={fadeUp} transition={{ duration: 0.7 }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-tight">
-            <TextReveal>Three steps. The first one takes a minute.</TextReveal>
-          </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Give us your handles. We pull your videos and read them. You post what wins.
-          </p>
-        </motion.div>
+    <Section id="how-it-works">
+      <Reveal>
+        <SectionHeading
+          title="Three steps. The first one takes a minute."
+          description="Give us your handles. We pull your videos and read them. You post what wins."
+        />
+      </Reveal>
 
-        {/* Vertical pipeline */}
-        <div className="relative">
-          {/* Central line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[3px] md:-translate-x-[1.5px] bg-content-coral "
-          />
-
-          {[
-            { step: "01", element: "In", title: "Connect your handles", description: "TikTok, Instagram, YouTube. Tell us your niche, your pillars and how you talk. No card.", icon: Target, borderColor: 'border-content-coral/30', bgColor: 'bg-content-coral/5', textColor: 'text-content-coral', dotColor: 'bg-content-coral' },
-            { step: "02", element: "An", title: "We analyze your videos", description: "Every video gets a beat map and a set of traits. Across all of them we work out what wins for you: hook length, payoff timing, tangents, text, topic.", icon: Microscope, borderColor: 'border-content-coral-500/30', bgColor: 'bg-content-coral-500/5', textColor: 'text-content-coral-600', dotColor: 'bg-content-coral-500' },
-            { step: "03", element: "Rs", title: "Post what wins", description: "Your numbers arrive every week. The Chemist writes the next video in your voice from what worked. Paid plans add competitors, strategy and a calendar.", icon: Brain, borderColor: 'border-content-coral/30', bgColor: 'bg-content-coral/5', textColor: 'text-content-coral', dotColor: 'bg-content-coral' },
-          ].map((step, index) => {
-            const isEven = index % 2 === 0;
-            return (
-              <motion.div
-                key={index}
-                initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
-                variants={isEven ? slideFromLeft : slideFromRight}
-                className="relative flex items-start mb-12 last:mb-0"
-              >
-                {/* Node on pipeline */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
-                  <span className={`absolute inset-0 rounded-full ${step.dotColor} opacity-40 blur-md animate-pulse`} />
-                  <div className={`relative w-6 h-6 rounded-full ${step.dotColor} border-4 border-slate-950 shadow-[0_2px_6px_rgba(0,0,0,0.35)]`} />
-                </div>
-
-                {/* Card */}
-                <div className={`ml-16 md:ml-0 md:w-[45%] ${isEven ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
-                  <div className="group relative bg-slate-900 rounded-2xl p-6 border border-white/10 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-content-coral/10 hover:border-content-coral/30 transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute inset-0 rounded-2xl opacity-[0.02] dot-grid-texture pointer-events-none" />
-                    <HoverBubbles />
-                    <div className="flex items-start gap-4 relative">
-                      <div className={`flex-shrink-0 w-12 h-12 flex flex-col items-center justify-center border-2 ${step.borderColor} rounded-lg ${step.bgColor}`}>
-                        <span className={`text-sm font-bold ${step.textColor} leading-none`}>{step.step}</span>
-                        <span className={`text-[11px] font-mono font-bold ${step.textColor} leading-none mt-0.5`}>{step.element}</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <step.icon className={`h-4 w-4 ${step.textColor}`} />
-                          <h3 className="text-lg font-bold text-white">{step.title}</h3>
-                        </div>
-                        <p className="text-slate-400 text-sm leading-relaxed">{step.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+      <Reveal>
+        <ol className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
+          {STEPS.map((s) => (
+            <li key={s.step} className="border-t border-line/[0.14] pt-6">
+              <span className="block font-heading text-sm font-medium text-ink-3 tabular-nums mb-4">{s.step}</span>
+              <h3 className="font-heading text-xl font-semibold tracking-[-0.01em] text-ink mb-2">{s.title}</h3>
+              <p className="text-body text-ink-2">{s.description}</p>
+            </li>
+          ))}
+        </ol>
+      </Reveal>
+    </Section>
   );
 }

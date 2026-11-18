@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { HexMolecule } from "@/components/ui/HexMolecule";
+import { PublicNav } from "@/components/PublicNav";
+import { Footer } from "@/components/landing/Footer";
 
 // RAW views by hour (biased — big creators post late)
 const RAW_HOURS = [
@@ -105,9 +106,9 @@ function Section({
     <section
       ref={ref}
       id={id}
-      className={`relative min-h-[100dvh] flex flex-col items-center justify-center px-6 py-24 transition-all duration-[600ms] ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      } ${className}`}
+      className={`relative flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24 transition-[opacity,transform] duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+      } ${id === "cover" ? "pt-32 sm:pt-40" : ""} ${className}`}
     >
       {children}
     </section>
@@ -123,13 +124,13 @@ function Eyebrow({
 }) {
   const colorClass =
     color === "coral"
-      ? "text-content-coral"
+      ? "text-ink"
       : color === "red"
-        ? "text-red-500"
-        : "text-slate-400";
+        ? "text-ink-3"
+        : "text-ink-3";
   return (
     <p
-      className={`${colorClass} text-[11px] font-mono uppercase tracking-[0.3em] mb-10`}
+      className={`text-meta text-ink-3 mb-4`}
     >
       {children}
     </p>
@@ -152,22 +153,22 @@ function RatioBar({
   const width = (ratio / max) * 100;
   return (
     <div className={`flex items-center gap-4 ${muted ? "opacity-40" : ""}`}>
-      <div className="w-14 text-right text-sm font-mono text-slate-500 flex-shrink-0 tabular-nums">
+      <div className="w-14 text-right text-sm font-mono text-ink-3 flex-shrink-0 tabular-nums">
         {label}
       </div>
-      <div className="flex-1 h-9 bg-white/60 border border-content-coral/10 rounded-lg overflow-hidden">
+      <div className="flex-1 h-9 bg-sunken rounded-lg overflow-hidden">
         <div
           className={`h-full rounded-lg transition-[width] duration-[900ms] ease-out ${
             highlight
-              ? "bg-gradient-to-r from-content-coral to-orange-400 shadow-md shadow-content-coral/30"
-              : "bg-gradient-to-r from-content-coral/30 to-content-coral/18"
+              ? "bg-content-coral"
+              : "bg-slate-400"
           }`}
           style={{ width: `${width}%` }}
         />
       </div>
       <div
-        className={`w-20 text-right font-bold text-sm flex-shrink-0 tabular-nums ${
-          highlight ? "text-content-coral" : "text-slate-500"
+        className={`w-20 text-right font-semibold text-sm flex-shrink-0 tabular-nums ${
+          highlight ? "text-ink" : "text-ink-2"
         }`}
       >
         {ratio.toFixed(3)}
@@ -190,22 +191,22 @@ function DayBar({
   const height = (ratio / max) * 100;
   return (
     <div className="flex flex-col items-center gap-3 flex-1">
-      <div className="text-xs font-mono tabular-nums font-bold text-slate-500 h-5">
+      <div className="text-xs font-mono tabular-nums font-semibold text-ink-3 h-5">
         {ratio.toFixed(3)}
       </div>
-      <div className="w-full max-w-[72px] h-80 bg-white/60 border border-content-coral/10 rounded-xl flex items-end overflow-hidden">
+      <div className="w-full max-w-[72px] h-80 bg-sunken rounded-xl flex items-end overflow-hidden">
         <div
           className={`w-full transition-[height] duration-[900ms] ease-out ${
             highlight
-              ? "bg-gradient-to-t from-content-coral to-orange-400 shadow-lg shadow-content-coral/30"
-              : "bg-gradient-to-t from-content-coral/30 to-content-coral/20"
+              ? "bg-content-coral"
+              : "bg-slate-400"
           }`}
           style={{ height: `${height}%` }}
         />
       </div>
       <div
-        className={`text-sm font-bold ${
-          highlight ? "text-content-coral" : "text-slate-500"
+        className={`text-sm font-semibold ${
+          highlight ? "text-ink" : "text-ink-2"
         }`}
       >
         {day}
@@ -218,16 +219,16 @@ function FollowerBar({ hour, followers, max }: { hour: string; followers: number
   const width = (followers / max) * 100;
   return (
     <div className="flex items-center gap-4">
-      <div className="w-14 text-right text-sm font-mono text-slate-500 flex-shrink-0 tabular-nums">
+      <div className="w-14 text-right text-sm font-mono text-ink-3 flex-shrink-0 tabular-nums">
         {hour}
       </div>
-      <div className="flex-1 h-7 bg-white/60 border border-slate-200/60 rounded-md overflow-hidden">
+      <div className="flex-1 h-7 bg-sunken rounded-md overflow-hidden">
         <div
-          className="h-full rounded-md transition-[width] duration-[900ms] ease-out bg-gradient-to-r from-slate-500 to-slate-400"
+          className="h-full rounded-md transition-[width] duration-[900ms] ease-out bg-slate-400"
           style={{ width: `${width}%` }}
         />
       </div>
-      <div className="w-16 text-right font-bold text-sm flex-shrink-0 tabular-nums text-slate-500">
+      <div className="w-16 text-right font-semibold text-sm flex-shrink-0 tabular-nums text-ink-3">
         {followers}K
       </div>
     </div>
@@ -235,13 +236,6 @@ function FollowerBar({ hour, followers, max }: { hour: string; followers: number
 }
 
 export function PostingTimesReport() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const maxRatio = Math.max(...NORMALIZED_HOURS.map((d) => d.ratio));
   const maxDayRatio = Math.max(...DAYS_NORMALIZED.map((d) => d.ratio));
@@ -249,38 +243,22 @@ export function PostingTimesReport() {
   const maxFollowers = Math.max(...FOLLOWER_BIAS.map((d) => d.followers));
 
   return (
-    <div className="lab-grid-bg text-slate-900 min-h-screen [font-feature-settings:'ss01','cv11']">
-      <div
-        className={`hidden md:block fixed top-6 right-8 z-50 text-[11px] font-mono uppercase tracking-[0.25em] transition-opacity duration-300 ${
-          scrolled ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <span className="text-slate-400">The Content Labs</span>
-        <span className="mx-3 text-slate-300">/</span>
-        <span className="text-content-coral">Posting Times</span>
-      </div>
+    <div className="bg-canvas text-ink min-h-screen">
+      <PublicNav />
 
       {/* COVER */}
       <Section id="cover">
-        <HexMolecule size={200} className="absolute top-16 right-16 opacity-30" />
-        <HexMolecule size={140} className="absolute bottom-24 left-12 opacity-25" />
         <div className="max-w-5xl text-center relative">
           <Eyebrow color="coral">Data Report &middot; 2026</Eyebrow>
-          <h1 className="text-6xl sm:text-8xl font-bold tracking-[-0.03em] leading-[0.95] mb-8">
-            Does <span className="text-content-coral">posting time</span>
+          <h1 className="font-heading text-4xl sm:text-6xl font-semibold tracking-[-0.03em] leading-[1.05] mb-8">
+            Does <span className="text-ink-3">posting time</span>
             <br />
             actually matter?
           </h1>
-          <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto leading-[1.6]">
+          <p className="text-lg sm:text-xl text-ink-2 max-w-2xl mx-auto leading-[1.6]">
             We analyzed 7,261 videos. Then we accounted for follower counts.
             The answer isn't what most articles tell you.
           </p>
-          <div className="mt-20 flex flex-col items-center gap-3 text-slate-400">
-            <p className="text-[11px] font-mono uppercase tracking-[0.3em]">
-              Scroll
-            </p>
-            <div className="w-px h-12 bg-gradient-to-b from-slate-400 to-transparent animate-pulse" />
-          </div>
         </div>
       </Section>
 
@@ -288,12 +266,12 @@ export function PostingTimesReport() {
       <Section id="problem">
         <div className="max-w-4xl text-center">
           <Eyebrow>The problem with "best time to post" articles</Eyebrow>
-          <h2 className="text-5xl sm:text-7xl font-bold tracking-[-0.025em] leading-[1.05] mb-10">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-10">
             Raw averages
             <br />
-            <span className="text-content-coral">lie to you.</span>
+            <span className="text-ink-3">lie to you.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 leading-[1.6] max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-ink-2 leading-[1.6] max-w-2xl mx-auto">
             Because the accounts posting at each hour aren't the same size.
           </p>
         </div>
@@ -304,16 +282,16 @@ export function PostingTimesReport() {
         <div className="max-w-4xl w-full">
           <div className="text-center mb-12">
             <Eyebrow>The bias</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               Big accounts post later.
             </h2>
-            <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-ink-2 max-w-2xl mx-auto leading-relaxed">
               Median follower count by posting hour (thousands). Late-night
               posters have 4.5× more followers than morning posters.
             </p>
           </div>
 
-          <div className="bg-white/50 border border-slate-200/60 rounded-2xl p-6 sm:p-8 space-y-2.5">
+          <div className="lab-card p-5 sm:p-6 space-y-2.5">
             {FOLLOWER_BIAS.map((d) => (
               <FollowerBar
                 key={d.hour}
@@ -324,7 +302,7 @@ export function PostingTimesReport() {
             ))}
           </div>
 
-          <p className="text-center text-base sm:text-lg text-slate-500 mt-10 max-w-xl mx-auto">
+          <p className="text-center text-base sm:text-lg text-ink-2 mt-10 max-w-xl mx-auto">
             So of course videos posted at 11pm show higher average views. The
             accounts are bigger.
           </p>
@@ -335,10 +313,10 @@ export function PostingTimesReport() {
       <Section id="fix">
         <div className="max-w-4xl text-center">
           <Eyebrow color="coral">The fix</Eyebrow>
-          <h2 className="text-5xl sm:text-7xl font-bold tracking-[-0.025em] leading-[1.05] mb-6">
-            Compare <span className="text-content-coral">apples to apples.</span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-6">
+            Compare <span className="text-ink-3">apples to apples.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 leading-[1.6] max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-ink-2 leading-[1.6] max-w-2xl mx-auto">
             Instead of comparing raw views, we compare how well each video did
             relative to its own creator's follower count.
           </p>
@@ -350,36 +328,36 @@ export function PostingTimesReport() {
         <div className="max-w-5xl w-full">
           <div className="text-center mb-14">
             <Eyebrow>Here's what we mean</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               Who performed better?
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto mb-12">
             {/* Creator A */}
-            <div className="bg-white/80 rounded-2xl p-8 border border-slate-200">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-400 mb-4 font-bold">
+            <div className="lab-card p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 Creator A &middot; Big account
               </p>
               <div className="space-y-4 text-left">
                 <div className="flex justify-between items-baseline">
-                  <span className="text-sm text-slate-500">Followers</span>
-                  <span className="text-2xl font-bold text-slate-900 tabular-nums">
+                  <span className="text-sm text-ink-3">Followers</span>
+                  <span className="font-heading text-2xl font-semibold text-ink tabular-nums">
                     1,000,000
                   </span>
                 </div>
                 <div className="flex justify-between items-baseline">
-                  <span className="text-sm text-slate-500">Views</span>
-                  <span className="text-2xl font-bold text-slate-900 tabular-nums">
+                  <span className="text-sm text-ink-3">Views</span>
+                  <span className="font-heading text-2xl font-semibold text-ink tabular-nums">
                     500,000
                   </span>
                 </div>
-                <div className="h-px bg-slate-200 my-3" />
+                <div className="h-px bg-line/[0.08] my-3" />
                 <div className="flex justify-between items-baseline">
-                  <span className="text-sm font-bold text-slate-500 uppercase tracking-wide">
+                  <span className="text-sm font-semibold text-ink-3">
                     Views per follower
                   </span>
-                  <span className="text-3xl font-bold text-slate-500 tabular-nums">
+                  <span className="font-heading text-3xl font-semibold text-ink-2 tabular-nums">
                     0.5
                   </span>
                 </div>
@@ -387,29 +365,29 @@ export function PostingTimesReport() {
             </div>
 
             {/* Creator B */}
-            <div className="bg-white rounded-2xl p-8 border-2 border-content-coral shadow-lg shadow-content-coral/15">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-content-coral mb-4 font-bold">
+            <div className="lab-card border-line/[0.16] p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 Creator B &middot; Small account
               </p>
               <div className="space-y-4 text-left">
                 <div className="flex justify-between items-baseline">
-                  <span className="text-sm text-slate-500">Followers</span>
-                  <span className="text-2xl font-bold text-slate-900 tabular-nums">
+                  <span className="text-sm text-ink-3">Followers</span>
+                  <span className="font-heading text-2xl font-semibold text-ink tabular-nums">
                     10,000
                   </span>
                 </div>
                 <div className="flex justify-between items-baseline">
-                  <span className="text-sm text-slate-500">Views</span>
-                  <span className="text-2xl font-bold text-slate-900 tabular-nums">
+                  <span className="text-sm text-ink-3">Views</span>
+                  <span className="font-heading text-2xl font-semibold text-ink tabular-nums">
                     50,000
                   </span>
                 </div>
-                <div className="h-px bg-slate-200 my-3" />
+                <div className="h-px bg-line/[0.08] my-3" />
                 <div className="flex justify-between items-baseline">
-                  <span className="text-sm font-bold text-content-coral uppercase tracking-wide">
+                  <span className="text-sm font-semibold text-ink">
                     Views per follower
                   </span>
-                  <span className="text-3xl font-bold text-content-coral tabular-nums">
+                  <span className="font-heading text-3xl font-semibold text-ink tabular-nums">
                     5.0
                   </span>
                 </div>
@@ -418,12 +396,12 @@ export function PostingTimesReport() {
           </div>
 
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-4">
+            <p className="text-base sm:text-lg text-ink-2 leading-relaxed mb-4">
               Creator A got more <em>total</em> views (500K vs 50K). But Creator
-              B's video reached <span className="font-bold text-content-coral">10×</span> their
+              B's video reached <span className="font-semibold text-ink">10×</span> their
               follower base while Creator A's barely reached half of theirs.
             </p>
-            <p className="text-lg sm:text-xl text-slate-900 font-bold">
+            <p className="text-lg sm:text-xl text-ink font-semibold">
               Creator B crushed it. Creator A didn't.
             </p>
           </div>
@@ -434,15 +412,15 @@ export function PostingTimesReport() {
       <Section id="why-it-matters">
         <div className="max-w-4xl text-center">
           <Eyebrow color="coral">Why this is the only fair way</Eyebrow>
-          <h2 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.1] mb-10">
+          <h2 className="font-heading text-3xl sm:text-5xl font-semibold tracking-[-0.02em] leading-[1.1] mb-10">
             It measures the thing that actually matters.
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 leading-[1.7] max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-ink-2 leading-[1.7] max-w-2xl mx-auto">
             Total views just tell you who has the biggest account. Views per
             follower tells you which videos broke out of their follower base
             and reached new people.
           </p>
-          <p className="text-base sm:text-lg text-slate-900 font-bold mt-8 tracking-tight">
+          <p className="text-base sm:text-lg text-ink font-semibold mt-8 tracking-tight">
             That's what going viral actually means.
           </p>
         </div>
@@ -453,16 +431,16 @@ export function PostingTimesReport() {
         <div className="max-w-4xl w-full">
           <div className="text-center mb-12">
             <Eyebrow>TikTok &middot; Median view/follower ratio</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               The real picture
             </h2>
-            <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-ink-2 max-w-2xl mx-auto leading-relaxed">
               Median ratio by posting hour (ET). Bars dimmed where sample size
               is thin.
             </p>
           </div>
 
-          <div className="bg-white/50 border border-content-coral/10 rounded-2xl p-6 sm:p-8 space-y-2.5">
+          <div className="lab-card p-5 sm:p-6 space-y-2.5">
             {NORMALIZED_HOURS.map((d) => (
               <RatioBar
                 key={d.hour}
@@ -479,17 +457,15 @@ export function PostingTimesReport() {
 
       {/* EVENING REVEAL */}
       <Section id="evening">
-        <HexMolecule size={240} className="absolute top-20 left-12 opacity-20" />
-        <HexMolecule size={180} className="absolute bottom-32 right-16 opacity-25" />
         <div className="max-w-4xl text-center relative">
           <Eyebrow>The real winner</Eyebrow>
-          <div className="text-[7rem] sm:text-[11rem] font-bold leading-[0.85] tracking-[-0.05em] text-content-coral mb-10">
+          <div className="font-heading text-[5rem] sm:text-[8rem] font-semibold leading-[0.9] tracking-[-0.04em] text-ink mb-8">
             7&ndash;10pm
           </div>
-          <p className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+          <p className="text-2xl sm:text-3xl font-semibold text-ink mb-4 tracking-tight">
             Not 9am. Not 6pm. Evening.
           </p>
-          <p className="text-base sm:text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-ink-2 max-w-xl mx-auto leading-relaxed">
             When you account for who's actually posting, the evening window is
             where videos outperform their follower base the most.
           </p>
@@ -501,16 +477,16 @@ export function PostingTimesReport() {
         <div className="max-w-4xl w-full">
           <div className="text-center mb-14">
             <Eyebrow>By Day &middot; TikTok</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               Which day wins on TikTok?
             </h2>
-            <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-ink-2 max-w-2xl mx-auto leading-relaxed">
               Median views per follower. Sunday edges out the rest. Wednesday
               lags everyone.
             </p>
           </div>
 
-          <div className="bg-white/50 border border-content-coral/10 rounded-2xl p-6 sm:p-8">
+          <div className="lab-card p-5 sm:p-6">
             <div className="flex items-end gap-3 sm:gap-4 h-80 px-2 sm:px-4">
               {DAYS_NORMALIZED.map((d) => (
                 <DayBar
@@ -524,8 +500,8 @@ export function PostingTimesReport() {
             </div>
           </div>
 
-          <p className="text-center text-base sm:text-lg text-slate-500 mt-10 max-w-xl mx-auto">
-            Range: <span className="font-bold text-slate-700">0.040 to 0.085</span>.
+          <p className="text-center text-base sm:text-lg text-ink-2 mt-10 max-w-xl mx-auto">
+            Range: <span className="font-semibold text-ink-2">0.040 to 0.085</span>.
             About 2× between best and worst.
           </p>
         </div>
@@ -535,12 +511,12 @@ export function PostingTimesReport() {
       <Section id="platform-intro">
         <div className="max-w-4xl text-center">
           <Eyebrow color="coral">But wait</Eyebrow>
-          <h2 className="text-5xl sm:text-7xl font-bold tracking-[-0.025em] leading-[1.05] mb-10">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-10">
             Instagram plays by
             <br />
-            <span className="text-content-coral">different rules.</span>
+            <span className="text-ink-3">different rules.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 leading-[1.6] max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-ink-2 leading-[1.6] max-w-2xl mx-auto">
             Same data, filtered by platform. The patterns are not the same.
           </p>
         </div>
@@ -551,15 +527,15 @@ export function PostingTimesReport() {
         <div className="max-w-4xl w-full">
           <div className="text-center mb-14">
             <Eyebrow>By Day &middot; Instagram Reels</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               Instagram rewards the weekend much harder
             </h2>
-            <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-ink-2 max-w-2xl mx-auto leading-relaxed">
               Same normalized metric. Completely different shape.
             </p>
           </div>
 
-          <div className="bg-white/50 border border-content-coral/10 rounded-2xl p-6 sm:p-8">
+          <div className="lab-card p-5 sm:p-6">
             <div className="flex items-end gap-3 sm:gap-4 h-80 px-2 sm:px-4">
               {DAYS_INSTAGRAM.map((d) => (
                 <DayBar
@@ -573,9 +549,9 @@ export function PostingTimesReport() {
             </div>
           </div>
 
-          <p className="text-center text-base sm:text-lg text-slate-500 mt-10 max-w-xl mx-auto">
-            Range: <span className="font-bold text-slate-700">0.047 to 0.187</span>.
-            Saturday is <span className="font-bold text-content-coral">4× better</span> than
+          <p className="text-center text-base sm:text-lg text-ink-2 mt-10 max-w-xl mx-auto">
+            Range: <span className="font-semibold text-ink-2">0.047 to 0.187</span>.
+            Saturday is <span className="font-semibold text-ink">4× better</span> than
             Tuesday on Instagram.
           </p>
         </div>
@@ -586,80 +562,80 @@ export function PostingTimesReport() {
         <div className="max-w-5xl w-full">
           <div className="text-center mb-14">
             <Eyebrow color="coral">Platform vs platform</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               Two different games
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 border-2 border-content-coral shadow-lg shadow-content-coral/15">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-content-coral mb-5 font-bold">
+            <div className="lab-card border-line/[0.16] p-6">
+              <p className="text-meta font-medium text-ink-2 mb-5 font-semibold">
                 Instagram Reels
               </p>
               <div className="space-y-4">
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs text-ink-3 mb-1">
                     Median views per follower
                   </p>
-                  <p className="text-4xl font-bold text-slate-900 tabular-nums tracking-tight">
+                  <p className="font-heading text-4xl font-semibold text-ink tabular-nums tracking-tight">
                     0.099
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs text-ink-3 mb-1">
                     Best vs worst day
                   </p>
-                  <p className="text-4xl font-bold text-slate-900 tabular-nums tracking-tight">
+                  <p className="font-heading text-4xl font-semibold text-ink tabular-nums tracking-tight">
                     4&times;
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs text-ink-3 mb-1">
                     Peak day
                   </p>
-                  <p className="text-xl font-bold text-slate-900">Saturday</p>
+                  <p className="text-xl font-semibold text-ink">Saturday</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/70 rounded-2xl p-8 border border-slate-200">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-400 mb-5 font-bold">
+            <div className="lab-card p-6">
+              <p className="text-meta font-medium text-ink-2 mb-5 font-semibold">
                 TikTok
               </p>
               <div className="space-y-4">
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs text-ink-3 mb-1">
                     Median views per follower
                   </p>
-                  <p className="text-4xl font-bold text-slate-500 tabular-nums tracking-tight">
+                  <p className="font-heading text-4xl font-semibold text-ink-2 tabular-nums tracking-tight">
                     0.063
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs text-ink-3 mb-1">
                     Best vs worst day
                   </p>
-                  <p className="text-4xl font-bold text-slate-500 tabular-nums tracking-tight">
+                  <p className="font-heading text-4xl font-semibold text-ink-2 tabular-nums tracking-tight">
                     2&times;
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs text-ink-3 mb-1">
                     Peak day
                   </p>
-                  <p className="text-xl font-bold text-slate-500">Sunday</p>
+                  <p className="text-xl font-semibold text-ink-2">Sunday</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="max-w-3xl mx-auto text-center mt-14 space-y-3">
-            <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-              Instagram reaches <span className="font-bold text-slate-700">57% more people</span> per
+            <p className="text-base sm:text-lg text-ink-2 leading-relaxed">
+              Instagram reaches <span className="font-semibold text-ink-2">57% more people</span> per
               follower on an average post, and its weekend boost is twice as
               strong as TikTok's.
             </p>
-            <p className="text-lg sm:text-xl text-slate-900 font-bold tracking-tight">
+            <p className="text-lg sm:text-xl text-ink font-semibold tracking-tight">
               If you post the same thing on both platforms, timing matters more
               on Instagram.
             </p>
@@ -671,38 +647,38 @@ export function PostingTimesReport() {
       <Section id="gap">
         <div className="max-w-4xl text-center">
           <Eyebrow color="coral">The honest truth</Eyebrow>
-          <h2 className="text-5xl sm:text-7xl font-bold tracking-[-0.025em] leading-[1.05] mb-12">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-12">
             The gap between best
             <br />
-            and worst is <span className="text-content-coral">small.</span>
+            and worst is <span className="text-ink-3">small.</span>
           </h2>
 
           <div className="grid grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto">
-            <div className="bg-white/70 rounded-2xl p-7 sm:p-8 border border-content-coral/20">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-400 mb-4 font-bold">
+            <div className="lab-card p-5 sm:p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 Best hour
               </p>
-              <p className="text-4xl sm:text-5xl font-bold text-content-coral tabular-nums tracking-tight">
+              <p className="font-heading text-3xl sm:text-4xl font-semibold text-ink tabular-nums tracking-tight">
                 0.111
               </p>
-              <p className="text-xs sm:text-sm text-slate-500 mt-3 uppercase tracking-wide font-medium">
+              <p className="text-xs sm:text-sm text-ink-3 mt-3 font-medium">
                 9 PM &middot; views/follower
               </p>
             </div>
-            <div className="bg-white/70 rounded-2xl p-7 sm:p-8 border border-slate-200/60">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-400 mb-4 font-bold">
+            <div className="lab-card p-5 sm:p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 Worst hour
               </p>
-              <p className="text-4xl sm:text-5xl font-bold text-slate-400 tabular-nums tracking-tight">
+              <p className="font-heading text-3xl sm:text-4xl font-semibold text-ink-3 tabular-nums tracking-tight">
                 0.034
               </p>
-              <p className="text-xs sm:text-sm text-slate-500 mt-3 uppercase tracking-wide font-medium">
+              <p className="text-xs sm:text-sm text-ink-3 mt-3 font-medium">
                 12 PM &middot; views/follower
               </p>
             </div>
           </div>
 
-          <p className="text-lg sm:text-xl text-slate-500 mt-12 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-ink-2 mt-12 max-w-xl mx-auto leading-relaxed">
             A ~3× difference between the best and worst reasonable hour. Same
             creator. Same content. Different time.
           </p>
@@ -714,39 +690,39 @@ export function PostingTimesReport() {
         <div className="max-w-5xl w-full">
           <div className="text-center mb-14">
             <Eyebrow color="coral">The real variable</Eyebrow>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
               What actually moves the needle
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            <div className="bg-white/60 rounded-2xl p-8 border border-slate-200/60">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-400 mb-4 font-bold">
+            <div className="lab-card p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 Posting time effect
               </p>
-              <p className="text-5xl sm:text-6xl font-bold text-slate-500 tabular-nums tracking-tight mb-3">
+              <p className="font-heading text-5xl sm:text-6xl font-semibold text-ink-2 tabular-nums tracking-tight mb-3">
                 ~3&times;
               </p>
-              <p className="text-sm text-slate-500 leading-relaxed">
+              <p className="text-sm text-ink-3 leading-relaxed">
                 Best hour vs worst reasonable hour (normalized for account
                 size).
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-8 border-2 border-content-coral shadow-xl shadow-content-coral/15">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-content-coral mb-4 font-bold">
+            <div className="lab-card border-line/[0.16] p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 Content quality effect
               </p>
-              <p className="text-5xl sm:text-6xl font-bold text-content-coral tabular-nums tracking-tight mb-3">
+              <p className="font-heading text-5xl sm:text-6xl font-semibold text-ink tabular-nums tracking-tight mb-3">
                 100&times;+
               </p>
-              <p className="text-sm text-slate-500 leading-relaxed">
+              <p className="text-sm text-ink-3 leading-relaxed">
                 Median video: 17K views. Top videos: millions. The gap between
                 good and bad dwarfs everything else.
               </p>
             </div>
           </div>
 
-          <p className="text-center text-base sm:text-lg text-slate-500 mt-14 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-center text-base sm:text-lg text-ink-2 mt-14 max-w-2xl mx-auto leading-relaxed">
             A great video posted at the wrong time still crushes a bad video
             posted at the "perfect" time. It's not even close.
           </p>
@@ -755,58 +731,56 @@ export function PostingTimesReport() {
 
       {/* CONCLUSION */}
       <Section id="conclusion">
-        <HexMolecule size={280} className="absolute top-16 left-8 opacity-20" />
-        <HexMolecule size={200} className="absolute bottom-20 right-10 opacity-25" />
 
         <div className="max-w-4xl text-center relative w-full">
           <Eyebrow color="coral">The ultimate conclusion</Eyebrow>
-          <h2 className="text-5xl sm:text-7xl font-bold tracking-[-0.025em] leading-[1.05] mb-14">
+          <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-14">
             Posting time matters.
             <br />
-            <span className="text-content-coral">Content matters more.</span>
+            <span className="text-ink-3">Content matters more.</span>
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl mx-auto mb-14 text-left">
-            <div className="bg-white rounded-2xl p-7 border-2 border-content-coral shadow-lg shadow-content-coral/15">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-content-coral mb-4 font-bold">
+            <div className="lab-card border-line/[0.16] p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 If you post on TikTok
               </p>
-              <p className="text-xl font-bold mb-1 text-slate-900 tracking-tight">
+              <p className="text-xl font-semibold mb-1 text-ink tracking-tight">
                 Sunday &middot; 7&ndash;10 PM ET
               </p>
-              <p className="text-sm text-slate-500 leading-relaxed mt-3">
+              <p className="text-sm text-ink-3 leading-relaxed mt-3">
                 Evening posts outperform. Don't stress the specific hour.
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-7 border-2 border-content-coral shadow-lg shadow-content-coral/15">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-content-coral mb-4 font-bold">
+            <div className="lab-card border-line/[0.16] p-6">
+              <p className="text-meta font-medium text-ink-2 mb-4 font-semibold">
                 If you post on Instagram
               </p>
-              <p className="text-xl font-bold mb-1 text-slate-900 tracking-tight">
+              <p className="text-xl font-semibold mb-1 text-ink tracking-tight">
                 Saturday &middot; 7&ndash;10 PM ET
               </p>
-              <p className="text-sm text-slate-500 leading-relaxed mt-3">
+              <p className="text-sm text-ink-3 leading-relaxed mt-3">
                 Weekend effect is 4× bigger here. Post weekends if you can.
               </p>
             </div>
           </div>
 
           <div className="max-w-3xl mx-auto mb-14">
-            <div className="bg-white/60 rounded-2xl p-5 border border-slate-200/60 flex items-center gap-5">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-red-500 font-bold flex-shrink-0">
+            <div className="lab-card p-5 flex items-center gap-5">
+              <p className="text-meta font-medium text-ink-2 font-semibold flex-shrink-0">
                 Avoid
               </p>
-              <p className="text-base sm:text-lg font-bold text-slate-900">
+              <p className="text-base sm:text-lg font-semibold text-ink">
                 3 AM &ndash; 6 AM ET on any platform
               </p>
             </div>
           </div>
 
-          <p className="text-base sm:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-ink-2 max-w-2xl mx-auto leading-relaxed">
             Stop obsessing over the clock. The difference between your best and
             worst video dwarfs the difference between 9am and 9pm.
           </p>
-          <p className="text-base sm:text-xl text-slate-900 font-bold mt-4 tracking-tight">
+          <p className="text-base sm:text-xl text-ink font-semibold mt-4 tracking-tight">
             Make better content. Post when you're ready. Keep going.
           </p>
         </div>
@@ -815,15 +789,15 @@ export function PostingTimesReport() {
       {/* SIGNATURE */}
       <Section id="signature" className="min-h-[40vh]">
         <div className="text-center">
-          <HexMolecule size={40} className="mx-auto mb-5 opacity-50" />
-          <p className="text-slate-400 text-[11px] font-mono uppercase tracking-[0.3em]">
+          <p className="text-meta text-ink-3">
             Data Report &middot; The Content Labs
           </p>
-          <p className="text-slate-400 text-[11px] font-mono mt-2">
+          <p className="text-meta text-ink-3 mt-1">
             7,261 videos &middot; thecontentlabs.app
           </p>
         </div>
       </Section>
+      <Footer />
     </div>
   );
 }

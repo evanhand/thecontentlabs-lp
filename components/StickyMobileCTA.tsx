@@ -43,20 +43,20 @@ export function StickyMobileCTA({ watchId = 'hero-section' }: StickyMobileCTAPro
   return (
     <div
       aria-hidden={!visible}
-      className={`sm:hidden fixed inset-x-0 bottom-0 z-40 px-3 pb-3 pt-2 transition-transform duration-300 ${
+      className={`sm:hidden fixed inset-x-0 bottom-0 z-40 px-3 pb-3 pt-2 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
         visible ? 'translate-y-0' : 'translate-y-full pointer-events-none'
       }`}
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
     >
-      <div className="rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.15)] flex items-center gap-3 p-2.5">
-        <div className="flex-1 pl-2">
-          <p className="text-[13px] font-bold text-slate-900 leading-tight">Start free, no card</p>
-          <p className="text-[11px] text-slate-500 leading-tight">60 seconds &middot; No card</p>
+      <div className="rounded-2xl bg-surface border border-line/[0.08] shadow-raised flex items-center gap-3 p-2.5">
+        <div className="flex-1 min-w-0 pl-2">
+          <p className="text-meta font-medium text-ink">Start free, no card</p>
+          <p className="text-xs text-ink-3">60 seconds &middot; No card</p>
         </div>
         <a
           href={registerHref}
           onClick={handleClick}
-          className="inline-flex items-center gap-1.5 px-4 py-3 bg-gradient-to-r from-content-cta-dark to-content-cta text-white rounded-xl font-bold text-sm shadow-md shadow-content-cta/30 active:scale-95 transition-transform"
+          className="inline-flex items-center gap-1.5 h-11 px-4 bg-content-coral text-white rounded-[10px] font-medium text-sm active:scale-[0.97] transition-transform duration-150"
           tabIndex={visible ? 0 : -1}
         >
           Start free

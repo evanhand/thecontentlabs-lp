@@ -1,93 +1,63 @@
 'use client';
 
+import type { ReactNode } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Rocket, ArrowRight, Shield, Check } from 'lucide-react';
-import { TextReveal } from '@/components/ui/TextReveal';
-import { MagneticButton } from '@/components/ui/MagneticButton';
-import { HexMolecule } from '@/components/ui/HexMolecule';
-import { fadeUp, scaleIn, staggerContainer, VIEWPORT_ONCE } from '@/lib/motionVariants';
+import { fadeUp, VIEWPORT_ONCE } from '@/lib/motionVariants';
+import { BTN_PRIMARY, CONTAINER } from '@/components/landing/Section';
 
-export function FinalCTA() {
+/**
+ * The page's single navy band (DESIGN.md: one per page). Used as the closing
+ * CTA on home, pricing and compare so every page ends the same way.
+ */
+export function FinalCTA({
+  title = 'Your next video is already in your last ten.',
+  body = 'Connect your handles and the free plan starts tracking today. Three videos analyzed by tonight, your numbers every week after that.',
+  ctaLabel = 'Start free',
+  ctaHref = '/register',
+  onCtaClick,
+  secondary,
+  footnote = 'Free plan, no card · Cancel anytime · Paid from $19/mo, $5 first month',
+}: {
+  title?: ReactNode;
+  body?: ReactNode;
+  ctaLabel?: string;
+  ctaHref?: string;
+  onCtaClick?: () => void;
+  secondary?: { label: string; href: string };
+  footnote?: ReactNode;
+}) {
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden z-10">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
-          variants={staggerContainer}
-          className="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 px-6 py-16 sm:px-16 sm:py-24 overflow-hidden border border-slate-800 shadow-2xl shadow-slate-900/40"
-        >
-          <div
-            aria-hidden
-            className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-content-coral/30 blur-[120px] pointer-events-none"
-          />
-          <div
-            aria-hidden
-            className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-amber-400/20 blur-[120px] pointer-events-none"
-          />
-          <HexMolecule size={80} className="absolute left-[8%] top-[18%] opacity-[0.08] animate-float pointer-events-none" />
-          <HexMolecule size={50} className="absolute right-[10%] top-[28%] opacity-[0.1] animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
-          <HexMolecule size={60} className="absolute left-[18%] bottom-[12%] opacity-[0.06] animate-float pointer-events-none" style={{ animationDelay: '4s' }} />
+    <section className="bg-content-navy py-20 sm:py-28">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT_ONCE}
+        variants={fadeUp}
+        className={`${CONTAINER} text-center`}
+      >
+        <h2 className="font-heading text-3xl sm:text-5xl font-semibold tracking-[-0.03em] leading-[1.08] text-white max-w-[20ch] mx-auto">
+          {title}
+        </h2>
+        <p className="mt-5 text-lg text-white/70 max-w-[60ch] mx-auto">{body}</p>
 
-          <div className="relative text-center max-w-3xl mx-auto">
-            <motion.h2
-              variants={fadeUp}
-              transition={{ duration: 0.7 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 tracking-tight leading-[1.05]"
+        <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
+          <a href={ctaHref} onClick={onCtaClick} className={`${BTN_PRIMARY} focus-visible:ring-offset-content-navy`}>
+            {ctaLabel}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          {secondary && (
+            <a
+              href={secondary.href}
+              className="inline-flex items-center justify-center h-12 px-6 rounded-[10px] border border-white/15 text-[15px] font-medium text-white hover:border-white/30 transition-colors duration-150"
             >
-              <TextReveal>Your next video is already in your last ten.</TextReveal>
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.6 }}
-              className="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
-            >
-              Connect your handles and the free plan starts tracking today. Three videos analyzed by tonight, your numbers every week after that.
-            </motion.p>
+              {secondary.label}
+            </a>
+          )}
+        </div>
 
-            <motion.div
-              variants={scaleIn}
-              transition={{ duration: 0.6 }}
-              className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-6 px-5 py-3 sm:px-6 bg-white/[0.06] backdrop-blur-sm rounded-xl border border-white/10 mb-10"
-            >
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-content-coral-400" />
-                <span className="text-slate-200 text-sm font-medium">Free plan, no card</span>
-              </div>
-              <div className="hidden sm:block h-4 w-px bg-white/20"></div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-content-coral-400" />
-                <span className="text-slate-300 text-sm">Cancel anytime</span>
-              </div>
-            </motion.div>
-
-            <motion.div variants={scaleIn} className="block">
-              <MagneticButton className="inline-block">
-                <a
-                  href="/register"
-                  className="lab-bubbles group inline-flex items-center px-8 py-5 sm:px-12 sm:py-6 bg-gradient-to-r from-content-cta-dark to-content-cta rounded-2xl font-bold text-lg sm:text-xl text-white shadow-xl shadow-content-coral/40 hover:shadow-2xl hover:shadow-content-coral/60 transition-all duration-300 hover:scale-105 active:scale-95 animate-progress-glow"
-                >
-                  <span className="flex items-center">
-                    <Rocket className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
-                    Start free
-                    <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </a>
-              </MagneticButton>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="mt-10 inline-block bg-white/[0.06] border border-white/10 rounded-lg px-4 py-2.5 sm:px-6 sm:py-3"
-            >
-              <p className="font-mono text-[11px] sm:text-xs text-slate-400 tracking-wide">
-                <span className="hidden sm:inline">Weekly numbers&nbsp;&nbsp;|&nbsp;&nbsp;Beat map per video&nbsp;&nbsp;|&nbsp;&nbsp;Chemist in your voice&nbsp;&nbsp;|&nbsp;&nbsp;Paid from $19/mo, $5 first month</span>
-                <span className="sm:hidden">Free plan · Paid from $19/mo · $5 first month</span>
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
+        {footnote && <p className="mt-6 text-meta text-white/55">{footnote}</p>}
+      </motion.div>
     </section>
   );
 }
