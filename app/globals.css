@@ -7,6 +7,16 @@ html {
 }
 
 :root {
+  /* Design system v2 (DESIGN.md) */
+  --canvas: 250 248 244;
+  --surface: 255 255 255;
+  --sunken: 243 240 234;
+  --ink: 15 23 42;
+  --ink-2: 71 85 105;
+  --ink-3: 100 116 139;
+  --line: 15 23 42;
+  --line-strong: 15 23 42;
+  --navy: 11 18 32;
   --spacing-base: 8px;
   --spacing-xs: calc(var(--spacing-base) * 0.5);
   --spacing-sm: var(--spacing-base);
@@ -676,4 +686,21 @@ html { scrollbar-color: #cbd5e1 transparent; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.dark {
+  --canvas: 11 18 32;
+  --surface: 19 28 46;
+  --sunken: 14 22 38;
+  --ink: 232 236 243;
+  --ink-2: 163 173 191;
+  --ink-3: 124 135 155;
+  --line: 255 255 255;
+  --line-strong: 255 255 255;
+}
+.lab-card {
+  border-radius: 1rem;
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--line) / 0.08);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px -8px rgb(15 23 42 / 0.10);
 }

@@ -21,6 +21,10 @@ const config: Config = {
         '4xl': ['2.25rem', { lineHeight: '2.6rem' }],
         '5xl': ['3rem', { lineHeight: '3.5rem' }],
         '6xl': ['3.75rem', { lineHeight: '4rem' }],
+        'title': ['1.75rem', { lineHeight: '2rem', letterSpacing: '-0.02em', fontWeight: '600' }],
+        'section': ['1.125rem', { lineHeight: '1.5rem', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'body': ['0.9375rem', { lineHeight: '1.5rem' }],
+        'meta': ['0.8125rem', { lineHeight: '1.125rem' }],
       },
       spacing: {
         '4xs': '2px',
@@ -34,6 +38,18 @@ const config: Config = {
         '2xl': '48px',
       },
       colors: {
+        canvas: 'rgb(var(--canvas) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        sunken: 'rgb(var(--sunken) / <alpha-value>)',
+        ink: {
+          DEFAULT: 'rgb(var(--ink) / <alpha-value>)',
+          2: 'rgb(var(--ink-2) / <alpha-value>)',
+          3: 'rgb(var(--ink-3) / <alpha-value>)',
+        },
+        line: {
+          DEFAULT: 'rgb(var(--line) / <alpha-value>)',
+          strong: 'rgb(var(--line-strong) / <alpha-value>)',
+        },
         content: {
           white: '#ffffff',
           black: '#0b1220',
@@ -90,6 +106,8 @@ const config: Config = {
         'aurora-3': 'aurora-3 20s ease-in-out infinite'
       },
       boxShadow: {
+        'card': '0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px -8px rgb(15 23 42 / 0.10)',
+        'raised': '0 1px 2px rgb(15 23 42 / 0.05), 0 12px 32px -12px rgb(15 23 42 / 0.20)',
         'soft': '0 2px 10px 0 rgba(0, 0, 0, 0.05)',
         'hover': '0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.05)',
         'focus': '0 0 0 3px rgba(244, 99, 42, 0.5)',
