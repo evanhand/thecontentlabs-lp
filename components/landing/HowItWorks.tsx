@@ -36,7 +36,7 @@ export function HowItWorks() {
         <ol className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
           {STEPS.map((s) => (
             <li key={s.step} className="border-t border-line/[0.14] pt-6">
-              <span className="block font-heading text-sm font-medium text-ink-3 tabular-nums mb-4">{s.step}</span>
+              <span className={`block font-heading text-6xl font-semibold leading-none tracking-[-0.04em] tabular-nums mb-5 ${s.step === '01' ? 'text-content-coral' : 'text-ink/15'}`}>{s.step}</span>
               <h3 className="font-heading text-xl font-semibold tracking-[-0.01em] text-ink mb-2">{s.title}</h3>
               <p className="text-body text-ink-2">{s.description}</p>
             </li>

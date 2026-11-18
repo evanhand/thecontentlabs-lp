@@ -704,3 +704,13 @@ html { scrollbar-color: #cbd5e1 transparent; }
   border: 1px solid rgb(var(--line) / 0.08);
   box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px -8px rgb(15 23 42 / 0.10);
 }
+
+/* Signature: the faint lab grid, fading out. */
+.canvas-grid {
+  background-image:
+    linear-gradient(rgb(244 99 42 / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(244 99 42 / 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent 75%);
+}

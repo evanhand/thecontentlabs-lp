@@ -53,8 +53,9 @@ export function Hero() {
   };
 
   return (
-    <section id="hero-section" className="pt-32 sm:pt-40 pb-20 sm:pb-28">
-      <div className={CONTAINER}>
+    <section id="hero-section" className="relative pt-32 sm:pt-40 pb-20 sm:pb-28">
+      <div aria-hidden className="canvas-grid pointer-events-none absolute inset-x-0 top-0 h-[640px]" />
+      <div className={`relative ${CONTAINER}`}>
         <div className="text-center max-w-4xl mx-auto">
           {fromPrealgo ? (
             <p className="inline-flex items-center gap-1.5 mb-6 px-3 py-1 rounded-full bg-surface border border-line/[0.08] text-meta text-ink-2">
@@ -77,12 +78,12 @@ export function Hero() {
             {fromPrealgo ? (
               <>
                 You picked the right hooks.
-                <span className="block text-ink-2">Now see why your videos land.</span>
+                <span className="block text-content-coral">Now see why your videos land.</span>
               </>
             ) : (
               <>
                 See why your last videos
-                <span className="block text-ink-2">did what they did.</span>
+                <span className="block text-content-coral">did what they did.</span>
               </>
             )}
           </h1>

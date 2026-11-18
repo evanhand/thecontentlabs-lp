@@ -9,7 +9,7 @@ import { fadeUp, VIEWPORT_ONCE } from '@/lib/motionVariants';
  * one container, one rhythm, one heading scale for every section.
  */
 export const CONTAINER = 'max-w-6xl mx-auto px-4 sm:px-6';
-export const H1 = 'font-heading text-4xl sm:text-6xl font-semibold tracking-[-0.03em] leading-[1.05] text-ink';
+export const H1 = 'font-heading text-[2.75rem] sm:text-7xl font-semibold tracking-[-0.04em] leading-[1.02] text-ink';
 export const H2 = 'font-heading text-3xl sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.1] text-ink';
 export const LEAD = 'text-lg text-ink-2 max-w-[60ch]';
 
